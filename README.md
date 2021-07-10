@@ -4,7 +4,7 @@ MHFPS
 
 NOTE:
 =============
-This is the Godot engine port of the game MHFPS that is planned to become the "upstream" project. Many features may be broken or missing!
+This is the [Godot](https://github.com/godotengine/godot) engine port of the game MHFPS that is planned to become the "upstream" project. Many features may be broken or missing!
 
 An epic game.
 =============
