@@ -1,0 +1,253 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Shaders/Blur.shader" type="Shader" id=1]
+[ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/Fonts/LiberationSans/liberation_sans_regular.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Assets/GameAssets/Scripts/TitleUIManager.cs" type="Script" id=4]
+[ext_resource path="res://Assets/Styles/panel_style.tres" type="StyleBox" id=5]
+
+[sub_resource type="ShaderMaterial" id=18]
+shader = ExtResource( 1 )
+shader_param/blur_amount = 3.0
+shader_param/translucency = 1.0
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[node name="TitleUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 18 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -192.0
+margin_top = 64.0
+margin_right = 192.0
+margin_bottom = 128.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.254902 )
+custom_constants/shadow_offset_y = 3
+custom_constants/shadow_as_outline = 0
+text = " MHFPS dev build! "
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = -112.0
+margin_right = 235.0
+margin_bottom = -64.0
+disabled = true
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TabPanel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -136.0
+margin_right = 136.0
+margin_bottom = 64.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Other" type="Button" parent="TabPanel"]
+margin_right = 88.0
+margin_bottom = 64.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
+text = "Other"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Underline" type="ColorRect" parent="TabPanel/Other"]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 36, 2 )
+mouse_filter = 2
+color = Color( 1, 0.713726, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="TabPanel"]
+margin_left = 88.0
+margin_right = 184.0
+margin_bottom = 64.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Underline" type="ColorRect" parent="TabPanel/Play"]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 88.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 40, 2 )
+mouse_filter = 2
+color = Color( 1, 0.713726, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multiplayer" type="Button" parent="TabPanel"]
+margin_left = 184.0
+margin_right = 274.0
+margin_bottom = 64.0
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.380392, 0.380392, 0.380392, 1 )
+text = "Multiplayer"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Underline" type="ColorRect" parent="TabPanel/Multiplayer"]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 36, 2 )
+mouse_filter = 2
+color = Color( 1, 0.713726, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabPanelTween" type="Tween" parent="TabPanel"]
+
+[node name="MultiplayerPanel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 64.0
+margin_right = -128.0
+margin_bottom = -64.0
+custom_styles/panel = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multiplayer" type="Panel" parent="MultiplayerPanel"]
+anchor_left = 0.0833333
+anchor_top = 0.167373
+anchor_right = 0.416667
+anchor_bottom = 0.834746
+custom_styles/panel = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button" type="Button" parent="MultiplayerPanel/Multiplayer"]
+anchor_left = 0.03125
+anchor_top = 0.790476
+anchor_right = 0.96875
+anchor_bottom = 0.971429
+text = "Online multiplayer"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LocalGame" type="Panel" parent="MultiplayerPanel"]
+anchor_left = 0.583333
+anchor_top = 0.167373
+anchor_right = 0.916667
+anchor_bottom = 0.834746
+custom_styles/panel = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button" type="Button" parent="MultiplayerPanel/LocalGame"]
+anchor_left = 0.03125
+anchor_top = 0.790476
+anchor_right = 0.96875
+anchor_bottom = 0.971429
+disabled = true
+text = "Local game"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="mouse_entered" from="TabPanel/Other" to="." method="onTabButtonHover" binds= [ 1 ]]
+[connection signal="mouse_exited" from="TabPanel/Other" to="." method="onTabButtonExit" binds= [ 1 ]]
+[connection signal="pressed" from="TabPanel/Other" to="." method="onTabButtonPressed" binds= [ 1 ]]
+[connection signal="mouse_entered" from="TabPanel/Play" to="." method="onTabButtonHover" binds= [ 2 ]]
+[connection signal="mouse_exited" from="TabPanel/Play" to="." method="onTabButtonExit" binds= [ 2 ]]
+[connection signal="pressed" from="TabPanel/Play" to="." method="onTabButtonPressed" binds= [ 2 ]]
+[connection signal="mouse_entered" from="TabPanel/Multiplayer" to="." method="onTabButtonHover" binds= [ 3 ]]
+[connection signal="mouse_exited" from="TabPanel/Multiplayer" to="." method="onTabButtonExit" binds= [ 3 ]]
+[connection signal="pressed" from="TabPanel/Multiplayer" to="." method="onTabButtonPressed" binds= [ 3 ]]

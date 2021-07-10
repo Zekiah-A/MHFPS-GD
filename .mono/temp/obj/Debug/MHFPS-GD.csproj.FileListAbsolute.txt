@@ -1,0 +1,8 @@
+/home/zekiah/MHFPS-GD/.mono/temp/obj/Debug/MHFPS-GD.csprojAssemblyReference.cache
+/home/zekiah/MHFPS-GD/.mono/temp/obj/Debug/MHFPS-GD.AssemblyInfoInputs.cache
+/home/zekiah/MHFPS-GD/.mono/temp/obj/Debug/MHFPS-GD.AssemblyInfo.cs
+/home/zekiah/MHFPS-GD/.mono/temp/obj/Debug/MHFPS-GD.csproj.CoreCompileInputs.cache
+/home/zekiah/MHFPS-GD/.mono/temp/bin/Debug/MHFPS-GD.dll
+/home/zekiah/MHFPS-GD/.mono/temp/bin/Debug/MHFPS-GD.pdb
+/home/zekiah/MHFPS-GD/.mono/temp/obj/Debug/MHFPS-GD.dll
+/home/zekiah/MHFPS-GD/.mono/temp/obj/Debug/MHFPS-GD.pdb

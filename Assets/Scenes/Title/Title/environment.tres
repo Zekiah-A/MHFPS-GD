@@ -1,0 +1,14 @@
+[gd_resource type="Environment" load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Scenes/Title/Title/sky.tres" type="ProceduralSky" id=1]
+
+[resource]
+background_mode = 2
+background_sky = ExtResource( 1 )
+background_color = Color( 0.0784314, 0.054902, 0.247059, 1 )
+background_energy = 0.5
+fog_enabled = true
+fog_depth_begin = 103.7
+fog_depth_end = 568.8
+tonemap_exposure = 0.5
+tonemap_white = 1.13
