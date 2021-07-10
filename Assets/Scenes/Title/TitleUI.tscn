@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Shaders/Blur.shader" type="Shader" id=1]
 [ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/LiberationSans/liberation_sans_regular.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/GameAssets/Scripts/TitleUIManager.cs" type="Script" id=4]
 [ext_resource path="res://Assets/Styles/panel_style.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/Styles/button_style.tres" type="StyleBox" id=6]
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = ExtResource( 1 )
@@ -216,7 +217,19 @@ anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
 anchor_bottom = 0.971429
+custom_styles/normal = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Online multiplayer"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="MultiplayerPanel/Multiplayer"]
+anchor_left = 0.125
+anchor_top = 0.104762
+anchor_right = 0.875
+anchor_bottom = 0.663492
+custom_styles/panel = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -238,6 +251,16 @@ anchor_right = 0.96875
 anchor_bottom = 0.971429
 disabled = true
 text = "Local game"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="MultiplayerPanel/LocalGame"]
+anchor_left = 0.125
+anchor_top = 0.104762
+anchor_right = 0.875
+anchor_bottom = 0.663492
+custom_styles/panel = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
