@@ -12,8 +12,10 @@ public class TitleUIManager : Control
 	private Tween _tabPanelTween;
 	
 	private Panel _multiplayerPanel;
+	private Tween _multiplayerTween;
 	
 	private const float _underlineMax = 1.2f;
+	private const float _tweenSpeed = 0.5f;
 	
 	public override void _Ready()
 	{
@@ -26,6 +28,7 @@ public class TitleUIManager : Control
 		_tabPanelTween = _tabPanel.GetNode<Tween>("TabPanelTween");
 		
 		_multiplayerPanel = GetNode<Panel>("MultiplayerPanel");
+		_multiplayerTween = _multiplayerPanel.GetNode<Tween>("MultiplayerTween");
 		
 		_multiplayerPanel.Visible = false;
 	}
@@ -37,13 +40,29 @@ public class TitleUIManager : Control
 		{
 			case 1:
 				GD.Print("TabOther pressed.");
+				GetTree().ChangeScene("res://Assets/Scenes/Other/Demo.tscn");
 				break;
 			case 2:
 				GD.Print("TabPlay pressed");
 				break;
 			case 3:
-				GD.Print("TabMultiplayer pressed");
-				_multiplayerPanel.Visible = true;
+				if (_multiplayerPanel.Visible == false)
+				{
+					_multiplayerPanel.Visible = true;
+					_multiplayerTween.InterpolateProperty (
+						_multiplayerPanel, //Object
+						"rect_position", //Property being tweened
+						new Vector2(128, -472), //from
+						new Vector2(128, 64), //to
+						_tweenSpeed, //speed
+						Tween.TransitionType.Cubic,
+						Tween.EaseType.Out
+					);
+					_multiplayerTween.Start();
+					GD.Print("TabMultiplayer pressed");
+				} 
+				else
+					_multiplayerPanel.Visible = false;
 				break;
 		}
 	}
@@ -58,7 +77,7 @@ public class TitleUIManager : Control
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
 					new Vector2(_underlineMax, 1), //to
-					1, //speed
+					_tweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
@@ -71,7 +90,7 @@ public class TitleUIManager : Control
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
 					new Vector2(_underlineMax, 1), //to
-					1, //speed
+					_tweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
@@ -84,7 +103,7 @@ public class TitleUIManager : Control
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
 					new Vector2(_underlineMax, 1), //to
-					1, //speed
+					_tweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
@@ -104,7 +123,7 @@ public class TitleUIManager : Control
 					"rect_scale", //Property being tweened
 					new Vector2(_underlineMax, 1), //from
 					new Vector2(1, 1), //to
-					1, //speed
+					_tweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
@@ -117,7 +136,7 @@ public class TitleUIManager : Control
 					"rect_scale", //Property being tweened
 					new Vector2(_underlineMax, 1), //from
 					new Vector2(1, 1), //to
-					1, //speed
+					_tweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
@@ -130,7 +149,7 @@ public class TitleUIManager : Control
 					"rect_scale", //Property being tweened
 					new Vector2(_underlineMax, 1), //from
 					new Vector2(1, 1), //to
-					1, //speed
+					_tweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);

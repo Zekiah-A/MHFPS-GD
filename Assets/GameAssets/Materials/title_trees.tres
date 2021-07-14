@@ -1,0 +1,9 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Textures/forest_TEMP.png" type="Texture" id=1]
+
+[resource]
+flags_transparent = true
+params_specular_mode = 4
+params_depth_draw_mode = 2
+albedo_texture = ExtResource( 1 )

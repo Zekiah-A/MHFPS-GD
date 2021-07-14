@@ -9,7 +9,7 @@
 
 [sub_resource type="ShaderMaterial" id=18]
 shader = ExtResource( 1 )
-shader_param/blur_amount = 3.0
+shader_param/blur_amount = 2.0
 shader_param/translucency = 1.0
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -92,6 +92,20 @@ disabled = true
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": true
+}
+
+[node name="WarningLabel" type="Label" parent="."]
+margin_left = 32.0
+margin_top = 256.0
+margin_right = 240.0
+margin_bottom = 360.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.611765 )
+text = "This background is not blurred to hide the disaster behind it"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="TabPanel" type="Panel" parent="."]
@@ -191,6 +205,7 @@ __meta__ = {
 [node name="TabPanelTween" type="Tween" parent="TabPanel"]
 
 [node name="MultiplayerPanel" type="Panel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 128.0
@@ -264,6 +279,8 @@ custom_styles/panel = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="MultiplayerTween" type="Tween" parent="MultiplayerPanel"]
 
 [connection signal="mouse_entered" from="TabPanel/Other" to="." method="onTabButtonHover" binds= [ 1 ]]
 [connection signal="mouse_exited" from="TabPanel/Other" to="." method="onTabButtonExit" binds= [ 1 ]]
