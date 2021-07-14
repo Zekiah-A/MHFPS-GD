@@ -67,7 +67,7 @@ operation = 2
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 2, 8 )
 
 [node name="GroundSensor" type="RayCast" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 7.02742, 0, 0, 0, 1, -4.72665e-05, -0.00602233, 0.000111818 )
+transform = Transform( 1, 0, 0, 0, 7, 0, 0, 0, 1, -0.001, -0.2, 0 )
 enabled = true
 
 [node name="StaticBody" type="StaticBody" parent="."]
