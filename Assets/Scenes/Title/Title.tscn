@@ -90,10 +90,11 @@ material = ExtResource( 5 )
 [node name="SpotLight" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0441644, 3.92465, 6.73881 )
 light_color = Color( 0, 0.298039, 1, 1 )
-light_energy = 5.63
+light_energy = 16.0
+spot_range = 21.4
 spot_attenuation = 0.637281
 spot_angle = 24.449
-spot_angle_attenuation = 0.870552
+spot_angle_attenuation = 0.901252
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 3 )
