@@ -25,6 +25,11 @@ public class KinematicPlayer : KinematicBody
 	private SpringArm springArm;
 	private Position3D pivot;
 	private Spatial inventoryNode;
+	TextureRect hologramRect;
+	Viewport hologramViewport; 
+	Camera hologramCamera;
+	Position3D hologramCameraPos;
+
 
 
 	public override void _Ready()
@@ -34,6 +39,10 @@ public class KinematicPlayer : KinematicBody
 		springArm = GetNode<SpringArm>("SpringArm"); //find node as well
 		pivot = GetNode<Position3D>("Pivot");
 		inventoryNode = pivot.GetNode<Spatial>("Inventory");
+		hologramRect = GetNode("PlayerHUD").GetNode<TextureRect>("TextureRect");
+		hologramViewport = pivot.GetNode<Viewport>("InvViewport");
+		hologramCamera = pivot.GetNode("InvViewport").GetNode<Camera>("InvCamera");
+		hologramCameraPos = pivot.GetNode<Position3D>("InvCamPosition");
 
 		UpdateInventory();
 	}
@@ -69,6 +78,15 @@ public class KinematicPlayer : KinematicBody
 			if (springArm.SpringLength < maxSpringLength)
 				springArm.SpringLength += 1;
 		}
+
+		if (@event.IsActionPressed("game_radial"))
+		{
+			GD.Print("Open radial inventory here!");
+			//Hack: For testing now
+			InventoryCurrent += 1;
+			UpdateInventory();
+		}
+		
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -86,7 +104,7 @@ public class KinematicPlayer : KinematicBody
 	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
 	public override void _Process(float delta)
 	{
-		DrawInventoryViewport();
+		DrawHologramViewport();
 	}
 
 
@@ -95,11 +113,28 @@ public class KinematicPlayer : KinematicBody
 	{
 		foreach (Node node in inventoryNode.GetChildren())
 		{
-			InventoryItem nodeItem = (InventoryItem) node;
-			Inventory.Add(nodeItem);
+			if (node is InventoryItem nodeItem)
+			{
+				if (!Inventory.Contains(nodeItem))
+				{
+					Inventory.Add(nodeItem);
+					GD.Print($"Added item '{node.Name}' to Inventory.");
+				}
+			
+				if (Inventory.IndexOf(nodeItem) == InventoryCurrent)
+				{
+					//enable this, it is the primary, maybe enable "isEnabled" bool in inventoryite.cs?
+					GD.Print($"Enabled - {nodeItem.Name}");
+				}
+				else
+				{
+					GD.Print($"Disabled - {nodeItem.Name}");
+				}
+				
+			}
 		}
 		
-		//(Somewhere else) - only enable curplr, so that it's scripts will run
+		//(Somewhere else) - only enable curitem, so that it's scripts will run
 	}
 
 
@@ -181,14 +216,9 @@ public class KinematicPlayer : KinematicBody
 	}
 
 	//TODO: Cleanup
-	private void DrawInventoryViewport()
+	private void DrawHologramViewport()
 	{
-		TextureRect tr = GetNode("PlayerHUD").GetNode<TextureRect>("TextureRect");
-		Viewport vp = GetNode("Pivot").GetNode<Viewport>("InvViewport");
-		tr.Texture = (Texture) vp.GetTexture();
-
-		Camera ic = GetNode("Pivot").GetNode("InvViewport").GetNode<Camera>("InvCamera");
-		Position3D icp = GetNode("Pivot").GetNode<Position3D>("InvCamPosition");
-		ic.GlobalTransform = icp.GlobalTransform;
+		hologramRect.Texture = (Texture) hologramViewport.GetTexture();
+		hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
 	}
 }
