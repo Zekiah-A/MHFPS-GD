@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class KinematicPlayer : KinematicBody
 {
@@ -11,16 +12,19 @@ public class KinematicPlayer : KinematicBody
 	public const float gravity = -39.2f; //4x earth gravity.
 	public const int jumpImpulse = 20;
 	public const int rotSpeed = 25;
-	[Export] public const int maxSpringLength = 8;
-	[Export] public const int mouseSensitivity = 1;
+	public const int maxSpringLength = 8;
+	public const int mouseSensitivity = 1;
 
-	private int scrollDir;
+	//get "Weapon class from the spatial" - all weapon logic will go into it's own class
+	//[Export] public int currentSelected;
+	public static int InventoryCurrent = 0;
+	public static List<InventoryItem> Inventory = new List<InventoryItem>();
 
 	private Vector3 velocity = Vector3.Zero;
 	private Vector3 snapVector = Vector3.Zero;
-
 	private SpringArm springArm;
 	private Position3D pivot;
+	private Spatial inventoryNode;
 
 
 	public override void _Ready()
@@ -29,6 +33,9 @@ public class KinematicPlayer : KinematicBody
 	
 		springArm = GetNode<SpringArm>("SpringArm"); //find node as well
 		pivot = GetNode<Position3D>("Pivot");
+		inventoryNode = pivot.GetNode<Spatial>("Inventory");
+
+		UpdateInventory();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -73,7 +80,26 @@ public class KinematicPlayer : KinematicBody
 		ApplyGravity(delta);
 		UpdateSnapVector();
 		Jump();
+		//TODO: Make camera controllable with right stick & arrow keys
 		velocity = MoveAndSlideWithSnap(velocity, snapVector, Vector3.Up, true);
+	}
+	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
+	public override void _Process(float delta)
+	{
+		DrawInventoryViewport();
+	}
+
+
+	//<summary> foreach object under the "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
+	public void UpdateInventory()
+	{
+		foreach (Node node in inventoryNode.GetChildren())
+		{
+			InventoryItem nodeItem = (InventoryItem) node;
+			Inventory.Add(nodeItem);
+		}
+		
+		//(Somewhere else) - only enable curplr, so that it's scripts will run
 	}
 
 
@@ -135,7 +161,7 @@ public class KinematicPlayer : KinematicBody
 		velocity.y = Mathf.Clamp(velocity.y, gravity, jumpImpulse);
 	}
 
-	public void UpdateSnapVector() //use fancy terneary thing
+	private void UpdateSnapVector() //use fancy terneary thing
 	{
 		if (IsOnFloor())
 			snapVector = -GetFloorNormal();
@@ -152,5 +178,17 @@ public class KinematicPlayer : KinematicBody
 		}
 		if (Input.IsActionJustReleased("game_jump") && velocity.y > jumpImpulse / 2)
 			velocity.y = jumpImpulse / 2;
+	}
+
+	//TODO: Cleanup
+	private void DrawInventoryViewport()
+	{
+		TextureRect tr = GetNode("PlayerHUD").GetNode<TextureRect>("TextureRect");
+		Viewport vp = GetNode("Pivot").GetNode<Viewport>("InvViewport");
+		tr.Texture = (Texture) vp.GetTexture();
+
+		Camera ic = GetNode("Pivot").GetNode("InvViewport").GetNode<Camera>("InvCamera");
+		Position3D icp = GetNode("Pivot").GetNode<Position3D>("InvCamPosition");
+		ic.GlobalTransform = icp.GlobalTransform;
 	}
 }

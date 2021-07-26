@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Scripts/InventoryItem.cs" type="Script" id=1]
+[ext_resource path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" type="Script" id=2]
+[ext_resource path="res://Assets/GameAssets/Models/Makehuman/zek.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/GameAssets/Models/Makehuman/zek_wireframe.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Scenes/Weapons/WeaponGun.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 1.5
+
+[node name="Player" type="Spatial"]
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="SpringArm" type="SpringArm" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+spring_length = 8.0
+
+[node name="Camera" type="Camera" parent="Player/SpringArm"]
+cull_mask = 1048573
+current = true
+
+[node name="Pivot" type="Position3D" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0 )
+
+[node name="Inventory" type="Position3D" parent="Player/Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
+
+[node name="Weapon" parent="Player/Pivot/Inventory" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.404352, 0.55416, -0.636522 )
+script = ExtResource( 1 )
+
+[node name="InvViewport" type="Viewport" parent="Player/Pivot"]
+size = Vector2( 192, 280 )
+transparent_bg = true
+
+[node name="InvCamera" type="Camera" parent="Player/Pivot/InvViewport"]
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 2 )
+cull_mask = 2
+current = true
+
+[node name="InvCamPosition" type="Position3D" parent="Player/Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.968 )
+
+[node name="zek" parent="Player/Pivot" instance=ExtResource( 3 )]
+transform = Transform( -2.35, 0, -2.05444e-07, 0, 2.35, 0, 2.05444e-07, 0, -2.35, 0, 0, 0 )
+
+[node name="zek_wireframe" parent="Player/Pivot" instance=ExtResource( 4 )]
+transform = Transform( -2.35, 0, -2.05444e-07, 0, 2.35, 0, 2.05444e-07, 0, -2.35, 0, 0, 0 )
+
+[node name="PlayerHUD" type="Control" parent="Player"]
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Player/PlayerHUD"]
+margin_left = 832.0
+margin_top = 600.0
+margin_right = 1024.0
+margin_bottom = 880.0
+rect_scale = Vector2( 1, -1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
