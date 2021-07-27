@@ -1,29 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/InventoryItem.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" type="Script" id=2]
 [ext_resource path="res://Assets/GameAssets/Models/Makehuman/zek.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Styles/inventory_panel_style.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/Scenes/Weapons/WeaponGun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/GameAssets/Shaders/Blur.shader" type="Shader" id=6]
 [ext_resource path="res://Assets/GameAssets/Shaders/hologram.shader" type="Shader" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 1.5
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 7 )
-shader_param/line_color = Color( 0, 0, 1, 1 )
-shader_param/line_width = 0.002
-shader_param/line_blur = 0.2
-shader_param/line_speed = 0.02
-shader_param/straight_lines = true
-shader_param/interrupt_width = 0.5
-shader_param/interrupt_blur = 0.25
-shader_param/interrupt_speed = 0.2
-shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
-shader_param/glow_itensity = 10.5
-shader_param/glow_amount = 2.5
-shader_param/flickering = 0.1
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
@@ -55,6 +41,21 @@ shader_param/glow_itensity = 10.5
 shader_param/glow_amount = 2.5
 shader_param/flickering = 0.1
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 7 )
+shader_param/line_color = Color( 0, 0, 1, 1 )
+shader_param/line_width = 0.002
+shader_param/line_blur = 0.2
+shader_param/line_speed = 0.02
+shader_param/straight_lines = true
+shader_param/interrupt_width = 0.5
+shader_param/interrupt_blur = 0.25
+shader_param/interrupt_speed = 0.2
+shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
+
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 7 )
 shader_param/line_color = Color( 0, 0, 1, 1 )
@@ -69,6 +70,12 @@ shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
 shader_param/glow_itensity = 10.5
 shader_param/glow_amount = 2.5
 shader_param/flickering = 0.1
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 6 )
+shader_param/blur_amount = 5.0
+shader_param/translucency = 1.0
+shader_param/lightness = 0.7
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
@@ -140,27 +147,27 @@ transform = Transform( -2.35, 0, -2.05444e-07, 0, 2.35, 0, 2.05444e-07, 0, -2.35
 
 [node name="zekiah-afro01" parent="Pivot/zek_hologram/zekiah/Skeleton" index="0"]
 layers = 2
-material/0 = SubResource( 4 )
+material/0 = SubResource( 2 )
 
 [node name="zekiah-base" parent="Pivot/zek_hologram/zekiah/Skeleton" index="1"]
 layers = 2
-material/0 = SubResource( 4 )
+material/0 = SubResource( 2 )
 
 [node name="zekiah-eyebrow001" parent="Pivot/zek_hologram/zekiah/Skeleton" index="2"]
 layers = 2
-material/0 = SubResource( 4 )
+material/0 = SubResource( 2 )
 
 [node name="zekiah-low_poly" parent="Pivot/zek_hologram/zekiah/Skeleton" index="3"]
 layers = 2
-material/0 = SubResource( 4 )
+material/0 = SubResource( 2 )
 
 [node name="zekiah-male_casualsuit06" parent="Pivot/zek_hologram/zekiah/Skeleton" index="4"]
 layers = 2
-material/0 = SubResource( 2 )
+material/0 = SubResource( 3 )
 
 [node name="zekiah-teeth_base" parent="Pivot/zek_hologram/zekiah/Skeleton" index="5"]
 layers = 2
-material/0 = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="zekiah-tongue01" parent="Pivot/zek_hologram/zekiah/Skeleton" index="6"]
 layers = 2
@@ -188,6 +195,7 @@ __meta__ = {
 }
 
 [node name="InvPanel" type="Panel" parent="PlayerHUD"]
+material = SubResource( 6 )
 anchor_left = 0.1875
 anchor_top = 0.186667
 anchor_right = 0.814453

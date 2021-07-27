@@ -12,6 +12,7 @@
 shader = ExtResource( 1 )
 shader_param/blur_amount = 2.0
 shader_param/translucency = 1.0
+shader_param/lightness = 1.0
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
