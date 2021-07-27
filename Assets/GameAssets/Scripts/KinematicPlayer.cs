@@ -29,8 +29,11 @@ public class KinematicPlayer : KinematicBody
 	Viewport hologramViewport; 
 	Camera hologramCamera;
 	Position3D hologramCameraPos;
-
-
+	Panel inventoryPanel;
+	TextureRect inventoryRect;
+	Viewport inventoryViewport;
+	Camera inventoryCamera;
+	Position3D inventoryCameraPos;
 
 	public override void _Ready()
 	{
@@ -40,11 +43,19 @@ public class KinematicPlayer : KinematicBody
 		pivot = GetNode<Position3D>("Pivot");
 		inventoryNode = pivot.GetNode<Spatial>("Inventory");
 		hologramRect = GetNode("PlayerHUD").GetNode<TextureRect>("TextureRect");
-		hologramViewport = pivot.GetNode<Viewport>("InvViewport");
-		hologramCamera = pivot.GetNode("InvViewport").GetNode<Camera>("InvCamera");
-		hologramCameraPos = pivot.GetNode<Position3D>("InvCamPosition");
+		hologramViewport = pivot.GetNode<Viewport>("HoloViewport");
+		hologramCamera = hologramViewport.GetNode<Camera>("HoloCamera");
+		hologramCameraPos = pivot.GetNode<Position3D>("HoloCamPosition");
+		inventoryPanel = GetNode("PlayerHUD").GetNode<Panel>("InvPanel");
+		inventoryRect = inventoryPanel.GetNode<TextureRect>("TextureRect");
+		inventoryViewport = pivot.GetNode<Viewport>("InvViewport");
+		inventoryCamera = inventoryViewport.GetNode<Camera>("InvCamera");
+		inventoryCameraPos = pivot.GetNode<Position3D>("InvCamPosition");
+
+		inventoryPanel.Visible = false;
 
 		UpdateInventory();
+		DrawHologramViewport();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -85,6 +96,7 @@ public class KinematicPlayer : KinematicBody
 			//Hack: For testing now
 			InventoryCurrent += 1;
 			UpdateInventory();
+			OpenInventoryPanel();
 		}
 		
 	}
@@ -104,11 +116,12 @@ public class KinematicPlayer : KinematicBody
 	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
 	public override void _Process(float delta)
 	{
-		DrawHologramViewport();
+		hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
+		inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;	
 	}
 
 
-	//<summary> foreach object under the "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
+	//<summary> foreach object under the  "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
 	public void UpdateInventory()
 	{
 		foreach (Node node in inventoryNode.GetChildren())
@@ -219,6 +232,23 @@ public class KinematicPlayer : KinematicBody
 	private void DrawHologramViewport()
 	{
 		hologramRect.Texture = (Texture) hologramViewport.GetTexture();
-		hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
+		//hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
+	}
+
+	private void OpenInventoryPanel()
+	{
+		if (!inventoryPanel.Visible)
+		{
+			inventoryPanel.Visible = true;
+			inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
+			Input.SetMouseMode(Input.MouseMode.Visible);
+			//inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;	
+		}
+		else
+		{
+			inventoryPanel.Visible = false;
+			inventoryRect.Texture = null; //clear
+			Input.SetMouseMode(Input.MouseMode.Captured);
+		}
 	}
 }
