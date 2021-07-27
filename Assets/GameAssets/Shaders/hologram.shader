@@ -4,7 +4,7 @@ render_mode unshaded;
 uniform sampler2D texture_image;
 
 uniform mediump vec4 line_color : hint_color = vec4(0.0, 0.0, 1.0, 1.0);
-uniform mediump float line_width : hint_range(0, 1) = 0.003;
+uniform mediump float line_width : hint_range(0, 1) = 0.002;
 uniform mediump float line_blur : hint_range(0, 1) = 0.2;
 uniform mediump float line_speed : hint_range(-1, 1) = 0.02;
 uniform  bool straight_lines = true;
@@ -14,9 +14,9 @@ uniform mediump float interrupt_blur : hint_range(0, 1) = 0.25;
 uniform mediump float interrupt_speed : hint_range(-1, 1) = 0.2;
 
 uniform mediump vec4 glow_color : hint_color = vec4(0.5, 0.75, 1.0, 1.0);
-uniform lowp float glow_itensity : hint_range(0, 20) = 8.5;
-uniform lowp float glow_amount : hint_range(0, 20) = 3.5;
-uniform lowp float flickering : hint_range(0, 1) = 0.55;
+uniform lowp float glow_itensity : hint_range(0, 20) = 10.5;
+uniform lowp float glow_amount : hint_range(0, 20) = 2.5;
+uniform lowp float flickering : hint_range(0, 1) = 0.1;
 
 vec3 fresnel_glow(float amount, float intensity, vec3 color, vec3 normal, vec3 view) {
 	return pow((1.0 - dot(normalize(normal), normalize(view))), amount) * color * intensity;

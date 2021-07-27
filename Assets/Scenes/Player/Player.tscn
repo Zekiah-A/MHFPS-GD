@@ -3,8 +3,8 @@
 [ext_resource path="res://Assets/GameAssets/Scripts/InventoryItem.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" type="Script" id=2]
 [ext_resource path="res://Assets/GameAssets/Models/Makehuman/zek.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Styles/inventory_panel_style.tres" type="StyleBox" id=4]
 [ext_resource path="res://Assets/Scenes/Weapons/WeaponGun.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Styles/panel_style.tres" type="StyleBox" id=6]
 [ext_resource path="res://Assets/GameAssets/Shaders/hologram.shader" type="Shader" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -13,7 +13,7 @@ height = 1.5
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 7 )
 shader_param/line_color = Color( 0, 0, 1, 1 )
-shader_param/line_width = 0.003
+shader_param/line_width = 0.002
 shader_param/line_blur = 0.2
 shader_param/line_speed = 0.02
 shader_param/straight_lines = true
@@ -21,14 +21,14 @@ shader_param/interrupt_width = 0.5
 shader_param/interrupt_blur = 0.25
 shader_param/interrupt_speed = 0.2
 shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
-shader_param/glow_itensity = 8.5
-shader_param/glow_amount = 3.5
-shader_param/flickering = 0.55
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
 shader_param/line_color = Color( 0, 0, 1, 1 )
-shader_param/line_width = 0.003
+shader_param/line_width = 0.002
 shader_param/line_blur = 0.2
 shader_param/line_speed = 0.02
 shader_param/straight_lines = true
@@ -36,14 +36,14 @@ shader_param/interrupt_width = 0.5
 shader_param/interrupt_blur = 0.25
 shader_param/interrupt_speed = 0.2
 shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
-shader_param/glow_itensity = 8.5
-shader_param/glow_amount = 3.5
-shader_param/flickering = 0.55
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 7 )
 shader_param/line_color = Color( 0, 0, 1, 1 )
-shader_param/line_width = 0.003
+shader_param/line_width = 0.002
 shader_param/line_blur = 0.2
 shader_param/line_speed = 0.02
 shader_param/straight_lines = true
@@ -51,14 +51,14 @@ shader_param/interrupt_width = 0.5
 shader_param/interrupt_blur = 0.25
 shader_param/interrupt_speed = 0.2
 shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
-shader_param/glow_itensity = 8.5
-shader_param/glow_amount = 3.5
-shader_param/flickering = 0.55
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 7 )
 shader_param/line_color = Color( 0, 0, 1, 1 )
-shader_param/line_width = 0.003
+shader_param/line_width = 0.002
 shader_param/line_blur = 0.2
 shader_param/line_speed = 0.02
 shader_param/straight_lines = true
@@ -66,9 +66,9 @@ shader_param/interrupt_width = 0.5
 shader_param/interrupt_blur = 0.25
 shader_param/interrupt_speed = 0.2
 shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
-shader_param/glow_itensity = 8.5
-shader_param/glow_amount = 3.5
-shader_param/flickering = 0.55
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
@@ -115,13 +115,16 @@ cull_mask = 2
 current = true
 
 [node name="InvViewport" type="Viewport" parent="Pivot"]
-size = Vector2( 192, 280 )
+size = Vector2( 768, 1184 )
+size_override_stretch = true
 transparent_bg = true
+render_target_v_flip = true
 
 [node name="InvCamera" type="Camera" parent="Pivot/InvViewport"]
 transform = Transform( -1, 2.99003e-08, -8.21505e-08, 2.26267e-08, 0.996195, 0.0871555, 8.44439e-08, 0.0871555, -0.996195, 0, 2, -3 )
 cull_mask = 2
 current = true
+fov = 75.0
 
 [node name="HoloCamPosition" type="Position3D" parent="Pivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.968 )
@@ -190,24 +193,20 @@ anchor_top = 0.186667
 anchor_right = 0.814453
 anchor_bottom = 0.813333
 mouse_filter = 1
-custom_styles/panel = ExtResource( 6 )
+custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHUD/InvPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -95.5
-margin_top = 148.0
-margin_right = 96.5
-margin_bottom = 444.0
-rect_scale = Vector2( 1, -1 )
+anchor_left = 0.350467
+anchor_top = 0.106383
+anchor_right = 0.649533
+anchor_bottom = 0.893617
+margin_right = -3.05176e-05
 expand = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Button" type="Button" parent="PlayerHUD/InvPanel"]
@@ -215,6 +214,7 @@ anchor_left = 0.673676
 anchor_top = 0.0638298
 anchor_right = 0.972741
 anchor_bottom = 0.234043
+text = "[1] Weapon Gun"
 __meta__ = {
 "_edit_use_anchors_": true
 }

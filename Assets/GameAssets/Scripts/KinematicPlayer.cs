@@ -240,6 +240,7 @@ public class KinematicPlayer : KinematicBody
 		if (!inventoryPanel.Visible)
 		{
 			inventoryPanel.Visible = true;
+			hologramRect.Visible = false;
 			inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
 			Input.SetMouseMode(Input.MouseMode.Visible);
 			//inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;	
@@ -247,6 +248,7 @@ public class KinematicPlayer : KinematicBody
 		else
 		{
 			inventoryPanel.Visible = false;
+			hologramRect.Visible = true;
 			inventoryRect.Texture = null; //clear
 			Input.SetMouseMode(Input.MouseMode.Captured);
 		}
