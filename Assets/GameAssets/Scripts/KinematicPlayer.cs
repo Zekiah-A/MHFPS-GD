@@ -131,6 +131,23 @@ public class KinematicPlayer : KinematicBody
 					break;
 			}
 		}
+
+		if (@event.IsActionPressed("ui_bumperl"))
+		{
+			InventoryCurrent -= 1;
+			if (InventoryCurrent < 0) //fix later
+				InventoryCurrent = 4;
+			OpenInventoryPanel();
+			OpenInventoryPanel();
+		}
+		else if (@event.IsActionPressed("ui_bumperr"))
+		{
+			InventoryCurrent += 1;
+			if (InventoryCurrent > 4) //fix later
+				InventoryCurrent = 0;
+			OpenInventoryPanel();
+			OpenInventoryPanel();
+		}
 	}
 
 	public override void _PhysicsProcess(float delta)
