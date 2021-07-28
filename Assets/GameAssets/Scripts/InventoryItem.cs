@@ -5,11 +5,20 @@ using System;
 public class InventoryItem : Spatial 
 {
 	[Export] public Spatial GameObject;
-
 	[Export] public int ItemType; //type - from enum
-
 	[Export] public string InventoryTexture;
+	public bool Enabled
+	{
+		get { return enabled; }
+		set
+		{
+			enabled=value;
+			OnEnabledChanged();
+		}
+	}
+
 	private Area pickupCollider;
+	private bool enabled;
 
 	//public override void _Ready() => pickupCollider = GetNode<Area>("PickupCollider");
 
@@ -17,6 +26,17 @@ public class InventoryItem : Spatial
 	{
 		//if inventory is not containing this, move into player and update (if collided with plr)
 		GD.Print("Collision!");
+	}
+
+	private void OnEnabledChanged()
+	{
+		GD.Print($"Enabled set to {enabled}");
+		
+		//HACK: BODGE: Quick bodge job :) //UpdateInventory needs to be called on slot change!
+		if (!enabled)
+			this.Visible = false;
+		else
+			this.Visible = true;
 	}
 
 	//Collide signal

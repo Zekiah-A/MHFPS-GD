@@ -106,37 +106,33 @@ public class KinematicPlayer : KinematicBody
 			{
 				case (int) KeyList.Key1:
 					InventoryCurrent = 0;
-					OpenInventoryPanel();
-					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key2:
 					InventoryCurrent = 1; //maybe use maths (int  keylist)
-					OpenInventoryPanel();
-					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key3:
 					InventoryCurrent = 2;
-					OpenInventoryPanel();
-					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key4:
 					InventoryCurrent = 3;
-					OpenInventoryPanel();
-					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key5:
 					InventoryCurrent = 4;
-					OpenInventoryPanel();
-					OpenInventoryPanel();
 					break;
 			}
+			//HACK: BODGE: lol
+			UpdateInventory();
+			OpenInventoryPanel();
+			OpenInventoryPanel();
 		}
-
+		//--------------------------------------------------------------WHAT IF UpdateInvHud just called upd inv?
+		//Make a switch, no break so these happen anyway or something lol
 		if (@event.IsActionPressed("ui_bumperl"))
 		{
 			InventoryCurrent -= 1;
 			if (InventoryCurrent < 0) //fix later
 				InventoryCurrent = 4;
+			UpdateInventory();
 			OpenInventoryPanel();
 			OpenInventoryPanel();
 		}
@@ -145,6 +141,7 @@ public class KinematicPlayer : KinematicBody
 			InventoryCurrent += 1;
 			if (InventoryCurrent > 4) //fix later
 				InventoryCurrent = 0;
+			UpdateInventory();
 			OpenInventoryPanel();
 			OpenInventoryPanel();
 		}
@@ -187,10 +184,12 @@ public class KinematicPlayer : KinematicBody
 				{
 					//enable this, it is the primary, maybe enable "isEnabled" bool in inventoryite.cs?
 					GD.Print($"Enabled - {nodeItem.Name}");
+					nodeItem.Enabled = true;
 				}
 				else
 				{
 					GD.Print($"Disabled - {nodeItem.Name}");
+					nodeItem.Enabled = false;
 				}
 				
 			}
