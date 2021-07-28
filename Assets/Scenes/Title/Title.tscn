@@ -100,8 +100,8 @@ spot_angle_attenuation = 0.901252
 environment = ExtResource( 3 )
 
 [node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, -7.35339, 12.3697, -30.4538 )
-width = 32.0
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, -7.35339, 18.6924, -30.4538 )
+width = 59.7791
 height = 14.0
 depth = 0.001
 material = ExtResource( 4 )

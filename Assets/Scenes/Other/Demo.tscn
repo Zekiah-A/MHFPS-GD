@@ -46,12 +46,337 @@ height = 0.001
 depth = 16.0
 
 [node name="RigidBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 15 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 15 )
+mass = 5.0
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBody/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody2" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody2"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody2/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody3" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody3"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody3/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody4" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody4"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody4/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody5" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody5"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody5/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody6" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody6"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody6/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody7" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody7"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody7/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody8" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody8"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody8/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody9" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody9"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody9/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody10" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody10"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody10/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody11" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody11"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody11/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody12" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody12"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody12/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody13" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody13"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody13/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody14" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody14"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody14/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody15" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody15"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody15/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody16" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody16"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody16/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody17" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody17"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody17/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody18" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody18"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody18/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody19" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody19"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody19/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody20" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody20"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody20/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody21" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody21"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody21/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody22" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody22"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody22/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody23" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody23"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody23/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody24" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody24"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody24/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody25" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody25"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody25/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody26" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody26"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody26/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody27" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody27"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody27/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RigidBody28" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3.5, 15 )
+mass = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody28"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="RigidBody28/CollisionShape"]
 mesh = SubResource( 3 )
 material/0 = null

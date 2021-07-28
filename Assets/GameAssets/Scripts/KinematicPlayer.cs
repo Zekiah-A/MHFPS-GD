@@ -25,15 +25,15 @@ public class KinematicPlayer : KinematicBody
 	private SpringArm springArm;
 	private Position3D pivot;
 	private Spatial inventoryNode;
-	TextureRect hologramRect;
-	Viewport hologramViewport; 
-	Camera hologramCamera;
-	Position3D hologramCameraPos;
-	Panel inventoryPanel;
-	TextureRect inventoryRect;
-	Viewport inventoryViewport;
-	Camera inventoryCamera;
-	Position3D inventoryCameraPos;
+	private TextureRect hologramRect;
+	private Viewport hologramViewport; 
+	private Camera hologramCamera;
+	private Position3D hologramCameraPos;
+	private Panel inventoryPanel;
+	private TextureRect inventoryRect;
+	private Viewport inventoryViewport;
+	private Camera inventoryCamera;
+	private Position3D inventoryCameraPos;
 
 	public override void _Ready()
 	{
@@ -94,11 +94,43 @@ public class KinematicPlayer : KinematicBody
 		{
 			GD.Print("Open radial inventory here!");
 			//Hack: For testing now
-			InventoryCurrent += 1;
+			//InventoryCurrent += 1;
 			UpdateInventory();
 			OpenInventoryPanel();
 		}
 		
+		if (@event is InputEventKey eventKey && eventKey.Pressed)
+		{	//eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape
+			//update HUD as well
+			switch (eventKey.Scancode)
+			{
+				case (int) KeyList.Key1:
+					InventoryCurrent = 0;
+					OpenInventoryPanel();
+					OpenInventoryPanel();
+					break;
+				case (int) KeyList.Key2:
+					InventoryCurrent = 1; //maybe use maths (int  keylist)
+					OpenInventoryPanel();
+					OpenInventoryPanel();
+					break;
+				case (int) KeyList.Key3:
+					InventoryCurrent = 2;
+					OpenInventoryPanel();
+					OpenInventoryPanel();
+					break;
+				case (int) KeyList.Key4:
+					InventoryCurrent = 3;
+					OpenInventoryPanel();
+					OpenInventoryPanel();
+					break;
+				case (int) KeyList.Key5:
+					InventoryCurrent = 4;
+					OpenInventoryPanel();
+					OpenInventoryPanel();
+					break;
+			}
+		}
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -235,6 +267,7 @@ public class KinematicPlayer : KinematicBody
 		//hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
 	}
 
+	List<Button> inventoryPanelButtons = new List<Button>();
 	private void OpenInventoryPanel()
 	{
 		if (!inventoryPanel.Visible)
@@ -243,7 +276,24 @@ public class KinematicPlayer : KinematicBody
 			hologramRect.Visible = false;
 			inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
 			Input.SetMouseMode(Input.MouseMode.Visible);
-			//inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;	
+			//inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;
+			
+			foreach (Node node in inventoryPanel.GetChildren())
+			{
+				if (node is Button button)
+				{
+					inventoryPanelButtons.Add(button);
+				
+					if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
+					{
+						button.AddColorOverride("font_color", new Color(0, 1, 0, 1));
+					}
+					else
+					{
+						button.AddColorOverride("font_color", new Color(1, 1, 1, 1));
+					}
+				}
+			}
 		}
 		else
 		{
@@ -252,5 +302,14 @@ public class KinematicPlayer : KinematicBody
 			inventoryRect.Texture = null; //clear
 			Input.SetMouseMode(Input.MouseMode.Captured);
 		}
+	}
+	
+	private void InventoryButtonPressed(int index)
+	{
+		InventoryCurrent = index;
+		UpdateInventory();
+		//HACK: BODGE: Need to add to update inv or something
+		OpenInventoryPanel();
+		OpenInventoryPanel();
 	}
 }

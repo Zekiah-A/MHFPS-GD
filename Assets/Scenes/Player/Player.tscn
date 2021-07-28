@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/InventoryItem.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" type="Script" id=2]
@@ -7,9 +7,13 @@
 [ext_resource path="res://Assets/Scenes/Weapons/WeaponGun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/GameAssets/Shaders/Blur.shader" type="Shader" id=6]
 [ext_resource path="res://Assets/GameAssets/Shaders/hologram.shader" type="Shader" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 1.5
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 0.05, 0.15, 0.25 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 7 )
@@ -71,7 +75,10 @@ shader_param/glow_itensity = 10.5
 shader_param/glow_amount = 2.5
 shader_param/flickering = 0.1
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="Animation" id=6]
+resource_name = "test"
+
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 6 )
 shader_param/blur_amount = 5.0
 shader_param/translucency = 1.0
@@ -100,10 +107,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 
 [node name="Weapon" type="Position3D" parent="Pivot/Inventory"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.604, 0.51, -0.654 )
 script = ExtResource( 1 )
 
 [node name="Weapon" parent="Pivot/Inventory/Weapon" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.404352, 0.55416, -0.636522 )
+
+[node name="Area" type="Area" parent="Pivot/Inventory/Weapon"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot/Inventory/Weapon/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.25 )
+shape = SubResource( 8 )
 
 [node name="Object" type="Spatial" parent="Pivot/Inventory"]
 script = ExtResource( 1 )
@@ -173,6 +186,9 @@ material/0 = SubResource( 4 )
 layers = 2
 material/0 = SubResource( 5 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/zek_hologram/zekiah/Skeleton" index="7"]
+anims/test = SubResource( 6 )
+
 [node name="PlayerHUD" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -195,7 +211,7 @@ __meta__ = {
 }
 
 [node name="InvPanel" type="Panel" parent="PlayerHUD"]
-material = SubResource( 6 )
+material = SubResource( 7 )
 anchor_left = 0.1875
 anchor_top = 0.186667
 anchor_right = 0.814453
@@ -223,6 +239,9 @@ anchor_top = 0.0638298
 anchor_right = 0.972741
 anchor_bottom = 0.234043
 text = "[1] Weapon Gun"
+icon = ExtResource( 8 )
+flat = true
+expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -232,6 +251,8 @@ anchor_left = 0.672897
 anchor_top = 0.234043
 anchor_right = 0.971963
 anchor_bottom = 0.404255
+text = "[2] ____________"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -241,6 +262,8 @@ anchor_left = 0.672897
 anchor_top = 0.404255
 anchor_right = 0.971963
 anchor_bottom = 0.574468
+text = "[3] ____________"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -250,6 +273,8 @@ anchor_left = 0.672897
 anchor_top = 0.574468
 anchor_right = 0.971963
 anchor_bottom = 0.744681
+text = "[4] ____________"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -259,10 +284,19 @@ anchor_left = 0.672897
 anchor_top = 0.744681
 anchor_right = 0.971963
 anchor_bottom = 0.914894
+text = "[5] ____________"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="Player" type="Spatial" parent="."]
+
+[connection signal="area_entered" from="Pivot/Inventory/Weapon/Area" to="Pivot/Inventory/Weapon" method="OnPickupCollide"]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button" to="." method="InventoryButtonPressed" binds= [ 0 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button2" to="." method="InventoryButtonPressed" binds= [ 1 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button3" to="." method="InventoryButtonPressed" binds= [ 2 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button4" to="." method="InventoryButtonPressed" binds= [ 3 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button5" to="." method="InventoryButtonPressed" binds= [ 4 ]]
 
 [editable path="Pivot/zek_hologram"]
