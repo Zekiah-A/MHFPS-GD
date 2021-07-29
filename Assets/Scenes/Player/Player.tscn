@@ -112,7 +112,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 [node name="Weapon" type="Position3D" parent="Pivot/Inventory"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.604, 0.51, -0.654 )
 script = ExtResource( 1 )
-InventoryTexture = ""
+InventoryTexture = "res://Assets/GameAssets/Icons/weapon_icon.png"
 
 [node name="Weapon" parent="Pivot/Inventory/Weapon" instance=ExtResource( 5 )]
 
@@ -125,6 +125,7 @@ shape = SubResource( 2 )
 [node name="Melee" type="Position3D" parent="Pivot/Inventory"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.604, 0.229383, -0.706421 )
 script = ExtResource( 1 )
+InventoryTexture = "res://icon.png"
 
 [node name="Area" type="Area" parent="Pivot/Inventory/Melee"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.819878, 0.19315 )
@@ -138,9 +139,11 @@ transform = Transform( -1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 5
 
 [node name="Object" type="Spatial" parent="Pivot/Inventory"]
 script = ExtResource( 1 )
+InventoryTexture = "res://icon.png"
 
 [node name="EffectObject" type="Spatial" parent="Pivot/Inventory"]
 script = ExtResource( 1 )
+InventoryTexture = "res://icon.png"
 
 [node name="HoloViewport" type="Viewport" parent="Pivot"]
 size = Vector2( 192, 280 )

@@ -319,6 +319,7 @@ public class KinematicPlayer : KinematicBody
 					try
 					{
 						button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] {Inventory[inventoryPanelButtons.IndexOf(button)].Name}";
+						button.Icon = ResourceLoader.Load(Inventory[inventoryPanelButtons.IndexOf(button)].InventoryTexture) as Texture;
 					}
 					catch
 					{
