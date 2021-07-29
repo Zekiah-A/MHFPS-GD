@@ -106,24 +106,35 @@ public class KinematicPlayer : KinematicBody
 			{
 				case (int) KeyList.Key1:
 					InventoryCurrent = 0;
+					UpdateInventory();
+					OpenInventoryPanel();
+					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key2:
 					InventoryCurrent = 1; //maybe use maths (int  keylist)
+					UpdateInventory();
+					OpenInventoryPanel();
+					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key3:
 					InventoryCurrent = 2;
+					UpdateInventory();
+					OpenInventoryPanel();
+					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key4:
 					InventoryCurrent = 3;
+					UpdateInventory();
+					OpenInventoryPanel();
+					OpenInventoryPanel();
 					break;
 				case (int) KeyList.Key5:
 					InventoryCurrent = 4;
+					UpdateInventory();
+					OpenInventoryPanel();
+					OpenInventoryPanel();
 					break;
 			}
-			//HACK: BODGE: lol
-			UpdateInventory();
-			OpenInventoryPanel();
-			OpenInventoryPanel();
 		}
 		//--------------------------------------------------------------WHAT IF UpdateInvHud just called upd inv?
 		//Make a switch, no break so these happen anyway or something lol
@@ -301,12 +312,17 @@ public class KinematicPlayer : KinematicBody
 					inventoryPanelButtons.Add(button);
 				
 					if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
-					{
 						button.AddColorOverride("font_color", new Color(0, 1, 0, 1));
-					}
 					else
-					{
 						button.AddColorOverride("font_color", new Color(1, 1, 1, 1));
+					
+					try
+					{
+						button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] {Inventory[inventoryPanelButtons.IndexOf(button)].Name}";
+					}
+					catch
+					{
+						button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] ____________";
 					}
 				}
 			}
