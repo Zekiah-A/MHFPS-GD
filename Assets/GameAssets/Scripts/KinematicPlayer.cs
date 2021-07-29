@@ -312,7 +312,7 @@ public class KinematicPlayer : KinematicBody
 					inventoryPanelButtons.Add(button);
 				
 					if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
-						button.AddColorOverride("font_color", new Color(0, 1, 0, 1));
+						button.AddColorOverride("font_color", new Color(0, 0, 1, 1));
 					else
 						button.AddColorOverride("font_color", new Color(1, 1, 1, 1));
 					

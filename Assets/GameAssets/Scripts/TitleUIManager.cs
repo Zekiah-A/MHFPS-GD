@@ -1,12 +1,13 @@
 using Godot;
 using System;
+using DiscordRPC;
 
 public class TitleUIManager : Control
 {	
 	private Panel _tabPanel;
-	private Button _tabOther;
-	private Button _tabPlay;
-	private Button _tabMultiplayer;
+	private Godot.Button _tabOther;
+	private Godot.Button _tabPlay;
+	private Godot.Button _tabMultiplayer;
 	private Tween _tabPanelTween;
 	
 	private Panel _mainPanels;
@@ -14,17 +15,47 @@ public class TitleUIManager : Control
 
 	private const float _underlineMax = 1.2f;
 	private const float _tweenSpeed = 0.5f;
+
+	public DiscordRpcClient client;
 	
 	public override void _Ready()
 	{		
 		_tabPanel = GetNode<Panel>("TabPanel");
-		_tabOther = _tabPanel.GetNode<Button>("Other");
-		_tabPlay = _tabPanel.GetNode<Button>("Play");
-		_tabMultiplayer = _tabPanel.GetNode<Button>("Multiplayer");
+		_tabOther = _tabPanel.GetNode<Godot.Button>("Other");
+		_tabPlay = _tabPanel.GetNode<Godot.Button>("Play");
+		_tabMultiplayer = _tabPanel.GetNode<Godot.Button>("Multiplayer");
 		_tabPanelTween = _tabPanel.GetNode<Tween>("TabPanelTween");
 		
 		_mainPanels = GetNode<Panel>("MainPanels");
 		_panelTween = GetNode<Tween>("PanelTween");
+
+
+		//TODO: Hide this with config
+		///<summary>Rich presence for Discord.</summary>
+		client = new DiscordRpcClient("870411160363614358");			
+
+		client.OnReady += (sender, e) =>
+		{
+			GD.Print("Received Ready from user {0}", e.User.Username);
+		};
+			
+		client.OnPresenceUpdate += (sender, e) =>
+		{
+			GD.Print("Received Update! {0}", e.Presence);
+		};
+
+		client.Initialize();
+		client.SetPresence(new RichPresence()
+		{
+			Details = "github.com/Zekiah-A/MHFPS-GD",
+			State = "Ingame - Title..",
+			Assets = new Assets()
+			{
+				LargeImageKey = "coolstuff",
+				LargeImageText = "S u  b l i m e ||zekiah-a.github.io/Subliminal||",
+				SmallImageKey = "coolstuff"
+			}
+		});	
 	}
 
 	public override void _UnhandledInput(InputEvent @event)

@@ -243,7 +243,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHUD/InvPanel"]
-anchor_left = 0.376947
+anchor_left = 0.373832
 anchor_top = 0.106383
 anchor_right = 0.623053
 anchor_bottom = 0.893618
@@ -260,7 +260,6 @@ anchor_right = 0.972741
 anchor_bottom = 0.234043
 text = "[1] Weapon Gun"
 icon = ExtResource( 8 )
-flat = true
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": true
@@ -273,7 +272,6 @@ anchor_right = 0.971963
 anchor_bottom = 0.404255
 text = "[2] ____________"
 icon = ExtResource( 8 )
-flat = true
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": true
@@ -286,7 +284,6 @@ anchor_right = 0.971963
 anchor_bottom = 0.574468
 text = "[3] ____________"
 icon = ExtResource( 8 )
-flat = true
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": true
@@ -299,7 +296,6 @@ anchor_right = 0.971963
 anchor_bottom = 0.744681
 text = "[4] ____________"
 icon = ExtResource( 8 )
-flat = true
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": true
@@ -312,7 +308,6 @@ anchor_right = 0.971963
 anchor_bottom = 0.914894
 text = "[5] ____________"
 icon = ExtResource( 8 )
-flat = true
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": true

@@ -3,4 +3,7 @@
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>MHFPSGD</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
+  </ItemGroup>
 </Project>
