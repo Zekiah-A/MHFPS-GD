@@ -332,7 +332,7 @@ public class KinematicPlayer : KinematicBody
 		{
 			inventoryPanel.Visible = false;
 			hologramRect.Visible = true;
-			inventoryRect.Texture = null; //clear
+			inventoryRect.Texture = null;
 			Input.SetMouseMode(Input.MouseMode.Captured);
 		}
 	}

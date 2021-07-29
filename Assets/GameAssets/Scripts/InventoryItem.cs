@@ -3,7 +3,7 @@ using System;
 
 ///<summary> All items that can be stored within the inventory (Weapon, Object, EffectObject), will inherit from this?</summary>
 public class InventoryItem : Spatial 
-{	//maybe tuple
+{
 	[Export] public string InventoryTexture;
 	public int ItemType;
 	public bool Enabled
