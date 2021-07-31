@@ -5,6 +5,7 @@
 [resource]
 background_mode = 2
 background_sky = ExtResource( 1 )
+background_energy = 0.21
 ss_reflections_enabled = true
 ss_reflections_fade_in = 0.0776449
 ssao_enabled = true
