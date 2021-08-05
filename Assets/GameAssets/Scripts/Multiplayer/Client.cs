@@ -7,7 +7,7 @@ using Godot;
 
 public class Client : Node
 {
-	public static Client instance;
+	public static Client instance = new Client();
 	public static int dataBufferSize = 4096;
 
 	public string ip = "127.0.0.1";
@@ -18,8 +18,9 @@ public class Client : Node
 
 	private delegate void PacketHandler(Packet _packet);
 	private static Dictionary<int, PacketHandler> packetHandlers;
-
-	public override void _EnterTree() //private void Awake()
+	
+/*
+	public void Start() //private void Awake()
 	{
 		if (instance == null)
 		{
@@ -28,11 +29,10 @@ public class Client : Node
 		else if (instance != this)
 		{
 			GD.Print("Instance already exists, destroying object!");
-/*
 			Destroy(this);
-*/
 		}
 	}
+*/
 	//hack: e
 	//private void Start()
 	//{

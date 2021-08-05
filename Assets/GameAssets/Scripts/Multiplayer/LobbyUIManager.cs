@@ -4,6 +4,9 @@ using DiscordRPC;
 
 public class LobbyUIManager : Control
 {
+	private string ipEntry;
+	private string usernameEntry;
+
 	public override void _EnterTree()
 	{
 		TitleUIManager.client.SetPresence(new RichPresence()
@@ -19,8 +22,7 @@ public class LobbyUIManager : Control
 		});	
 	}
 
-	public override void _Ready()
-	{
-		
-	}
+	private void OnIpTextChanged(string newIp) => ipEntry = newIp;
+	private void OnUsernameTextChanged(string newUsername) => usernameEntry = newUsername;
+	private void OnConnectPressed() => Client.instance.ConnectToServer(ipEntry);
 }
