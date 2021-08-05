@@ -38,7 +38,7 @@ public class Weapon : Spatial
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event.IsActionPressed("game_fire"))
+		if (@event.IsActionPressed("game_fire") && GetParent<InventoryItem>().Enabled)
 			Fire();
 	}
 
@@ -86,7 +86,7 @@ public class Weapon : Spatial
 		}
 
 		playerCamera.RotationDegrees = new Vector3(
-			playerCamera.Rotation.x + 1,
+			playerCamera.Rotation.x + 1f,
 			playerCamera.RotationDegrees.y,
 			playerCamera.RotationDegrees.z
 		);
@@ -102,28 +102,3 @@ public class Weapon : Spatial
 		);
 	}
 }
-/*
-	if Input.is_action_pressed("fire"):
-		if not anim_player.is_playing():
-			camera.translation = lerp(camera.translation, 
-					Vector3(rand_range(MAX_CAM_SHAKE, -MAX_CAM_SHAKE), 
-					rand_range(MAX_CAM_SHAKE, -MAX_CAM_SHAKE), 0), 0.5)
-			if raycast.is_colliding():
-				var target = raycast.get_collider()
-				if target.is_in_group("Enemy"):
-					target.health -= damage
-		anim_player.play("AssaultFire")
-	else:
-		camera.translation = Vector3()
-		anim_player.stop()
-
-*/
-
-/*
-private PackedScene _bulletScene = (PackedScene)GD.Load("res://bullet.tscn");
-
-public void OnShoot()
-{
-	Node bullet = _bulletScene.Instance();
-	AddChild(bullet);
-*/
