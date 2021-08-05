@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Shadow.png-bc2ad34340ee89a95e74db3d9e7b058a.s3tc.stex"
-path.etc2="res://.import/Shadow.png-bc2ad34340ee89a95e74db3d9e7b058a.etc2.stex"
+path.s3tc="res://.import/bullet_hole.png-7ca7c7aae68aaa15035a08ab46621041.s3tc.stex"
+path.etc2="res://.import/bullet_hole.png-7ca7c7aae68aaa15035a08ab46621041.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/GameAssets/Textures/Shadow.png"
-dest_files=[ "res://.import/Shadow.png-bc2ad34340ee89a95e74db3d9e7b058a.s3tc.stex", "res://.import/Shadow.png-bc2ad34340ee89a95e74db3d9e7b058a.etc2.stex" ]
+source_file="res://Assets/GameAssets/Textures/bullet_hole.png"
+dest_files=[ "res://.import/bullet_hole.png-7ca7c7aae68aaa15035a08ab46621041.s3tc.stex", "res://.import/bullet_hole.png-7ca7c7aae68aaa15035a08ab46621041.etc2.stex" ]
 
 [params]
 

@@ -11,7 +11,11 @@ public class Weapon : Spatial
 	private Spatial muzzleFlash;
 	private Timer weaponTimer;
 	private PackedScene impactParticles;
-/////
+	private PackedScene bulletHole;
+	private Spatial player;
+	Camera playerCamera;
+	Tween weaponTween;
+
 	public override void _Ready() //better idea, extend for melee
 	{
 		weaponCast = GetNode<RayCast>("WeaponCast");
@@ -24,6 +28,12 @@ public class Weapon : Spatial
 		weaponTimer.Connect("timeout", this, "OnFireEnd");
 		
 		impactParticles = GD.Load("res://Assets/Scenes/Resources/ImpactParticles.tscn") as PackedScene; //other = bloodparticles
+		bulletHole = GD.Load("res://Assets/Scenes/Resources/BulletHole.tscn") as PackedScene; //other = other mats?
+
+		player = GetTree().CurrentScene.FindNode("Player") as Spatial;
+		playerCamera = player.GetNode("SpringArm").GetNode<Camera>("Camera");
+
+		weaponTween = GetNode<Tween>("WeaponTween");
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -58,21 +68,38 @@ public class Weapon : Spatial
 					//target.health -= damage
 				//else
 				//{
-					Spatial particles = (Spatial) impactParticles.Instance();
+					Particles particles = impactParticles.Instance<Particles>();
+					particles.LookAt(-weaponRay.GetCollisionNormal(), Vector3.Up);
 					particles.Translation = hitPosition;
-					particles.Rotation = Vector3.Zero; //hit normal
 					GetTree().CurrentScene.AddChild(particles);
+					particles.Emitting = true;
 
-					GD.Print($"Impact particles instanced at {particles.Translation} with parent {particles.GetParent()}.");
+					//make a dict and GC after it reaches a number
+					Spatial hole = bulletHole.Instance<Spatial>();
+					hole.LookAt(-weaponRay.GetCollisionNormal(), Vector3.Up);
+					hole.Translation = hitPosition;
+					GetTree().CurrentScene.AddChild(hole);
 				//}
+
 				GD.Print($"Weapon hit target {target}");
 			}
 		}
+
+		playerCamera.RotationDegrees = new Vector3(
+			playerCamera.Rotation.x + 1,
+			playerCamera.RotationDegrees.y,
+			playerCamera.RotationDegrees.z
+		);
 	}
 
 	public void OnFireEnd()
 	{
 		muzzleFlash.Visible = false;
+		playerCamera.RotationDegrees = new Vector3(
+			playerCamera.Rotation.x - 1,
+			playerCamera.RotationDegrees.y,
+			playerCamera.RotationDegrees.z
+		);
 	}
 }
 /*

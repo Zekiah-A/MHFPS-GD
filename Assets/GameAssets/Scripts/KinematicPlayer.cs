@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class KinematicPlayer : KinematicBody
 {
-	public const int maxSpeed = 10; //TODO: these are PUUBLIC and consts, why are they lower?
+	public bool FirstPerson;
 
+	public const int maxSpeed = 10; //TODO: these are PUUBLIC and consts, why are they lower?
 	public const int acceleration = 70;
 	public const int friction = 60;
 	public const int airFriction = 10;
@@ -175,8 +176,17 @@ public class KinematicPlayer : KinematicBody
 	{
 		hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
 		inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;	
-	}
+		
+		if (springArm.SpringLength == 0) //TODO: this is all terrible, FIX!
+			FirstPerson = true;
+		else
+			FirstPerson = false;
 
+		if (FirstPerson)
+			springArm.Translation = new Vector3(0, 1.5f, -0.4f);
+		else
+			springArm.Translation = new Vector3(0, 1.5f, 0);
+	}
 
 	//<summary> foreach object under the  "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
 	public void UpdateInventory()

@@ -5,7 +5,7 @@ using DiscordRPC;
 public class LobbyUIManager : Control
 {
 	private string ipEntry;
-	private string usernameEntry;
+	public static string usernameEntry;
 
 	public override void _EnterTree()
 	{
@@ -25,4 +25,6 @@ public class LobbyUIManager : Control
 	private void OnIpTextChanged(string newIp) => ipEntry = newIp;
 	private void OnUsernameTextChanged(string newUsername) => usernameEntry = newUsername;
 	private void OnConnectPressed() => Client.instance.ConnectToServer(ipEntry);
+
+
 }

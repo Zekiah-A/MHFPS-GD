@@ -32,9 +32,7 @@ public class ClientSend
         using (Packet _packet = new Packet((int)ClientPackets.welcomeReceived))
         {
             _packet.Write(Client.instance.myId);
-/*
-            _packet.Write(UiManager.instance.usernameField.text);
-*/
+            _packet.Write(LobbyUIManager.usernameEntry);
             SendTCPData(_packet);
         }
     }
