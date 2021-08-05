@@ -397,4 +397,5 @@ __meta__ = {
 [connection signal="mouse_entered" from="TabPanel/Multiplayer" to="." method="onTabButtonHover" binds= [ 3 ]]
 [connection signal="mouse_exited" from="TabPanel/Multiplayer" to="." method="onTabButtonExit" binds= [ 3 ]]
 [connection signal="pressed" from="TabPanel/Multiplayer" to="." method="onTabButtonPressed" binds= [ 3 ]]
+[connection signal="pressed" from="MainPanels/MultiplayerPanel/Multiplayer/Button" to="." method="OnMultiplayerButtonPressed"]
 [connection signal="pressed" from="MainPanels/OtherPanel/Multiplayer/Button" to="." method="OnDemoButtonPressed"]

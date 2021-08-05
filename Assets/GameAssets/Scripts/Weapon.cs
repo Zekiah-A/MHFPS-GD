@@ -60,8 +60,8 @@ public class Weapon : Spatial
 				//{
 					Spatial particles = (Spatial) impactParticles.Instance();
 					particles.Translation = hitPosition;
-					particles.Rotation = Vector3.Zero;
-					AddChild(particles);
+					particles.Rotation = Vector3.Zero; //hit normal
+					GetTree().CurrentScene.AddChild(particles);
 
 					GD.Print($"Impact particles instanced at {particles.Translation} with parent {particles.GetParent()}.");
 				//}

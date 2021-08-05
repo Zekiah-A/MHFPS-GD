@@ -37,7 +37,7 @@ public class Player : RigidBody
 	//change to regular _Process?
 	public override void _PhysicsProcess(float _delta)
 	{
-		if (GetLinearVelocity().Length() < MaxSpeed)
+		if (LinearVelocity.Length() < MaxSpeed)
 		{
 			if (Input.IsActionPressed("game_forward"))
 			{

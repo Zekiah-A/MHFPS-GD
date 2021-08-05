@@ -16,7 +16,7 @@ public class TitleUIManager : Control
 	private const float _underlineMax = 1.2f;
 	private const float _tweenSpeed = 0.5f;
 
-	public DiscordRpcClient client;
+	public static DiscordRpcClient client;
 	
 	public override void _Ready()
 	{		
@@ -48,7 +48,7 @@ public class TitleUIManager : Control
 		client.SetPresence(new RichPresence()
 		{
 			Details = "github.com/Zekiah-A/MHFPS-GD",
-			State = "Ingame - Title..",
+			State = "Ingame - Title.",
 			Assets = new Assets()
 			{
 				LargeImageKey = "coolstuff",
@@ -233,6 +233,7 @@ public class TitleUIManager : Control
 	#region WIDGET_LOGIC
 	
 	private void OnDemoButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Other/Demo.tscn");
-
+	private void OnMultiplayerButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Multiplayer/Lobby.tscn");
+	
 	#endregion
 }

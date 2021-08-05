@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Scripts/Multiplayer/LobbyUIManager.cs" type="Script" id=1]
+
+[node name="LobbyUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.734
+anchor_top = 0.4
+anchor_right = 0.906
+anchor_bottom = 0.6
+margin_left = -31.616
+margin_top = -32.0
+margin_right = 32.256
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Conenct" type="Button" parent="Panel"]
+anchor_left = 0.033
+anchor_top = 0.696
+anchor_right = 0.967
+anchor_bottom = 0.94
+margin_left = 0.0799999
+margin_top = -0.0640106
+margin_right = -0.0800171
+margin_bottom = 0.0399933
+text = "Connect"
+
+[node name="Ip" type="LineEdit" parent="Panel"]
+anchor_left = 0.033
+anchor_top = 0.043
+anchor_right = 0.967
+anchor_bottom = 0.304
+margin_left = 0.0799999
+margin_top = 0.0879998
+margin_right = -0.0800171
+margin_bottom = 0.0639954
+text = "IP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Username" type="LineEdit" parent="Panel"]
+anchor_left = 0.033
+anchor_top = 0.348
+anchor_right = 0.967
+anchor_bottom = 0.609
+margin_left = 0.0799999
+margin_top = -0.0320053
+margin_right = -0.0800171
+margin_bottom = -0.0560074
+text = "Username"
+__meta__ = {
+"_edit_use_anchors_": false
+}

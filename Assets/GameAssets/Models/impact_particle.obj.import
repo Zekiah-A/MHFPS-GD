@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh"
+
+[deps]
+
+files=[ "res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh" ]
+
+source_file="res://Assets/GameAssets/Models/impact_particle.obj"
+dest_files=[ "res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh", "res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
