@@ -5,6 +5,10 @@ public class Weapon : Spatial
 {
 	[Export] public int MaxAmmo;
 	[Export] public int CurrentAmmo;
+	private float swayThreshold = 10;
+	private readonly float swayLeft = -0.5f;
+	private readonly float swayRight = 0.5f;
+	private readonly float swayStrength = 5;
 
 	private RayCast weaponCast; //really should be gun only
 	private Area weaponArea; //really should be melee only for collisions of melee weapon
@@ -13,8 +17,11 @@ public class Weapon : Spatial
 	private PackedScene impactParticles;
 	private PackedScene bulletHole;
 	private Spatial player;
-	Camera playerCamera;
-	Tween weaponTween;
+	private Camera playerCamera;
+	private Tween weaponTween;
+	private float mouseRelativeMovement;
+
+
 
 	public override void _Ready() //better idea, extend for melee
 	{
@@ -40,6 +47,14 @@ public class Weapon : Spatial
 	{
 		if (@event.IsActionPressed("game_fire") && GetParent<InventoryItem>().Enabled)
 			Fire();
+
+		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
+			mouseRelativeMovement = -eventMouseMotion.Relative.x;
+	}
+
+	public override void _PhysicsProcess(float delta)
+	{
+		SwayWeapon(delta);
 	}
 
 	public void Fire()
@@ -83,5 +98,15 @@ public class Weapon : Spatial
 	public void OnFireEnd()
 	{
 		muzzleFlash.Visible = false;		
+	}
+
+	public virtual void SwayWeapon(float delta)
+	{
+		if (mouseRelativeMovement > swayThreshold)
+			Rotation = new Vector3(0, Mathf.Lerp(Rotation.y, swayLeft, swayStrength * delta), 0);
+		else if (mouseRelativeMovement < -swayThreshold)
+			Rotation = new Vector3(0, Mathf.Lerp(Rotation.y, swayRight, swayStrength * delta), 0);
+		else
+			Rotation = new Vector3(0, Mathf.Lerp(Rotation.y, 0, swayStrength * delta), 0);
 	}
 }

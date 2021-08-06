@@ -78,7 +78,6 @@ public class KinematicPlayer : KinematicBody
 			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * mouseSensitivity));
 			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
 				springArm.Rotation.y, springArm.Rotation.z);
-			inventoryNode.RotationDegrees = new Vector3(springArm.RotationDegrees.x, inventoryNode.RotationDegrees.y, inventoryNode.RotationDegrees.z);
 		}
 		
 		if (@event.IsActionPressed("game_zoomin"))
@@ -169,24 +168,18 @@ public class KinematicPlayer : KinematicBody
 		ApplyGravity(delta);
 		UpdateSnapVector();
 		Jump();
+		RotateInventory();
+		CheckFirstPerson();
+
 		//TODO: Make camera controllable with right stick & arrow keys
 		velocity = MoveAndSlideWithSnap(velocity, snapVector, Vector3.Up, true);
 	}
+
 	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
 	public override void _Process(float delta)
 	{
 		hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
 		inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;	
-		
-		if (springArm.SpringLength == 0) //TODO: this is all terrible, FIX!
-			FirstPerson = true;
-		else
-			FirstPerson = false;
-
-		if (FirstPerson)
-			springArm.Translation = new Vector3(0, 1.5f, -0.4f);
-		else
-			springArm.Translation = new Vector3(0, 1.5f, 0);
 	}
 
 	//<summary> foreach object under the  "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
@@ -298,11 +291,28 @@ public class KinematicPlayer : KinematicBody
 			velocity.y = jumpImpulse / 2;
 	}
 
+	private void RotateInventory()
+	{
+		inventoryNode.RotationDegrees = new Vector3(Mathf.Lerp(inventoryNode.RotationDegrees.x, springArm.RotationDegrees.x, 0.2f), inventoryNode.RotationDegrees.y, inventoryNode.RotationDegrees.z);
+	}
+
+	private void CheckFirstPerson()
+	{
+		if (springArm.SpringLength == 0)
+		{
+			FirstPerson = true;
+			springArm.Translation = new Vector3(0, 1.5f, -0.4f);
+		} else
+		{
+			FirstPerson = false;
+			springArm.Translation = new Vector3(0, 1.5f, 0);
+		}
+	}
+
 	//TODO: Cleanup
 	private void DrawHologramViewport()
 	{
 		hologramRect.Texture = (Texture) hologramViewport.GetTexture();
-		//hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
 	}
 
 	List<Button> inventoryPanelButtons = new List<Button>();
@@ -314,7 +324,6 @@ public class KinematicPlayer : KinematicBody
 			hologramRect.Visible = false;
 			inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
 			Input.SetMouseMode(Input.MouseMode.Visible);
-			//inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;
 			
 			foreach (Node node in inventoryPanel.GetChildren())
 			{
