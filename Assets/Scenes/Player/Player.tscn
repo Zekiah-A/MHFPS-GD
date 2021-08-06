@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/InventoryItem.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Assets/GameAssets/Shaders/hologram.shader" type="Shader" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=8]
 [ext_resource path="res://Assets/GameAssets/Models/Katana/Katana v5.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Scenes/Player/e.tres" type="Animation" id=10]
+[ext_resource path="res://Assets/Scenes/Player/zekiahAction.tres" type="Animation" id=11]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 1.5
@@ -86,6 +88,30 @@ shader = ExtResource( 6 )
 shader_param/blur_amount = 5.0
 shader_param/translucency = 1.0
 shader_param/lightness = 0.7
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "test"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "test"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "test"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=13]
+blend_point_0/node = SubResource( 10 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 11 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 12 )
+blend_point_2/pos = Vector2( 0, 1 )
+
+[sub_resource type="AnimationNodeBlendTree" id=14]
+graph_offset = Vector2( 4.32605, -42.5 )
+nodes/Idle/node = SubResource( 13 )
+nodes/Idle/position = Vector2( 80, 100 )
+nodes/output/position = Vector2( 320, 160 )
+node_connections = [ "output", 0, "Idle" ]
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
@@ -313,23 +339,22 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="TextureRect2" type="TextureRect" parent="PlayerHUD"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -12.0
-margin_top = -12.0
-margin_right = 12.0
-margin_bottom = 12.0
-mouse_filter = 2
-texture = ExtResource( 8 )
-expand = true
+[node name="Player" type="Spatial" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../Pivot/zek_hologram/zekiah/Skeleton/AnimationPlayer")
+active = true
+parameters/Idle/blend_position = Vector2( -0.394343, 0.147632 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
-[node name="Player" type="Spatial" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Pivot/zek/zekiah/Skeleton")
+anims/anim = ExtResource( 10 )
+anims/e = ExtResource( 10 )
+anims/zekiahAction = ExtResource( 11 )
 
 [connection signal="area_entered" from="Pivot/Inventory/Weapon/Area" to="Pivot/Inventory/Weapon" method="OnPickupCollide"]
 [connection signal="area_entered" from="Pivot/Inventory/Melee/Area" to="Pivot/Inventory/Melee" method="OnPickupCollide"]
@@ -339,4 +364,5 @@ __meta__ = {
 [connection signal="pressed" from="PlayerHUD/InvPanel/Button4" to="." method="InventoryButtonPressed" binds= [ 3 ]]
 [connection signal="pressed" from="PlayerHUD/InvPanel/Button5" to="." method="InventoryButtonPressed" binds= [ 4 ]]
 
+[editable path="Pivot/zek"]
 [editable path="Pivot/zek_hologram"]
