@@ -107,10 +107,10 @@ current = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0 )
 
 [node name="Inventory" type="Position3D" parent="Pivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0 )
 
 [node name="Weapon" type="Position3D" parent="Pivot/Inventory"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.604, 0.51, -0.654 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.5, -1.5 )
 script = ExtResource( 1 )
 InventoryTexture = "res://Assets/GameAssets/Icons/weapon_icon.png"
 
@@ -123,7 +123,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.25 )
 shape = SubResource( 2 )
 
 [node name="Melee" type="Position3D" parent="Pivot/Inventory"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.604, 0.229383, -0.706421 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.75, -1.5 )
 script = ExtResource( 1 )
 InventoryTexture = "res://Assets/GameAssets/Icons/katana_icon.png"
 
@@ -311,6 +311,22 @@ icon = ExtResource( 8 )
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": true
+}
+
+[node name="TextureRect2" type="TextureRect" parent="PlayerHUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -12.0
+margin_right = 12.0
+margin_bottom = 12.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="Player" type="Spatial" parent="."]

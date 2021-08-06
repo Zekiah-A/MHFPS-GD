@@ -78,6 +78,7 @@ public class KinematicPlayer : KinematicBody
 			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * mouseSensitivity));
 			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
 				springArm.Rotation.y, springArm.Rotation.z);
+			inventoryNode.RotationDegrees = new Vector3(springArm.RotationDegrees.x, inventoryNode.RotationDegrees.y, inventoryNode.RotationDegrees.z);
 		}
 		
 		if (@event.IsActionPressed("game_zoomin"))

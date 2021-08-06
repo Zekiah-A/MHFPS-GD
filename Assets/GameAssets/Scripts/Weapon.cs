@@ -42,12 +42,6 @@ public class Weapon : Spatial
 			Fire();
 	}
 
-	public override void _PhysicsProcess(float delta)
-	{
-		//if(weaponCast.IsColliding())
-		//	GD.Print("WeaponCast is colliding");
-	}
-
 	public void Fire()
 	{
 		AnimationPlayer animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -83,22 +77,11 @@ public class Weapon : Spatial
 
 				GD.Print($"Weapon hit target {target}");
 			}
-		}
-
-		playerCamera.RotationDegrees = new Vector3(
-			playerCamera.Rotation.x + 1f,
-			playerCamera.RotationDegrees.y,
-			playerCamera.RotationDegrees.z
-		);
+		} //TODO: Call a "shake" animation in the camera.
 	}
 
 	public void OnFireEnd()
 	{
-		muzzleFlash.Visible = false;
-		playerCamera.RotationDegrees = new Vector3(
-			playerCamera.Rotation.x - 1,
-			playerCamera.RotationDegrees.y,
-			playerCamera.RotationDegrees.z
-		);
+		muzzleFlash.Visible = false;		
 	}
 }
