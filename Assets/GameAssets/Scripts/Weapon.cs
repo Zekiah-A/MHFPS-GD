@@ -41,7 +41,7 @@ public class Weapon : Spatial
 		bulletHole = GD.Load("res://Assets/Scenes/Resources/BulletHole.tscn") as PackedScene; //other = other mats?
 
 		player = GetTree().CurrentScene.FindNode("Player") as Spatial;
-		playerCamera = player.GetNode("SpringArm").GetNode<Camera>("Camera");
+		//playerCamera = player.GetNode("SpringArm").GetNode<Camera>("Camera"); //player should issue this to the head class?
 
 		weaponTween = GetNode<Tween>("WeaponTween");
 		ammoHud = GetNode("WeaponHUD").GetNode<Label>("Ammo");
@@ -89,7 +89,6 @@ public class Weapon : Spatial
 			{
 				var target = weaponRay.GetCollider();
 				Vector3 hitPosition = weaponRay.GetCollisionPoint();
-				// V DO SPECIAL EFFECTS
 				//if target.isInGroup("Enemy"): //NOTE: THis "group" stuff could be useful
 					//target.health -= damage
 				//else

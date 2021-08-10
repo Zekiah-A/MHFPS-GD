@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Scenes/Other/Demo/environment.tres" type="Environment" id=1]
 [ext_resource path="res://Assets/Scenes/Player/Player.tscn" type="PackedScene" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 10, 1, 10 )
+
+[sub_resource type="BoxShape" id=2]
 
 [node name="Spatial" type="Spatial"]
 
@@ -40,3 +42,11 @@ shape = SubResource( 1 )
 width = 16.0
 height = 0.001
 depth = 16.0
+
+[node name="StaticBody3" type="StaticBody" parent="."]
+transform = Transform( 3.05166, 0, 0, 0, 3.92039, 0, 0, 0, 2.78686, 0, 0.995356, 14.9854 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
+shape = SubResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="StaticBody3"]

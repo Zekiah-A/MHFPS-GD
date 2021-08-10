@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/GameAssets/Shaders/Blur.shader" type="Shader" id=6]
 [ext_resource path="res://Assets/GameAssets/Shaders/hologram.shader" type="Shader" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=8]
-[ext_resource path="res://Assets/GameAssets/Models/Katana/Katana v5.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Scenes/Weapons/WeaponMelee.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Scenes/Player/e.tres" type="Animation" id=10]
 [ext_resource path="res://Assets/Scenes/Player/zekiahAction.tres" type="Animation" id=11]
 
@@ -121,11 +121,13 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="SpringArm" type="SpringArm" parent="."]
+[node name="SpringArmY" type="Position3D" parent="."]
+
+[node name="SpringArm" type="SpringArm" parent="SpringArmY"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 spring_length = 8.0
 
-[node name="Camera" type="Camera" parent="SpringArm"]
+[node name="Camera" type="Camera" parent="SpringArmY/SpringArm"]
 cull_mask = 1048573
 current = true
 
@@ -149,9 +151,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.25 )
 shape = SubResource( 2 )
 
 [node name="Melee" type="Position3D" parent="Pivot/Inventory"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.75, -1.5 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.6, -0.75, -1.5 )
 script = ExtResource( 1 )
 InventoryTexture = "res://Assets/GameAssets/Icons/katana_icon.png"
+ItemType = 1
 
 [node name="Area" type="Area" parent="Pivot/Inventory/Melee"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.819878, 0.19315 )
@@ -161,15 +164,17 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.134, -0.195 )
 shape = SubResource( 3 )
 
 [node name="Katana v5" parent="Pivot/Inventory/Melee" instance=ExtResource( 9 )]
-transform = Transform( -1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, 5.96046e-08, 0, 5.96046e-08 )
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.96046e-08, 0, 5.96046e-08 )
 
 [node name="Object" type="Spatial" parent="Pivot/Inventory"]
 script = ExtResource( 1 )
 InventoryTexture = "res://icon.png"
+ItemType = 2
 
 [node name="EffectObject" type="Spatial" parent="Pivot/Inventory"]
 script = ExtResource( 1 )
 InventoryTexture = "res://icon.png"
+ItemType = 3
 
 [node name="HoloViewport" type="Viewport" parent="Pivot"]
 size = Vector2( 192, 280 )

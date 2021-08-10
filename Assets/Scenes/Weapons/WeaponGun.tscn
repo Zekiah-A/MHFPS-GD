@@ -34,7 +34,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.05, 1, 0, 0, 0.037942, 0.195655, 0, 0, 0.980673, 1, 1, 1, 0.1, 1, 0, 0, 0.0252947, 0.201403, -0.0183858, -0.0890321, 0.975281, 1, 1, 1, 0.2, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "WeaponReload"
 length = 0.7
 tracks/0/type = "transform"
@@ -57,7 +57,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 90, 0, 0 ), Vector3( 180, 0, 0 ), Vector3( 270, 0, 0 ), Vector3( 360, 0, 0 ), Vector3( 400, 0, 0 ), Vector3( 360, 0, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=9]
 size = 25
 outline_size = 1
 outline_color = Color( 0.27451, 0.27451, 0.27451, 1 )
@@ -121,7 +121,7 @@ shadow_contact = 0.75
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/WeaponFire = SubResource( 7 )
-anims/WeaponReload = SubResource( 9 )
+anims/WeaponReload = SubResource( 8 )
 
 [node name="WeaponTween" type="Tween" parent="."]
 
@@ -152,7 +152,7 @@ anchor_left = 0.8125
 anchor_top = 0.586667
 anchor_right = 1.0
 anchor_bottom = 0.64
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.713726, 0.713726, 0.713726, 1 )
 text = "0/0"
 align = 2

@@ -5,7 +5,7 @@ using System;
 public class InventoryItem : Spatial 
 {
 	[Export] public string InventoryTexture;
-	public int ItemType;
+	[Export] public int ItemType;
 	public bool Enabled
 	{
 		get { return enabled; }

@@ -1,6 +1,7 @@
 public enum ItemTypes
 {
-    Weapon, //Weapon object: Melee, Fired
+    Weapon = 0, //Weapon object: Melee, Fired
+    MeleeWeapon,
     Object, //Collectable objects: Pen, paper
     EffectObject //Object that does something: Healthshot, Food
 }

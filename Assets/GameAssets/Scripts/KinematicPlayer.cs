@@ -2,6 +2,10 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+//TODO:
+// Make player face movement dir instead of input (rotate towards velocity)
+// Acceleration tilting (looks liek surfing), rotate around centre of mass
+
 public class KinematicPlayer : KinematicBody
 {
 	public bool FirstPerson;
@@ -24,6 +28,7 @@ public class KinematicPlayer : KinematicBody
 	private Vector3 velocity = Vector3.Zero;
 	private Vector3 snapVector = Vector3.Zero;
 	private SpringArm springArm;
+	private Position3D ArmY; //shouldn't be capital
 	private Position3D pivot;
 	private Spatial inventoryNode;
 	private TextureRect hologramRect;
@@ -39,8 +44,8 @@ public class KinematicPlayer : KinematicBody
 	public override void _Ready()
 	{
 		Input.SetMouseMode(Input.MouseMode.Captured);
-	
-		springArm = GetNode<SpringArm>("SpringArm"); //find node as well
+		ArmY = GetNode<Position3D>("SpringArmY");
+		springArm = ArmY.GetNode<SpringArm>("SpringArm"); //find node as well
 		pivot = GetNode<Position3D>("Pivot");
 		inventoryNode = pivot.GetNode<Spatial>("Inventory");
 		hologramRect = GetNode("PlayerHUD").GetNode<TextureRect>("TextureRect");
@@ -74,7 +79,7 @@ public class KinematicPlayer : KinematicBody
 
 		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
 		{
-			RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * mouseSensitivity));
+			ArmY.RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * mouseSensitivity));
 			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * mouseSensitivity));
 			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
 				springArm.Rotation.y, springArm.Rotation.z);
@@ -169,7 +174,7 @@ public class KinematicPlayer : KinematicBody
 		UpdateSnapVector();
 		Jump();
 		RotateInventory();
-		CheckFirstPerson();
+		MoveSpringArm();
 
 		//TODO: Make camera controllable with right stick & arrow keys
 		velocity = MoveAndSlideWithSnap(velocity, snapVector, Vector3.Up, true);
@@ -228,7 +233,7 @@ public class KinematicPlayer : KinematicBody
 
 	private Vector3 GetDirection(Vector3 inputVector)
 	{
-		var direction = (inputVector.x * Transform.basis.x) + (inputVector.z * Transform.basis.z);
+		Vector3 direction = (inputVector.x * ArmY.Transform.basis.x) + (inputVector.z * ArmY.Transform.basis.z); 
 		return direction;
 	}
 
@@ -238,10 +243,10 @@ public class KinematicPlayer : KinematicBody
 		{
 			velocity.x = Mathf.MoveToward(velocity.x, direction.x * maxSpeed, acceleration * delta);
 			velocity.z = Mathf.MoveToward(velocity.z, direction.z * maxSpeed, acceleration * delta);
-			
+
 			pivot.Rotation = new Vector3(
 				pivot.Rotation.x,
-				Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-inputVector.x, -inputVector.z), rotSpeed * delta),
+				Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), rotSpeed * delta),
 				pivot.Rotation.z
 			);
 		}
@@ -296,7 +301,7 @@ public class KinematicPlayer : KinematicBody
 		inventoryNode.RotationDegrees = new Vector3(Mathf.Lerp(inventoryNode.RotationDegrees.x, springArm.RotationDegrees.x, 0.2f), inventoryNode.RotationDegrees.y, inventoryNode.RotationDegrees.z);
 	}
 
-	private void CheckFirstPerson()
+	private void MoveSpringArm()
 	{
 		if (springArm.SpringLength == 0)
 		{
@@ -305,7 +310,23 @@ public class KinematicPlayer : KinematicBody
 		} else
 		{
 			FirstPerson = false;
-			springArm.Translation = new Vector3(0, 1.5f, 0);
+			if (InventoryCurrent < Inventory.Count - 1)
+			{
+				switch (Inventory[InventoryCurrent].ItemType)
+				{
+					case (int) ItemTypes.Weapon:
+						springArm.Translation = new Vector3(0, Mathf.Lerp(springArm.Translation.y, 2, 0.1f), 0);
+						break;
+					case (int) ItemTypes.MeleeWeapon:
+						springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 1, 0.1f), Mathf.Lerp(springArm.Translation.y, 1.5f, 0.1f), 0);
+						break;
+					default:
+						springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 0, 0.1f), Mathf.Lerp(springArm.Translation.y, 1.5f, 0.1f), 0);
+						break;
+				}
+			}
+			else
+				springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 0, 0.1f), Mathf.Lerp(springArm.Translation.y, 1.5f, 0.1f), 0);
 		}
 	}
 
@@ -334,7 +355,7 @@ public class KinematicPlayer : KinematicBody
 					if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
 						button.AddColorOverride("font_color", new Color(0, 0, 1, 1));
 					else
-						button.AddColorOverride("font_color", new Color(1, 1, 1, 1));
+						button.AddColorOverride("font_color", new Color(1, 1, 1, 0.5f));
 					
 					try
 					{
