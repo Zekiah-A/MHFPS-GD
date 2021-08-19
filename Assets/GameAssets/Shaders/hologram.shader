@@ -4,7 +4,7 @@ render_mode unshaded;
 uniform sampler2D texture_image;
 
 uniform mediump vec4 line_color : hint_color = vec4(0.0, 0.0, 1.0, 1.0);
-uniform mediump float line_width : hint_range(0, 1) = 0.002;
+uniform mediump float line_width : hint_range(0, 1) = 0.1;
 uniform mediump float line_blur : hint_range(0, 1) = 0.2;
 uniform mediump float line_speed : hint_range(-1, 1) = 0.02;
 uniform  bool straight_lines = true;

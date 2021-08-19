@@ -24,8 +24,10 @@ public class KinematicPlayer : KinematicBody
 	//[Export] public int currentSelected;
 	public static int InventoryCurrent = 0;
 	public static List<InventoryItem> Inventory = new List<InventoryItem>();
+	List<Button> inventoryPanelButtons = new List<Button>();
 
 	private Vector3 velocity = Vector3.Zero;
+	private Vector3 lastvelocity;
 	private Vector3 snapVector = Vector3.Zero;
 	private SpringArm springArm;
 	private Position3D ArmY; //shouldn't be capital
@@ -83,6 +85,7 @@ public class KinematicPlayer : KinematicBody
 			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * mouseSensitivity));
 			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
 				springArm.Rotation.y, springArm.Rotation.z);
+
 		}
 		
 		if (@event.IsActionPressed("game_zoomin"))
@@ -113,32 +116,27 @@ public class KinematicPlayer : KinematicBody
 				case (int) KeyList.Key1:
 					InventoryCurrent = 0;
 					UpdateInventory();
-					OpenInventoryPanel();
-					OpenInventoryPanel();
+					UpdateInventoryPanel();
 					break;
 				case (int) KeyList.Key2:
 					InventoryCurrent = 1; //maybe use maths (int  keylist)
 					UpdateInventory();
-					OpenInventoryPanel();
-					OpenInventoryPanel();
+					UpdateInventoryPanel();
 					break;
 				case (int) KeyList.Key3:
 					InventoryCurrent = 2;
 					UpdateInventory();
-					OpenInventoryPanel();
-					OpenInventoryPanel();
+					UpdateInventoryPanel();
 					break;
 				case (int) KeyList.Key4:
 					InventoryCurrent = 3;
 					UpdateInventory();
-					OpenInventoryPanel();
-					OpenInventoryPanel();
+					UpdateInventoryPanel();
 					break;
 				case (int) KeyList.Key5:
 					InventoryCurrent = 4;
 					UpdateInventory();
-					OpenInventoryPanel();
-					OpenInventoryPanel();
+					UpdateInventoryPanel();
 					break;
 			}
 		}
@@ -150,8 +148,7 @@ public class KinematicPlayer : KinematicBody
 			if (InventoryCurrent < 0) //fix later
 				InventoryCurrent = 4;
 			UpdateInventory();
-			OpenInventoryPanel();
-			OpenInventoryPanel();
+			UpdateInventoryPanel();
 		}
 		else if (@event.IsActionPressed("ui_bumperr"))
 		{
@@ -159,9 +156,11 @@ public class KinematicPlayer : KinematicBody
 			if (InventoryCurrent > 4) //fix later
 				InventoryCurrent = 0;
 			UpdateInventory();
-			OpenInventoryPanel();
-			OpenInventoryPanel();
+			UpdateInventoryPanel();
 		}
+
+		//if (@event.IsActionPressed("game_fire2"))
+			//AimDownSights();
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -175,6 +174,7 @@ public class KinematicPlayer : KinematicBody
 		Jump();
 		RotateInventory();
 		MoveSpringArm();
+		AccelerationTilt(delta);
 
 		//TODO: Make camera controllable with right stick & arrow keys
 		velocity = MoveAndSlideWithSnap(velocity, snapVector, Vector3.Up, true);
@@ -239,6 +239,9 @@ public class KinematicPlayer : KinematicBody
 
 	private void ApplyMovement(Vector3 inputVector, Vector3 direction, float delta)
 	{
+		lastvelocity.x = velocity.x;
+		lastvelocity.z = velocity.z;
+		
 		if (direction != Vector3.Zero)
 		{
 			velocity.x = Mathf.MoveToward(velocity.x, direction.x * maxSpeed, acceleration * delta);
@@ -315,7 +318,7 @@ public class KinematicPlayer : KinematicBody
 				switch (Inventory[InventoryCurrent].ItemType)
 				{
 					case (int) ItemTypes.Weapon:
-						springArm.Translation = new Vector3(0, Mathf.Lerp(springArm.Translation.y, 2, 0.1f), 0);
+						springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 0, 0.1f), Mathf.Lerp(springArm.Translation.y, 2, 0.1f), 0);
 						break;
 					case (int) ItemTypes.MeleeWeapon:
 						springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 1, 0.1f), Mathf.Lerp(springArm.Translation.y, 1.5f, 0.1f), 0);
@@ -336,38 +339,42 @@ public class KinematicPlayer : KinematicBody
 		hologramRect.Texture = (Texture) hologramViewport.GetTexture();
 	}
 
-	List<Button> inventoryPanelButtons = new List<Button>();
+	
+	private void UpdateInventoryPanel()
+	{
+		foreach (Node node in inventoryPanel.GetChildren())
+		{
+			if (node is Button button)
+			{
+				inventoryPanelButtons.Add(button);
+			
+				if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
+					button.AddColorOverride("font_color", new Color(0, 0, 1, 1));
+				else
+					button.AddColorOverride("font_color", new Color(1, 1, 1, 0.5f));
+				
+				try
+				{
+					button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] {Inventory[inventoryPanelButtons.IndexOf(button)].Name}";
+					button.Icon = ResourceLoader.Load(Inventory[inventoryPanelButtons.IndexOf(button)].InventoryTexture) as Texture;
+				}
+				catch
+				{
+					button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] ____________";
+				}
+			}
+		}
+	}
+
 	private void OpenInventoryPanel()
 	{
+		UpdateInventoryPanel();
 		if (!inventoryPanel.Visible)
 		{
 			inventoryPanel.Visible = true;
 			hologramRect.Visible = false;
 			inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
 			Input.SetMouseMode(Input.MouseMode.Visible);
-			
-			foreach (Node node in inventoryPanel.GetChildren())
-			{
-				if (node is Button button)
-				{
-					inventoryPanelButtons.Add(button);
-				
-					if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
-						button.AddColorOverride("font_color", new Color(0, 0, 1, 1));
-					else
-						button.AddColorOverride("font_color", new Color(1, 1, 1, 0.5f));
-					
-					try
-					{
-						button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] {Inventory[inventoryPanelButtons.IndexOf(button)].Name}";
-						button.Icon = ResourceLoader.Load(Inventory[inventoryPanelButtons.IndexOf(button)].InventoryTexture) as Texture;
-					}
-					catch
-					{
-						button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] ____________";
-					}
-				}
-			}
 		}
 		else
 		{
@@ -375,7 +382,7 @@ public class KinematicPlayer : KinematicBody
 			hologramRect.Visible = true;
 			inventoryRect.Texture = null;
 			Input.SetMouseMode(Input.MouseMode.Captured);
-		}
+		}	
 	}
 	
 	private void InventoryButtonPressed(int index)
@@ -384,6 +391,17 @@ public class KinematicPlayer : KinematicBody
 		UpdateInventory();
 		//HACK: BODGE: Need to add to update inv or something
 		OpenInventoryPanel();
-		OpenInventoryPanel();
+	}
+
+	private void AccelerationTilt(float delta) //ALL COULD JUST BE IN APPLY MOVEMENT
+	{ //i need directional velocity, not general
+		Vector3 acceleration = new Vector3(
+			(velocity.x - lastvelocity.x),
+			0,
+			(velocity.z - lastvelocity.z)
+		) / delta;
+
+		Vector3 directionalAcceleration = acceleration + Rotation;
+		
 	}
 }

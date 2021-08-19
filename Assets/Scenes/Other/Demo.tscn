@@ -1,12 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Scenes/Other/Demo/environment.tres" type="Environment" id=1]
 [ext_resource path="res://Assets/Scenes/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/GameAssets/Scripts/logic.cs" type="Script" id=3]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 10, 1, 10 )
+[sub_resource type="NavigationMesh" id=1]
+vertices = PoolVector3Array( -23, 0.914762, -17, -15, 0.914762, -17, -14, 0.914762, -20, -23, 0.914762, -23, 14, 0.914762, -20, 15, 0.914762, -17, 23, 0.914762, -17, 23, 0.914762, -23, -12, 0.914762, -23, -23, 0.914762, -23, -14, 0.914762, -20, -7, 0.914762, -20, 14, 0.914762, -20, 23, 0.914762, -23, 11, 0.914762, -23, 7, 0.914762, -20, -7, 0.914762, -20, 0, 0.914762, -20, 0, 0.914762, -23, -12, 0.914762, -23, 7, 0.914762, -20, 11, 0.914762, -23, 0, 0.914762, -23, 0, 0.914762, -20, -7, 4.66476, -21, -13, 4.66476, -21, -13, 2.41476, -16, 13, 2.41476, -16, 13, 4.66476, -21, 6, 4.66476, -21, -12, 0.914762, 23, -4, 0.914762, 19, -5, 0.914762, 12, -23, 0.914762, 3, -23, 0.914762, 13, -4, 0.914762, 19, -12, 0.914762, 23, 0, 0.914762, 23, 5, 0.914762, 18, -4, 0.914762, 19, 0, 0.914762, 23, 11, 0.914762, 23, -23, 0.914762, 3, -5, 0.914762, 12, 4, 0.914762, 11, 23, 0.914762, 3, 13, 2.41476, -16, -13, 2.41476, -16, -5.95995, 0.914762, -12.0561, 12.0602, 0.914762, -11.9242, -12.1, 0.914762, -12.1, 23, 0.914762, -17, 15, 0.914762, -17, 13, 2.41476, -16, 23, 0.914762, -7, -13, 2.41476, -16, -15, 0.914762, -17, -23, 0.914762, -17, -23, 0.914762, -7, -13, 2.41476, -16, -23, 0.914762, -7, -23, 0.914762, 3, 23, 0.914762, 3, 23, 0.914762, -7, 13, 2.41476, -16, 4, 0.914762, 11, 5, 0.914762, 18, 11, 0.914762, 23, 23, 0.914762, 13, 23, 0.914762, 3, 13, 2.41476, -16, 6, 4.66476, -21, 0, 4.66476, -21, -13, 2.41476, -16, 0, 4.66476, -21, -7, 4.66476, -21, -13, 2.41476, -16, -23, 0.914762, 13, -23, 0.914762, 23, -12, 0.914762, 23, 11, 0.914762, 23, 23, 0.914762, 23, 23, 0.914762, 13 )
+polygons = [ PoolIntArray( 1, 0, 2 ), PoolIntArray( 2, 0, 3 ), PoolIntArray( 5, 4, 6 ), PoolIntArray( 6, 4, 7 ), PoolIntArray( 11, 10, 8 ), PoolIntArray( 8, 10, 9 ), PoolIntArray( 15, 14, 12 ), PoolIntArray( 12, 14, 13 ), PoolIntArray( 17, 16, 18 ), PoolIntArray( 18, 16, 19 ), PoolIntArray( 23, 22, 20 ), PoolIntArray( 20, 22, 21 ), PoolIntArray( 26, 25, 24 ), PoolIntArray( 29, 28, 27 ), PoolIntArray( 31, 30, 32 ), PoolIntArray( 32, 30, 34 ), PoolIntArray( 32, 34, 33 ), PoolIntArray( 35, 37, 36 ), PoolIntArray( 39, 38, 40 ), PoolIntArray( 40, 38, 41 ), PoolIntArray( 46, 48, 47 ), PoolIntArray( 47, 50, 42 ), PoolIntArray( 42, 50, 43 ), PoolIntArray( 43, 48, 44 ), PoolIntArray( 44, 49, 45 ), PoolIntArray( 45, 49, 46 ), PoolIntArray( 48, 50, 47 ), PoolIntArray( 46, 49, 48 ), PoolIntArray( 50, 48, 43 ), PoolIntArray( 48, 49, 44 ), PoolIntArray( 52, 51, 53 ), PoolIntArray( 53, 51, 54 ), PoolIntArray( 56, 55, 57 ), PoolIntArray( 57, 55, 58 ), PoolIntArray( 61, 60, 59 ), PoolIntArray( 64, 63, 62 ), PoolIntArray( 66, 65, 67 ), PoolIntArray( 67, 65, 68 ), PoolIntArray( 68, 65, 69 ), PoolIntArray( 71, 70, 72 ), PoolIntArray( 72, 70, 73 ), PoolIntArray( 76, 75, 74 ), PoolIntArray( 79, 78, 77 ), PoolIntArray( 82, 81, 80 ) ]
+cell/size = 1.0
+cell/height = 0.75
+agent/height = 1.5
+agent/radius = 0.5
 
 [sub_resource type="BoxShape" id=2]
+extents = Vector3( 10, 1, 10 )
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="CapsuleMesh" id=4]
+radius = 0.5
+mid_height = 1.5
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0.8, 0.439216, 0.439216, 1 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -19,34 +35,52 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="Navigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/StaticBody"]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, -1, 0 )
-shape = SubResource( 1 )
-
-[node name="CSGBox" type="CSGBox" parent="StaticBody"]
-width = 16.0
-height = 0.001
-depth = 16.0
-
-[node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 1.63308, 0, 0, 0, 0.876416, -0.4481, 0, 0.481555, 0.815529, 0, 0, -15.0146 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
-transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, -1, 0 )
-shape = SubResource( 1 )
-
-[node name="CSGBox" type="CSGBox" parent="StaticBody2"]
-width = 16.0
-height = 0.001
-depth = 16.0
-
-[node name="StaticBody3" type="StaticBody" parent="."]
-transform = Transform( 3.05166, 0, 0, 0, 3.92039, 0, 0, 0, 2.78686, 0, 0.995356, 14.9854 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
 shape = SubResource( 2 )
 
-[node name="CSGBox" type="CSGBox" parent="StaticBody3"]
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/StaticBody"]
+width = 16.0
+height = 0.001
+depth = 16.0
+
+[node name="StaticBody2" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 1.63308, 0, 0, 0, 0.876416, -0.4481, 0, 0.481555, 0.815529, 0, 0, -15.0146 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/StaticBody2"]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, -1, 0 )
+shape = SubResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/StaticBody2"]
+width = 16.0
+height = 0.001
+depth = 16.0
+
+[node name="StaticBody3" type="StaticBody" parent="Navigation/NavigationMeshInstance"]
+transform = Transform( 3.05166, 0, 0, 0, 3.92039, 0, 0, 0, 2.78686, 0, 0.995356, 14.9854 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/StaticBody3"]
+shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/StaticBody3"]
+
+[node name="Npc" type="KinematicBody" parent="Navigation"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5 )
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Navigation/Npc"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="Navigation/Npc"]
+wait_time = 2.0
+autostart = true

@@ -1,6 +1,6 @@
 using Godot;
 using System;
-	//BASE CLASS FOR ALL WEAPONS
+//BASE CLASS FOR ALL WEAPONS
 public class Weapon : Spatial
 {
 	[Export] public int TotalAmmo = 16;
@@ -29,14 +29,14 @@ public class Weapon : Spatial
 	public override void _Ready() //better idea, extend for melee
 	{
 		weaponCast = GetNode<RayCast>("WeaponCast");
-		
+
 		muzzleFlash = GetNode("Mesh").GetNode<Spatial>("MuzzleFlash");
 		muzzleFlash.Visible = false;
 
 		weaponTimer = GetNode<Timer>("Timer");
 		weaponTimer.WaitTime = 0.2f; //make  ext
 		weaponTimer.Connect("timeout", this, "OnFireEnd");
-		
+
 		impactParticles = GD.Load("res://Assets/Scenes/Resources/ImpactParticles.tscn") as PackedScene; //other = bloodparticles
 		bulletHole = GD.Load("res://Assets/Scenes/Resources/BulletHole.tscn") as PackedScene; //other = other mats?
 
@@ -68,7 +68,7 @@ public class Weapon : Spatial
 
 	public virtual void Fire()
 	{
-		
+
 		RayCast weaponRay = GetNode<RayCast>("WeaponCast");
 
 		if (!animPlayer.IsPlaying() && CanFire == true) //this kinda limits it to spamming at anim length (0.2 seconds, i could make this the timer length too thru script :thinking:)
@@ -90,20 +90,20 @@ public class Weapon : Spatial
 				var target = weaponRay.GetCollider();
 				Vector3 hitPosition = weaponRay.GetCollisionPoint();
 				//if target.isInGroup("Enemy"): //NOTE: THis "group" stuff could be useful
-					//target.health -= damage
+				//target.health -= damage
 				//else
 				//{
-					Particles particles = impactParticles.Instance<Particles>();
-					particles.LookAt(-weaponRay.GetCollisionNormal(), Vector3.Up);
-					particles.Translation = hitPosition;
-					GetTree().CurrentScene.AddChild(particles);
-					particles.Emitting = true;
+				Particles particles = impactParticles.Instance<Particles>();
+				particles.LookAt(-weaponRay.GetCollisionNormal(), Vector3.Up);
+				particles.Translation = hitPosition;
+				GetTree().CurrentScene.AddChild(particles);
+				particles.Emitting = true;
 
-					//make a dict and GC after it reaches a number
-					Spatial hole = bulletHole.Instance<Spatial>();
-					hole.LookAt(-weaponRay.GetCollisionNormal(), Vector3.Up);
-					hole.Translation = hitPosition;
-					GetTree().CurrentScene.AddChild(hole);
+				//make a dict and GC after it reaches a number
+				Spatial hole = bulletHole.Instance<Spatial>();
+				hole.LookAt(-weaponRay.GetCollisionNormal(), Vector3.Up);
+				hole.Translation = hitPosition;
+				GetTree().CurrentScene.AddChild(hole);
 				//}
 
 				GD.Print($"Weapon hit target {target}");
@@ -113,7 +113,7 @@ public class Weapon : Spatial
 
 	public virtual void OnFireEnd()
 	{
-		muzzleFlash.Visible = false;		
+		muzzleFlash.Visible = false;
 	}
 
 	public virtual void Reload()
@@ -121,7 +121,7 @@ public class Weapon : Spatial
 		animPlayer.Play("WeaponReload");
 
 		int diff = MagazineSize - CurrentAmmo;
-		
+
 		if (TotalAmmo - diff >= 0)
 		{
 			TotalAmmo -= diff;
