@@ -1,0 +1,375 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Scripts/InventoryItem.cs" type="Script" id=1]
+[ext_resource path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" type="Script" id=2]
+[ext_resource path="res://Assets/GameAssets/Models/Makehuman/zek.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Styles/inventory_panel_style.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets/Scenes/Weapons/WeaponGun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/GameAssets/Shaders/Blur.shader" type="Shader" id=6]
+[ext_resource path="res://Assets/GameAssets/Shaders/hologram.shader" type="Shader" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Scenes/Weapons/WeaponMelee.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Scenes/Player/e.tres" type="Animation" id=10]
+[ext_resource path="res://Assets/Scenes/Player/zekiahAction.tres" type="Animation" id=11]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 1.5
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.05, 0.15, 0.25 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.0788995, 0.669822, 0.0958408 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 7 )
+shader_param/line_color = Color( 0, 0, 1, 1 )
+shader_param/line_width = 0.002
+shader_param/line_blur = 0.4
+shader_param/line_speed = 0.02
+shader_param/straight_lines = true
+shader_param/interrupt_width = 0.5
+shader_param/interrupt_blur = 0.25
+shader_param/interrupt_speed = 0.2
+shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 7 )
+shader_param/line_color = Color( 0, 0, 1, 1 )
+shader_param/line_width = 0.002
+shader_param/line_blur = 0.2
+shader_param/line_speed = 0.02
+shader_param/straight_lines = true
+shader_param/interrupt_width = 0.5
+shader_param/interrupt_blur = 0.25
+shader_param/interrupt_speed = 0.2
+shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 7 )
+shader_param/line_color = Color( 0, 0, 1, 1 )
+shader_param/line_width = 0.002
+shader_param/line_blur = 0.2
+shader_param/line_speed = 0.02
+shader_param/straight_lines = true
+shader_param/interrupt_width = 0.5
+shader_param/interrupt_blur = 0.25
+shader_param/interrupt_speed = 0.2
+shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 7 )
+shader_param/line_color = Color( 0, 0, 1, 1 )
+shader_param/line_width = 0.002
+shader_param/line_blur = 0.4
+shader_param/line_speed = 0.02
+shader_param/straight_lines = true
+shader_param/interrupt_width = 0.5
+shader_param/interrupt_blur = 0.25
+shader_param/interrupt_speed = 0.2
+shader_param/glow_color = Color( 0.5, 0.75, 1, 1 )
+shader_param/glow_itensity = 10.5
+shader_param/glow_amount = 2.5
+shader_param/flickering = 0.1
+
+[sub_resource type="Animation" id=8]
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 6 )
+shader_param/blur_amount = 5.0
+shader_param/translucency = 1.0
+shader_param/lightness = 0.7
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "test"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "test"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "test"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=13]
+blend_point_0/node = SubResource( 10 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 11 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 12 )
+blend_point_2/pos = Vector2( 0, 1 )
+
+[sub_resource type="AnimationNodeBlendTree" id=14]
+graph_offset = Vector2( 4.32605, -42.5 )
+nodes/Idle/node = SubResource( 13 )
+nodes/Idle/position = Vector2( 80, 100 )
+nodes/output/position = Vector2( 320, 160 )
+node_connections = [ "output", 0, "Idle" ]
+
+[node name="Player" type="KinematicBody" groups=[
+"Player",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="SpringArmY" type="Position3D" parent="."]
+
+[node name="SpringArm" type="SpringArm" parent="SpringArmY"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+spring_length = 8.0
+
+[node name="Camera" type="Camera" parent="SpringArmY/SpringArm"]
+cull_mask = 1048573
+current = true
+
+[node name="Pivot" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0 )
+
+[node name="Inventory" type="Position3D" parent="Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0 )
+
+[node name="Weapon" type="Position3D" parent="Pivot/Inventory"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.5, -1.5 )
+script = ExtResource( 1 )
+InventoryTexture = "res://Assets/GameAssets/Icons/weapon_icon.png"
+
+[node name="Weapon" parent="Pivot/Inventory/Weapon" instance=ExtResource( 5 )]
+
+[node name="Area" type="Area" parent="Pivot/Inventory/Weapon"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot/Inventory/Weapon/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -0.25 )
+shape = SubResource( 2 )
+
+[node name="Melee" type="Position3D" parent="Pivot/Inventory"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.6, -0.75, -1.5 )
+script = ExtResource( 1 )
+InventoryTexture = "res://Assets/GameAssets/Icons/katana_icon.png"
+ItemType = 1
+
+[node name="Area" type="Area" parent="Pivot/Inventory/Melee"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.819878, 0.19315 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot/Inventory/Melee/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.134, -0.195 )
+shape = SubResource( 3 )
+
+[node name="Katana v5" parent="Pivot/Inventory/Melee" instance=ExtResource( 9 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.96046e-08, 0, 5.96046e-08 )
+
+[node name="Object" type="Spatial" parent="Pivot/Inventory"]
+script = ExtResource( 1 )
+InventoryTexture = "res://icon.png"
+ItemType = 2
+
+[node name="EffectObject" type="Spatial" parent="Pivot/Inventory"]
+script = ExtResource( 1 )
+InventoryTexture = "res://icon.png"
+ItemType = 3
+
+[node name="HoloViewport" type="Viewport" parent="Pivot"]
+size = Vector2( 192, 280 )
+transparent_bg = true
+
+[node name="HoloCamera" type="Camera" parent="Pivot/HoloViewport"]
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 2 )
+cull_mask = 2
+current = true
+
+[node name="InvViewport" type="Viewport" parent="Pivot"]
+size = Vector2( 768, 1184 )
+size_override_stretch = true
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="InvCamera" type="Camera" parent="Pivot/InvViewport"]
+transform = Transform( -1, 2.99003e-08, -8.21505e-08, 2.26267e-08, 0.996195, 0.0871555, 8.44439e-08, 0.0871555, -0.996195, 0, 2, -3 )
+cull_mask = 2
+current = true
+fov = 75.0
+
+[node name="HoloCamPosition" type="Position3D" parent="Pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.968 )
+
+[node name="InvCamPosition" type="Position3D" parent="Pivot"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, -3.032 )
+
+[node name="zek" parent="Pivot" instance=ExtResource( 3 )]
+transform = Transform( -2.35, 0, -2.05444e-07, 0, 2.35, 0, 2.05444e-07, 0, -2.35, 0, 0, 0 )
+
+[node name="zek_hologram" parent="Pivot" instance=ExtResource( 3 )]
+transform = Transform( -2.35, 0, -2.05444e-07, 0, 2.35, 0, 2.05444e-07, 0, -2.35, 0, 0, 0 )
+
+[node name="zekiah-afro01" parent="Pivot/zek_hologram/zekiah/Skeleton" index="0"]
+layers = 2
+material/0 = SubResource( 4 )
+
+[node name="zekiah-base" parent="Pivot/zek_hologram/zekiah/Skeleton" index="1"]
+layers = 2
+material/0 = SubResource( 4 )
+
+[node name="zekiah-eyebrow001" parent="Pivot/zek_hologram/zekiah/Skeleton" index="2"]
+layers = 2
+material/0 = SubResource( 4 )
+
+[node name="zekiah-low_poly" parent="Pivot/zek_hologram/zekiah/Skeleton" index="3"]
+layers = 2
+material/0 = SubResource( 4 )
+
+[node name="zekiah-male_casualsuit06" parent="Pivot/zek_hologram/zekiah/Skeleton" index="4"]
+layers = 2
+material/0 = SubResource( 5 )
+
+[node name="zekiah-teeth_base" parent="Pivot/zek_hologram/zekiah/Skeleton" index="5"]
+layers = 2
+material/0 = SubResource( 6 )
+
+[node name="zekiah-tongue01" parent="Pivot/zek_hologram/zekiah/Skeleton" index="6"]
+layers = 2
+material/0 = SubResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/zek_hologram/zekiah/Skeleton" index="7"]
+anims/test = SubResource( 8 )
+
+[node name="PlayerHUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -192.0
+margin_bottom = 280.0
+rect_scale = Vector2( 1, -1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InvPanel" type="Panel" parent="PlayerHUD"]
+material = SubResource( 9 )
+anchor_left = 0.1875
+anchor_top = 0.186667
+anchor_right = 0.814453
+anchor_bottom = 0.813333
+mouse_filter = 1
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="PlayerHUD/InvPanel"]
+anchor_left = 0.373832
+anchor_top = 0.106383
+anchor_right = 0.623053
+anchor_bottom = 0.893618
+margin_right = -3.05176e-05
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button" type="Button" parent="PlayerHUD/InvPanel"]
+anchor_left = 0.673676
+anchor_top = 0.0638298
+anchor_right = 0.972741
+anchor_bottom = 0.234043
+text = "[1] Weapon Gun"
+icon = ExtResource( 8 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button2" type="Button" parent="PlayerHUD/InvPanel"]
+anchor_left = 0.672897
+anchor_top = 0.234043
+anchor_right = 0.971963
+anchor_bottom = 0.404255
+text = "[2] ____________"
+icon = ExtResource( 8 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button3" type="Button" parent="PlayerHUD/InvPanel"]
+anchor_left = 0.672897
+anchor_top = 0.404255
+anchor_right = 0.971963
+anchor_bottom = 0.574468
+text = "[3] ____________"
+icon = ExtResource( 8 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button4" type="Button" parent="PlayerHUD/InvPanel"]
+anchor_left = 0.672897
+anchor_top = 0.574468
+anchor_right = 0.971963
+anchor_bottom = 0.744681
+text = "[4] ____________"
+icon = ExtResource( 8 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Button5" type="Button" parent="PlayerHUD/InvPanel"]
+anchor_left = 0.672897
+anchor_top = 0.744681
+anchor_right = 0.971963
+anchor_bottom = 0.914894
+text = "[5] ____________"
+icon = ExtResource( 8 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Player" type="Spatial" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../Pivot/zek_hologram/zekiah/Skeleton/AnimationPlayer")
+active = true
+parameters/Idle/blend_position = Vector2( -0.394343, 0.147632 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Pivot/zek/zekiah/Skeleton")
+anims/anim = ExtResource( 10 )
+anims/e = ExtResource( 10 )
+anims/zekiahAction = ExtResource( 11 )
+
+[connection signal="area_entered" from="Pivot/Inventory/Weapon/Area" to="Pivot/Inventory/Weapon" method="OnPickupCollide"]
+[connection signal="area_entered" from="Pivot/Inventory/Melee/Area" to="Pivot/Inventory/Melee" method="OnPickupCollide"]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button" to="." method="InventoryButtonPressed" binds= [ 0 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button2" to="." method="InventoryButtonPressed" binds= [ 1 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button3" to="." method="InventoryButtonPressed" binds= [ 2 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button4" to="." method="InventoryButtonPressed" binds= [ 3 ]]
+[connection signal="pressed" from="PlayerHUD/InvPanel/Button5" to="." method="InventoryButtonPressed" binds= [ 4 ]]
+
+[editable path="Pivot/zek"]
+[editable path="Pivot/zek_hologram"]

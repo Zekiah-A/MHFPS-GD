@@ -1,0 +1,163 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Scripts/Weapon.cs" type="Script" id=1]
+[ext_resource path="res://Assets/GameAssets/Textures/weapon_flash.png" type="Texture" id=2]
+[ext_resource path="res://Assets/GameAssets/Textures/aim_reticle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Fonts/Typefaces/liberation-sans/LiberationSans-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.1, 0.1, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.1, 0.2, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="PlaneMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="Animation" id=7]
+length = 0.2
+step = 0.05
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray( 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0.05, 1, 0, 0, 0.037942, 0.195655, 0, 0, 0.980673, 1, 1, 1, 0.1, 1, 0, 0, 0.0252947, 0.201403, -0.0183858, -0.0890321, 0.975281, 1, 1, 1, 0.2, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "WeaponReload"
+length = 0.7
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath("Mesh:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 90, 0, 0 ), Vector3( 180, 0, 0 ), Vector3( 270, 0, 0 ), Vector3( 360, 0, 0 ), Vector3( 400, 0, 0 ), Vector3( 360, 0, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=9]
+size = 25
+outline_size = 1
+outline_color = Color( 0.27451, 0.27451, 0.27451, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="WeaponGun" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="WeaponCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )
+enabled = true
+cast_to = Vector3( 0, 0, -100 )
+
+[node name="Mesh" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0 )
+layers = 3
+
+[node name="CSGMesh" type="CSGMesh" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25 )
+mesh = SubResource( 1 )
+material = SubResource( 2 )
+
+[node name="CSGMesh2" type="CSGMesh" parent="Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.05 )
+mesh = SubResource( 3 )
+material = SubResource( 4 )
+
+[node name="MuzzleFlash" type="Spatial" parent="Mesh"]
+
+[node name="MeshInstance" type="MeshInstance" parent="Mesh/MuzzleFlash"]
+transform = Transform( -2.59792e-08, 0.594335, -2.59792e-08, 0, -8.65983e-09, -0.198114, -0.114749, -5.01585e-09, 2.1925e-16, 0.00228007, -0.000172898, -0.583913 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Mesh/MuzzleFlash"]
+transform = Transform( 1.13559e-15, -1.73194e-08, 0.198114, -2.59792e-08, 0.594335, -1.73194e-08, -0.114749, -5.01585e-09, 2.1925e-16, 0.00228007, -0.000172898, -0.583913 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Mesh/MuzzleFlash"]
+transform = Transform( 2.59792e-08, -0.594335, 8.65955e-09, 2.27117e-15, -4.32986e-08, 0.198114, -0.114749, -5.01585e-09, 2.1925e-16, 0.00228007, -0.000172898, -0.583913 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="Mesh/MuzzleFlash"]
+transform = Transform( -3.40676e-15, 6.92778e-08, -0.198114, 2.59792e-08, -0.594335, -2.84217e-13, -0.114749, -5.01585e-09, 2.1925e-16, 0.00228007, -0.000172898, -0.583913 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="OmniLight" type="OmniLight" parent="Mesh/MuzzleFlash"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.538124 )
+light_color = Color( 1, 0.682353, 0.137255, 1 )
+light_energy = 0.25
+light_specular = 0.59
+shadow_contact = 0.75
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/WeaponFire = SubResource( 7 )
+anims/WeaponReload = SubResource( 8 )
+
+[node name="WeaponTween" type="Tween" parent="."]
+
+[node name="WeaponHUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="AimReticle" type="TextureRect" parent="WeaponHUD"]
+anchor_left = 0.496094
+anchor_top = 0.493333
+anchor_right = 0.503906
+anchor_bottom = 0.506667
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( 4, 4 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Ammo" type="Label" parent="WeaponHUD"]
+anchor_left = 0.8125
+anchor_top = 0.586667
+anchor_right = 1.0
+anchor_bottom = 0.64
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.713726, 0.713726, 0.713726, 1 )
+text = "0/0"
+align = 2
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": true
+}

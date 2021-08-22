@@ -1,0 +1,158 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Scenes/Title/TitleUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/GameAssets/Blender/bikeshed_high.fbx" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Scenes/Title/Title/environment.tres" type="Environment" id=3]
+[ext_resource path="res://Assets/GameAssets/Materials/title_trees.tres" type="Material" id=4]
+[ext_resource path="res://Assets/GameAssets/Materials/iso_periskeri.tres" type="Material" id=5]
+[ext_resource path="res://Assets/GameAssets/Materials/grass.tres" type="Material" id=6]
+
+[node name="Title" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3.00742, 4, 0, 4.57582 )
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3.00742, -6.0428, 0.676608, 4.57582 )
+width = 0.23479
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 0.965523, -0.260319, 0, 0.260319, 0.965523, 0, 0, 0, 3.00742, -6.28531, 2.49541, 4.57582 )
+width = 0.23479
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 0.81244, -0.583045, 0, 0.583045, 0.81244, 0, 0, 0, 3.00742, -7.10974, 4.22846, 4.57243 )
+width = 0.23479
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 13 )
+
+[node name="TitleUI" parent="." instance=ExtResource( 1 )]
+
+[node name="bikeshed_high" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7444, -0.416115, 3.02027 )
+
+[node name="Plane" parent="bikeshed_high/RootNode" index="0"]
+material/0 = ExtResource( 6 )
+
+[node name="bikeshed_high4" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -16.2556, -0.416115, 2.02027 )
+
+[node name="bikeshed_high3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 6, 1.63052, -0.161236, -55.0343 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01703, 2.88479, 5.78261 )
+light_color = Color( 0.662745, 0.529412, 0, 1 )
+light_energy = 0.42
+omni_range = 5.70544
+
+[node name="CSGSphere" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, -9.62576e-08, 2.20212, 0, -1, -4.37114e-08, -0.111342, -0.368102, 6.73881 )
+radial_segments = 31
+rings = 16
+material = ExtResource( 5 )
+
+[node name="CSGSphere2" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, -9.62576e-08, 2.20212, 0, -1, -4.37114e-08, -0.111342, -1.39373, 7.35388 )
+radial_segments = 25
+rings = 14
+material = ExtResource( 5 )
+
+[node name="CSGSphere3" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, -9.62576e-08, 2.20212, 0, -1, -4.37114e-08, -0.678604, -1.39373, 7.12687 )
+radial_segments = 20
+rings = 13
+material = ExtResource( 5 )
+
+[node name="CSGSphere4" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, -9.62576e-08, 2.20212, 0, -1, -4.37114e-08, -0.67583, -1.39373, 6.55926 )
+radial_segments = 21
+rings = 13
+material = ExtResource( 5 )
+
+[node name="CSGSphere5" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, -9.62576e-08, 2.20212, 0, -1, -4.37114e-08, -0.111477, -1.39373, 5.95795 )
+material = ExtResource( 5 )
+
+[node name="CSGSphere6" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, -9.62576e-08, 2.20212, 0, -1, -4.37114e-08, 0.795961, -1.39373, 6.10546 )
+radial_segments = 18
+rings = 13
+material = ExtResource( 5 )
+
+[node name="CSGSphere7" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, -9.62576e-08, 2.20212, 0, -1, -4.37114e-08, 0.795961, -1.39373, 6.99064 )
+radial_segments = 23
+rings = 14
+material = ExtResource( 5 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0441644, 3.92465, 6.73881 )
+light_color = Color( 0, 0.298039, 1, 1 )
+light_energy = 16.0
+spot_range = 21.4
+spot_attenuation = 0.637281
+spot_angle = 24.449
+spot_angle_attenuation = 0.901252
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 3 )
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, -7.35339, 18.6924, -30.4538 )
+width = 59.7791
+height = 14.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, 13.5466, 8.36968, -22.4538 )
+width = 32.0
+height = 12.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[node name="CSGBox7" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, -24.0734, 16.3697, -46.4538 )
+width = 32.0
+height = 14.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, 19.8166, 16.3697, -43.4538 )
+width = 32.0
+height = 18.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[node name="CSGBox9" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, -38.7034, 10.3697, -18.4538 )
+width = 32.0
+height = 12.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[node name="CSGBox12" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, -61.6934, 5.36968, -35.4538 )
+width = 32.0
+height = 22.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[node name="CSGBox10" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, 55.3466, 14.3697, -35.4538 )
+width = 32.0
+height = 18.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[node name="CSGBox11" type="CSGBox" parent="."]
+transform = Transform( 2.09, 0, 0, 0, 2, 0, 0, 0, 1, 78.3366, -2.63032, -27.4538 )
+width = 32.0
+height = 14.0
+depth = 0.001
+material = ExtResource( 4 )
+
+[editable path="bikeshed_high"]

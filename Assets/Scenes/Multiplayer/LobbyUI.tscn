@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Scripts/Multiplayer/LobbyUIManager.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Styles/panel_style.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets/Styles/button_style.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets/Fonts/Typefaces/liberation-sans/LiberationSans-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="LobbyUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.734
+anchor_top = 0.4
+anchor_right = 0.906
+anchor_bottom = 0.6
+margin_left = -31.616
+margin_top = -32.0
+margin_right = 32.256
+margin_bottom = 32.0
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Conenct" type="Button" parent="Panel"]
+anchor_left = 0.033
+anchor_top = 0.696
+anchor_right = 0.967
+anchor_bottom = 0.94
+margin_left = 0.0799999
+margin_top = -0.0640106
+margin_right = -0.0800171
+margin_bottom = 0.0399933
+custom_styles/normal = ExtResource( 3 )
+text = "Connect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ip" type="LineEdit" parent="Panel"]
+anchor_left = 0.033
+anchor_top = 0.043
+anchor_right = 0.967
+anchor_bottom = 0.304
+margin_left = 0.0799999
+margin_top = 0.0879998
+margin_right = -0.0800171
+margin_bottom = 0.0639954
+custom_fonts/font = SubResource( 1 )
+placeholder_text = "IP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Username" type="LineEdit" parent="Panel"]
+anchor_left = 0.033
+anchor_top = 0.348
+anchor_right = 0.967
+anchor_bottom = 0.609
+margin_left = 0.0799999
+margin_top = -0.0320053
+margin_right = -0.0800171
+margin_bottom = -0.0560074
+custom_fonts/font = SubResource( 2 )
+placeholder_text = "Username"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Panel/Conenct" to="." method="OnConnectPressed"]
+[connection signal="text_changed" from="Panel/Ip" to="." method="OnIpTextChanged"]
+[connection signal="text_changed" from="Panel/Username" to="." method="OnUsernameTextChanged"]

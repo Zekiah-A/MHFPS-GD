@@ -1,0 +1,10 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[sub_resource type="NoiseTexture" id=1]
+
+[resource]
+albedo_color = Color( 0.243137, 0.141176, 0.0196078, 1 )
+metallic_specular = 0.68
+normal_enabled = true
+normal_scale = -2.06
+normal_texture = SubResource( 1 )
