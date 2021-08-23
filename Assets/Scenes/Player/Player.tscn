@@ -113,7 +113,9 @@ nodes/Idle/position = Vector2( 80, 100 )
 nodes/output/position = Vector2( 320, 160 )
 node_connections = [ "output", 0, "Idle" ]
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" groups=[
+"Player",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0 )
 script = ExtResource( 2 )
 

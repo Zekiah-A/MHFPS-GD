@@ -110,37 +110,14 @@ public class KinematicPlayer : KinematicBody
 		
 		if (@event is InputEventKey eventKey && eventKey.Pressed)
 		{	//eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape
-			//update HUD as well
-			switch (eventKey.Scancode)
+			///<summary>checking for number keys.</summary>
+			if (eventKey.Scancode >= 49 && eventKey.Scancode <= 53)
 			{
-				case (int) KeyList.Key1:
-					InventoryCurrent = 0;
-					UpdateInventory();
-					UpdateInventoryPanel();
-					break;
-				case (int) KeyList.Key2:
-					InventoryCurrent = 1; //maybe use maths (int  keylist)
-					UpdateInventory();
-					UpdateInventoryPanel();
-					break;
-				case (int) KeyList.Key3:
-					InventoryCurrent = 2;
-					UpdateInventory();
-					UpdateInventoryPanel();
-					break;
-				case (int) KeyList.Key4:
-					InventoryCurrent = 3;
-					UpdateInventory();
-					UpdateInventoryPanel();
-					break;
-				case (int) KeyList.Key5:
-					InventoryCurrent = 4;
-					UpdateInventory();
-					UpdateInventoryPanel();
-					break;
+				InventoryCurrent = (int) eventKey.Scancode - 49;
+				UpdateInventory();
+				UpdateInventoryPanel();
 			}
 		}
-		//--------------------------------------------------------------WHAT IF UpdateInvHud just called upd inv?
 		//Make a switch, no break so these happen anyway or something lol
 		if (@event.IsActionPressed("ui_bumperl"))
 		{
@@ -342,6 +319,8 @@ public class KinematicPlayer : KinematicBody
 	
 	private void UpdateInventoryPanel()
 	{
+		UpdateInventory();
+
 		foreach (Node node in inventoryPanel.GetChildren())
 		{
 			if (node is Button button)
@@ -368,7 +347,6 @@ public class KinematicPlayer : KinematicBody
 
 	private void OpenInventoryPanel()
 	{
-		UpdateInventoryPanel();
 		if (!inventoryPanel.Visible)
 		{
 			inventoryPanel.Visible = true;
