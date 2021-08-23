@@ -1,6 +1,6 @@
 MHFPS
 -------
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Zekiah-A/MHFPS) ![GitHub last commit](https://img.shields.io/github/last-commit/Zekiah-A/MHFPS?label=Last%20Update) 
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Zekiah-A/MHFPS-GD) ![GitHub last commit](https://img.shields.io/github/last-commit/Zekiah-A/MHFPS-GD?label=Last%20Update) 
 
 NOTE:
 =============
@@ -19,4 +19,4 @@ Download:
 
 Click below to download the game!
 
-[![](https://img.shields.io/badge/Download-Click%20here!-blue?style=for-the-badge&logo=appveyor)](https://github.com/Zekiah-A/MHFPS/releases)
+[![](https://img.shields.io/badge/Download-Click%20here!-blue?style=for-the-badge&logo=appveyor)](https://github.com/Zekiah-A/MHFPS-GD/releases)
