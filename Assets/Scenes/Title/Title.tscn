@@ -32,11 +32,11 @@ width = 0.23479
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 13 )
 script = ExtResource( 9 )
 Random = true
-Damping = 20.0
-LerpStrength = 0.01
+Damping = 5.0
+LerpStrength = 0.1
 
 [node name="Timer" type="Timer" parent="Camera"]
-wait_time = 0.2
+wait_time = 0.1
 autostart = true
 
 [node name="IntroTween" type="Tween" parent="."]

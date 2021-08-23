@@ -10,9 +10,12 @@ public class CameraEffects : Camera
 	[Export] public float LerpStrength = 0.1f;
 
 	private float posx = 0, posy = 0;
+	private int incrementx = 98043, incrementy = 62356;
 
 	private Random random;
 	private Timer cameraTimer;
+	OpenSimplexNoise noise = new OpenSimplexNoise();
+
 
 	public override void _Ready()
 	{
@@ -31,6 +34,7 @@ public class CameraEffects : Camera
 			}
 		}
 	}
+
 	public override void _Process(float delta) //input tween
 	{
 		if (!Random)
@@ -46,11 +50,12 @@ public class CameraEffects : Camera
 			/*camera.*/Rotation.z
 		);
 	}
-
+	
 	private void OnTimerComplete()
 	{
 		///<note> Value must be between -0.5 and 0.5 </note>
-		posx = (float) random.Next(-5, 5) / 10.0f;
-		posy = (float) random.Next(-5, 5) / 10.0f;
+		incrementx++; incrementy++;
+		posx = noise.GetNoise1d(incrementx) / 2;
+		posy = noise.GetNoise1d(-incrementx) / 2;
 	}
 }
