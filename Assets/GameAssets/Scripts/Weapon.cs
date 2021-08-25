@@ -64,6 +64,7 @@ public class Weapon : Spatial
 	public override void _PhysicsProcess(float delta)
 	{
 		SwayWeapon(delta);
+		RotateWeapon(); //should use delta here too?
 	}
 
 	public virtual void Fire()
@@ -135,6 +136,11 @@ public class Weapon : Spatial
 				CanFire = false;
 		}
 		ammoHud.Text = $"{CurrentAmmo}/{MagazineSize} | {TotalAmmo}";
+	}
+
+	public virtual void RotateWeapon() //THIS doesn't matter anyway, because the ray should come from player HEAD and the bullet should hit where player is looking!
+	{
+		/*RotationDegrees = new Vector3(Mathf.Lerp(RotationDegrees.x, springArm.RotationDegrees.x, 0.2f), RotationDegrees.y, RotationDegrees.z);*/
 	}
 
 	public virtual void SwayWeapon(float delta)

@@ -149,7 +149,7 @@ public class KinematicPlayer : KinematicBody
 		ApplyGravity(delta);
 		UpdateSnapVector();
 		Jump();
-		RotateInventory();
+		//RotateInventory();
 		MoveSpringArm();
 		AccelerationTilt(delta);
 
@@ -160,8 +160,12 @@ public class KinematicPlayer : KinematicBody
 	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
 	public override void _Process(float delta)
 	{
+		Vector3 inputVector = GetInputVector();
+		Vector3 direction = GetDirection(inputVector); //TODO: THESE SHOULD BE GLObAL - used in bothj process & physprocess!
+		
 		hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
-		inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;	
+		inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;
+		ApplyRotation(delta, direction); //separate from movement to remove annoying mouse rotation delay due to Godot input inconsistency
 	}
 
 	//<summary> foreach object under the  "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
@@ -223,12 +227,29 @@ public class KinematicPlayer : KinematicBody
 		{
 			velocity.x = Mathf.MoveToward(velocity.x, direction.x * maxSpeed, acceleration * delta);
 			velocity.z = Mathf.MoveToward(velocity.z, direction.z * maxSpeed, acceleration * delta);
-
+		}
+	}
+	
+	private void ApplyRotation(float delta, Vector3 direction)
+	{
+		if (FirstPerson)
+		{
 			pivot.Rotation = new Vector3(
 				pivot.Rotation.x,
-				Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), rotSpeed * delta),
+				ArmY.Rotation.y,
 				pivot.Rotation.z
 			);
+		}
+		else
+		{
+			if (direction != Vector3.Zero)
+			{
+				pivot.Rotation = new Vector3(
+					pivot.Rotation.x,
+					Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), rotSpeed * delta),
+					pivot.Rotation.z
+				);
+			}
 		}
 	}
 
@@ -275,12 +296,12 @@ public class KinematicPlayer : KinematicBody
 		if (Input.IsActionJustReleased("game_jump") && velocity.y > jumpImpulse / 2)
 			velocity.y = jumpImpulse / 2;
 	}
-
+/*
 	private void RotateInventory()
 	{
 		inventoryNode.RotationDegrees = new Vector3(Mathf.Lerp(inventoryNode.RotationDegrees.x, springArm.RotationDegrees.x, 0.2f), inventoryNode.RotationDegrees.y, inventoryNode.RotationDegrees.z);
 	}
-
+*/
 	private void MoveSpringArm()
 	{
 		if (springArm.SpringLength == 0)
