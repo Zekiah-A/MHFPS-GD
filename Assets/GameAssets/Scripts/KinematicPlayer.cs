@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 //TODO:
 // Make player face movement dir instead of input (rotate towards velocity)
+// ^ A) Does it face input anyways? What about move in dir of rotation.
 // Acceleration tilting (looks liek surfing), rotate around centre of mass
 
 public class KinematicPlayer : KinematicBody
@@ -14,7 +15,7 @@ public class KinematicPlayer : KinematicBody
 	public const int acceleration = 70;
 	public const int friction = 60;
 	public const int airFriction = 10;
-	public const float gravity = -39.2f; //4x earth gravity.
+	public const float gravity = -39.2f; //4x earth gravity, need mass.
 	public const int jumpImpulse = 20;
 	public const int rotSpeed = 25;
 	public const int maxSpringLength = 8;
@@ -30,7 +31,7 @@ public class KinematicPlayer : KinematicBody
 	private Vector3 lastvelocity;
 	private Vector3 snapVector = Vector3.Zero;
 	private SpringArm springArm;
-	private Position3D ArmY; //shouldn't be capital
+	private Position3D armY;
 	private Position3D pivot;
 	private Spatial inventoryNode;
 	private TextureRect hologramRect;
@@ -45,9 +46,10 @@ public class KinematicPlayer : KinematicBody
 
 	public override void _Ready()
 	{
+		//Find node exists as well.
 		Input.SetMouseMode(Input.MouseMode.Captured);
-		ArmY = GetNode<Position3D>("SpringArmY");
-		springArm = ArmY.GetNode<SpringArm>("SpringArm"); //find node as well
+		armY = GetNode<Position3D>("SpringArmY");
+		springArm = armY.GetNode<SpringArm>("SpringArm");
 		pivot = GetNode<Position3D>("Pivot");
 		inventoryNode = pivot.GetNode<Spatial>("Inventory");
 		hologramRect = GetNode("PlayerHUD").GetNode<TextureRect>("TextureRect");
@@ -70,7 +72,6 @@ public class KinematicPlayer : KinematicBody
 	{
 		if (@event.IsActionPressed("click"))
 			Input.SetMouseMode(Input.MouseMode.Captured);
-		
 		if (@event.IsActionPressed("toggle_capture"))
 		{
 			if (Input.GetMouseMode() == Input.MouseMode.Captured)
@@ -78,36 +79,47 @@ public class KinematicPlayer : KinematicBody
 			else
 				Input.SetMouseMode(Input.MouseMode.Captured);
 		}
-
-		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
-		{
-			ArmY.RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * mouseSensitivity));
-			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * mouseSensitivity));
-			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
-				springArm.Rotation.y, springArm.Rotation.z);
-
-		}
-		
 		if (@event.IsActionPressed("game_zoomin"))
 		{
 			if (springArm.SpringLength > 0)
 				springArm.SpringLength -= 1;
 		}
-		else if (@event.IsActionPressed("game_zoomout"))
+		if (@event.IsActionPressed("game_zoomout"))
 		{
 			if (springArm.SpringLength < maxSpringLength)
 				springArm.SpringLength += 1;
 		}
-
 		if (@event.IsActionPressed("game_radial"))
 		{
 			GD.Print("Open radial inventory here!");
-			//Hack: For testing now
-			//InventoryCurrent += 1;
 			UpdateInventory();
 			OpenInventoryPanel();
 		}
-		
+		if (@event.IsActionPressed("ui_bumperl"))
+		{
+			InventoryCurrent -= 1;
+			if (InventoryCurrent < 0)
+				InventoryCurrent = 4;
+			UpdateInventory();
+			UpdateInventoryPanel();
+		}
+		if (@event.IsActionPressed("ui_bumperr"))
+		{
+			InventoryCurrent += 1;
+			if (InventoryCurrent > 4)
+				InventoryCurrent = 0;
+			UpdateInventory();
+			UpdateInventoryPanel();
+		}
+
+		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
+		{
+			armY.RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * mouseSensitivity));
+			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * mouseSensitivity));
+			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
+				springArm.Rotation.y, springArm.Rotation.z);
+
+		}
 		if (@event is InputEventKey eventKey && eventKey.Pressed)
 		{	//eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape
 			///<summary>checking for number keys.</summary>
@@ -118,26 +130,6 @@ public class KinematicPlayer : KinematicBody
 				UpdateInventoryPanel();
 			}
 		}
-		//Make a switch, no break so these happen anyway or something lol
-		if (@event.IsActionPressed("ui_bumperl"))
-		{
-			InventoryCurrent -= 1;
-			if (InventoryCurrent < 0) //fix later
-				InventoryCurrent = 4;
-			UpdateInventory();
-			UpdateInventoryPanel();
-		}
-		else if (@event.IsActionPressed("ui_bumperr"))
-		{
-			InventoryCurrent += 1;
-			if (InventoryCurrent > 4) //fix later
-				InventoryCurrent = 0;
-			UpdateInventory();
-			UpdateInventoryPanel();
-		}
-
-		//if (@event.IsActionPressed("game_fire2"))
-			//AimDownSights();
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -214,7 +206,7 @@ public class KinematicPlayer : KinematicBody
 
 	private Vector3 GetDirection(Vector3 inputVector)
 	{
-		Vector3 direction = (inputVector.x * ArmY.Transform.basis.x) + (inputVector.z * ArmY.Transform.basis.z); 
+		Vector3 direction = (inputVector.x * armY.Transform.basis.x) + (inputVector.z * armY.Transform.basis.z); 
 		return direction;
 	}
 
@@ -236,7 +228,7 @@ public class KinematicPlayer : KinematicBody
 		{
 			pivot.Rotation = new Vector3(
 				pivot.Rotation.x,
-				ArmY.Rotation.y,
+				armY.Rotation.y,
 				pivot.Rotation.z
 			);
 		}
@@ -331,11 +323,9 @@ public class KinematicPlayer : KinematicBody
 		}
 	}
 
-	//TODO: Cleanup
-	private void DrawHologramViewport()
-	{
+	private void DrawHologramViewport() =>
 		hologramRect.Texture = (Texture) hologramViewport.GetTexture();
-	}
+
 
 	
 	private void UpdateInventoryPanel()
@@ -388,19 +378,20 @@ public class KinematicPlayer : KinematicBody
 	{
 		InventoryCurrent = index;
 		UpdateInventory();
-		//HACK: BODGE: Need to add to update inv or something
 		OpenInventoryPanel();
 	}
 
-	private void AccelerationTilt(float delta) //ALL COULD JUST BE IN APPLY MOVEMENT
-	{ //i need directional velocity, not general
+	private void AccelerationTilt(float delta)
+	{
+		//i need directional velocity, not general, could be in applymovement?
+		/*
 		Vector3 acceleration = new Vector3(
 			(velocity.x - lastvelocity.x),
 			0,
 			(velocity.z - lastvelocity.z)
 		) / delta;
 
-		Vector3 directionalAcceleration = acceleration + Rotation;
+		Vector3 directionalAcceleration = acceleration + Rotation;*/
 		
 	}
 }
