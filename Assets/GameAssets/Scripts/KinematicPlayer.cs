@@ -11,15 +11,16 @@ public class KinematicPlayer : KinematicBody
 {
 	public bool FirstPerson;
 
-	public const int maxSpeed = 10; //TODO: these are PUUBLIC and consts, why are they lower?
-	public const int acceleration = 70;
-	public const int friction = 60;
-	public const int airFriction = 10;
-	public const float gravity = -39.2f; //4x earth gravity, need mass.
-	public const int jumpImpulse = 20;
-	public const int rotSpeed = 25;
-	public const int maxSpringLength = 8;
-	public const int mouseSensitivity = 1;
+	public const int MaxSpeed = 4;
+	public const int Acceleration = 30;
+	public const int Friction = 100;
+	public const int AirFriction = 10;
+	public const float Gravity = -9.8f;
+	public const int JumpImpulse = 5;
+	public const int RotSpeed = 15;
+	public const int MaxSpringLength = 4;
+	public const float MouseSensitivity = 0.2f;
+	public const bool MouseSmoothing = true; //TODO:
 
 	//get "Weapon class from the spatial" - all weapon logic will go into it's own class
 	//[Export] public int currentSelected;
@@ -30,6 +31,7 @@ public class KinematicPlayer : KinematicBody
 	private Vector3 velocity = Vector3.Zero;
 	private Vector3 lastvelocity;
 	private Vector3 snapVector = Vector3.Zero;
+
 	private SpringArm springArm;
 	private Position3D armY;
 	private Position3D pivot;
@@ -72,30 +74,30 @@ public class KinematicPlayer : KinematicBody
 	{
 		if (@event.IsActionPressed("click"))
 			Input.SetMouseMode(Input.MouseMode.Captured);
-		if (@event.IsActionPressed("toggle_capture"))
+		else if (@event.IsActionPressed("toggle_capture"))
 		{
 			if (Input.GetMouseMode() == Input.MouseMode.Captured)
 				Input.SetMouseMode(Input.MouseMode.Visible);
 			else
 				Input.SetMouseMode(Input.MouseMode.Captured);
 		}
-		if (@event.IsActionPressed("game_zoomin"))
+		else if (@event.IsActionPressed("game_zoomin"))
 		{
 			if (springArm.SpringLength > 0)
 				springArm.SpringLength -= 1;
 		}
-		if (@event.IsActionPressed("game_zoomout"))
+		else if (@event.IsActionPressed("game_zoomout"))
 		{
-			if (springArm.SpringLength < maxSpringLength)
+			if (springArm.SpringLength < MaxSpringLength)
 				springArm.SpringLength += 1;
 		}
-		if (@event.IsActionPressed("game_radial"))
+		else if (@event.IsActionPressed("game_radial"))
 		{
 			GD.Print("Open radial inventory here!");
 			UpdateInventory();
 			OpenInventoryPanel();
 		}
-		if (@event.IsActionPressed("ui_bumperl"))
+		else if (@event.IsActionPressed("ui_bumperl"))
 		{
 			InventoryCurrent -= 1;
 			if (InventoryCurrent < 0)
@@ -103,7 +105,7 @@ public class KinematicPlayer : KinematicBody
 			UpdateInventory();
 			UpdateInventoryPanel();
 		}
-		if (@event.IsActionPressed("ui_bumperr"))
+		else if (@event.IsActionPressed("ui_bumperr"))
 		{
 			InventoryCurrent += 1;
 			if (InventoryCurrent > 4)
@@ -114,13 +116,13 @@ public class KinematicPlayer : KinematicBody
 
 		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
 		{
-			armY.RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * mouseSensitivity));
-			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * mouseSensitivity));
+			armY.RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * MouseSensitivity));
+			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * MouseSensitivity));
 			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
 				springArm.Rotation.y, springArm.Rotation.z);
-
+			//smooth this out somehow - move to process
 		}
-		if (@event is InputEventKey eventKey && eventKey.Pressed)
+		else if (@event is InputEventKey eventKey && eventKey.Pressed)
 		{	//eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape
 			///<summary>checking for number keys.</summary>
 			if (eventKey.Scancode >= 49 && eventKey.Scancode <= 53)
@@ -147,6 +149,10 @@ public class KinematicPlayer : KinematicBody
 
 		//TODO: Make camera controllable with right stick & arrow keys
 		velocity = MoveAndSlideWithSnap(velocity, snapVector, Vector3.Up, true);
+	
+		//TODO: Constantly rotate camera to face back of player / pivot back
+		//camera rotation = lerp player pivot rotation,
+		//blocked by mouse movement somehow? would still need to get mouse motion in process
 	}
 
 	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
@@ -217,8 +223,8 @@ public class KinematicPlayer : KinematicBody
 		
 		if (direction != Vector3.Zero)
 		{
-			velocity.x = Mathf.MoveToward(velocity.x, direction.x * maxSpeed, acceleration * delta);
-			velocity.z = Mathf.MoveToward(velocity.z, direction.z * maxSpeed, acceleration * delta);
+			velocity.x = Mathf.MoveToward(velocity.x, direction.x * MaxSpeed, Acceleration * delta);
+			velocity.z = Mathf.MoveToward(velocity.z, direction.z * MaxSpeed, Acceleration * delta);
 		}
 	}
 	
@@ -238,7 +244,7 @@ public class KinematicPlayer : KinematicBody
 			{
 				pivot.Rotation = new Vector3(
 					pivot.Rotation.x,
-					Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), rotSpeed * delta),
+					Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), RotSpeed * delta),
 					pivot.Rotation.z
 				);
 			}
@@ -251,23 +257,23 @@ public class KinematicPlayer : KinematicBody
 		{
 			if (IsOnFloor())
 			{
-				velocity.x = Mathf.MoveToward(velocity.x, 0, friction * delta);
-				velocity.y = Mathf.MoveToward(velocity.y, 0, friction * delta);
-				velocity.z = Mathf.MoveToward(velocity.z, 0, friction * delta);
+				velocity.x = Mathf.MoveToward(velocity.x, 0, Friction * delta);
+				velocity.y = Mathf.MoveToward(velocity.y, 0, Friction * delta);
+				velocity.z = Mathf.MoveToward(velocity.z, 0, Friction * delta);
 			}
 			else
 			{
-				velocity.x = Mathf.MoveToward(velocity.x, 0, airFriction * delta);
-				velocity.y = Mathf.MoveToward(velocity.y, 0, airFriction * delta);
-				velocity.z = Mathf.MoveToward(velocity.z, 0, airFriction * delta);
+				velocity.x = Mathf.MoveToward(velocity.x, 0, AirFriction * delta);
+				velocity.y = Mathf.MoveToward(velocity.y, 0, AirFriction * delta);
+				velocity.z = Mathf.MoveToward(velocity.z, 0, AirFriction * delta);
 			}
 		}
 	}
 
 	private void ApplyGravity(float delta)
 	{
-		velocity.y += gravity * delta;
-		velocity.y = Mathf.Clamp(velocity.y, gravity, jumpImpulse);
+		velocity.y += Gravity * delta;
+		velocity.y = Mathf.Clamp(velocity.y, Gravity, JumpImpulse);
 	}
 
 	private void UpdateSnapVector() //use fancy terneary thing
@@ -283,10 +289,10 @@ public class KinematicPlayer : KinematicBody
 		if (Input.IsActionJustPressed("game_jump") && IsOnFloor())
 		{
 			snapVector = Vector3.Zero; //allows plr to jump
-			velocity.y = jumpImpulse;
+			velocity.y = JumpImpulse;
 		}
-		if (Input.IsActionJustReleased("game_jump") && velocity.y > jumpImpulse / 2)
-			velocity.y = jumpImpulse / 2;
+		if (Input.IsActionJustReleased("game_jump") && velocity.y > JumpImpulse / 2)
+			velocity.y = JumpImpulse / 2;
 	}
 /*
 	private void RotateInventory()
@@ -385,13 +391,13 @@ public class KinematicPlayer : KinematicBody
 	{
 		//i need directional velocity, not general, could be in applymovement?
 		/*
-		Vector3 acceleration = new Vector3(
+		Vector3 Acceleration = new Vector3(
 			(velocity.x - lastvelocity.x),
 			0,
 			(velocity.z - lastvelocity.z)
 		) / delta;
 
-		Vector3 directionalAcceleration = acceleration + Rotation;*/
+		Vector3 directionalAcceleration = Acceleration + Rotation;*/
 		
 	}
 }
