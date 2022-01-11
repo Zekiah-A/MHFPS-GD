@@ -28,13 +28,9 @@ environment = ExtResource( 1 )
 transform = Transform( 0.60948, 0.339214, -0.716567, -0.219775, 0.940709, 0.25839, 0.761731, 0, 0.647894, -2.66806, 5.21733, 3.86199 )
 shadow_enabled = true
 
-[node name="Player" parent="." groups=[
-"Actor",
-] instance=ExtResource( 2 )]
+[node name="Player" parent="." groups=["Actor"] instance=ExtResource( 2 )]
 
-[node name="Navigation" type="Navigation" parent="." groups=[
-"Environment",
-]]
+[node name="Navigation" type="Navigation" parent="." groups=["Environment"]]
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.53267e-05, 0.0166285, -0.0012641 )
@@ -161,9 +157,7 @@ shape = SubResource( 3 )
 
 [node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/StaticBody11"]
 
-[node name="Actor" type="Spatial" parent="." groups=[
-"Actor",
-]]
+[node name="Actor" type="Spatial" parent="." groups=["Actor"]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 script = ExtResource( 3 )
 

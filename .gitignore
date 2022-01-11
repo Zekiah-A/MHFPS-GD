@@ -1,7 +1,9 @@
 .mono/
 .import/
 .godot/
+.idea/*
 
 /.mono/
 /.import/
 /.godot/
+/.idea/

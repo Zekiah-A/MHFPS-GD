@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ground047_1K_Color.png-553aa2d2c6d10aabbffb728662805336.stex"
+path="res://.import/phone_background.png-cd30fa4a5723b0e4abb3c0a98c44fc3c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GameAssets/Textures/Ground/Ground047_1K_Color.png"
-dest_files=[ "res://.import/Ground047_1K_Color.png-553aa2d2c6d10aabbffb728662805336.stex" ]
+source_file="res://Assets/GameAssets/Textures/Phone/phone_background.png"
+dest_files=[ "res://.import/phone_background.png-cd30fa4a5723b0e4abb3c0a98c44fc3c.stex" ]
 
 [params]
 

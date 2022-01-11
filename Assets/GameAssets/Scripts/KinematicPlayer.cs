@@ -45,7 +45,7 @@ public class KinematicPlayer : KinematicBody
 	private Viewport inventoryViewport;
 	private Camera inventoryCamera;
 	private Position3D inventoryCameraPos;
-
+	private Panel phoneScreen;
 	public override void _Ready()
 	{
 		//Find node exists as well.
@@ -63,9 +63,11 @@ public class KinematicPlayer : KinematicBody
 		inventoryViewport = pivot.GetNode<Viewport>("InvViewport");
 		inventoryCamera = inventoryViewport.GetNode<Camera>("InvCamera");
 		inventoryCameraPos = pivot.GetNode<Position3D>("InvCamPosition");
-
+		phoneScreen = GetNode("PlayerHUD").GetNode<Panel>("PhoneScreen");
+		
 		inventoryPanel.Visible = false;
-
+		phoneScreen.Visible = false;
+		
 		UpdateInventory();
 		DrawHologramViewport();
 	}
@@ -96,6 +98,7 @@ public class KinematicPlayer : KinematicBody
 			GD.Print("Open radial inventory here!");
 			UpdateInventory();
 			OpenInventoryPanel();
+			OpenPhone();
 		}
 		else if (@event.IsActionPressed("ui_bumperl"))
 		{
@@ -378,6 +381,29 @@ public class KinematicPlayer : KinematicBody
 			inventoryRect.Texture = null;
 			Input.SetMouseMode(Input.MouseMode.Captured);
 		}	
+	}
+
+	private async void OpenPhone()
+	{
+		var animator = GetNode("PlayerHUD").GetNode<AnimationPlayer>("PhoneAnimations");
+		
+		//Abort of animation is already playing to prevent spam.
+		if (!animator.IsPlaying())
+		{
+			//If phone is open:
+			if (phoneScreen.Visible)
+			{
+				animator.PlayBackwards("open_phone");
+				//Wait for animation to finish playing before hiding.
+				await ToSignal(animator, "animation_finished");
+				phoneScreen.Visible = false;
+			}
+			else
+			{
+				phoneScreen.Visible = true;
+				animator.Play("open_phone");
+			}
+		}
 	}
 	
 	private void InventoryButtonPressed(int index)
