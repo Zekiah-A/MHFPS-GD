@@ -13,7 +13,8 @@ config_version=4
 config/name="MHFPS-GD"
 run/main_scene="res://Assets/Scenes/Title/Title.tscn"
 boot_splash/image="res://MHFPS_Title.png"
-config/icon="res://icon.png"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/icon="res://MHFPS_Icon.png"
 
 [global]
 
