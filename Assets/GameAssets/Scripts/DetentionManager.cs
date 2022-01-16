@@ -9,13 +9,17 @@ public class DetentionManager : Node
 	public int ClockTime = 0;
 	
 	private Texture dotCursor;
+	private Texture hoverCursor;
 	private AudioStreamMP3 ambientStream;
 	private AudioStreamMP3 clockStream;
+	private AudioStreamMP3 clockUnwindStream;
 	private AudioStreamMP3[] casetteStreams;
 	private AudioStreamPlayer ambientPlayer;
+	private AudioStreamPlayer actionPlayer;
 	private AudioStreamPlayer3D casettePlayer;
 	private AudioStreamPlayer3D clockPlayer;
-
+	private AnimationPlayer actionAnimationPlayer;
+	
 	private CSGBox leftDoor;
 	private CSGBox rightDoor;
 	private Spatial bunsenBurner;
@@ -23,11 +27,14 @@ public class DetentionManager : Node
 
 	private DetentionTeacher stainTeacher;
 
+	
 	public override void _Ready()
 	{
 		dotCursor = ResourceLoader.Load<Texture>("res://Assets/GameAssets/Textures/aim_reticle.png");
+		hoverCursor = ResourceLoader.Load<Texture>("res://Assets/GameAssets/Textures/aim_hover.png");
 		ambientStream = ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/ambient.mp3");
 		clockStream = ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/clock.mp3");
+		clockUnwindStream = ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/clock_unwind.mp3");
 		casetteStreams = new []
 		{
 			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete0.mp3"),
@@ -35,12 +42,14 @@ public class DetentionManager : Node
 		};
 		
 		ambientPlayer = GetNode<AudioStreamPlayer>("AmbientPlayer");
+		actionPlayer = GetNode("CameraBody").GetNode<AudioStreamPlayer>("PlayerActionPlayer");
 		casettePlayer = GetNode("CasetteRecorder").GetNode<AudioStreamPlayer3D>("CasettePlayer");
 		clockPlayer = GetNode("Clock").GetNode<AudioStreamPlayer3D>("ClockPlayer");
 		leftDoor = GetNode<CSGBox>("LeftDoor");
 		rightDoor = GetNode<CSGBox>("RightDoor");
 		bunsenBurner = GetNode<Spatial>("BunsenBurner");
 		clockTimer = GetNode("Clock").GetNode<Timer>("ClockTimer");
+		actionAnimationPlayer = GetNode("CameraBody").GetNode<AnimationPlayer>("ActionAnimationPlayer");
 
 		stainTeacher = GetNode<DetentionTeacher>("StainTeacher");
 		
@@ -94,6 +103,12 @@ public class DetentionManager : Node
 				}
 			}
 		}
+		
+		//If is hovering, change cursor
+		if (@event is InputEventMouse mouse)
+		{
+			Input.SetCustomMouseCursor(hoverCursor);
+		}
 	}
 
 	private void OnRightDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
@@ -114,6 +129,12 @@ public class DetentionManager : Node
 					rightDoor.Visible = true;
 				}
 			}
+		}
+		
+		//If is hovering, change cursor
+		if (@event is InputEventMouse mouse)
+		{
+			Input.SetCustomMouseCursor(hoverCursor);
 		}
 	}
 
@@ -136,8 +157,44 @@ public class DetentionManager : Node
 				}
 			}
 		}
+		
+		//If is hovering, change cursor
+		if (@event is InputEventMouse mouse)
+		{
+			Input.SetCustomMouseCursor(hoverCursor);
+		}
 	}
-	
+
+	//TODO: Move all clock logic to it's own class to avoid bloating up this script
+	private void OnClockClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
+	{
+		//Unwind clock sequence.
+		if (!actionPlayer.Playing)
+		{
+			if (@event is InputEventMouseButton mouseButton)
+			{
+				if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+				{
+					actionPlayer.Stream = clockUnwindStream;
+					actionPlayer.Play();
+					actionAnimationPlayer.Play("unwind_animation");
+					ClockTime = 0;
+				}
+			}
+		}
+		
+		//If is hovering, change cursor
+		if (@event is InputEventMouse mouse)
+		{
+			Input.SetCustomMouseCursor(hoverCursor);
+		}
+	}
+
+	public void OnObjectMouseExit()
+	{
+		Input.SetCustomMouseCursor(dotCursor);
+	}
+
 	private void OnClockTimerTimeout()
 	{	//Clock will need rewinding every 30 seconds
 		ClockTime += 1;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Assets/GameAssets/Audio/Detention/clock.mp3" type="AudioStream" id=9]
 [ext_resource path="res://Assets/GameAssets/Scripts/StainTeacher.cs" type="Script" id=10]
 [ext_resource path="res://Assets/GameAssets/Materials/flame_material.tres" type="Material" id=11]
+[ext_resource path="res://Assets/GameAssets/Audio/Detention/clock_unwind.mp3" type="AudioStream" id=12]
+[ext_resource path="res://Assets/GameAssets/Animations/unwind_animation.tres" type="Animation" id=13]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -21,9 +23,13 @@ ss_reflections_enabled = true
 ssao_enabled = true
 glow_enabled = true
 glow_blend_mode = 0
+glow_high_quality = true
 adjustment_enabled = true
 adjustment_brightness = 0.47
 adjustment_contrast = 1.15
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.5, 0.5, 0.1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.06, 0.12, 0.06 )
@@ -91,6 +97,12 @@ spot_range = 20.0
 spot_attenuation = 1.93187
 spot_angle = 10.0
 
+[node name="PlayerActionPlayer" type="AudioStreamPlayer" parent="CameraBody"]
+stream = ExtResource( 12 )
+
+[node name="ActionAnimationPlayer" type="AnimationPlayer" parent="CameraBody"]
+anims/unwind_animation = ExtResource( 13 )
+
 [node name="CSGBox" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 width = 16.0314
@@ -112,6 +124,11 @@ stream = ExtResource( 9 )
 unit_db = 20.0
 
 [node name="ClockTimer" type="Timer" parent="Clock"]
+
+[node name="Area" type="Area" parent="Clock"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Clock/Area"]
+shape = SubResource( 10 )
 
 [node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -180,9 +197,9 @@ shape = SubResource( 3 )
 
 [node name="Flame" type="Spatial" parent="BunsenBurner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0 )
-visible = false
 
 [node name="FlameParticles" type="Particles" parent="BunsenBurner/Flame"]
+emitting = false
 amount = 200
 lifetime = 0.15
 randomness = 1.0
@@ -191,8 +208,9 @@ draw_order = 2
 process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 5 )
 
-[node name="OmniLight" type="OmniLight" parent="BunsenBurner/Flame"]
+[node name="FlameLight" type="OmniLight" parent="BunsenBurner/Flame"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+visible = false
 light_color = Color( 0.890196, 0.576471, 0.270588, 1 )
 light_energy = 0.5
 shadow_enabled = true
@@ -243,10 +261,32 @@ width = 1.364
 height = 1.08803
 depth = 0.887405
 
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.04164, 2.18146, -10.0157 )
+light_energy = 0.1
+omni_range = 4.52425
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.40881, 2.18146, -10.0157 )
+light_energy = 0.05
+omni_range = 4.52425
+
+[node name="OmniLight3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.48615, 1.67421, -12.4465 )
+light_energy = 0.05
+omni_range = 4.52425
+
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
 [connection signal="timeout" from="Clock/ClockTimer" to="." method="OnClockTimerTimeout"]
+[connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
+[connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="BunsenBurner/Area" to="." method="OnBunsenBurnerClicked"]
+[connection signal="mouse_exited" from="BunsenBurner/Area" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="BunsenBurner/BurnerTimer" to="BunsenBurner" method="OnBurnerTimerFinished"]
 [connection signal="timeout" from="BunsenBurner/OveruseTimer" to="BunsenBurner" method="OnOveruseTimerFinished"]
 [connection signal="input_event" from="Phone/LeftButton" to="." method="OnLeftDoorClicked"]
+[connection signal="mouse_exited" from="Phone/LeftButton" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="Phone/RightButton" to="." method="OnRightDoorClicked"]
+[connection signal="mouse_exited" from="Phone/RightButton" to="." method="OnObjectMouseExit"]
+
+[editable path="DetentionUI"]

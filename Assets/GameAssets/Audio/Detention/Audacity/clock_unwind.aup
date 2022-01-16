@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="clock_unwind_data" version="1.3.0" audacityversion="2.4.1" sel0="4.5743310658" sel1="4.5743310658" vpos="0" h="0.0000000000" zoom="86.1328125000" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="Audio Track" isSelected="1" height="150" minimized="0" channel="2" linked="0" mute="0" solo="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="390144">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fb0f.au" len="194560" min="-1.267033" max="1.807773" rms="0.07129"/>
+				</waveblock>
+				<waveblock start="194560">
+					<simpleblockfile filename="eff1f40d.au" len="167936" min="-0.913044" max="0.83985" rms="0.047333"/>
+				</waveblock>
+				<waveblock start="362496">
+					<simpleblockfile filename="eff1f172.au" len="27648" min="-1.132443" max="1.610137" rms="0.238639"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="8.84680272" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="51200">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fa21.au" len="51200" min="-0.151864" max="0.139517" rms="0.017164"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

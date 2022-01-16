@@ -4,21 +4,27 @@ using System;
 public class BunsenBurner : Spatial
 {
 	public int BurnTime = 0;
-	private Spatial flame;
+	private Light flameLight;
+	private Particles flameParticles;
 	private Timer burnerTimer;
 	private Timer overuseTimer;
-	
+	private Label workLeftLabel;
+
 	public override void _Ready()
 	{
-		flame = GetNode<Spatial>("Flame");
+		flameLight = GetNode("Flame").GetNode<Light>("FlameLight");
+		flameParticles = GetNode("Flame").GetNode<Particles>("FlameParticles");
 		burnerTimer = GetNode<Timer>("BurnerTimer");
 		overuseTimer = GetNode<Timer>("OveruseTimer");
+		workLeftLabel = GetTree().CurrentScene.GetNode("DetentionUI").GetNode("WorkPanel").GetNode<Label>("WorkLeft");
 	}
 
 	//Start burn timer, and start overuse timer.
 	public void Burn()
 	{
-		flame.Visible = true;
+		flameLight.Visible = true;
+		flameParticles.Emitting = true;
+		burnerTimer.Paused = false;
 		burnerTimer.Start();
 		overuseTimer.Start();
 	}
@@ -26,7 +32,8 @@ public class BunsenBurner : Spatial
 	//Pause burn timer, and reset over use timer.
 	public void StopBurning()
 	{
-		flame.Visible = false;
+		flameLight.Visible = false;
+		flameParticles.Emitting = false;
 		burnerTimer.Paused = true;
 		overuseTimer.Stop();
 	}
@@ -35,6 +42,7 @@ public class BunsenBurner : Spatial
 	private void OnBurnerTimerFinished()
 	{
 		BurnTime++;
+		workLeftLabel.Text = (300 - BurnTime).ToString();
 		
 		//Total mach length
 		if (BurnTime >= 300)
@@ -47,6 +55,7 @@ public class BunsenBurner : Spatial
 	public void OnOveruseTimerFinished()
 	{
 		GD.Print("Game over: Time us overused.");
-		//TODO: Jumpscare.
+		//TODO: Use the correct Jumpscare.
+		GetTree().CurrentScene.GetNode<DetentionTeacher>("StainTeacher").Jumpscare();
 	}
 }

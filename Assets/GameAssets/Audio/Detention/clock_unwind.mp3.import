@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/clock_unwind.mp3-c1c6ea779622323e3b980370409cabec.mp3str"
+
+[deps]
+
+source_file="res://Assets/GameAssets/Audio/Detention/clock_unwind.mp3"
+dest_files=[ "res://.import/clock_unwind.mp3-c1c6ea779622323e3b980370409cabec.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
