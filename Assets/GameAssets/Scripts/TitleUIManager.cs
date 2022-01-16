@@ -234,7 +234,7 @@ public class TitleUIManager : Control
 	
 	private void OnDemoButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Other/Demo.tscn");
 	private void OnMultiplayerButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Multiplayer/Lobby.tscn");
-	private void OnDetentionButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Detention.tscn");
+	private void OnDetentionButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Detention/Detention.tscn");
 	
 	#endregion
 }
