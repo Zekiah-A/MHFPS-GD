@@ -196,17 +196,17 @@ public class DetentionManager : Node
 	}
 
 	private void OnClockTimerTimeout()
-	{	//Clock will need rewinding every 30 seconds
+	{	//Clock will need rewinding every 45 seconds
 		ClockTime += 1;
 
 		//Auditory warning to player that time is running out. 
-		if (ClockTime >= 20 && ClockTime < 30) 
+		if (ClockTime >= 40 && ClockTime < 45) 
 		{
 			clockPlayer.Stream = clockStream;
 			clockPlayer.Play();
 		}
-		//If gone for more than 30 seconds without rewind, then player will be jumpscared. 
-		else if (ClockTime >= 30) 
+		//If gone for more than 40 seconds without rewind, then player will be jumpscared. 
+		else if (ClockTime >= 45) 
 		{
 			//Jumpscare player, time is out.
 			clockPlayer.Stop();
