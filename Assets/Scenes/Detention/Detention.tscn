@@ -1,10 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
 [ext_resource path="res://Assets/GameAssets/Models/CasetteRecorder/cassete_recorder.glb" type="PackedScene" id=3]
 [ext_resource path="res://Assets/GameAssets/Audio/Detention/ambient.mp3" type="AudioStream" id=4]
 [ext_resource path="res://Assets/Scenes/Detention/DetentionUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/GameAssets/Models/BunsenBurner/bunsen_burner.glb" type="PackedScene" id=6]
+[ext_resource path="res://Assets/GameAssets/Models/Phone/phone.glb" type="PackedScene" id=7]
+[ext_resource path="res://Assets/GameAssets/Scripts/BunsenBurner.cs" type="Script" id=8]
+[ext_resource path="res://Assets/GameAssets/Audio/Detention/clock.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Assets/GameAssets/Scripts/StainTeacher.cs" type="Script" id=10]
+[ext_resource path="res://Assets/GameAssets/Materials/flame_material.tres" type="Material" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -13,9 +19,55 @@ fog_enabled = true
 fog_depth_begin = 5.0
 ss_reflections_enabled = true
 ssao_enabled = true
+glow_enabled = true
+glow_blend_mode = 0
 adjustment_enabled = true
 adjustment_brightness = 0.47
 adjustment_contrast = 1.15
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.06, 0.12, 0.06 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.241007, 0.298561, 0.352518, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.958008, 0.414736, 0.0636177, 1, 1, 1, 1, 1, 1, 0.322266, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+width = 512
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.119601, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.267045 ), -0.299875, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+trail_divisor = 5
+emission_shape = 1
+emission_sphere_radius = 0.01
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.1
+angular_velocity = 40.0
+angular_velocity_random = 1.0
+linear_accel = 4.0
+linear_accel_random = 1.0
+angle = 360.0
+angle_random = 1.0
+scale = 2.0
+scale_random = 0.8
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 9 )
+
+[sub_resource type="QuadMesh" id=5]
+material = ExtResource( 11 )
+size = Vector2( 0.05, 0.05 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.198076, 0.172571, 0.197376 )
 
 [node name="Detention" type="Spatial"]
 script = ExtResource( 2 )
@@ -26,10 +78,18 @@ environment = SubResource( 1 )
 [node name="DetentionUI" parent="." instance=ExtResource( 5 )]
 
 [node name="CameraBody" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1 )
 script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="CameraBody"]
+fov = 40.0
+
+[node name="Torch" type="SpotLight" parent="CameraBody"]
+light_color = Color( 0.988235, 0.917647, 0.501961, 1 )
+shadow_enabled = true
+spot_range = 20.0
+spot_attenuation = 1.93187
+spot_angle = 10.0
 
 [node name="CSGBox" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
@@ -48,11 +108,28 @@ max_db = 5.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13 )
 
 [node name="ClockPlayer" type="AudioStreamPlayer3D" parent="Clock"]
+stream = ExtResource( 9 )
+unit_db = 20.0
+
+[node name="ClockTimer" type="Timer" parent="Clock"]
 
 [node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -20.0
+volume_db = -15.0
 mix_target = 1
+
+[node name="JumpscarePlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 5.0
+
+[node name="DoorsTimer" type="Timer" parent="."]
+
+[node name="WorkTimer" type="Timer" parent="."]
+
+[node name="StainTeacher" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -17 )
+script = ExtResource( 10 )
+
+[node name="CSGBox" type="CSGBox" parent="StainTeacher"]
 
 [node name="CSGBox7" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19219, -1.8046 )
@@ -90,47 +167,86 @@ width = 0.002
 height = 4.1106
 depth = 15.2437
 
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.748255, 1.97183, -1.20905 )
-light_energy = 0.266
-shadow_enabled = true
-shadow_contact = 0.734
+[node name="BunsenBurner" parent="." instance=ExtResource( 6 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.914934, 1.24824, -1.6608 )
+script = ExtResource( 8 )
 
-[node name="OmniLight5" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.370389, 1.97183, -1.00221 )
-light_energy = 0.0
-light_negative = true
-shadow_enabled = true
-shadow_contact = 0.734
+[node name="Area" type="Area" parent="BunsenBurner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+input_capture_on_drag = true
 
-[node name="BurnerLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976012, 1.97183, -1.00221 )
-light_energy = 4.55
-light_negative = true
-shadow_enabled = true
-shadow_contact = 0.734
-omni_range = 0.709
+[node name="CollisionShape" type="CollisionShape" parent="BunsenBurner/Area"]
+shape = SubResource( 3 )
 
-[node name="OmniLight2" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.34096, 3.60859, -9.71922 )
-light_color = Color( 0.780392, 0.780392, 0.572549, 1 )
-shadow_enabled = true
-shadow_contact = 0.734
-omni_range = 4.651
+[node name="Flame" type="Spatial" parent="BunsenBurner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0 )
+visible = false
 
-[node name="OmniLight3" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0576, 3.60859, -9.71922 )
-light_color = Color( 0.780392, 0.780392, 0.572549, 1 )
-shadow_enabled = true
-shadow_contact = 0.734
-omni_range = 3.977
+[node name="FlameParticles" type="Particles" parent="BunsenBurner/Flame"]
+amount = 200
+lifetime = 0.15
+randomness = 1.0
+local_coords = false
+draw_order = 2
+process_material = SubResource( 4 )
+draw_pass_1 = SubResource( 5 )
 
-[node name="OmniLight4" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343194, 3.15652, -12.8389 )
-light_color = Color( 0.780392, 0.780392, 0.572549, 1 )
+[node name="OmniLight" type="OmniLight" parent="BunsenBurner/Flame"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+light_color = Color( 0.890196, 0.576471, 0.270588, 1 )
+light_energy = 0.5
 shadow_enabled = true
-shadow_contact = 0.734
-omni_range = 1.988
-omni_attenuation = 1.27456
+omni_range = 1.948
+omni_attenuation = 0.901251
+
+[node name="BurnerTimer" type="Timer" parent="BunsenBurner"]
+
+[node name="OveruseTimer" type="Timer" parent="BunsenBurner"]
+wait_time = 20.0
+
+[node name="Phone" parent="." instance=ExtResource( 7 )]
+transform = Transform( 0.129409, 0, 0.482963, 0, 0.5, 0, -0.482963, 0, 0.129409, -0.0670866, 1.24153, -2.34762 )
+
+[node name="LeftButton" type="Area" parent="Phone"]
+transform = Transform( 1, 0, 0, 0, 0.229649, 0, 0, 0, 1, 0.00375509, 0, -0.218341 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Phone/LeftButton"]
+shape = SubResource( 2 )
+
+[node name="RightButton" type="Area" parent="Phone"]
+transform = Transform( 1, 0, 0, 0, 0.229649, 0, 0, 0, 1, 0.00330591, 0, 0.183539 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Phone/RightButton"]
+shape = SubResource( 2 )
+
+[node name="LeftDoor" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22728, 1.46561, -11.514 )
+visible = false
+height = 2.85962
+depth = 1.39267
+
+[node name="RightDoor" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7217, 1.46561, -11.514 )
+visible = false
+height = 2.85962
+depth = 1.39267
+
+[node name="Window" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.26466, 1.65029, -13.4829 )
+width = 2.06995
+height = 1.08803
+depth = 0.887405
+
+[node name="Clock2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193382, 3.13523, -13.4829 )
+width = 1.364
+height = 1.08803
+depth = 0.887405
 
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
+[connection signal="timeout" from="Clock/ClockTimer" to="." method="OnClockTimerTimeout"]
+[connection signal="input_event" from="BunsenBurner/Area" to="." method="OnBunsenBurnerClicked"]
+[connection signal="timeout" from="BunsenBurner/BurnerTimer" to="BunsenBurner" method="OnBurnerTimerFinished"]
+[connection signal="timeout" from="BunsenBurner/OveruseTimer" to="BunsenBurner" method="OnOveruseTimerFinished"]
+[connection signal="input_event" from="Phone/LeftButton" to="." method="OnLeftDoorClicked"]
+[connection signal="input_event" from="Phone/RightButton" to="." method="OnRightDoorClicked"]

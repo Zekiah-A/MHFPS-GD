@@ -15,6 +15,10 @@ run/main_scene="res://Assets/Scenes/Title/Title.tscn"
 boot_splash/image="res://MHFPS_Title.png"
 config/icon="res://icon.png"
 
+[global]
+
+"ray pickable"=false
+
 [input]
 
 game_any={

@@ -1,24 +1,40 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
 [node name="DetentionUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="BatteryPanel" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -104.0
+margin_left = -176.0
 margin_top = -48.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Battery" type="Label" parent="BatteryPanel"]
+anchor_left = 0.409
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0159988
 custom_fonts/font = ExtResource( 1 )
-text = ": 50%"
+text = "100%"
 align = 2
 valign = 1
 clip_text = true
@@ -26,16 +42,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
+[node name="Colon" type="Label" parent="BatteryPanel"]
+anchor_left = 0.273
+anchor_right = 0.409
 anchor_bottom = 1.0
-margin_left = -152.0
-margin_top = -48.0
-margin_right = -104.0
+margin_left = -0.0480003
+margin_right = 0.0159988
+custom_fonts/font = ExtResource( 1 )
+text = ":"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BatteryIcon" type="TextureRect" parent="BatteryPanel"]
+anchor_right = 0.273
+anchor_bottom = 1.0
+margin_right = -0.0480003
+mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimePanel" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -48.0
+margin_right = 128.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TimePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+text = "00:00"
+align = 1
+valign = 1
+clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
