@@ -1,6 +1,6 @@
 MHFPS
 -------
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Zekiah-A/MHFPS-GD) ![GitHub last commit](https://img.shields.io/github/last-commit/Zekiah-A/MHFPS-GD?label=Last%20Update) 
+![GitHub code size in bytes](https://img.shields.io/github/repo-size/Zekiah-A/MHFPS-GD) ![GitHub last commit](https://img.shields.io/github/last-commit/Zekiah-A/MHFPS-GD?label=Last%20Update) 
 
 NOTE:
 =============
