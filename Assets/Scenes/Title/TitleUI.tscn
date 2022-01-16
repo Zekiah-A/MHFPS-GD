@@ -76,13 +76,13 @@ __meta__ = {
 [node name="Other" type="Button" parent="TabPanel"]
 margin_right = 88.0
 margin_bottom = 64.0
+custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
+custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 5 )
 custom_styles/disabled = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
 text = "Other"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -104,13 +104,13 @@ __meta__ = {
 margin_left = 88.0
 margin_right = 184.0
 margin_bottom = 64.0
+custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
+custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/focus = SubResource( 10 )
 custom_styles/disabled = SubResource( 11 )
 custom_styles/normal = SubResource( 12 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -132,13 +132,13 @@ __meta__ = {
 margin_left = 184.0
 margin_right = 274.0
 margin_bottom = 64.0
+custom_colors/font_color = Color( 0.380392, 0.380392, 0.380392, 1 )
+custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = SubResource( 13 )
 custom_styles/pressed = SubResource( 14 )
 custom_styles/focus = SubResource( 15 )
 custom_styles/disabled = SubResource( 16 )
 custom_styles/normal = SubResource( 17 )
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.380392, 0.380392, 0.380392, 1 )
 text = "Multiplayer"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -183,12 +183,12 @@ margin_left = -192.0
 margin_top = 64.0
 margin_right = 192.0
 margin_bottom = 128.0
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.254902 )
 custom_constants/shadow_offset_y = 3
 custom_constants/shadow_as_outline = 0
+custom_fonts/font = ExtResource( 2 )
 text = " MHFPS dev build! "
 align = 1
 valign = 1
@@ -215,9 +215,9 @@ margin_left = 32.0
 margin_top = 256.0
 margin_right = 240.0
 margin_bottom = 360.0
-custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.415686, 0.415686, 0.415686, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.611765 )
+custom_fonts/font = ExtResource( 3 )
 text = "This background is not blurred to hide the disaster behind it"
 autowrap = true
 __meta__ = {
@@ -256,8 +256,8 @@ anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
 anchor_bottom = 0.971429
-custom_styles/normal = ExtResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = ExtResource( 6 )
 text = "Online multiplayer"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -336,8 +336,8 @@ anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
 anchor_bottom = 0.971429
-custom_styles/normal = ExtResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = ExtResource( 6 )
 text = "Demo Level"
 __meta__ = {
 "_edit_use_anchors_": true
@@ -368,8 +368,10 @@ anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
 anchor_bottom = 0.971429
-disabled = true
-text = "The hall of memes!"
+margin_left = -1.23978e-05
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = ExtResource( 6 )
+text = "Detention"
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -399,3 +401,4 @@ __meta__ = {
 [connection signal="pressed" from="TabPanel/Multiplayer" to="." method="onTabButtonPressed" binds= [ 3 ]]
 [connection signal="pressed" from="MainPanels/MultiplayerPanel/Multiplayer/Button" to="." method="OnMultiplayerButtonPressed"]
 [connection signal="pressed" from="MainPanels/OtherPanel/Multiplayer/Button" to="." method="OnDemoButtonPressed"]
+[connection signal="pressed" from="MainPanels/OtherPanel/LocalGame/Button" to="." method="OnDetentionButtonPressed"]

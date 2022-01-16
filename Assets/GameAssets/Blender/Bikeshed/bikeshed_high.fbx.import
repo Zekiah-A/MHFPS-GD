@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/bikeshed_high.fbx-0662c3dd186b555985ac5e362af48090.scn"
+path="res://.import/bikeshed_high.fbx-5afd063bc31920b753fc135903dfb05b.scn"
 
 [deps]
 
-source_file="res://Assets/GameAssets/Blender/bikeshed_high.fbx"
-dest_files=[ "res://.import/bikeshed_high.fbx-0662c3dd186b555985ac5e362af48090.scn" ]
+source_file="res://Assets/GameAssets/Blender/Bikeshed/bikeshed_high.fbx"
+dest_files=[ "res://.import/bikeshed_high.fbx-5afd063bc31920b753fc135903dfb05b.scn" ]
 
 [params]
 

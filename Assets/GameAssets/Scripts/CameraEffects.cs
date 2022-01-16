@@ -44,10 +44,10 @@ public class CameraEffects : Camera
 			posy = (mousePosition.y  - GetViewport().GetVisibleRect().Size.y / 2) / GetViewport().GetVisibleRect().Size.y;
 		}
 
-		/*camera.*/Rotation = new Vector3 (
-			Mathf.Lerp(/*camera.*/Rotation.x, Inverse ? posy / Damping : -posy / Damping, LerpStrength),
-			Mathf.Lerp(/*camera.*/Rotation.y, Inverse ? posx / Damping : -posx / Damping, LerpStrength),
-			/*camera.*/Rotation.z
+		Rotation = new Vector3 (
+			Mathf.Lerp(Rotation.x, Inverse ? posy / Damping : -posy / Damping, LerpStrength),
+			Mathf.Lerp(Rotation.y, Inverse ? posx / Damping : -posx / Damping, LerpStrength),
+			Rotation.z
 		);
 	}
 	

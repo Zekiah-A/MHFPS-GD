@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ambient.mp3-6a5244b37fe4c7a3d436f8fc2124b938.mp3str"
+
+[deps]
+
+source_file="res://Assets/GameAssets/Audio/Detention/ambient.mp3"
+dest_files=[ "res://.import/ambient.mp3-6a5244b37fe4c7a3d436f8fc2124b938.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

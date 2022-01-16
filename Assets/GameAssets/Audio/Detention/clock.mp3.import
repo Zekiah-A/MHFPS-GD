@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/clock.mp3-b184d49736723fe96675039f460ff5d4.mp3str"
+
+[deps]
+
+source_file="res://Assets/GameAssets/Audio/Detention/clock.mp3"
+dest_files=[ "res://.import/clock.mp3-b184d49736723fe96675039f460ff5d4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

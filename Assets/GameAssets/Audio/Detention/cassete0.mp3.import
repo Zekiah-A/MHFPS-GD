@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/cassete0.mp3-6051e6de569fd75d74a20094f62a207f.mp3str"
+
+[deps]
+
+source_file="res://Assets/GameAssets/Audio/Detention/cassete0.mp3"
+dest_files=[ "res://.import/cassete0.mp3-6051e6de569fd75d74a20094f62a207f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

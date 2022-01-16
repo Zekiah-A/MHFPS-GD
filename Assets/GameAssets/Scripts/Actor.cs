@@ -2,10 +2,10 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class Actor : Spatial
+public class Actor : Spatial //Player should be actor as well
 {
 	[Export]
-	public int State;
+	public List<int> State = new List<int> {0};
 	public List<Node> BodiesInSight = new List<Node>();
 	
 	private AnimationPlayer animationPlayer;
@@ -24,9 +24,9 @@ public class Actor : Spatial
 	public override void _PhysicsProcess(float delta)
 	{
 		if (BodiesInSight.Count != 0)
-			State = (int) States.Patrol;
+			State[0] = (int) States.Patrol;
 		else
-			State = (int) States.Idle;
+			State[0] = (int) States.Idle;
 
 		ApplyState();
 	}
@@ -47,22 +47,26 @@ public class Actor : Spatial
 
 	public void ApplyState()
 	{
-		switch (State)
+		foreach (int current in State)
 		{
-			case (int) States.Idle:
-				animationPlayer.Play("Idle");
-				break;
-			case (int) States.Patrol:
-				animationPlayer.Play("Walk"); //Obviusly only play when walking during patrol
-				break;
-			case (int) States.Converse:
-				break;
-			case (int) States.Alert:
-				break;
-			case (int) States.Hostile:
-				break;
-			case (int) States.Dead:
-				break;
+			switch (current)
+			{
+				case (int) States.Idle:
+					animationPlayer.Play("Idle");
+					break;
+				case (int) States.Patrol:
+					animationPlayer.Play("Walk"); //Obviusly only play when walking during patrol
+					break;
+				case (int) States.Converse:
+					//look at player. 
+					break;
+				case (int) States.Alert:
+					break;
+				case (int) States.Hostile:
+					break;
+				case (int) States.Dead:
+					break;
+			}
 		}
 	}
 	

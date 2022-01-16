@@ -1,0 +1,133 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Models/CasetteRecorder/cassete_recorder.glb" type="PackedScene" id=1]
+[ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
+[ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=3]
+[ext_resource path="res://Assets/GameAssets/Audio/Detention/ambient.mp3" type="AudioStream" id=4]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_energy = 1.29
+fog_enabled = true
+fog_depth_begin = 5.0
+ss_reflections_enabled = true
+ssao_enabled = true
+adjustment_enabled = true
+adjustment_brightness = 0.47
+adjustment_contrast = 1.15
+
+[node name="Detention" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="CameraBody" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+script = ExtResource( 3 )
+
+[node name="Camera" type="Camera" parent="CameraBody"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
+width = 16.0314
+height = 0.002
+depth = 15.9727
+
+[node name="CasetteRecorder" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1.13684, 1.24221, -1.46452 )
+
+[node name="CasettePlayer" type="AudioStreamPlayer3D" parent="CasetteRecorder"]
+unit_db = 5.0
+max_db = 5.0
+
+[node name="Clock" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13 )
+
+[node name="ClockPlayer" type="AudioStreamPlayer3D" parent="Clock"]
+
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -5.0
+mix_target = 1
+
+[node name="CSGBox7" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19219, -1.8046 )
+width = 3.39855
+height = 0.0738659
+depth = 1.67136
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.97899, -6 )
+width = 16.0314
+height = 0.002
+depth = 15.9727
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1.93315 )
+width = 16.0314
+height = 4.1106
+depth = 0.002
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -13.1652 )
+width = 16.0314
+height = 4.1106
+depth = 0.002
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80956, 2, -5.74794 )
+width = 0.002
+height = 4.1106
+depth = 15.2437
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.49655, 2, -5.74794 )
+width = 0.002
+height = 4.1106
+depth = 15.2437
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.748255, 1.97183, -1.20905 )
+light_energy = 0.266
+shadow_enabled = true
+shadow_contact = 0.734
+
+[node name="OmniLight5" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.370389, 1.97183, -1.00221 )
+light_energy = 0.0
+light_negative = true
+shadow_enabled = true
+shadow_contact = 0.734
+
+[node name="BurnerLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976012, 1.97183, -1.00221 )
+light_energy = 4.55
+light_negative = true
+shadow_enabled = true
+shadow_contact = 0.734
+omni_range = 0.709
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.34096, 3.60859, -9.71922 )
+light_color = Color( 0.780392, 0.780392, 0.572549, 1 )
+shadow_enabled = true
+shadow_contact = 0.734
+omni_range = 4.651
+
+[node name="OmniLight3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0576, 3.60859, -9.71922 )
+light_color = Color( 0.780392, 0.780392, 0.572549, 1 )
+shadow_enabled = true
+shadow_contact = 0.734
+omni_range = 3.977
+
+[node name="OmniLight4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.343194, 3.15652, -12.8389 )
+light_color = Color( 0.780392, 0.780392, 0.572549, 1 )
+shadow_enabled = true
+shadow_contact = 0.734
+omni_range = 1.988
+omni_attenuation = 1.27456
+
+[connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]

@@ -369,39 +369,60 @@ public class KinematicPlayer : KinematicBody
 	{
 		if (!inventoryPanel.Visible)
 		{
-			inventoryPanel.Visible = true;
-			hologramRect.Visible = false;
-			inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
+			//inventoryPanel.Visible = true;
+			//hologramRect.Visible = false;
+			//inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
 			Input.SetMouseMode(Input.MouseMode.Visible);
 		}
 		else
 		{
-			inventoryPanel.Visible = false;
-			hologramRect.Visible = true;
-			inventoryRect.Texture = null;
+			//inventoryPanel.Visible = false;
+			//hologramRect.Visible = true;
+			//inventoryRect.Texture = null;
 			Input.SetMouseMode(Input.MouseMode.Captured);
 		}	
 	}
 
 	private async void OpenPhone()
 	{
-		var animator = GetNode("PlayerHUD").GetNode<AnimationPlayer>("PhoneAnimations");
+		Tween phoneTween = GetNode("PlayerHUD").GetNode<Tween>("PhoneTween");
 		
-		//Abort of animation is already playing to prevent spam.
-		if (!animator.IsPlaying())
+		//If already tweening, abort (in order to prevent spam).
+		if (!phoneTween.IsActive())
 		{
-			//If phone is open:
+			//If phone screen is open:
 			if (phoneScreen.Visible)
 			{
-				animator.PlayBackwards("open_phone");
-				//Wait for animation to finish playing before hiding.
-				await ToSignal(animator, "animation_finished");
+				GetNode("PlayerHUD").GetNode("PhoneScreen").GetNode("Cursor").Set("FollowMouse", true);
+				phoneTween.InterpolateProperty(
+					phoneScreen,
+					"rect_position",
+					GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition")
+						.RectPosition, //TODO: Make these const vars to avoid unecessary acess?
+					GetNode("PlayerHUD").GetNode<Panel>("ClosedPosition").RectPosition,
+					1,
+					Tween.TransitionType.Cubic,
+					Tween.EaseType.In
+				);
+				phoneTween.Start();
+				await ToSignal(phoneTween, "tween_completed");
 				phoneScreen.Visible = false;
 			}
 			else
 			{
+				GetNode("PlayerHUD").GetNode("PhoneScreen").GetNode("Cursor").Set("FollowMouse", true); //TODO: Make vars for some of these.
+				Input.WarpMousePosition(GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition").RectPosition + (GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition").RectSize / 2));
 				phoneScreen.Visible = true;
-				animator.Play("open_phone");
+				phoneTween.InterpolateProperty(
+					phoneScreen,
+					"rect_position",
+					GetNode("PlayerHUD").GetNode<Panel>("ClosedPosition").RectPosition,
+					GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition").RectPosition,
+					1,
+					Tween.TransitionType.Cubic,
+					Tween.EaseType.Out
+				);
+				phoneTween.Start();
 			}
 		}
 	}

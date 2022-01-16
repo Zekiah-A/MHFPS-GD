@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/watcher.mp3-0c99633f4abd936203b46f7374a9a6b4.mp3str"
+
+[deps]
+
+source_file="res://Assets/GameAssets/Audio/Detention/watcher.mp3"
+dest_files=[ "res://.import/watcher.mp3-0c99633f4abd936203b46f7374a9a6b4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

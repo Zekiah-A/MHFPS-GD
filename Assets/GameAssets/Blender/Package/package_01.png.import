@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/package_01.png-0e6f6ce33ea369b6c7df19fe83d4eea6.stex"
+path="res://.import/package_01.png-541d025eea7c744729d0042b01a583ee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/GameAssets/Blender/package_01.png"
-dest_files=[ "res://.import/package_01.png-0e6f6ce33ea369b6c7df19fe83d4eea6.stex" ]
+source_file="res://Assets/GameAssets/Blender/Package/package_01.png"
+dest_files=[ "res://.import/package_01.png-541d025eea7c744729d0042b01a583ee.stex" ]
 
 [params]
 

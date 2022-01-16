@@ -1,20 +1,36 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Scenes/Title/TitleUI.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/GameAssets/Blender/bikeshed_high.fbx" type="PackedScene" id=2]
+[ext_resource path="res://Assets/GameAssets/Blender/Bikeshed/bikeshed_high.fbx" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Scenes/Title/Title/environment.tres" type="Environment" id=3]
 [ext_resource path="res://Assets/GameAssets/Materials/title_trees.tres" type="Material" id=4]
 [ext_resource path="res://Assets/GameAssets/Materials/iso_periskeri.tres" type="Material" id=5]
 [ext_resource path="res://Assets/GameAssets/Materials/grass.tres" type="Material" id=6]
 [ext_resource path="res://Assets/GameAssets/Scripts/TitleManager.cs" type="Script" id=7]
-[ext_resource path="res://Assets/GameAssets/Animations/fade_animation.tres" type="Animation" id=8]
+[ext_resource path="res://Assets/GameAssets/Blender/tabletennis/tabletennis_high.glb" type="PackedScene" id=8]
 [ext_resource path="res://Assets/GameAssets/Scripts/CameraEffects.cs" type="Script" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "FadeAnimation"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
 
 [node name="Title" type="Spatial"]
 script = ExtResource( 7 )
 
-[node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3.00742, 4, 0, 4.57582 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 3 )
 
 [node name="CSGBox3" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3.00742, -6.0428, 0.676608, 4.57582 )
@@ -61,7 +77,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="IntroFade"]
-anims/FadeAnimation = ExtResource( 8 )
+anims/FadeAnimation = SubResource( 1 )
 
 [node name="bikeshed_high" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7444, -0.416115, 3.02027 )
@@ -186,7 +202,7 @@ height = 14.0
 depth = 0.001
 material = ExtResource( 4 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 3 )
+[node name="tabletennis_high" parent="." instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.24348, -1.22947, 4.12082 )
 
 [editable path="bikeshed_high"]
