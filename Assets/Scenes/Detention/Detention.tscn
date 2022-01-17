@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -14,6 +14,9 @@
 [ext_resource path="res://Assets/GameAssets/Audio/Detention/clock_unwind.mp3" type="AudioStream" id=12]
 [ext_resource path="res://Assets/GameAssets/Animations/unwind_animation.tres" type="Animation" id=13]
 [ext_resource path="res://Assets/GameAssets/Models/Clock/clock.glb" type="PackedScene" id=14]
+[ext_resource path="res://Assets/GameAssets/Models/teacher_desk/teacher_desk.glb" type="PackedScene" id=15]
+[ext_resource path="res://Assets/GameAssets/Models/Vent/vent.glb" type="PackedScene" id=16]
+[ext_resource path="res://Assets/GameAssets/Models/DoubleDesk/double_desk.glb" type="PackedScene" id=17]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -28,9 +31,6 @@ glow_high_quality = true
 adjustment_enabled = true
 adjustment_brightness = 0.47
 adjustment_contrast = 1.15
-
-[sub_resource type="BoxShape" id=10]
-extents = Vector3( 0.5, 0.5, 0.1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.06, 0.12, 0.06 )
@@ -76,6 +76,9 @@ size = Vector2( 0.05, 0.05 )
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.198076, 0.172571, 0.197376 )
 
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.5, 0.5, 0.1 )
+
 [node name="Detention" type="Spatial"]
 script = ExtResource( 2 )
 
@@ -110,85 +113,18 @@ width = 16.0314
 height = 0.002
 depth = 15.9727
 
+[node name="double_desk" parent="." instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, -1.85813 )
+
 [node name="CasetteRecorder" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1.13684, 1.24221, -1.46452 )
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1.02481, 1.36874, -1.85813 )
 
 [node name="CasettePlayer" type="AudioStreamPlayer3D" parent="CasetteRecorder"]
 unit_db = 5.0
 max_db = 5.0
 
-[node name="Clock" parent="." instance=ExtResource( 14 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.76275, -13.168 )
-
-[node name="ClockPlayer" type="AudioStreamPlayer3D" parent="Clock"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-stream = ExtResource( 9 )
-unit_db = 20.0
-
-[node name="ClockTimer" type="Timer" parent="Clock"]
-
-[node name="Area" type="Area" parent="Clock"]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Clock/Area"]
-shape = SubResource( 10 )
-
-[node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -15.0
-mix_target = 1
-
-[node name="JumpscarePlayer" type="AudioStreamPlayer" parent="."]
-volume_db = 5.0
-
-[node name="DoorsTimer" type="Timer" parent="."]
-
-[node name="WorkTimer" type="Timer" parent="."]
-
-[node name="StainTeacher" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -17 )
-script = ExtResource( 10 )
-
-[node name="CSGBox" type="CSGBox" parent="StainTeacher"]
-
-[node name="CSGBox7" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19219, -1.8046 )
-width = 3.39855
-height = 0.0738659
-depth = 1.67136
-
-[node name="CSGBox6" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.97899, -6 )
-width = 16.0314
-height = 0.002
-depth = 15.9727
-
-[node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1.93315 )
-width = 16.0314
-height = 4.1106
-depth = 0.002
-
-[node name="CSGBox3" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -13.1652 )
-width = 16.0314
-height = 4.1106
-depth = 0.002
-
-[node name="CSGBox4" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80956, 2, -5.74794 )
-width = 0.002
-height = 4.1106
-depth = 15.2437
-
-[node name="CSGBox5" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.49655, 2, -5.74794 )
-width = 0.002
-height = 4.1106
-depth = 15.2437
-
 [node name="BunsenBurner" parent="." instance=ExtResource( 6 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.914934, 1.24824, -1.6608 )
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.914934, 1.38392, -1.85813 )
 script = ExtResource( 8 )
 
 [node name="Area" type="Area" parent="BunsenBurner"]
@@ -226,7 +162,7 @@ omni_attenuation = 0.901251
 wait_time = 20.0
 
 [node name="Phone" parent="." instance=ExtResource( 7 )]
-transform = Transform( 0.129409, 0, 0.482963, 0, 0.5, 0, -0.482963, 0, 0.129409, -0.0670866, 1.24153, -2.34762 )
+transform = Transform( 0.129409, 0, 0.482963, 0, 0.5, 0, -0.482963, 0, 0.129409, -0.043459, 1.37508, -1.85813 )
 
 [node name="LeftButton" type="Area" parent="Phone"]
 transform = Transform( 1, 0, 0, 0, 0.229649, 0, 0, 0, 1, 0.00375509, 0, -0.218341 )
@@ -240,14 +176,78 @@ transform = Transform( 1, 0, 0, 0, 0.229649, 0, 0, 0, 1, 0.00330591, 0, 0.183539
 [node name="CollisionShape" type="CollisionShape" parent="Phone/RightButton"]
 shape = SubResource( 2 )
 
+[node name="Clock" parent="." instance=ExtResource( 14 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.76275, -13.168 )
+
+[node name="ClockPlayer" type="AudioStreamPlayer3D" parent="Clock"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+stream = ExtResource( 9 )
+unit_db = 20.0
+
+[node name="ClockTimer" type="Timer" parent="Clock"]
+
+[node name="Area" type="Area" parent="Clock"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Clock/Area"]
+shape = SubResource( 10 )
+
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -15.0
+mix_target = 1
+
+[node name="JumpscarePlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 5.0
+
+[node name="DoorsTimer" type="Timer" parent="."]
+
+[node name="WorkTimer" type="Timer" parent="."]
+
+[node name="StainTeacher" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -17 )
+script = ExtResource( 10 )
+
+[node name="CSGBox" type="CSGBox" parent="StainTeacher"]
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -13.1652 )
+width = 16.0314
+height = 4.1106
+depth = 0.002
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.97899, -6 )
+width = 16.0314
+height = 0.002
+depth = 15.9727
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1.93315 )
+width = 16.0314
+height = 4.1106
+depth = 0.002
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80956, 2, -5.74794 )
+width = 0.002
+height = 4.1106
+depth = 15.2437
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.49655, 2, -5.74794 )
+width = 0.002
+height = 4.1106
+depth = 15.2437
+
 [node name="LeftDoor" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22728, 1.46561, -11.514 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22728, 1.46561, -8.68771 )
 visible = false
 height = 2.85962
 depth = 1.39267
 
 [node name="RightDoor" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7217, 1.46561, -11.514 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50745, 1.46561, -11.514 )
 visible = false
 height = 2.85962
 depth = 1.39267
@@ -279,10 +279,39 @@ light_energy = 1.479
 editor_only = true
 omni_range = 54.608
 
+[node name="teacher_desk" parent="." instance=ExtResource( 15 )]
+transform = Transform( -0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, -5.8, 0, -11 )
+
+[node name="vent" parent="." instance=ExtResource( 16 )]
+transform = Transform( -0.75, 0, 6.55671e-08, 0, 0.75, 0, -6.55671e-08, 0, -0.75, 0, 3.96506, -4.592 )
+
+[node name="SetDesks" type="Spatial" parent="."]
+
+[node name="double_desk" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, -6, 0, -3.85813 )
+
+[node name="double_desk2" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 6, 0, -3.85813 )
+
+[node name="double_desk3" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, -6, 0, -6.358 )
+
+[node name="double_desk4" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 6, 0, -6.358 )
+
+[node name="double_desk10" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, -3, 0, -3.85813 )
+
+[node name="double_desk11" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, -3, 0, -6.358 )
+
+[node name="double_desk7" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 3, 0, -3.85813 )
+
+[node name="double_desk8" parent="SetDesks" instance=ExtResource( 17 )]
+transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 3, 0, -6.358 )
+
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
-[connection signal="timeout" from="Clock/ClockTimer" to="." method="OnClockTimerTimeout"]
-[connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
-[connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="BunsenBurner/Area" to="." method="OnBunsenBurnerClicked"]
 [connection signal="mouse_exited" from="BunsenBurner/Area" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="BunsenBurner/BurnerTimer" to="BunsenBurner" method="OnBurnerTimerFinished"]
@@ -291,5 +320,8 @@ omni_range = 54.608
 [connection signal="mouse_exited" from="Phone/LeftButton" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="Phone/RightButton" to="." method="OnRightDoorClicked"]
 [connection signal="mouse_exited" from="Phone/RightButton" to="." method="OnObjectMouseExit"]
+[connection signal="timeout" from="Clock/ClockTimer" to="." method="OnClockTimerTimeout"]
+[connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
+[connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
 
 [editable path="DetentionUI"]
