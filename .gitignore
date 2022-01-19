@@ -1,9 +1,7 @@
 .mono/
 .import/
 .godot/
-.idea/*
+.idea/
 
-/.mono/
-/.import/
-/.godot/
-/.idea/
+*.blend1
+*.kra~

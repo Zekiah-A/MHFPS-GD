@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -14,9 +14,12 @@
 [ext_resource path="res://Assets/GameAssets/Audio/Detention/clock_unwind.mp3" type="AudioStream" id=12]
 [ext_resource path="res://Assets/GameAssets/Animations/unwind_animation.tres" type="Animation" id=13]
 [ext_resource path="res://Assets/GameAssets/Models/Clock/clock.glb" type="PackedScene" id=14]
-[ext_resource path="res://Assets/GameAssets/Models/teacher_desk/teacher_desk.glb" type="PackedScene" id=15]
+[ext_resource path="res://Assets/GameAssets/Models/TeacherDesk/teacher_desk.glb" type="PackedScene" id=15]
 [ext_resource path="res://Assets/GameAssets/Models/Vent/vent.glb" type="PackedScene" id=16]
 [ext_resource path="res://Assets/GameAssets/Models/DoubleDesk/double_desk.glb" type="PackedScene" id=17]
+[ext_resource path="res://Assets/GameAssets/Models/CrumpledPaper/crumpled_paper.glb" type="PackedScene" id=18]
+[ext_resource path="res://Assets/GameAssets/Models/Gluestick/gluestick.glb" type="PackedScene" id=19]
+[ext_resource path="res://Assets/GameAssets/Models/Rubber/rubber.glb" type="PackedScene" id=20]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -279,7 +282,7 @@ light_energy = 1.479
 editor_only = true
 omni_range = 54.608
 
-[node name="teacher_desk" parent="." instance=ExtResource( 15 )]
+[node name="TeacherDesk" parent="." instance=ExtResource( 15 )]
 transform = Transform( -0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, -5.8, 0, -11 )
 
 [node name="vent" parent="." instance=ExtResource( 16 )]
@@ -310,6 +313,50 @@ transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 3, 0, -3.85813 )
 
 [node name="double_desk8" parent="SetDesks" instance=ExtResource( 17 )]
 transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 3, 0, -6.358 )
+
+[node name="TableProps" type="Spatial" parent="."]
+
+[node name="CrumpledPaper2" parent="TableProps" instance=ExtResource( 18 )]
+transform = Transform( 0.695871, 0, -0.565176, 0, 0.102458, 0, 0.449985, 0, 0.554042, -6.36679, 1.37177, -3.37676 )
+
+[node name="CrumpledPaper3" parent="TableProps" instance=ExtResource( 18 )]
+transform = Transform( -0.721178, -0.0345134, 0.30621, 0.13506, -0.0660776, 0.310642, 0.325644, 1.10621, 0.0937229, 7.28069, 1.37208, -6.69146 )
+
+[node name="gluestick" parent="TableProps" instance=ExtResource( 19 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 2.88973, 1.50039, -4.28047 )
+
+[node name="gluestick2" parent="TableProps" instance=ExtResource( 19 )]
+transform = Transform( -2.83914e-08, -0.649519, -0.375, 0.75, -3.27835e-08, 0, -1.63918e-08, -0.375, 0.649519, 2.26186, 1.4059, -6.32048 )
+
+[node name="gluestick3" parent="TableProps" instance=ExtResource( 19 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 6.68668, 1.50039, -6.04849 )
+
+[node name="gluestick4" parent="TableProps" instance=ExtResource( 19 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -3.1594, 1.50039, -6.42428 )
+
+[node name="gluestick6" parent="TableProps" instance=ExtResource( 19 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -5.0087, 1.50039, -4.1186 )
+
+[node name="gluestick5" parent="TableProps" instance=ExtResource( 19 )]
+transform = Transform( -2.33797e-08, 0.534864, -0.525757, -0.75, -3.27835e-08, 0, -2.29816e-08, 0.525757, 0.534864, -3.1594, 1.40114, -3.5223 )
+
+[node name="rubber" parent="TableProps" instance=ExtResource( 20 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.87956, 1.37435, -3.78421 )
+
+[node name="rubber4" parent="TableProps" instance=ExtResource( 20 )]
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.12044, 1.37435, -3.78421 )
+
+[node name="rubber5" parent="TableProps" instance=ExtResource( 20 )]
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.06602, 1.37435, -3.78421 )
+
+[node name="rubber6" parent="TableProps" instance=ExtResource( 20 )]
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.09566, 1.40627, -3.78421 )
+
+[node name="rubber2" parent="TableProps" instance=ExtResource( 20 )]
+transform = Transform( -0.866423, 0, 1.22446, 0, 1.5, 0, -1.22446, 0, -0.866423, -6.45903, 1.37435, -5.98014 )
+
+[node name="rubber3" parent="TableProps" instance=ExtResource( 20 )]
+transform = Transform( 1.39444, 0, -0.552747, 0, 1.5, 0, 0.552747, 0, 1.39444, -0.69631, 1.37435, -2.42105 )
 
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
 [connection signal="input_event" from="BunsenBurner/Area" to="." method="OnBunsenBurnerClicked"]
