@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Assets/GameAssets/Shaders/Blur.shader" type="Shader" id=1]
+[ext_resource path="res://Assets/GameAssets/Shaders/blur.shader" type="Shader" id=1]
 [ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Fonts/LiberationSans/liberation_sans_regular.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/GameAssets/Scripts/TitleUIManager.cs" type="Script" id=4]
