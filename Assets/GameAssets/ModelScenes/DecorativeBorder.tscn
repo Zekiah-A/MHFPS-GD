@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Textures/DecorativeBorder/decorative_border.png" type="Texture" id=1]
+[ext_resource path="res://Assets/GameAssets/Textures/DecorativeBorder/decorative_border_normal.png" type="Texture" id=2]
+
+[sub_resource type="PlaneMesh" id=14]
+
+[sub_resource type="SpatialMaterial" id=15]
+flags_transparent = true
+albedo_texture = ExtResource( 1 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 2 )
+uv1_scale = Vector3( 0.5, 1, 0.5 )
+uv1_offset = Vector3( 0, 0, 0.5 )
+uv1_triplanar = true
+
+[node name="DecorativeBorder" type="CSGMesh"]
+transform = Transform( 0.4, 0, 0, 0, -4.37114e-08, -0.06, 0, 1, -2.62268e-09, 0, 0, 0 )
+mesh = SubResource( 14 )
+material = SubResource( 15 )

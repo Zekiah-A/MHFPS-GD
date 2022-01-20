@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/door_right.mp3-25f993e4fbd08650e9f6fbbf34b6975f.mp3str"
+
+[deps]
+
+source_file="res://Assets/GameAssets/Audio/Detention/door_right.mp3"
+dest_files=[ "res://.import/door_right.mp3-25f993e4fbd08650e9f6fbbf34b6975f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -29,22 +29,27 @@
 [ext_resource path="res://Assets/GameAssets/Models/Paper/paper_stack.glb" type="PackedScene" id=27]
 [ext_resource path="res://Assets/GameAssets/Models/Knife/knife.glb" type="PackedScene" id=28]
 [ext_resource path="res://Assets/GameAssets/Models/Watcher/watcher.glb" type="PackedScene" id=29]
+[ext_resource path="res://Assets/GameAssets/Scripts/Clock.cs" type="Script" id=30]
+[ext_resource path="res://Assets/GameAssets/ModelScenes/DecorativeBorder.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Assets/GameAssets/Materials/decorative_border_horizontal.tres" type="Material" id=32]
+[ext_resource path="res://Assets/GameAssets/Materials/decorative_border_vertical.tres" type="Material" id=33]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
 background_energy = 0.0
+ambient_light_color = Color( 0.0352941, 0, 0.329412, 1 )
 fog_enabled = true
-fog_color = Color( 0.239216, 0.262745, 0.290196, 1 )
+fog_color = Color( 0.176471, 0.176471, 0.176471, 1 )
 fog_depth_begin = 1.0
-fog_depth_curve = 0.128546
+fog_depth_curve = 0.0332698
 fog_transmit_enabled = true
-ss_reflections_enabled = true
 ssao_enabled = true
 glow_blend_mode = 0
 glow_high_quality = true
 adjustment_enabled = true
 adjustment_brightness = 0.47
 adjustment_contrast = 1.15
+adjustment_saturation = 0.5
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.06, 0.12, 0.06 )
@@ -180,7 +185,7 @@ omni_attenuation = 0.901251
 wait_time = 20.0
 
 [node name="Phone" parent="." instance=ExtResource( 7 )]
-transform = Transform( 0.129409, 0, 0.482963, 0, 0.5, 0, -0.482963, 0, 0.129409, -0.043459, 1.37508, -1.85813 )
+transform = Transform( 0.129409, 0, 0.482963, 0, 0.5, 0, -0.482963, 0, 0.129409, -0.043459, 1.37508, -2.23902 )
 
 [node name="LeftButton" type="Area" parent="Phone"]
 transform = Transform( 1, 0, 0, 0, 0.229649, 0, 0, 0, 1, 0.00375509, 0, -0.218341 )
@@ -196,6 +201,13 @@ shape = SubResource( 2 )
 
 [node name="Clock" parent="." instance=ExtResource( 14 )]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.76275, -13.168 )
+script = ExtResource( 30 )
+
+[node name="minutes" parent="Clock" index="1"]
+transform = Transform( 3.1, 0, 0, 0, 3.1, 0, 0, 0, 1.24, 0, 0, 0.1 )
+
+[node name="hours" parent="Clock" index="3"]
+transform = Transform( -2.41136, 0.419888, 0, -0.579449, -1.74735, 0, 0, 0, 0.992, 0, -9.53674e-07, 0.0599995 )
 
 [node name="ClockPlayer" type="AudioStreamPlayer3D" parent="Clock"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
@@ -257,6 +269,7 @@ omni_range = 4.52425
 
 [node name="EditorLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15027, -6.88943 )
+visible = false
 light_energy = 1.479
 editor_only = true
 omni_range = 54.608
@@ -273,7 +286,7 @@ transform = Transform( -0.28505, 0, -0.0194777, 0, 0.285714, 0, 0.0194777, 0, -0
 [node name="Knife" parent="TeacherDesk" instance=ExtResource( 28 )]
 transform = Transform( -0.801337, -0.236678, -0.549402, 6.91762e-08, 0.918405, -0.395642, 0.598213, -0.317042, -0.735952, -1.75709, 2.23114, -1.23519 )
 
-[node name="vent" parent="." instance=ExtResource( 16 )]
+[node name="Vent" parent="." instance=ExtResource( 16 )]
 transform = Transform( -0.75, 0, 6.55671e-08, 0, 0.75, 0, -6.55671e-08, 0, -0.75, 0, 3.96506, -4.592 )
 
 [node name="SetDesks" type="Spatial" parent="."]
@@ -317,13 +330,13 @@ transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 2.88973, 1.50039, -4.
 transform = Transform( -2.83914e-08, -0.649519, -0.375, 0.75, -3.27835e-08, 0, -1.63918e-08, -0.375, 0.649519, 2.26186, 1.4059, -6.32048 )
 
 [node name="Gluestick3" parent="TableProps" instance=ExtResource( 19 )]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 6.68668, 1.50039, -6.04849 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 6.68668, 1.47215, -6.04849 )
 
 [node name="Gluestick4" parent="TableProps" instance=ExtResource( 19 )]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -3.1594, 1.50039, -6.42428 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -3.1594, 1.47029, -6.42428 )
 
 [node name="Gluestick6" parent="TableProps" instance=ExtResource( 19 )]
-transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -5.0087, 1.50039, -4.1186 )
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -5.0087, 1.46502, -4.1186 )
 
 [node name="Gluestick5" parent="TableProps" instance=ExtResource( 19 )]
 transform = Transform( -2.33797e-08, 0.534864, -0.525757, -0.75, -3.27835e-08, 0, -2.29816e-08, 0.525757, 0.534864, -3.1594, 1.40114, -3.5223 )
@@ -335,10 +348,10 @@ transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.87956, 1.37435, -3.78
 transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.12044, 1.37435, -3.78421 )
 
 [node name="Rubber5" parent="TableProps" instance=ExtResource( 20 )]
-transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.06602, 1.37435, -3.78421 )
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.07715, 1.37435, -3.78421 )
 
 [node name="Rubber6" parent="TableProps" instance=ExtResource( 20 )]
-transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.09566, 1.40627, -3.78421 )
+transform = Transform( -6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 6.09566, 1.38747, -3.78421 )
 
 [node name="Rubber2" parent="TableProps" instance=ExtResource( 20 )]
 transform = Transform( -0.866423, 0, 1.22446, 0, 1.5, 0, -1.22446, 0, -0.866423, -6.45903, 1.37435, -5.98014 )
@@ -381,11 +394,59 @@ material/0 = SubResource( 13 )
 [node name="DisplayBoard" parent="." instance=ExtResource( 25 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.79949, 2.64741, -4.76703 )
 
+[node name="DecorativeBorderBottom" parent="DisplayBoard" instance=ExtResource( 31 )]
+transform = Transform( 1.99246, -1.74022e-07, 4.56404e-16, 0, -4.37114e-08, -0.06, -6.96087e-08, 1, -2.62268e-09, 0, -0.940479, 0.0136185 )
+material = ExtResource( 32 )
+
+[node name="DecorativeBorderTop" parent="DisplayBoard" instance=ExtResource( 31 )]
+transform = Transform( -1.99246, 2.61445e-07, 5.24537e-09, 1.74187e-07, 4.37114e-08, 0.06, 1.04578e-07, 1, -2.62268e-09, -4.76837e-07, 0.938967, 0.0136185 )
+material = ExtResource( 32 )
+
+[node name="DecorativeBorderRight" parent="DisplayBoard" instance=ExtResource( 31 )]
+transform = Transform( 2.6128e-07, 8.74228e-08, 0.06, 0.976306, -1.06689e-07, -3.85534e-09, 1.74845e-08, 1, -5.24537e-09, 1.93, -0.004421, 0.0136185 )
+material = ExtResource( 33 )
+
+[node name="DecorativeBorderLeft" parent="DisplayBoard" instance=ExtResource( 31 )]
+transform = Transform( -3.46631e-07, 4.61853e-14, -0.06, -0.976306, 1.06689e-07, 9.10071e-09, 1.74846e-08, 1, 8.88178e-16, -1.93902, -0.00442123, 0.0136213 )
+material = ExtResource( 33 )
+
 [node name="DisplayBoard2" parent="." instance=ExtResource( 25 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.38092, 2.64741, -3.61575 )
 
+[node name="DecorativeBorderBottom" parent="DisplayBoard2" instance=ExtResource( 31 )]
+transform = Transform( -1.99246, 2.61445e-07, -6.85687e-16, 0, -4.37114e-08, -0.06, -1.04578e-07, -1, 2.62268e-09, -3.00613, -0.940479, 15.1668 )
+material = ExtResource( 32 )
+
+[node name="DecorativeBorderTop" parent="DisplayBoard2" instance=ExtResource( 31 )]
+transform = Transform( 1.99246, -1.74022e-07, -5.24537e-09, 1.74187e-07, 4.37114e-08, 0.06, 6.96087e-08, -1, 2.62268e-09, -3.00613, 0.938967, 15.1668 )
+material = ExtResource( 32 )
+
+[node name="DecorativeBorderRight" parent="DisplayBoard2" instance=ExtResource( 31 )]
+transform = Transform( -2.6128e-07, 3.55271e-14, -0.06, 0.976306, -1.06689e-07, -3.85534e-09, -1.74846e-08, -1, -8.88178e-16, -4.93613, -0.004421, 15.1668 )
+material = ExtResource( 33 )
+
+[node name="DecorativeBorderLeft" parent="DisplayBoard2" instance=ExtResource( 31 )]
+transform = Transform( 3.46631e-07, 8.74227e-08, 0.06, -0.976306, 1.06689e-07, 9.10071e-09, -1.74845e-08, -1, 5.24537e-09, -1.06711, -0.00442123, 15.1668 )
+material = ExtResource( 33 )
+
 [node name="DisplayBoard3" parent="." instance=ExtResource( 25 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.79949, 2.64741, -0.615747 )
+
+[node name="DecorativeBorderBottom" parent="DisplayBoard3" instance=ExtResource( 31 )]
+transform = Transform( -1.99246, 2.61445e-07, -6.85687e-16, 0, -4.37114e-08, -0.06, -1.04578e-07, -1, 2.62268e-09, -3.00613, -0.940479, 15.1668 )
+material = ExtResource( 32 )
+
+[node name="DecorativeBorderTop" parent="DisplayBoard3" instance=ExtResource( 31 )]
+transform = Transform( 1.99246, -1.74022e-07, -5.24537e-09, 1.74187e-07, 4.37114e-08, 0.06, 6.96087e-08, -1, 2.62268e-09, -3.00613, 0.938967, 15.1668 )
+material = ExtResource( 32 )
+
+[node name="DecorativeBorderRight" parent="DisplayBoard3" instance=ExtResource( 31 )]
+transform = Transform( -2.6128e-07, 3.55271e-14, -0.06, 0.976306, -1.06689e-07, -3.85534e-09, -1.74846e-08, -1, -8.88178e-16, -4.93613, -0.004421, 15.1668 )
+material = ExtResource( 33 )
+
+[node name="DecorativeBorderLeft" parent="DisplayBoard3" instance=ExtResource( 31 )]
+transform = Transform( 3.46631e-07, 8.74227e-08, 0.06, -0.976306, 1.06689e-07, 9.10071e-09, -1.74845e-08, -1, 5.24537e-09, -1.06711, -0.00442123, 15.1668 )
+material = ExtResource( 33 )
 
 [node name="Walls" type="CSGCombiner" parent="."]
 
@@ -426,16 +487,32 @@ width = 0.002
 height = 4.1106
 depth = 15.2437
 
-[node name="Window" type="CSGBox" parent="Walls"]
+[node name="WindowCutout" type="CSGBox" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.69742, 1.832, -13.4829 )
 operation = 2
 width = 2.88758
 height = 1.52015
 depth = 0.887405
 
+[node name="LeftDoorCutout" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22728, 1.46561, -8.68771 )
+operation = 2
+height = 2.85962
+depth = 1.39267
+
+[node name="RightDoorCutout" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50745, 1.46561, -11.514 )
+operation = 2
+height = 2.85962
+depth = 1.39267
+
 [node name="Watcher" parent="." instance=ExtResource( 29 )]
 transform = Transform( 2.08577, 0, -0.843848, 0, 2.25, 0, 0.843848, 0, 2.08577, 3.69477, 1, -13.5827 )
 visible = false
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6 )
+extents = Vector3( 8, 2, 8 )
 
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
 [connection signal="input_event" from="BunsenBurner/Area" to="." method="OnBunsenBurnerClicked"]
@@ -451,6 +528,7 @@ visible = false
 [connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
 
 [editable path="DetentionUI"]
+[editable path="Clock"]
 [editable path="YouFailedPoster"]
 [editable path="ThirdEyePoster"]
 [editable path="UusikaupunkiPoster"]
