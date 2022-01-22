@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://Assets/GameAssets/ModelScenes/DecorativeBorder.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Assets/GameAssets/Materials/decorative_border_horizontal.tres" type="Material" id=32]
 [ext_resource path="res://Assets/GameAssets/Materials/decorative_border_vertical.tres" type="Material" id=33]
+[ext_resource path="res://Assets/GameAssets/Audio/Detention/cassete2.mp3" type="AudioStream" id=34]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -51,6 +52,9 @@ adjustment_enabled = true
 adjustment_brightness = 0.47
 adjustment_contrast = 1.15
 adjustment_saturation = 0.7
+
+[sub_resource type="BoxShape" id=36]
+extents = Vector3( 0.05, 0.1, 0.05 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.06, 0.12, 0.06 )
@@ -212,8 +216,15 @@ transform = Transform( 0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, -1.85813 )
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1.02481, 1.36874, -1.85813 )
 
 [node name="CasettePlayer" type="AudioStreamPlayer3D" parent="CasetteRecorder"]
+stream = ExtResource( 34 )
 unit_db = 5.0
 max_db = 5.0
+
+[node name="Area" type="Area" parent="CasetteRecorder"]
+
+[node name="CollisionShape" type="CollisionShape" parent="CasetteRecorder/Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.0499998 )
+shape = SubResource( 36 )
 
 [node name="BunsenBurner" parent="." instance=ExtResource( 6 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.914934, 1.38392, -1.85813 )
@@ -847,6 +858,8 @@ height = 0.001
 depth = 5.2
 
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
+[connection signal="input_event" from="CasetteRecorder/Area" to="." method="OnCasetteRecorderClicked"]
+[connection signal="mouse_exited" from="CasetteRecorder/Area" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="BunsenBurner/Area" to="." method="OnBunsenBurnerClicked"]
 [connection signal="mouse_exited" from="BunsenBurner/Area" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="BunsenBurner/BurnerTimer" to="BunsenBurner" method="OnBurnerTimerFinished"]
@@ -855,7 +868,7 @@ depth = 5.2
 [connection signal="mouse_exited" from="Phone/LeftButton" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="Phone/RightButton" to="." method="OnRightDoorClicked"]
 [connection signal="mouse_exited" from="Phone/RightButton" to="." method="OnObjectMouseExit"]
-[connection signal="timeout" from="Clock/ClockTimer" to="." method="OnClockTimerTimeout"]
+[connection signal="timeout" from="Clock/ClockTimer" to="Clock" method="OnClockTimerTimeout"]
 [connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
 

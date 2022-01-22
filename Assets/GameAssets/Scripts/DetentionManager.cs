@@ -28,6 +28,7 @@ public class DetentionManager : Node
 		{
 			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete0.mp3"),
 			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete1.mp3"),
+			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete2.mp3")
 		};
 		ambientPlayer = GetNode<AudioStreamPlayer>("AmbientPlayer");
 		casettePlayer = GetNode("CasetteRecorder").GetNode<AudioStreamPlayer3D>("CasettePlayer");
@@ -50,7 +51,7 @@ public class DetentionManager : Node
 		casettePlayer.Play();
 	}
 	
-	private void OnStreamFinish()
+	private void OnStreamFinish() //TODO: Move casette player code to it's own class if it's becoming too complex.
 	{
 		// Begin the second half of the casette announcement, after the "audio interruption".
 		if (casettePlayer.Stream == casetteStreams[0])
@@ -165,6 +166,28 @@ public class DetentionManager : Node
 			Input.SetCustomMouseCursor(hoverCursor);
 		}
 	}
+	
+	//TODO: Casette should be spelled "cassette", this needs to be fixed everywhere, including in the editor.
+	private void OnCasetteRecorderClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
+	{
+		if (@event is InputEventMouseButton mouseButton)
+		{
+			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			{
+				//Stop the casette recorder from playing. Play click sound to notify that it has been shut off.
+				casettePlayer.Stream = casetteStreams[2];
+				casettePlayer.Play();
+				(clock as Clock)?.StartClockTimer();
+			}
+		}
+		
+		//If is hovering, change cursor
+		if (@event is InputEventMouse mouse)
+		{
+			Input.SetCustomMouseCursor(hoverCursor);
+		}
+	}
+	
 	public void OnObjectMouseExit()
 	{
 		Input.SetCustomMouseCursor(dotCursor);

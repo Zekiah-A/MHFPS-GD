@@ -30,9 +30,7 @@ public class Clock : Spatial
 		actionAnimationPlayer = GetTree().CurrentScene.GetNode("CameraBody").GetNode<AnimationPlayer>("ActionAnimationPlayer");
 		stainTeacher = GetTree().CurrentScene.GetNode<DetentionTeacher>("StainTeacher");
 
-		clockTimer.Connect("timeout", this, nameof(OnClockTimerTimeout)); //TODO: Connect through editor instead.
 		minuteHand.RotationDegrees = new Vector3(minuteHand.RotationDegrees.x, minuteHand.RotationDegrees.y, 0);
-
 	}
 	
 	public void Unwind()
@@ -71,9 +69,7 @@ public class Clock : Spatial
 			clockPlayer.Stop();
 			stainTeacher.Jumpscare();
 		}
-		GD.Print(minuteHand.Rotation.z);
 		// Minute hand needs to travel 360 degrees to get to 6:00 in 30 seconds, so 12 degrees per second. Minus twelve because this model is stupid and the co-ords are wrong. 🤓🔫 
 		minuteHand.RotationDegrees = new Vector3(minuteHand.RotationDegrees.x, minuteHand.RotationDegrees.y, minuteHand.RotationDegrees.z - 12); //TODO: Make fancy tweens to make it look good. 
 	}
 }
-
