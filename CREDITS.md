@@ -17,5 +17,6 @@ Credits
     * A***:<br/>
       Artistic vision and storyline designer.
     * A******:<br/>
-      Musical compositions.    
+      Musical compositions.  
+        
 ❤️
