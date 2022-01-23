@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -105,6 +105,11 @@ extents = Vector3( 0.2, 0.05, 0.4 )
 
 [sub_resource type="BoxShape" id=40]
 extents = Vector3( 0.2, 0.05, 0.2 )
+
+[sub_resource type="BoxShape" id=42]
+extents = Vector3( 1.2, 0.01, 1.8 )
+
+[sub_resource type="StyleBoxEmpty" id=41]
 
 [sub_resource type="BoxShape" id=10]
 extents = Vector3( 0.5, 0.5, 0.1 )
@@ -295,6 +300,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-07, 0, 0.2 )
 [node name="CollisionShape" type="CollisionShape" parent="Phone/RightDoorButton"]
 shape = SubResource( 40 )
 
+[node name="BackgroundArea" type="Area" parent="Phone"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999999, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Phone/BackgroundArea"]
+shape = SubResource( 42 )
+
 [node name="Viewport" type="Viewport" parent="Phone"]
 size = Vector2( 400, 200 )
 render_target_v_flip = true
@@ -309,35 +320,15 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Left" type="Button" parent="Phone/Viewport/PhoneUI"]
-anchor_left = 0.0110823
-anchor_top = 0.261818
-anchor_right = 0.480693
-anchor_bottom = 0.981818
-text = "Left Door"
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="Right" type="Button" parent="Phone/Viewport/PhoneUI"]
-anchor_left = 0.500087
-anchor_top = 0.261818
-anchor_right = 0.98632
-anchor_bottom = 0.981818
-text = "Right Door"
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="Panel" type="Panel" parent="Phone/Viewport/PhoneUI"]
-anchor_right = 1.0
+[node name="TopPanel" type="Panel" parent="Phone/Viewport/PhoneUI"]
+anchor_right = 1.00039
 anchor_bottom = 0.24
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Title" type="Label" parent="Phone/Viewport/PhoneUI/Panel"]
-anchor_right = 0.797922
+[node name="Title" type="Label" parent="Phone/Viewport/PhoneUI/TopPanel"]
+anchor_right = 0.695652
 anchor_bottom = 1.0
 text = "Mobile Door Control"
 align = 1
@@ -347,13 +338,41 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Upgrades" type="Label" parent="Phone/Viewport/PhoneUI/Panel"]
-anchor_left = 0.797922
-anchor_right = 1.00017
+[node name="Upgrades" type="Label" parent="Phone/Viewport/PhoneUI/TopPanel"]
+anchor_left = 0.695652
+anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Upgrades"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ContentPanel" type="Panel" parent="Phone/Viewport/PhoneUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Button" parent="Phone/Viewport/PhoneUI/ContentPanel"]
+anchor_left = 0.0108738
+anchor_top = 0.261
+anchor_right = 0.48466
+anchor_bottom = 0.981
+text = "Left Door"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Right" type="Button" parent="Phone/Viewport/PhoneUI/ContentPanel"]
+anchor_left = 0.509515
+anchor_top = 0.261
+anchor_right = 0.981748
+anchor_bottom = 0.981
+text = "Right Door"
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -952,6 +971,7 @@ transform = Transform( 0.75, 0, 1.11759e-08, 0, 0.75, 0, -1.11759e-08, 0, 0.75, 
 [connection signal="mouse_exited" from="Phone/OpenButton" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="Phone/LeftDoorButton" to="Phone" method="OnLeftDoorClicked"]
 [connection signal="input_event" from="Phone/RightDoorButton" to="Phone" method="OnRightDoorClicked"]
+[connection signal="input_event" from="Phone/BackgroundArea" to="Phone" method="OnBackgroundClicked"]
 [connection signal="timeout" from="Clock/ClockTimer" to="Clock" method="OnClockTimerTimeout"]
 [connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]

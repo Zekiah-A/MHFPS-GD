@@ -103,6 +103,17 @@ public class Phone : Spatial
 			Input.SetCustomMouseCursor(hoverCursor);
 		}
 	}
+
+	private void OnBackgroundClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx) //TODO: Only enable this area when the phone is opened.
+	{
+		if (@event is InputEventMouseButton mouseButton)
+		{
+			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			{
+				Deactivate();
+			}
+		}
+	}
 	
 	//NOTE: Make sure to enable Resource > Local to scene under the viewport material for the phone screen, or else it will not work.
 }
