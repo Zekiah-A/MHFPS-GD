@@ -1,12 +1,11 @@
 using Godot;
-using System;
 
+//TODO: Namespace MHFPS.Detention
 public class DetentionManager : Node
 {
 	public bool BunsenBurnerOn = false;
-	public bool LeftDoorOpen = true;
-	public bool RightDoorOpen = true;
-	
+	public bool PhoneActivated = false;
+
 	private Texture dotCursor;
 	private Texture hoverCursor;
 	private AudioStreamMP3 ambientStream;
@@ -14,10 +13,9 @@ public class DetentionManager : Node
 	private AudioStreamPlayer ambientPlayer;
 	private AudioStreamPlayer3D casettePlayer;
 	
-	private CSGBox leftDoor;
-	private CSGBox rightDoor;
 	private Spatial bunsenBurner;
 	private Spatial clock;
+	private Spatial phone;
 
 	public override void _Ready()
 	{
@@ -32,10 +30,9 @@ public class DetentionManager : Node
 		};
 		ambientPlayer = GetNode<AudioStreamPlayer>("AmbientPlayer");
 		casettePlayer = GetNode("CasetteRecorder").GetNode<AudioStreamPlayer3D>("CasettePlayer");
-		leftDoor = GetNode<CSGBox>("LeftDoor");
-		rightDoor = GetNode<CSGBox>("RightDoor");
 		bunsenBurner = GetNode<Spatial>("BunsenBurner");
 		clock = GetNode<Spatial>("Clock");
+		phone = GetNode<Spatial>("Phone");
 		
 		BeginGame();
 	}
@@ -51,7 +48,7 @@ public class DetentionManager : Node
 		casettePlayer.Play();
 	}
 	
-	private void OnStreamFinish() //TODO: Move casette player code to it's own class if it's becoming too complex.
+	private void OnStreamFinish()
 	{
 		// Begin the second half of the casette announcement, after the "audio interruption".
 		if (casettePlayer.Stream == casetteStreams[0])
@@ -68,23 +65,16 @@ public class DetentionManager : Node
 		}
 	}
 	
-	private void OnLeftDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
+	private void OnPhoneClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{
 			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
 			{
-				LeftDoorOpen = !LeftDoorOpen;
-				GD.Print($"Left Door open {LeftDoorOpen}");
-
-				if (LeftDoorOpen)
-				{
-					leftDoor.Visible = false;
-				}
+				if (!PhoneActivated)
+					(phone as Phone)?.Activate();
 				else
-				{
-					leftDoor.Visible = true;
-				}
+					(phone as Phone)?.Deactivate();
 			}
 		}
 		
@@ -95,34 +85,7 @@ public class DetentionManager : Node
 		}
 	}
 
-	private void OnRightDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
-	{
-		if (@event is InputEventMouseButton mouseButton)
-		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
-			{
-				RightDoorOpen = !RightDoorOpen;
-				GD.Print($"Right Door open {RightDoorOpen}");
-				
-				if (RightDoorOpen)
-				{
-					rightDoor.Visible = false; //TODO: Each door will have it's own script that will handle it's animations, etc
-				}
-				else
-				{
-					rightDoor.Visible = true;
-				}
-			}
-		}
-		
-		//If is hovering, change cursor
-		if (@event is InputEventMouse mouse)
-		{
-			Input.SetCustomMouseCursor(hoverCursor);
-		}
-	}
-
-	private void OnBunsenBurnerClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
+		private void OnBunsenBurnerClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{

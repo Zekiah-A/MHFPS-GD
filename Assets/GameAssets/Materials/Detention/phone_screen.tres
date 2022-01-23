@@ -1,0 +1,13 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[sub_resource type="ViewportTexture" id=44]
+viewport_path = NodePath("Phone/Viewport")
+
+[resource]
+resource_local_to_scene = true
+albedo_texture = SubResource( 44 )
+emission_enabled = true
+emission = Color( 0.376471, 0.376471, 0.376471, 1 )
+emission_energy = 0.2
+emission_operator = 0
+emission_on_uv2 = false

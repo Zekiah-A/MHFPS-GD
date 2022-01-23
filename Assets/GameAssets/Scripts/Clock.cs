@@ -67,6 +67,7 @@ public class Clock : Spatial
 		{
 			//Jumpscare player, time is out.
 			clockPlayer.Stop();
+			clockTimer.Stop();
 			stainTeacher.Jumpscare();
 		}
 		// Minute hand needs to travel 360 degrees to get to 6:00 in 30 seconds, so 12 degrees per second. Minus twelve because this model is stupid and the co-ords are wrong. 🤓🔫 
