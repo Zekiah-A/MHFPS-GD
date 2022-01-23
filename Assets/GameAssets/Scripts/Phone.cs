@@ -27,6 +27,8 @@ public class Phone : Spatial
 		doorButtons[1].InputRayPickable = false;
 		doorButtons[2].InputRayPickable = true;
 		defaultTransform = Transform;
+		
+		GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment.Set("dof_blur_far_enabled", false);
 	}
 	
 	public void Activate()
@@ -37,6 +39,8 @@ public class Phone : Spatial
 		doorButtons[0].InputRayPickable = true;
 		doorButtons[1].InputRayPickable = true;
 		doorButtons[2].InputRayPickable = false;
+		
+		GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment.Set("dof_blur_far_enabled", true);
 	}
 
 	public void Deactivate()
@@ -46,10 +50,10 @@ public class Phone : Spatial
 		doorButtons[1].InputRayPickable = false;
 		doorButtons[2].InputRayPickable = true;
 		Transform = defaultTransform;
+		GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment.Set("dof_blur_far_enabled", false);
 	}
 
-
-	//TODO: ALl of this is the GUI part of the phone, that opens when activated. Render the whole control UI to a viewport texture, then use areas to control the UI.
+	//TODO: GUI colours for opened/closed, fake button "press" effect when clicked, etc (use "IsPressed" on the button, and make a style for pressed / unpressed.)
 	//TODO: Vent should not be here, and should only be affected by hovering the mouse over it in doors, as it is light based.
 	
 	private void OnLeftDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
