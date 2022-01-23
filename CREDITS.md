@@ -9,13 +9,13 @@ Credits
     * [Xabian-A](https://github.com/Xabian-A/):<br/>
       Voice acting and Playtesting.
     * J*****:<br/>
-      Artistic vision and storyline design.
+      Artistic vision and storyline designer.
     * N***:<br/>
       Artistic vision and storyline designer.
     * H*****:<br/>
       3D modelling and assets.
     * A***:<br/>
-      Artistic vision and storyline designer.
+      Voice acting.
     * A******:<br/>
       Musical compositions.  
         
