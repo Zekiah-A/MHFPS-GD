@@ -9,6 +9,8 @@ public class Phone : Spatial
 	private Tween phoneTween;
 	private Area[] doorButtons;
 	private Texture hoverCursor;
+	private Environment worldEnvironment;
+	private Button[] doorUiButtons;
 
 	public override void _Ready()
 	{
@@ -16,19 +18,25 @@ public class Phone : Spatial
 		doors = GetTree().CurrentScene.GetNode<Spatial>("Doors");
 		cameraBody = GetTree().CurrentScene.GetNode<Spatial>("CameraBody");
 		phoneTween = GetNode<Tween>("Tween");
+		worldEnvironment = GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment;
 		doorButtons = new []
 		{
 			GetNode<Area>("LeftDoorButton"),
 			GetNode<Area>("RightDoorButton"),
 			GetNode<Area>("OpenButton"),
 		};
+
+		doorUiButtons = new[]
+		{
+			GetNode("Viewport").GetNode("PhoneUI").GetNode("ContentPanel").GetNode<Button>("LeftButton"),
+			GetNode("Viewport").GetNode("PhoneUI").GetNode("ContentPanel").GetNode<Button>("RightButton"),
+		};
 		
 		doorButtons[0].InputRayPickable = false;
 		doorButtons[1].InputRayPickable = false;
 		doorButtons[2].InputRayPickable = true;
 		defaultTransform = Transform;
-		
-		GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment.Set("dof_blur_far_enabled", false);
+		worldEnvironment.Set("dof_blur_far_enabled", false);
 	}
 	
 	public void Activate()
@@ -39,8 +47,7 @@ public class Phone : Spatial
 		doorButtons[0].InputRayPickable = true;
 		doorButtons[1].InputRayPickable = true;
 		doorButtons[2].InputRayPickable = false;
-		
-		GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment.Set("dof_blur_far_enabled", true);
+		worldEnvironment.Set("dof_blur_far_enabled", true);
 	}
 
 	public void Deactivate()
@@ -50,7 +57,7 @@ public class Phone : Spatial
 		doorButtons[1].InputRayPickable = false;
 		doorButtons[2].InputRayPickable = true;
 		Transform = defaultTransform;
-		GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment.Set("dof_blur_far_enabled", false);
+		worldEnvironment.Set("dof_blur_far_enabled", false);
 	}
 
 	//TODO: GUI colours for opened/closed, fake button "press" effect when clicked, etc (use "IsPressed" on the button, and make a style for pressed / unpressed.)
@@ -64,13 +71,13 @@ public class Phone : Spatial
 			{
 				if (((Doors) doors).LeftOpened)
 				{
-					GD.Print("cl");
 					((Doors) doors)?.CloseLeft();
+					doorUiButtons[0].SetPressedNoSignal(true);
 				}
 				else
 				{
-					GD.Print("ol");
 					((Doors) doors)?.OpenLeft();
+					doorUiButtons[0].SetPressedNoSignal(false);
 				}
 			}
 		}
@@ -90,13 +97,13 @@ public class Phone : Spatial
 			{
 				if (((Doors) doors).RightOpened)
 				{
-					GD.Print("cr");
 					((Doors) doors)?.CloseRight();
+					doorUiButtons[1].SetPressedNoSignal(true);
 				}
 				else
 				{
-					GD.Print("or");
 					((Doors) doors)?.OpenRight();
+					doorUiButtons[1].SetPressedNoSignal(false);
 				}
 			}
 		}

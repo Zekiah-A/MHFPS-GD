@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://Assets/GameAssets/Scripts/Doors.cs" type="Script" id=35]
 [ext_resource path="res://Assets/GameAssets/Materials/Detention/phone_screen.tres" type="Material" id=36]
 [ext_resource path="res://Assets/GameAssets/Scripts/Phone.cs" type="Script" id=37]
+[ext_resource path="res://Assets/Themes/detention_phoneui.tres" type="Theme" id=38]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -305,11 +306,23 @@ shape = SubResource( 40 )
 [node name="BackgroundArea" type="Area" parent="Phone"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999999, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Phone/BackgroundArea"]
+[node name="Background" type="CollisionShape" parent="Phone/BackgroundArea"]
+visible = false
+shape = SubResource( 42 )
+
+[node name="Left" type="CollisionShape" parent="Phone/BackgroundArea"]
+transform = Transform( 1, 0, -8.88178e-16, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.33786e-06, 1.8, -1.8 )
+visible = false
+shape = SubResource( 42 )
+
+[node name="Right" type="CollisionShape" parent="Phone/BackgroundArea"]
+transform = Transform( 1, 0, 8.88178e-16, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.8, 1.8 )
+visible = false
 shape = SubResource( 42 )
 
 [node name="Viewport" type="Viewport" parent="Phone"]
 size = Vector2( 400, 200 )
+handle_input_locally = false
 render_target_v_flip = true
 
 [node name="PhoneUI" type="Control" parent="Phone/Viewport"]
@@ -359,21 +372,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="Button" parent="Phone/Viewport/PhoneUI/ContentPanel"]
+[node name="LeftButton" type="Button" parent="Phone/Viewport/PhoneUI/ContentPanel"]
 anchor_left = 0.0108738
 anchor_top = 0.261
 anchor_right = 0.48466
 anchor_bottom = 0.981
+theme = ExtResource( 38 )
+toggle_mode = true
 text = "Left Door"
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Right" type="Button" parent="Phone/Viewport/PhoneUI/ContentPanel"]
+[node name="RightButton" type="Button" parent="Phone/Viewport/PhoneUI/ContentPanel"]
 anchor_left = 0.509515
 anchor_top = 0.261
 anchor_right = 0.981748
 anchor_bottom = 0.981
+theme = ExtResource( 38 )
+toggle_mode = true
 text = "Right Door"
 __meta__ = {
 "_edit_use_anchors_": true
