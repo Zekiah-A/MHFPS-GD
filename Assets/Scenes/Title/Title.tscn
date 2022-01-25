@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/GameAssets/Materials/iso_periskeri.tres" type="Material" id=5]
 [ext_resource path="res://Assets/GameAssets/Materials/grass.tres" type="Material" id=6]
 [ext_resource path="res://Assets/GameAssets/Scripts/TitleManager.cs" type="Script" id=7]
-[ext_resource path="res://Assets/GameAssets/Blender/tabletennis/tabletennis_high.glb" type="PackedScene" id=8]
+[ext_resource path="res://Assets/GameAssets/Blender/TableTennis/tabletennis_high.glb" type="PackedScene" id=8]
 [ext_resource path="res://Assets/GameAssets/Scripts/CameraEffects.cs" type="Script" id=9]
 
 [sub_resource type="Animation" id=1]
@@ -204,5 +204,10 @@ material = ExtResource( 4 )
 
 [node name="tabletennis_high" parent="." instance=ExtResource( 8 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.24348, -1.22947, 4.12082 )
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34044, 0, 4.77388 )
+extents = Vector3( 3.86731, 2.68538, 3.86546 )
+enable_shadows = true
 
 [editable path="bikeshed_high"]

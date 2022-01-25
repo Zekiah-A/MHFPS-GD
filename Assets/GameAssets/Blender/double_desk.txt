@@ -1,0 +1,4 @@
+double_desk.blend - Ⓒ Zekiah-A (https://github.com/Zekiah-A)
+
+TODO:
+	Normal maps for the surface texture, for better reflections.

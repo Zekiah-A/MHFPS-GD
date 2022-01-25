@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://Assets/GameAssets/Materials/Detention/phone_screen.tres" type="Material" id=36]
 [ext_resource path="res://Assets/GameAssets/Scripts/Phone.cs" type="Script" id=37]
 [ext_resource path="res://Assets/Themes/detention_phoneui.tres" type="Theme" id=38]
+[ext_resource path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting1.glb" type="PackedScene" id=39]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -214,8 +215,9 @@ light_color = Color( 0.988235, 0.917647, 0.501961, 1 )
 light_energy = 1.25
 shadow_enabled = true
 spot_range = 20.0
-spot_attenuation = 1.93187
+spot_attenuation = 1.46408
 spot_angle = 10.0
+spot_angle_attenuation = 0.732043
 
 [node name="PlayerActionPlayer" type="AudioStreamPlayer" parent="CameraBody"]
 stream = ExtResource( 12 )
@@ -267,11 +269,9 @@ draw_pass_1 = SubResource( 5 )
 [node name="FlameLight" type="OmniLight" parent="BunsenBurner/Flame"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 visible = false
-light_color = Color( 0.890196, 0.576471, 0.270588, 1 )
-light_energy = 0.5
+light_color = Color( 0.909804, 0.568627, 0.207843, 1 )
 shadow_enabled = true
 omni_range = 1.948
-omni_attenuation = 0.901251
 
 [node name="BurnerTimer" type="Timer" parent="BunsenBurner"]
 
@@ -978,6 +978,26 @@ depth = 1.39267
 
 [node name="Vent" parent="Doors" instance=ExtResource( 16 )]
 transform = Transform( 0.75, 0, 1.11759e-08, 0, 0.75, 0, -1.11759e-08, 0, 0.75, 0, 3.96506, -4.592 )
+
+[node name="WallDecorations" type="Spatial" parent="."]
+
+[node name="CSGBox" type="CSGBox" parent="WallDecorations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 2, -13.7 )
+height = 4.2
+
+[node name="CSGBox3" type="CSGBox" parent="WallDecorations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 2, -13.05 )
+width = 1.2
+height = 4.2
+depth = 0.2
+
+[node name="CSGBox2" type="CSGBox" parent="WallDecorations"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 1.8 )
+width = 7.0
+height = 4.2
+
+[node name="wall_skirting1" parent="WallDecorations" instance=ExtResource( 39 )]
+transform = Transform( -4.37114e-08, 0, -8, 0, 1, 0, 1, 0, -3.49691e-07, 0, 0, -13.175 )
 
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
 [connection signal="input_event" from="CasetteRecorder/Area" to="." method="OnCasetteRecorderClicked"]
