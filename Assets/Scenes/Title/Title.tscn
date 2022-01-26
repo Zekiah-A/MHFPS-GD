@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Scenes/Title/TitleUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/GameAssets/Blender/Bikeshed/bikeshed_high.fbx" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/GameAssets/Scripts/TitleManager.cs" type="Script" id=7]
 [ext_resource path="res://Assets/GameAssets/Blender/TableTennis/tabletennis_high.glb" type="PackedScene" id=8]
 [ext_resource path="res://Assets/GameAssets/Scripts/CameraEffects.cs" type="Script" id=9]
+[ext_resource path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeAnimation"
@@ -32,20 +33,9 @@ script = ExtResource( 7 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 3 )
 
-[node name="CSGBox3" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 3.00742, -6.0428, 0.676608, 4.57582 )
-width = 0.23479
-
-[node name="CSGBox4" type="CSGBox" parent="."]
-transform = Transform( 0.965523, -0.260319, 0, 0.260319, 0.965523, 0, 0, 0, 3.00742, -6.28531, 2.49541, 4.57582 )
-width = 0.23479
-
-[node name="CSGBox5" type="CSGBox" parent="."]
-transform = Transform( 0.81244, -0.583045, 0, 0.583045, 0.81244, 0, 0, 0, 3.00742, -7.10974, 4.22846, 4.57243 )
-width = 0.23479
-
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 13 )
+fov = 50.0
 script = ExtResource( 9 )
 Random = true
 Damping = 5.0
@@ -209,5 +199,8 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.24348
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34044, 0, 4.77388 )
 extents = Vector3( 3.86731, 2.68538, 3.86546 )
 enable_shadows = true
+
+[node name="bike_shed" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -7.99446, 0.0935855, 4.60736 )
 
 [editable path="bikeshed_high"]

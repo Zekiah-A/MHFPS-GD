@@ -541,7 +541,7 @@ transform = Transform( -0.866423, 0, 1.22446, 0, 1.5, 0, -1.22446, 0, -0.866423,
 transform = Transform( 1.39444, 0, -0.552747, 0, 1.5, 0, 0.552747, 0, 1.39444, -0.69631, 1.37435, -2.42105 )
 
 [node name="PaperStack" parent="TableProps" instance=ExtResource( 27 )]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 2.36861, 1.38164, -3.73581 )
+transform = Transform( 0.2, -4.76837e-08, 0, 4.76837e-08, 0.2, 0, 0, 0, 0.2, 2.36861, 1.38164, -3.73581 )
 
 [node name="PaperStack2" parent="TableProps" instance=ExtResource( 27 )]
 transform = Transform( 0.134927, 0, -0.14763, 0, 0.2, 0, 0.14763, 0, 0.134927, -2.10844, 1.31654, -3.73581 )
