@@ -4,6 +4,5 @@
 
 [resource]
 flags_transparent = true
-params_specular_mode = 4
 params_depth_draw_mode = 2
 albedo_texture = ExtResource( 1 )

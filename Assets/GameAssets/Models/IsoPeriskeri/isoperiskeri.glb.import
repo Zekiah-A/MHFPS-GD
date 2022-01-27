@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/bikeshed_high.fbx-5afd063bc31920b753fc135903dfb05b.scn"
+path="res://.import/isoperiskeri.glb-c52318974dc5b43fcce6313759c7dcec.scn"
 
 [deps]
 
-source_file="res://Assets/GameAssets/Blender/Bikeshed/bikeshed_high.fbx"
-dest_files=[ "res://.import/bikeshed_high.fbx-5afd063bc31920b753fc135903dfb05b.scn" ]
+source_file="res://Assets/GameAssets/Models/IsoPeriskeri/isoperiskeri.glb"
+dest_files=[ "res://.import/isoperiskeri.glb-c52318974dc5b43fcce6313759c7dcec.scn" ]
 
 [params]
 
@@ -16,12 +16,12 @@ nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
-nodes/use_legacy_names=true
+nodes/use_legacy_names=false
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
 meshes/octahedral_compression=true
-meshes/compress=true
+meshes/compress=4286
 meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0
