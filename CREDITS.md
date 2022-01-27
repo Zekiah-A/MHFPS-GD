@@ -5,7 +5,7 @@ Credits
     * [Zekiah-A](http://github.com/Zekiah-A):<br/>
       Developer.
     * [StarlkYT](https://github.com/StarlkYT/):<br/>
-      Game launcher and code help.
+      Game launcher design and code help.
     * [Xabian-A](https://github.com/Xabian-A/):<br/>
       Voice acting and Playtesting.
     * J*****:<br/>

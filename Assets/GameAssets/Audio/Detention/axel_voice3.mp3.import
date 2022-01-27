@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/axel_voice3.mp3-9b83f3f97c0c62e65f8bba1a0385a1a1.mp3str"
+
+[deps]
+
+source_file="res://Assets/GameAssets/Audio/Detention/axel_voice3.mp3"
+dest_files=[ "res://.import/axel_voice3.mp3-9b83f3f97c0c62e65f8bba1a0385a1a1.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

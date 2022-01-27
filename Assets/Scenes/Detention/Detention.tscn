@@ -647,7 +647,7 @@ material = ExtResource( 26 )
 [node name="CollisionShape" type="CollisionShape" parent="Walls/Floor/StaticBody"]
 shape = SubResource( 15 )
 
-[node name="CSGBox3" type="CSGBox" parent="Walls"]
+[node name="Wall" type="CSGBox" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -13.1652 )
 width = 16.0314
 height = 4.1106
@@ -659,19 +659,19 @@ width = 16.0314
 height = 0.001
 depth = 15.3562
 
-[node name="CSGBox2" type="CSGBox" parent="Walls"]
+[node name="Wall2" type="CSGBox" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1.93315 )
 width = 16.0314
 height = 4.1106
 depth = 0.002
 
-[node name="CSGBox4" type="CSGBox" parent="Walls"]
+[node name="Wall3" type="CSGBox" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.80956, 2, -5.74794 )
 width = 0.002
 height = 4.1106
 depth = 15.2437
 
-[node name="CSGBox5" type="CSGBox" parent="Walls"]
+[node name="Wall4" type="CSGBox" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.49655, 2, -5.74794 )
 width = 0.002
 height = 4.1106
@@ -695,6 +695,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50745, 1.46561, -11.514 )
 operation = 2
 height = 2.85962
 depth = 1.39267
+
+[node name="VentCutout" type="CSGBox" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -4.4 )
+operation = 2
+width = 1.6
+height = 0.4
+depth = 1.5
 
 [node name="Watcher" parent="." instance=ExtResource( 29 )]
 transform = Transform( 2.08577, 0, -0.843848, 0, 2.25, 0, 0.843848, 0, 2.08577, 3.69477, 1, -13.5827 )
@@ -977,7 +984,7 @@ height = 2.85962
 depth = 1.39267
 
 [node name="Vent" parent="Doors" instance=ExtResource( 16 )]
-transform = Transform( 0.75, 0, 1.11759e-08, 0, 0.75, 0, -1.11759e-08, 0, 0.75, 0, 3.96506, -4.592 )
+transform = Transform( 0.75, 0, 2.23518e-08, 0, 0.75, 0, -1.11759e-08, 0, 1.5, 0, 3.965, -4.4 )
 
 [node name="WallDecorations" type="Spatial" parent="."]
 
