@@ -1,6 +1,7 @@
 [gd_resource type="SpatialMaterial" load_steps=2 format=2]
 
 [sub_resource type="ViewportTexture" id=44]
+resource_name = "_albedo"
 viewport_path = NodePath("Phone/Viewport")
 
 [resource]
