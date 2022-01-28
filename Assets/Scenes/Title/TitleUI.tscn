@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Shaders/blur.shader" type="Shader" id=1]
 [ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=2]
@@ -7,6 +7,16 @@
 [ext_resource path="res://Assets/Styles/panel_style.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/Styles/button_style.tres" type="StyleBox" id=6]
 [ext_resource path="res://Assets/Styles/empty_style.tres" type="StyleBox" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=20]
+
+[sub_resource type="OpenSimplexNoise" id=21]
+period = 0.1
+persistence = 0.0
+
+[sub_resource type="NoiseTexture" id=22]
+seamless = true
+noise = SubResource( 21 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -50,6 +60,19 @@ shader_param/lightness = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GrainRect" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.231373 )
+material = SubResource( 20 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 22 )
+expand = true
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -189,7 +212,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 0.254902 )
 custom_constants/shadow_offset_y = 3
 custom_constants/shadow_as_outline = 0
 custom_fonts/font = ExtResource( 2 )
-text = " MHFPS dev build! "
+text = " MHFPS indev "
 align = 1
 valign = 1
 autowrap = true
@@ -211,14 +234,15 @@ __meta__ = {
 }
 
 [node name="WarningLabel" type="Label" parent="MainPanels/PlayPanel"]
-margin_left = 32.0
-margin_top = 256.0
-margin_right = 240.0
-margin_bottom = 360.0
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -52.0
+margin_right = 208.0
+margin_bottom = 52.0
 custom_colors/font_color = Color( 0.415686, 0.415686, 0.415686, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.611765 )
 custom_fonts/font = ExtResource( 3 )
-text = "This background is not blurred to hide the disaster behind it"
+text = "Currently Playing: The Real Thing - BIM & ELEVNS"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false

@@ -12,6 +12,7 @@ public class TitleManager : Spatial
 	private Camera camera;
 	private Tween introTween;
 	private AnimationPlayer fadeAnimation;
+	private AnimationPlayer cameraAnimationPlayer;
 	
 	
 	public override void _Ready()
@@ -19,11 +20,12 @@ public class TitleManager : Spatial
 		camera =  GetNode<Camera>("Camera");
 		introTween = GetNode<Tween>("IntroTween");
 		fadeAnimation = GetNode("IntroFade").GetNode<AnimationPlayer>("AnimationPlayer");
+		cameraAnimationPlayer = GetNode("Camera").GetNode<AnimationPlayer>("CameraAnimationPlayer");
 		
 		PlayIntroAnimation();
 	}
 	
-	private void PlayIntroAnimation()
+	private async void PlayIntroAnimation()
 	{
 		introTween.InterpolateProperty (
 			camera,
@@ -47,5 +49,33 @@ public class TitleManager : Spatial
 
 		fadeAnimation.Play("FadeAnimation");
 		introTween.Start();
+		
+		//Block camera animation from occuring during the intro.
+		await ToSignal(introTween, "tween_all_completed");
+		cameraAnimationPlayer.Play("title_camera_animation");
+		
+		//TODO: Implement these properly
+		GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
+		GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer").PlaybackSpeed = 1.25f;
+		GetNode("GenericModel2").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
+		GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer").PlaybackSpeed = 0.7f;
+		GetNode("GenericModel3").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
+	}
+	
+	private void OnCameraAnimationPlayerFinished(string anim_name)
+	{
+		cameraAnimationPlayer.Play("title_camera_animation");
+	}
+	private void OnGenericAnimationFinished(string anim_name)
+	{
+		GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
+	}
+	private void OnGeneric2AnimationFinished(string anim_name)
+	{
+		GetNode("GenericModel2").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
+	}
+	private void OnGeneric3AnimationFinished(string anim_name)
+	{
+		GetNode("GenericModel3").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
 	}
 }
