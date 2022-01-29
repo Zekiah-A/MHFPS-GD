@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/Scenes/Title/TitleUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/GameAssets/Models/IsoPeriskeri/isoperiskeri.glb" type="PackedScene" id=2]
@@ -7,11 +7,21 @@
 [ext_resource path="res://Assets/GameAssets/Materials/iso_periskeri.tres" type="Material" id=5]
 [ext_resource path="res://Assets/GameAssets/Animations/title_camera_animation.tres" type="Animation" id=6]
 [ext_resource path="res://Assets/GameAssets/Scripts/TitleManager.cs" type="Script" id=7]
-[ext_resource path="res://Assets/GameAssets/Blender/TableTennis/tabletennis_high.glb" type="PackedScene" id=8]
+[ext_resource path="res://Assets/GameAssets/Models/TableTennis/tabletennis_high.glb" type="PackedScene" id=8]
 [ext_resource path="res://Assets/GameAssets/Scripts/CameraEffects.cs" type="Script" id=9]
 [ext_resource path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" type="PackedScene" id=10]
 [ext_resource path="res://The Real Thing.mp3" type="AudioStream" id=11]
 [ext_resource path="res://Assets/GameAssets/ModelScenes/GenericModel.tscn" type="PackedScene" id=12]
+
+[sub_resource type="GIProbeData" id=11]
+bounds = AABB( -11.7579, -3.82354, -10, 23.5158, 7.64708, 20 )
+cell_size = 0.183717
+to_cell_xform = Transform( 5.44315, 0, 0, 0, 5.44315, 0, 0, 0, 5.44315, 64, 20.8121, 54.4315 )
+dynamic_data = PoolIntArray( 0, 8, 128, 64, 128, 1, 0, 0, 1086324736, 1086324736, 0, 0, 1101004800, 1086324736, 1065353216, 0, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 8355711, 0 )
+dynamic_range = 4
+bias = 1.5
+normal_bias = 0.0
+propagation = 0.7
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeAnimation"
@@ -1574,6 +1584,16 @@ light_energy = 0.1
 shadow_enabled = true
 directional_shadow_mode = 1
 
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22328, 0.464195, 4.77388 )
+extents = Vector3( 6.59891, 3.57612, 7.94551 )
+enable_shadows = true
+
+[node name="GIProbe" type="GIProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5491, 0.946121, 3.13178 )
+extents = Vector3( 11.7579, 3.82354, 10 )
+data = SubResource( 11 )
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 13 )
 fov = 50.0
@@ -1704,12 +1724,7 @@ depth = 0.001
 material = ExtResource( 4 )
 
 [node name="TableTennis" parent="." instance=ExtResource( 8 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.24348, -0.824145, 4.12082 )
-
-[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34044, 0, 4.77388 )
-extents = Vector3( 3.86731, 2.68538, 3.86546 )
-enable_shadows = true
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.25, -0.82, 4.12 )
 
 [node name="BikeShed" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -7.99446, 0.181829, 4.60736 )

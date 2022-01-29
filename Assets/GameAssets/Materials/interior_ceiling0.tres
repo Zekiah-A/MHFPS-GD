@@ -1,0 +1,23 @@
+[gd_resource type="SpatialMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Textures/InteriorCeiling/ceiling_panel_diffuse0.png" type="Texture" id=1]
+[ext_resource path="res://Assets/GameAssets/Textures/InteriorCeiling/ceiling_panel_roughness0.png" type="Texture" id=3]
+[ext_resource path="res://Assets/GameAssets/Textures/InteriorCeiling/ceiling_panel_normal0.png" type="Texture" id=4]
+[ext_resource path="res://Assets/GameAssets/Textures/InteriorCeiling/ceiling_panel_metallic0.png" type="Texture" id=5]
+[ext_resource path="res://Assets/GameAssets/Textures/InteriorCeiling/ceiling_panel_ambient0.png" type="Texture" id=6]
+
+[resource]
+albedo_texture = ExtResource( 1 )
+metallic = 0.1
+metallic_texture = ExtResource( 5 )
+roughness_texture = ExtResource( 3 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 6 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+uv1_scale = Vector3( 1.5, 1.5, 1 )
+uv1_offset = Vector3( -0.028, 0.035, 0 )
