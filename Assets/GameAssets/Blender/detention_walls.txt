@@ -1,6 +1,6 @@
-double_desk.blend - Ⓒ Zekiah-A (https://github.com/Zekiah-A)
+detention_walls.blend - Ⓒ Zekiah-A (https://github.com/Zekiah-A)
 
 This 3D model is licensed under the GPL V3.0 license, see the license attached under the head of this repository (../../../LICENSE). Textures and additional assets used in this model may be distributed under their own respective licenses.
 
 TODO:
-	Normal maps for the surface texture, for better reflections.
+	Wall details?
