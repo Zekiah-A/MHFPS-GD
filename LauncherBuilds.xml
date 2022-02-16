@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<LauncherBuilds xmlns="mhfps_launcher_builds">
+	<Build Version="0" Platform="win-x64">
+		<Link>https://link.link</Link>
+		<Date>16/02/2022 17:00:26</Date>
+		<Description>No update notes provided.</Description>
+    </Build>
+	<Build Version="0" Platform="macos-x64">
+		<Link>https://link.link</Link>
+		<Date>16/02/2022 17:00:26</Date>
+		<Description>No update notes provided.</Description>
+    </Build>
+	<Build Version="0" Platform="linux-x64">
+		<Link>https://link.link</Link>
+		<Date>16/02/2022 17:00:26</Date>
+		<Description>No update notes provided.</Description>
+    </Build>
+</LauncherBuilds>
