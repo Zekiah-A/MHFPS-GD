@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Scenes/Other/Demo/environment.tres" type="Environment" id=1]
 [ext_resource path="res://Assets/Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/GameAssets/Scripts/Actor.cs" type="Script" id=3]
 [ext_resource path="res://Assets/GameAssets/ModelScenes/GenericModel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Fonts/Typefaces/liberation-sans/LiberationSans-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/GameAssets/Models/Bottle/water_bottle.glb" type="PackedScene" id=6]
 
 [sub_resource type="NavigationMesh" id=1]
 cell/size = 1.0
@@ -30,6 +31,10 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
+
+[sub_resource type="CapsuleShape" id=11]
+radius = 0.1
+height = 0.4
 
 [node name="Spatial" type="Spatial"]
 
@@ -213,4 +218,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WaterBottleRigidBody" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="WaterBottleRigidBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 11 )
+
+[node name="WaterBottle" parent="WaterBottleRigidBody" instance=ExtResource( 6 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0 )
+
 [editable path="Actor/GenericModel"]
+[editable path="WaterBottleRigidBody/WaterBottle"]
