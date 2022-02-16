@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -209,6 +209,9 @@ size = Vector2( 12, 3 )
 
 [sub_resource type="QuadMesh" id=35]
 size = Vector2( 7, 3 )
+
+[sub_resource type="BoxShape" id=46]
+extents = Vector3( 1, 0.1, 0.6 )
 
 [sub_resource type="PlaneMesh" id=44]
 
@@ -940,6 +943,11 @@ depth = 1.39267
 [node name="Vent" parent="Doors" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 3.5, -4.4 )
 
+[node name="Area" type="Area" parent="Doors/Vent"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Doors/Vent/Area"]
+shape = SubResource( 46 )
+
 [node name="BatteryTimer" type="Timer" parent="Doors"]
 wait_time = 6.0
 
@@ -1106,6 +1114,7 @@ material/0 = ExtResource( 42 )
 [connection signal="timeout" from="Clock/ClockTimer" to="Clock" method="OnClockTimerTimeout"]
 [connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
+[connection signal="mouse_exited" from="Doors/Vent/Area" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="Doors/BatteryTimer" to="Doors" method="OnBatteryTimerTimeout"]
 
 [editable path="DetentionUI"]

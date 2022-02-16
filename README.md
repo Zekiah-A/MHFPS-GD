@@ -20,3 +20,7 @@ Download:
 Click below to download the game!
 
 [![](https://img.shields.io/badge/Download-Click%20here!-blue?style=for-the-badge&logo=appveyor)](https://github.com/Zekiah-A/MHFPS-GD/releases)
+
+Developing Guidelines:
+======================
+[For help with finding out how to develop for MHFPS, see here](DEVELOPER_GUIDELINES.md)

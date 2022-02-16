@@ -221,16 +221,13 @@ __meta__ = {
 }
 
 [node name="Play" type="Button" parent="MainPanels/PlayPanel"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 64.0
-margin_top = -112.0
-margin_right = 235.0
-margin_bottom = -64.0
-disabled = true
+anchor_left = 0.0625
+anchor_top = 0.813333
+anchor_right = 0.229492
+anchor_bottom = 0.893333
 text = "Play"
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="WarningLabel" type="Label" parent="MainPanels/PlayPanel"]
@@ -423,6 +420,7 @@ __meta__ = {
 [connection signal="mouse_entered" from="TabPanel/Multiplayer" to="." method="onTabButtonHover" binds= [ 3 ]]
 [connection signal="mouse_exited" from="TabPanel/Multiplayer" to="." method="onTabButtonExit" binds= [ 3 ]]
 [connection signal="pressed" from="TabPanel/Multiplayer" to="." method="onTabButtonPressed" binds= [ 3 ]]
+[connection signal="pressed" from="MainPanels/PlayPanel/Play" to="." method="OnStartPressed"]
 [connection signal="pressed" from="MainPanels/MultiplayerPanel/Multiplayer/Button" to="." method="OnMultiplayerButtonPressed"]
 [connection signal="pressed" from="MainPanels/OtherPanel/Multiplayer/Button" to="." method="OnDemoButtonPressed"]
 [connection signal="pressed" from="MainPanels/OtherPanel/LocalGame/Button" to="." method="OnDetentionButtonPressed"]

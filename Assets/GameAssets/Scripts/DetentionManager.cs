@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 //TODO: Namespace MHFPS.Detention
@@ -13,6 +14,7 @@ public class DetentionManager : Node
 	private AudioStreamPlayer ambientPlayer;
 	private AudioStreamPlayer3D casettePlayer;
 	
+	private Control detentionUiCanvas;
 	private Spatial bunsenBurner;
 	private Spatial clock;
 	private Spatial phone;
@@ -28,6 +30,7 @@ public class DetentionManager : Node
 			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete1.mp3"),
 			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete2.mp3")
 		};
+		detentionUiCanvas = GetNode<Control>("DetentionUI"); //TODO: Mouse down loading-like animation for the player crumpling up paper
 		ambientPlayer = GetNode<AudioStreamPlayer>("AmbientPlayer");
 		casettePlayer = GetNode("CasetteRecorder").GetNode<AudioStreamPlayer3D>("CasettePlayer");
 		bunsenBurner = GetNode<Spatial>("BunsenBurner");
@@ -151,6 +154,17 @@ public class DetentionManager : Node
 		}
 	}
 	
+	private void OnVentHovered(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx) //TODO: IMPLEMENT
+	{
+		throw new NotImplementedException();
+		
+		//If is hovering, change cursor
+		if (@event is InputEventMouse mouse)
+		{
+			Input.SetCustomMouseCursor(hoverCursor);
+		}
+	}
+
 	public void OnObjectMouseExit()
 	{
 		Input.SetCustomMouseCursor(dotCursor);

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Textures/School/map.png" type="Texture" id=1]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 550, 550 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( 275, 0, 275, -275, 0, 275, 275, 0, -275, -275, 0, 275, -275, 0, -275, 275, 0, -275 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Map" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Map"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Map/StaticBody"]
+shape = SubResource( 3 )

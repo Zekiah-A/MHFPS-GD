@@ -66,7 +66,9 @@ public class TitleUIManager : Control
 		if (@event.IsActionPressed("ui_bumperr"))
 			SwitchPanel(3, true);
 	}
-	
+
+	public void OnStartPressed() => GetTree().ChangeScene("res://Assets/Scenes/Intro/Intro.tscn");
+
 	#region TAB_BUTTONS
 	//Index 1: Other panel, Index 2: Play Panel, Index 3: Multiplayer Panel
 	private void onTabButtonPressed(int _index) => SwitchPanel(_index);

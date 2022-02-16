@@ -898,6 +898,7 @@ spring_length = 4.0
 [node name="Camera" type="Camera" parent="SpringArmY/SpringArm"]
 cull_mask = 1048573
 current = true
+far = 500.0
 
 [node name="Pivot" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0 )

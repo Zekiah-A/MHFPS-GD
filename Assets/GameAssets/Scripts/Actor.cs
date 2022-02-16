@@ -10,11 +10,15 @@ public class Actor : Spatial //Player should be actor as well
 	
 	private AnimationPlayer animationPlayer;
 	private Area actorSight;
+	private Label thoughtLabel;
 
 	public override void _Ready()
 	{
 		animationPlayer = GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer");
 		actorSight = GetNode<Area>("ActorSight");
+		
+		//TESTING: Show actor thoughts for debugging.
+		thoughtLabel = GetNode("Viewport").GetNode("Control").GetNode<Label>("ThoughtLabel");
 
 		actorSight.Connect("body_entered", this, nameof(OnBodyEnteredSight));
 		actorSight.Connect("body_exited", this, nameof(OnBodyExitedSight));
