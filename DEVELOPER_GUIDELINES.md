@@ -44,7 +44,7 @@ TODO:
 
 ## Model and Texture Guidelines:
 
-Models and textures have no strict regulations, but it should just be noted that you should attempt to make it fit in with the general aesthetic of the game. Performance is also a big deal, so it is preffereed that most textures, if possible, be exported at resolutions of 1024x1024, or lower (such as 512*512, or any other number to the power of 2). When you are creating a model, also make sure to consider poly count, by thinking things such as "How can I make this model as low poly as possible, while also looking good.", and also considering "If the player will never see this, then it's fine to not put any geometry here."
+Models and textures have no strict regulations, but it should just be noted that you should attempt to make it fit in with the general aesthetic of the game. Performance is also quite important, so it is prefered that most textures, if possible, be exported at resolutions of 1024x1024, or lower (such as 512*512, or any other number to the power of 2). However, it's fine for things like HDRIs or high fidelity textures to use higher resolutions. When you are creating a model, also make sure to consider poly count, by thinking things such as "How can I make this model as low poly as possible, while also looking good.", and also considering "If the player will never see this, then it's fine to not put any geometry here."
 
 ## Footnotes:
 Once again, if you're reading this, you're probably epic, and any contribuions to this project could not be more appreciated! ❤️ 😎️
