@@ -1,0 +1,14 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Assets/GameAssets/Textures/BumpyWall/bumpy_wall_albedo.png" type="Texture" id=1]
+
+[resource]
+albedo_texture = ExtResource( 1 )
+roughness = 0.8
+depth_enabled = true
+depth_scale = 0.05
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+depth_texture = ExtResource( 1 )
+uv1_scale = Vector3( 5, 5.781, 0 )

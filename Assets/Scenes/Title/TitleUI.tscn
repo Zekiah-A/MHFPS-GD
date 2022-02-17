@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Shaders/blur.shader" type="Shader" id=1]
 [ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Styles/panel_style.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/Styles/button_style.tres" type="StyleBox" id=6]
 [ext_resource path="res://Assets/Styles/empty_style.tres" type="StyleBox" id=7]
+[ext_resource path="res://Assets/Fonts/Typefaces/liberation-sans/LiberationSans-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="CanvasItemMaterial" id=20]
 
@@ -55,6 +56,24 @@ shader_param/lightness = 1.0
 [sub_resource type="StyleBoxEmpty" id=16]
 
 [sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="DynamicFont" id=23]
+size = 20
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.705882, 0.705882, 0.705882, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.541176, 0.541176, 0.541176, 1 )
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+shadow_color = Color( 0, 0, 0, 0.0784314 )
 
 [node name="TitleUI" type="Control"]
 anchor_right = 1.0
@@ -225,6 +244,11 @@ anchor_left = 0.0625
 anchor_top = 0.813333
 anchor_right = 0.229492
 anchor_bottom = 0.893333
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 23 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = SubResource( 24 )
+custom_styles/normal = ExtResource( 6 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": true
