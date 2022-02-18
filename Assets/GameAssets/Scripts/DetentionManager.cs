@@ -18,6 +18,7 @@ public class DetentionManager : Node
 	private Spatial bunsenBurner;
 	private Spatial clock;
 	private Spatial phone;
+	private Spatial doors;
 
 	public override void _Ready()
 	{
@@ -36,7 +37,8 @@ public class DetentionManager : Node
 		bunsenBurner = GetNode<Spatial>("BunsenBurner");
 		clock = GetNode<Spatial>("Clock");
 		phone = GetNode<Spatial>("Phone");
-		
+		doors = GetTree().CurrentScene.GetNode<Spatial>("Doors");
+
 		BeginGame();
 	}
 
@@ -88,7 +90,7 @@ public class DetentionManager : Node
 		}
 	}
 
-		private void OnBunsenBurnerClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
+	private void OnBunsenBurnerClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{
@@ -154,19 +156,13 @@ public class DetentionManager : Node
 		}
 	}
 	
-	private void OnVentHovered(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx) //TODO: IMPLEMENT
-	{
-		throw new NotImplementedException();
-		
-		//If is hovering, change cursor
-		if (@event is InputEventMouse mouse)
-		{
-			Input.SetCustomMouseCursor(hoverCursor);
-		}
-	}
+	//TODO: Implement signals
+	private void OnVentMouseEntered() =>
+		(doors as Doors)?.TorchOnVent();
 
-	public void OnObjectMouseExit()
-	{
+	private void OnVentMouseExit() =>
+		(doors as Doors)?.TorchOffVent();
+
+	public void OnObjectMouseExit() =>
 		Input.SetCustomMouseCursor(dotCursor);
-	}
 }

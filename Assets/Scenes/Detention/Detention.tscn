@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" type="Script" id=1]
 [ext_resource path="res://Assets/GameAssets/Scripts/DetentionManager.cs" type="Script" id=2]
@@ -44,6 +44,7 @@
 [ext_resource path="res://Assets/GameAssets/Materials/interior_ceiling0.tres" type="Material" id=42]
 [ext_resource path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting_corner1.glb" type="PackedScene" id=43]
 [ext_resource path="res://Assets/GameAssets/Textures/WallGraffiti/wall_graffiti0.png" type="Texture" id=44]
+[ext_resource path="res://Assets/GameAssets/Models/WaterBottle/water_bottle.glb" type="PackedScene" id=45]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -501,6 +502,9 @@ transform = Transform( -0.28505, 0, -0.0194777, 0, 0.285714, 0, 0.0194777, 0, -0
 [node name="Knife" parent="TeacherDesk" instance=ExtResource( 28 )]
 transform = Transform( -0.801337, -0.236678, -0.549402, 6.91762e-08, 0.918405, -0.395642, 0.598213, -0.317042, -0.735952, -1.75709, 2.23114, -1.23519 )
 
+[node name="WaterBottle" parent="TeacherDesk" instance=ExtResource( 45 )]
+transform = Transform( -1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0, -1.85714, -0.857144, 2.30832, -0.999999 )
+
 [node name="SetDesks" type="Spatial" parent="."]
 
 [node name="DoubleDesk" parent="SetDesks" instance=ExtResource( 17 )]
@@ -582,6 +586,12 @@ transform = Transform( 0.171828, 0, 0.102349, 0, 0.2, 0, -0.102349, 0, 0.171828,
 
 [node name="PaperStack4" parent="TableProps" instance=ExtResource( 27 )]
 transform = Transform( -0.145614, 4.80326e-09, 0.1371, -1.50217e-08, -0.2, -8.9476e-09, 0.1371, -1.68119e-08, 0.145614, 6.98272, 1.36158, -3.82803 )
+
+[node name="WaterBottle" parent="TableProps" instance=ExtResource( 45 )]
+transform = Transform( -1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0, -1.85714, 3.94286, 1.60832, -3.9 )
+
+[node name="WaterBottle2" parent="TableProps" instance=ExtResource( 45 )]
+transform = Transform( -1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0, -1.85714, -4.85714, 1.60832, -6.6 )
 
 [node name="Posters" type="Spatial" parent="."]
 
@@ -949,7 +959,7 @@ transform = Transform( 1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 3.5, -
 shape = SubResource( 46 )
 
 [node name="BatteryTimer" type="Timer" parent="Doors"]
-wait_time = 6.0
+wait_time = 4.0
 
 [node name="WallDecorations" type="Spatial" parent="."]
 
@@ -1114,6 +1124,8 @@ material/0 = ExtResource( 42 )
 [connection signal="timeout" from="Clock/ClockTimer" to="Clock" method="OnClockTimerTimeout"]
 [connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
+[connection signal="mouse_entered" from="Doors/Vent/Area" to="." method="OnVentMouseEntered"]
+[connection signal="mouse_exited" from="Doors/Vent/Area" to="." method="OnVentMouseExit"]
 [connection signal="mouse_exited" from="Doors/Vent/Area" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="Doors/BatteryTimer" to="Doors" method="OnBatteryTimerTimeout"]
 
