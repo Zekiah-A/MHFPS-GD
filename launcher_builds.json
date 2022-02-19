@@ -1,0 +1,12 @@
+{
+  "build": {
+    "version": "0",
+    "date": "16/02/2022 17:00:26",
+    "description": "No update notes provided.",
+    "links": {
+      "windows-x64": "//",
+      "linux-x64": "//",
+      "macos-x64": "//"
+    }
+  }
+}

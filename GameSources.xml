@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>  
-<GameSources xmlns="mhfps_game_sources">
-    <Source Version="0">
-        <Link>https://github.com/Zekiah-A/MHFPS-GD/archive/refs/heads/master.zip</Link>
-        <Date>16/02/2022 17:00:26</Date>
-        <Description>Latest Available MHFPS Source.</Description>
-    </Source>
-</GameSources>
