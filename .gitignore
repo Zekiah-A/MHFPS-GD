@@ -5,6 +5,7 @@
 
 *.blend1
 *.kra~
+*.blob
 
 # For testing
 The Real Thing.mp3
