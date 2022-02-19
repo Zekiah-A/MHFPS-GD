@@ -60,9 +60,22 @@ public class Phone : Spatial
 		worldEnvironment.Set("dof_blur_far_enabled", false);
 	}
 
+	public void Disable()
+	{
+		doorButtons[0].EmitSignal("mouse_exit");
+		doorButtons[0].QueueFree();
+		doorButtons[1].QueueFree();
+		doorButtons[2].QueueFree();
+		doorUiButtons[0].SetPressedNoSignal(false);
+		doorUiButtons[1].SetPressedNoSignal(false);
+		Transform = defaultTransform;
+		worldEnvironment.Set("dof_blur_far_enabled", false);
+	}
+
 	//TODO: GUI colours for opened/closed, fake button "press" effect when clicked, etc (use "IsPressed" on the button, and make a style for pressed / unpressed.)
 	//TODO: Vent should not be here, and should only be affected by hovering the mouse over it in doors, as it is light based.
 	
+	//TODO: Mouse state nees to reset once mouse is off of these.
 	private void OnLeftDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
 	{
 		if (@event is InputEventMouseButton mouseButton)

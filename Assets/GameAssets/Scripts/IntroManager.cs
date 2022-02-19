@@ -6,21 +6,23 @@ public class IntroManager : Spatial
 	private Timer creditsTimer;
 	private AnimationPlayer cameraAnimationPlayer;
 	
-	public override void _Ready()
+	public override async void _Ready()
 	{
 		creditsTimer = GetNode<Timer>("CutsceneTimer");
 		cameraAnimationPlayer = GetNode<AnimationPlayer>("Camera/CameraAnimationPlayer");
 
-		GetNode<AnimationPlayer>("IntroUI/CreditsPanel/AnimationPlayer").Play("intro_credits");
-		creditsTimer.Connect("timeout", this, nameof(PlayIntro));
-		creditsTimer.Start(); //Should yield for animation to finish instead
+		var creditsAnimationPlayer = GetNode<AnimationPlayer>("IntroUI/CreditsPanel/AnimationPlayer");
+		creditsAnimationPlayer.Play("intro_credits");
+
+		await ToSignal(creditsAnimationPlayer, "animation_finished");
+		PlayIntro();
 	}
 
-	public void PlayIntro()
+	private void PlayIntro()
 	{
 		GetNode<Panel>("IntroUI/CreditsPanel").Visible = false;
 		GetNode<ColorRect>("IntroUI/CreditsBackground").Visible = false;
-		
+
 		GetNode<Tween>("IntroUI/CinematicBars/Tween").InterpolateProperty(
 			GetNode<Panel>("IntroUI/CinematicBars"),
 			"rect_scale",
@@ -32,6 +34,6 @@ public class IntroManager : Spatial
 		);
 		GetNode<Tween>("IntroUI/CinematicBars/Tween").Start();
 		
-		cameraAnimationPlayer.Play("intro_camera");		
+		cameraAnimationPlayer.Play("intro_camera");
 	}
 }

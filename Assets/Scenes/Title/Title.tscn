@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Scenes/Title/TitleUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/GameAssets/Models/IsoPeriskeri/isoperiskeri.glb" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" type="PackedScene" id=10]
 [ext_resource path="res://The Real Thing.mp3" type="AudioStream" id=11]
 [ext_resource path="res://Assets/GameAssets/ModelScenes/GenericModel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/GameAssets/Materials/TableTennis/tabletennis_metal.material" type="Material" id=13]
 
 [sub_resource type="GIProbeData" id=11]
 bounds = AABB( -11.7579, -3.82354, -10, 23.5158, 7.64708, 20 )
@@ -1726,6 +1727,9 @@ material = ExtResource( 4 )
 [node name="TableTennis" parent="." instance=ExtResource( 8 )]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.25, -0.82, 4.12 )
 
+[node name="Legs" parent="TableTennis" index="2"]
+material/0 = ExtResource( 13 )
+
 [node name="BikeShed" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -7.99446, 0.181829, 4.60736 )
 
@@ -1762,6 +1766,7 @@ anims/Walk = SubResource( 10 )
 [connection signal="animation_finished" from="GenericModel2/AnimationPlayer" to="." method="OnGeneric2AnimationFinished"]
 [connection signal="animation_finished" from="GenericModel3/AnimationPlayer" to="." method="OnGeneric3AnimationFinished"]
 
+[editable path="TableTennis"]
 [editable path="IsoPeriskeri"]
 [editable path="GenericModel"]
 [editable path="GenericModel2"]

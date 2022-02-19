@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Materials/hedge.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Scenes/default_environment.tres" type="Environment" id=2]
@@ -17,6 +17,10 @@
 [ext_resource path="res://Assets/GameAssets/Textures/Brick/brick0_ambient.png" type="Texture" id=15]
 [ext_resource path="res://Assets/GameAssets/Textures/Godot/godot_text.png" type="Texture" id=16]
 [ext_resource path="res://Assets/GameAssets/Animations/intro_credits.tres" type="Animation" id=17]
+[ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=18]
+[ext_resource path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_2.png" type="Texture" id=19]
+[ext_resource path="res://Assets/GameAssets/Textures/HandLogo/hand-logo.png" type="Texture" id=20]
+[ext_resource path="res://Assets/GameAssets/Animations/intro_camera.tres" type="Animation" id=21]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -27,7 +31,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -1.95187, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -2.13467, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/1/type = "bezier"
@@ -37,7 +41,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 1.1387, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1.2, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
@@ -47,7 +51,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0.346697, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1.44938, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/3/type = "bezier"
@@ -57,7 +61,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 1.5087, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
@@ -67,7 +71,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( -53.7496, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -10.134, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/5/type = "bezier"
@@ -77,72 +81,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( -0.346619, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=12]
-resource_name = "intro_camera"
-length = 10.0
-tracks/0/type = "bezier"
-tracks/0/path = NodePath(".:translation:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( -2.13467, -0.25, 0, 0.25, 0, -2.13467, -0.25, 0, 0.25, 0, -1.95187, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2, 2.01 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath(".:translation:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 1.2, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 1.1387, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2, 2.01 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath(".:translation:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1.44938, -0.25, 0, 0.25, 0, 1.3964, -0.25, 0, 0.25, 0, 0.346697, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2, 2.01 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath(".:rotation_degrees:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1.5087, -0.25, 0, 0.25, 0, 1.5087, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2, 2.01 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath(".:rotation_degrees:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( -10.134, -0.25, 0, 0.25, 0, -12.9406, -0.25, 0, 0.25, 0, -53.7496, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2, 2.01 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath(".:rotation_degrees:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -0.346619, -0.25, 0, 0.25, 0, -0.346619, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 2, 2.01 )
 }
 
 [sub_resource type="SpatialMaterial" id=11]
@@ -215,76 +155,104 @@ bg_color = Color( 0, 0, 0, 1 )
 [sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Icon:rect_position:x")
+tracks/0/path = NodePath("MadeWith:modulate:r")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 128, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Icon:rect_position:y")
+tracks/1/path = NodePath("MadeWith:modulate:g")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 128, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Icon:rect_rotation")
+tracks/2/path = NodePath("MadeWith:modulate:b")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("Text:rect_position:x")
+tracks/3/path = NodePath("MadeWith:modulate:a")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 448, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("Text:rect_position:y")
+tracks/4/path = NodePath("GameTitle:rect_scale:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 320, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("Text:rect_rotation")
+tracks/5/path = NodePath("GameTitle:rect_scale:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Text:modulate")
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("BloodEffect:rect_position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"points": PoolRealArray( -16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("BloodEffect:rect_position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( -400, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("HandLogo:rect_position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( -944, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("HandLogo:rect_position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 
 [node name="Intro" type="Spatial"]
@@ -299,13 +267,13 @@ shadow_enabled = true
 shadow_contact = 1.0
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.591433, -0.0176549, -0.806161, -0.00604751, 0.999635, -0.0263288, 0.806331, 0.0204469, 0.591111, -1.95187, 1.1387, 0.346697 )
+transform = Transform( 0.984399, 0, -0.175951, 0, 1, 0, 0.175951, 0, 0.984399, -2.13467, 1.2, 1.44938 )
 current = true
 fov = 50.0
 
 [node name="CameraAnimationPlayer" type="AnimationPlayer" parent="Camera"]
 anims/RESET = SubResource( 13 )
-anims/intro_camera = SubResource( 12 )
+anims/intro_camera = ExtResource( 21 )
 
 [node name="House" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5 )
@@ -400,6 +368,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="IntroUI/CinematicBars"]
 
 [node name="CreditsBackground" type="ColorRect" parent="IntroUI"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -445,9 +414,9 @@ anchor_top = 0.373
 anchor_right = 0.531
 anchor_bottom = 0.373
 margin_left = -95.744
-margin_top = 96.2
+margin_top = 32.2
 margin_right = 96.256
-margin_bottom = 176.2
+margin_bottom = 112.2
 texture = ExtResource( 16 )
 expand = true
 __meta__ = {
@@ -459,15 +428,60 @@ anchor_left = 0.531
 anchor_top = 0.373
 anchor_right = 0.531
 anchor_bottom = 0.373
-margin_left = -415.744
-margin_top = -95.8
-margin_right = -223.746
-margin_bottom = 96.1967
+margin_left = -647.744
+margin_top = 424.2
+margin_right = -455.747
+margin_bottom = 616.197
 rect_pivot_offset = Vector2( 96, 96 )
 texture = ExtResource( 9 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": true
+}
+
+[node name="BloodEffect" type="TextureRect" parent="IntroUI/CreditsPanel"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -400.0
+margin_right = 667.0
+texture = ExtResource( 19 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HandLogo" type="TextureRect" parent="IntroUI/CreditsPanel"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -944.0
+margin_right = -74.0
+margin_bottom = 504.0
+texture = ExtResource( 20 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameTitle" type="Label" parent="IntroUI/CreditsPanel"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -44.0
+margin_right = 192.0
+margin_bottom = 44.0
+rect_pivot_offset = Vector2( 192, 44 )
+custom_fonts/font = ExtResource( 18 )
+text = "MHFPS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="IntroUI/CreditsPanel"]

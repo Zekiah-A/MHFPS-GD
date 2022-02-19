@@ -87,6 +87,15 @@ public class Doors : Spatial
 	{
 		BatteryPercentage--;
 		batteryLabel.Text = $"{BatteryPercentage}%";
+
+		//If player has run out of battery, leave them completely vunerable, possible also disable their torch.
+		if (BatteryPercentage == 97)
+		{
+			batteryTimer.Stop();
+			(GetTree().CurrentScene.GetNode("Phone") as Phone)?.Disable();
+			OpenLeft();
+			OpenRight();
+		}
 	}
 
 	/// <summary>
