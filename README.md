@@ -23,4 +23,4 @@ Click below to download the game!
 
 Developing Guidelines:
 ======================
-[For help with finding out how to develop for MHFPS, see here](DEVELOPER_GUIDELINES.md)
+[For help with finding out how to develop for MHFPS, see here](CONTRIBUTING.md)
