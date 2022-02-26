@@ -62,19 +62,19 @@ public class TitleManager : Spatial
 		GetNode("GenericModel3").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
 	}
 	
-	private void OnCameraAnimationPlayerFinished(string anim_name)
+	private void OnCameraAnimationPlayerFinished(string animName)
 	{
 		cameraAnimationPlayer.Play("title_camera_animation");
 	}
-	private void OnGenericAnimationFinished(string anim_name)
+	private void OnGenericAnimationFinished(string animName)
 	{
 		GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
 	}
-	private void OnGeneric2AnimationFinished(string anim_name)
+	private void OnGeneric2AnimationFinished(string animName)
 	{
 		GetNode("GenericModel2").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
 	}
-	private void OnGeneric3AnimationFinished(string anim_name)
+	private void OnGeneric3AnimationFinished(string animName)
 	{
 		GetNode("GenericModel3").GetNode<AnimationPlayer>("AnimationPlayer").Play("Idle");
 	}

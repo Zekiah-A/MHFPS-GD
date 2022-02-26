@@ -15,8 +15,8 @@ public class Clock : Spatial
 	private Timer clockTimer;
 	private Spatial minuteHand;
 	
-	private const int maximumTime = 30;
-	private const int warnTime = 5;
+	private const int MaximumTime = 30;
+	private const int WarnTime = 5;
 
 	public override void _Ready()
 	{
@@ -57,13 +57,13 @@ public class Clock : Spatial
 		ClockTime += 1;
 
 		// Auditory warning to player that time is running out. 
-		if (ClockTime >= maximumTime - warnTime && ClockTime < maximumTime) 
+		if (ClockTime >= MaximumTime - WarnTime && ClockTime < MaximumTime) 
 		{
 			clockPlayer.Stream = clockStream;
 			clockPlayer.Play();
 		}
 		// If gone for more than 30 seconds without rewind, then player will be jumpscared. 
-		else if (ClockTime >= maximumTime) 
+		else if (ClockTime >= MaximumTime) 
 		{
 			//Jumpscare player, time is out.
 			clockPlayer.Stop();

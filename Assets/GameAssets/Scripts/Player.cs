@@ -9,57 +9,57 @@ public class Player : RigidBody
 	private const float MovementSpeed = 100f;
 	private const float MaxSpeed = 10f;
 
-	private RayCast _groundSensor;
-	private Spatial _cameraPivot;
-	private float _yaw = 0f;
-	private float _pitch = 0f;
-	private Vector3 _viewDirection = Vector3.Zero;
-	private Spatial _model;
+	private RayCast groundSensor;
+	private Spatial cameraPivot;
+	private float yaw = 0f;
+	private float pitch = 0f;
+	private Vector3 viewDirection = Vector3.Zero;
+	private Spatial model;
 	
 	public override void _Ready()
 	{
-		_groundSensor = GetNode<RayCast>("GroundSensor");
-		_cameraPivot = GetNode<Spatial>("CameraPivot");
-		_model = GetNode<Spatial>("Model");
-		_viewDirection = _cameraPivot.GlobalTransform.basis.z;
+		groundSensor = GetNode<RayCast>("GroundSensor");
+		cameraPivot = GetNode<Spatial>("CameraPivot");
+		model = GetNode<Spatial>("Model");
+		viewDirection = cameraPivot.GlobalTransform.basis.z;
 	}
 
-	public override void _Input(InputEvent @_event)
+	public override void _Input(InputEvent @event)
 	{
-		if (@_event is InputEventMouseMotion _mouse)
+		if (@event is InputEventMouseMotion mouse)
 		{
-			_yaw = (_yaw - _mouse.Relative.x * MouseSensitivity) % 360; //Fmod
-			_pitch = Math.Max(Math.Min(_pitch - _mouse.Relative.y * MouseSensitivity, 70), -50);
-			_cameraPivot.RotationDegrees = new Vector3(_pitch, _yaw, 0);
+			yaw = (yaw - mouse.Relative.x * MouseSensitivity) % 360; //Fmod
+			pitch = Math.Max(Math.Min(pitch - mouse.Relative.y * MouseSensitivity, 70), -50);
+			cameraPivot.RotationDegrees = new Vector3(pitch, yaw, 0);
 		}
 	}
 
 	//change to regular _Process?
-	public override void _PhysicsProcess(float _delta)
+	public override void _PhysicsProcess(float delta)
 	{
 		if (LinearVelocity.Length() < MaxSpeed)
 		{
 			if (Input.IsActionPressed("game_forward"))
 			{
 				//move the player forward with LinearVelocity(0, 0, MovementSpeed), in the direction of the _cameraPivot's forward vector
-				LinearVelocity -= _cameraPivot.GlobalTransform.basis.z * MovementSpeed * _delta;			}
+				LinearVelocity -= cameraPivot.GlobalTransform.basis.z * MovementSpeed * delta;			}
 			if (Input.IsActionPressed("game_backward"))
 			{
 				//move the player backward with LinearVelocity(0, 0, -MovementSpeed), in the direction of the _cameraPivot's forward vector
-				LinearVelocity += _cameraPivot.GlobalTransform.basis.z * MovementSpeed * _delta;			}
+				LinearVelocity += cameraPivot.GlobalTransform.basis.z * MovementSpeed * delta;			}
 			if (Input.IsActionPressed("game_left"))
 			{
 				//move the player left with LinearVelocity(0, MovementSpeed, 0), in the direction of the _cameraPivot's right vector
-				LinearVelocity -= _cameraPivot.GlobalTransform.basis.x * MovementSpeed * _delta;			}
+				LinearVelocity -= cameraPivot.GlobalTransform.basis.x * MovementSpeed * delta;			}
 			if (Input.IsActionPressed("game_right"))
 			{
 				//move the player right with LinearVelocity(0, -MovementSpeed, 0), in the direction of the _cameraPivot's right vector
-				LinearVelocity += _cameraPivot.GlobalTransform.basis.x * MovementSpeed * _delta;			}
+				LinearVelocity += cameraPivot.GlobalTransform.basis.x * MovementSpeed * delta;			}
 			
 			//make the player jump if they are on the ground and the jump key is pressed
-			if (Input.IsActionJustPressed("game_jump") && _groundSensor.IsColliding())
+			if (Input.IsActionJustPressed("game_jump") && groundSensor.IsColliding())
 			{
-				LinearVelocity += _cameraPivot.GlobalTransform.basis.y * 10 * _delta;
+				LinearVelocity += cameraPivot.GlobalTransform.basis.y * 10 * delta;
 			}
 		}
 
@@ -76,7 +76,7 @@ public class Player : RigidBody
 		
 		if (Input.IsActionPressed("game_any"))
 		{
-			_model.Rotation = new Vector3(this.Rotation.x, Mathf.Lerp(_model.Rotation.y, _cameraPivot.Rotation.y - 90, 0.1f), this.Rotation.z);
+			model.Rotation = new Vector3(this.Rotation.x, Mathf.Lerp(model.Rotation.y, cameraPivot.Rotation.y - 90, 0.1f), this.Rotation.z);
 		}
 	} 	
 }

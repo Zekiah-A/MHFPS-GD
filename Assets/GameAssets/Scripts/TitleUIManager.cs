@@ -4,35 +4,42 @@ using DiscordRPC;
 
 public class TitleUIManager : Control
 {	
-	private Panel _tabPanel;
-	private Godot.Button _tabOther;
-	private Godot.Button _tabPlay;
-	private Godot.Button _tabMultiplayer;
-	private Tween _tabPanelTween;
+	private Panel tabPanel;
+	private Godot.Button tabOther;
+	private Godot.Button tabPlay;
+	private Godot.Button tabMultiplayer;
+	private Tween tabPanelTween;
+	private Tween panelTween;
+	private Panel mainPanels;
+
+	private Vector2 mainPanels1;
+	private Vector2 mainPanels2;
+	private Vector2 mainPanels3;
 	
-	private Panel _mainPanels;
-	private Tween _panelTween;
-
-	private const float _underlineMax = 1.2f;
-	private const float _tweenSpeed = 0.5f;
-
+	private const float UnderlineMax = 1.2f;
+	private const float TweenSpeed = 0.5f;
+	
 	public static DiscordRpcClient client;
 	
 	public override void _Ready()
 	{		
-		_tabPanel = GetNode<Panel>("TabPanel");
-		_tabOther = _tabPanel.GetNode<Godot.Button>("Other");
-		_tabPlay = _tabPanel.GetNode<Godot.Button>("Play");
-		_tabMultiplayer = _tabPanel.GetNode<Godot.Button>("Multiplayer");
-		_tabPanelTween = _tabPanel.GetNode<Tween>("TabPanelTween");
+		tabPanel = GetNode<Panel>("TabPanel");
+		tabOther = tabPanel.GetNode<Godot.Button>("Other");
+		tabPlay = tabPanel.GetNode<Godot.Button>("Play");
+		tabMultiplayer = tabPanel.GetNode<Godot.Button>("Multiplayer");
+		tabPanelTween = tabPanel.GetNode<Tween>("TabPanelTween");
 		
-		_mainPanels = GetNode<Panel>("MainPanels");
-		_panelTween = GetNode<Tween>("PanelTween");
+		mainPanels = GetNode<Panel>("MainPanels");
+		panelTween = GetNode<Tween>("PanelTween");
 
+		Connect("resized", this, nameof(OnUIResized));
+		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.x, 0);
+		mainPanels2 = new Vector2(0, 0);
+		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.x, 0);
 
-		//TODO: Hide this with config
+		//TODO: ID should be obfuscated?
 		///<summary>Rich presence for Discord.</summary>
-		client = new DiscordRpcClient("870411160363614358");			
+		client = new DiscordRpcClient("870411160363614358");
 
 		client.OnReady += (sender, e) =>
 		{
@@ -45,14 +52,14 @@ public class TitleUIManager : Control
 		};
 
 		client.Initialize();
-		client.SetPresence(new RichPresence()
+		client.SetPresence(new RichPresence
 		{
 			Details = "github.com/Zekiah-A/MHFPS-GD",
-			State = "Ingame - Title.",
+			State = "Ingame",
 			Assets = new Assets()
 			{
 				LargeImageKey = "coolstuff",
-				LargeImageText = "S u  b l i m e ||zekiah-a.github.io/Subliminal||",
+				LargeImageText = "|| Playing MHFPS ||",
 				SmallImageKey = "coolstuff"
 			}
 		});	
@@ -69,134 +76,141 @@ public class TitleUIManager : Control
 
 	public void OnStartPressed() => GetTree().ChangeScene("res://Assets/Scenes/Intro/Intro.tscn");
 
-	#region TAB_BUTTONS
 	//Index 1: Other panel, Index 2: Play Panel, Index 3: Multiplayer Panel
-	private void onTabButtonPressed(int _index) => SwitchPanel(_index);
+	private void OnTabButtonPressed(int index) => SwitchPanel(index);
 	
-	private void onTabButtonHover(int _index)
+	private void OnTabButtonHover(int index)
 	{
-		switch (_index)
+		switch (index)
 		{
 			case 1:
-				_tabPanelTween.InterpolateProperty (
-					_tabOther.GetNode("Underline"), //Object
+				tabPanelTween.InterpolateProperty (
+					tabOther.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
-					new Vector2(_underlineMax, 1), //to
-					_tweenSpeed, //speed
+					new Vector2(UnderlineMax, 1), //to
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				_tabPanelTween.Start();
+				tabPanelTween.Start();
 				GD.Print("TabOther hovered.");
 				break;
 			case 2:
-				_tabPanelTween.InterpolateProperty (
-					_tabPlay.GetNode("Underline"), //Object
+				tabPanelTween.InterpolateProperty (
+					tabPlay.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
-					new Vector2(_underlineMax, 1), //to
-					_tweenSpeed, //speed
+					new Vector2(UnderlineMax, 1), //to
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				_tabPanelTween.Start();
+				tabPanelTween.Start();
 				GD.Print("TabPlay hovered");
 				break;
 			case 3:
-				_tabPanelTween.InterpolateProperty (
-					_tabMultiplayer.GetNode("Underline"), //Object
+				tabPanelTween.InterpolateProperty (
+					tabMultiplayer.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
-					new Vector2(_underlineMax, 1), //to
-					_tweenSpeed, //speed
+					new Vector2(UnderlineMax, 1), //to
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				_tabPanelTween.Start();
+				tabPanelTween.Start();
 				GD.Print("TabMultiplayer hovered");
 				break;
 		}
 	}
 	
-	private void onTabButtonExit(int _index)
+	private void OnTabButtonExit(int index)
 	{
-		switch (_index)
+		switch (index)
 		{
 			case 1:
-				_tabPanelTween.InterpolateProperty (
-					_tabOther.GetNode("Underline"), //Object
+				tabPanelTween.InterpolateProperty (
+					tabOther.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
-					new Vector2(_underlineMax, 1), //from
+					new Vector2(UnderlineMax, 1), //from
 					new Vector2(1, 1), //to
-					_tweenSpeed, //speed
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				_tabPanelTween.Start();
+				tabPanelTween.Start();
 				GD.Print("TabOther exited.");
 				break;
 			case 2:
-				_tabPanelTween.InterpolateProperty (
-					_tabPlay.GetNode("Underline"), //Object
+				tabPanelTween.InterpolateProperty (
+					tabPlay.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
-					new Vector2(_underlineMax, 1), //from
+					new Vector2(UnderlineMax, 1), //from
 					new Vector2(1, 1), //to
-					_tweenSpeed, //speed
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				_tabPanelTween.Start();
+				tabPanelTween.Start();
 				GD.Print("TabPlay exited");
 				break;
 			case 3:
-				_tabPanelTween.InterpolateProperty (
-					_tabMultiplayer.GetNode("Underline"), //Object
+				tabPanelTween.InterpolateProperty (
+					tabMultiplayer.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
-					new Vector2(_underlineMax, 1), //from
+					new Vector2(UnderlineMax, 1), //from
 					new Vector2(1, 1), //to
-					_tweenSpeed, //speed
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				_tabPanelTween.Start();
+				tabPanelTween.Start();
 				GD.Print("TabMultiplayer exited");
 				break;
 		}
 	}
-	#endregion
 
-	#region PANEL_LOGIC
-	private void SwitchPanel(int _selected, bool controller = true)
+	private void OnUIResized()
 	{
-
-		Vector2 _mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.x, 0);
-		Vector2 _mainPanels2 = new Vector2(0, 0);
-		Vector2 _mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.x, 0);
-
+		if (mainPanels.RectPosition == mainPanels1)
+			SwitchPanel(1);
+		else if (mainPanels.RectPosition == mainPanels2)
+			SwitchPanel(2);
+		else if (mainPanels.RectPosition == mainPanels3)
+			SwitchPanel(3);
+	}
+	
+	private void SwitchPanel(int selected, bool controller = false)
+	{
+		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.x, 0);
+		mainPanels2 = new Vector2(0, 0);
+		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.x, 0);
+		
 		if (controller)
-		{ //1 = left, 3 = right
-			if (_mainPanels.RectPosition == _mainPanels1 && _selected == 3)
-				_selected = 2;
-			else if (_mainPanels.RectPosition == _mainPanels2 && _selected == 3)
-				_selected = 3;
+		{
+			//1 = left, 3 = right
+			if (mainPanels.RectPosition == mainPanels1 && selected == 3)
+				selected = 2;
+			else if (mainPanels.RectPosition == mainPanels2 && selected == 3)
+				selected = 3;
 			
-			else if (_mainPanels.RectPosition == _mainPanels3 && _selected == 1)
-				_selected = 2;
-			else if (_mainPanels.RectPosition == _mainPanels2 && _selected == 1)
-				_selected = 1;
+			else if (mainPanels.RectPosition == mainPanels3 && selected == 1)
+				selected = 2;
+			else if (mainPanels.RectPosition == mainPanels2 && selected == 1)
+				selected = 1;
 		}
 
-		switch (_selected)
+		switch (selected)
 		{
 			case 1:
 				//Focus "Other" panel to the centre by moving all
-				_panelTween.InterpolateProperty (
-					_mainPanels,
+				panelTween.InterpolateProperty (
+					mainPanels,
 					"rect_position", //Property being tweened
-					_mainPanels.RectPosition, //from
-					_mainPanels1, //to
-					_tweenSpeed, //speed
+					mainPanels.RectPosition, //from
+					mainPanels1, //to
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
@@ -204,12 +218,12 @@ public class TitleUIManager : Control
 
 			case 2:
 				//Focus "Player" panel to the centre by moving all
-				_panelTween.InterpolateProperty (
-					_mainPanels,
+				panelTween.InterpolateProperty (
+					mainPanels,
 					"rect_position", //Property being tweened
-					_mainPanels.RectPosition, //from
-					_mainPanels2, //to
-					_tweenSpeed, //speed
+					mainPanels.RectPosition, //from
+					mainPanels2, //to
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
@@ -217,26 +231,21 @@ public class TitleUIManager : Control
 
 			case 3:
 				//Focus "Multiplayer" panel to the centre by moving all
-				_panelTween.InterpolateProperty (
-					_mainPanels,
+				panelTween.InterpolateProperty (
+					mainPanels,
 					"rect_position", //Property being tweened
-					_mainPanels.RectPosition, //from
-					_mainPanels3, //to
-					_tweenSpeed, //speed
+					mainPanels.RectPosition, //from
+					mainPanels3, //to
+					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
 				break;
 		}
-		_panelTween.Start();
+		panelTween.Start();
 	}
-	#endregion
-
-	#region WIDGET_LOGIC
 	
 	private void OnDemoButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Other/Demo.tscn");
 	private void OnMultiplayerButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Multiplayer/Lobby.tscn");
 	private void OnDetentionButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Detention/Detention.tscn");
-	
-	#endregion
 }

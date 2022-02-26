@@ -5,10 +5,10 @@ public class Pathfinder : KinematicBody
 {
 	public float JumpImpulse = 30f;
 
-	private const float speed = 10f;
-	private const float rotationSpeed = 5f;
+	private const float Speed = 10f;
+	private const float RotationSpeed = 5f;
 	public const float Gravity = -39.2f;
-	private const float maxFallSpeed = 100f;
+	private const float MaxFallSpeed = 100f;
 
 	//private Vector3 velocity = Vector3.Zero;
 	private Vector3 direction = Vector3.Zero;
@@ -38,14 +38,14 @@ public class Pathfinder : KinematicBody
 		
 		Rotation = new Vector3(
 				Rotation.x,
-				Mathf.LerpAngle(Rotation.y, Mathf.Atan2(-direction.x, -direction.z), rotationSpeed * delta),
+				Mathf.LerpAngle(Rotation.y, Mathf.Atan2(-direction.x, -direction.z), RotationSpeed * delta),
 				Rotation.z
 		);
 		
 		//MoveAndSlide(-GlobalTransform.basis.z * speed, Vector3.Up); //still testing
 		
 		if (groundCast.IsColliding())
-			direction = MoveAndSlide(direction.Normalized() * speed, Vector3.Up);
+			direction = MoveAndSlide(direction.Normalized() * Speed, Vector3.Up);
 		else
 		{
 			//Vector3 directionWithGravity = new Vector3(direction.x, 0, direction.z); //TODO: currently must be 0, no y velocity calculated yet until jumping is implemented

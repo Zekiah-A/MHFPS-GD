@@ -17,11 +17,11 @@ namespace Utils.Colour //TODO: Use a record!
         ///<summary>Alpha value.</summary>
         public byte A;
 
-        public Colour(byte _r, byte _g, byte _b, byte _a)// => new Colour(_r, _g, _b, _a);
+        public Colour(byte r, byte g, byte b, byte a)// => new Colour(_r, _g, _b, _a);
         {
             //Colour Colour = new Colour(_r, _g, _b, _a);
             //assign rgba instead
-            R = _r; G = _g; B = _b; A = _a;
+            R = r; G = g; B = b; A = a;
         }
     }
 }

@@ -116,7 +116,10 @@ __meta__ = {
 }
 
 [node name="Other" type="Button" parent="TabPanel"]
-margin_right = 88.0
+anchor_left = 0.162
+anchor_right = 0.162
+margin_left = -44.064
+margin_right = 43.936
 margin_bottom = 64.0
 custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -143,8 +146,10 @@ __meta__ = {
 }
 
 [node name="Play" type="Button" parent="TabPanel"]
-margin_left = 88.0
-margin_right = 184.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_right = 48.0
 margin_bottom = 64.0
 custom_colors/font_color = Color( 0.384314, 0.384314, 0.384314, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -171,8 +176,10 @@ __meta__ = {
 }
 
 [node name="Multiplayer" type="Button" parent="TabPanel"]
-margin_left = 184.0
-margin_right = 274.0
+anchor_left = 0.842
+anchor_right = 0.842
+margin_left = -45.024
+margin_right = 44.976
 margin_bottom = 64.0
 custom_colors/font_color = Color( 0.380392, 0.380392, 0.380392, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -257,8 +264,9 @@ __meta__ = {
 [node name="WarningLabel" type="Label" parent="MainPanels/PlayPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
+margin_left = 8.0
 margin_top = -52.0
-margin_right = 208.0
+margin_right = 136.0
 margin_bottom = 52.0
 custom_colors/font_color = Color( 0.415686, 0.415686, 0.415686, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.611765 )
@@ -270,20 +278,19 @@ __meta__ = {
 }
 
 [node name="MultiplayerPanel" type="Panel" parent="MainPanels"]
-anchor_left = 1.106
-anchor_top = 0.107
-anchor_right = 1.894
-anchor_bottom = 0.893
-margin_left = 0.455933
-margin_top = -0.200012
-margin_right = -0.456055
-margin_bottom = 0.19989
+anchor_left = 1.0
+anchor_right = 2.0
+anchor_bottom = 0.96
+margin_left = 109.0
+margin_top = 64.0
+margin_right = -109.0
+margin_bottom = -40.0001
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 0, 236 )
 custom_styles/panel = ExtResource( 5 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="Multiplayer" type="Panel" parent="MainPanels/MultiplayerPanel"]
@@ -352,14 +359,12 @@ __meta__ = {
 [node name="MultiplayerTween" type="Tween" parent="MainPanels/MultiplayerPanel"]
 
 [node name="OtherPanel" type="Panel" parent="MainPanels"]
-anchor_left = -0.894
-anchor_top = 0.107
-anchor_right = -0.106
-anchor_bottom = 0.893
-margin_left = 0.45575
-margin_top = -0.199806
-margin_right = -0.455673
-margin_bottom = 0.199768
+anchor_left = -1.0
+anchor_bottom = 0.96
+margin_left = 109.0
+margin_top = 64.0002
+margin_right = -109.0
+margin_bottom = -40.0002
 rect_pivot_offset = Vector2( 806, 236 )
 custom_styles/panel = ExtResource( 5 )
 __meta__ = {
@@ -435,15 +440,15 @@ __meta__ = {
 
 [node name="PanelTween" type="Tween" parent="."]
 
-[connection signal="mouse_entered" from="TabPanel/Other" to="." method="onTabButtonHover" binds= [ 1 ]]
-[connection signal="mouse_exited" from="TabPanel/Other" to="." method="onTabButtonExit" binds= [ 1 ]]
-[connection signal="pressed" from="TabPanel/Other" to="." method="onTabButtonPressed" binds= [ 1 ]]
-[connection signal="mouse_entered" from="TabPanel/Play" to="." method="onTabButtonHover" binds= [ 2 ]]
-[connection signal="mouse_exited" from="TabPanel/Play" to="." method="onTabButtonExit" binds= [ 2 ]]
-[connection signal="pressed" from="TabPanel/Play" to="." method="onTabButtonPressed" binds= [ 2 ]]
-[connection signal="mouse_entered" from="TabPanel/Multiplayer" to="." method="onTabButtonHover" binds= [ 3 ]]
-[connection signal="mouse_exited" from="TabPanel/Multiplayer" to="." method="onTabButtonExit" binds= [ 3 ]]
-[connection signal="pressed" from="TabPanel/Multiplayer" to="." method="onTabButtonPressed" binds= [ 3 ]]
+[connection signal="mouse_entered" from="TabPanel/Other" to="." method="OnTabButtonHover" binds= [ 1 ]]
+[connection signal="mouse_exited" from="TabPanel/Other" to="." method="OnTabButtonExit" binds= [ 1 ]]
+[connection signal="pressed" from="TabPanel/Other" to="." method="OnTabButtonPressed" binds= [ 1 ]]
+[connection signal="mouse_entered" from="TabPanel/Play" to="." method="OnTabButtonHover" binds= [ 2 ]]
+[connection signal="mouse_exited" from="TabPanel/Play" to="." method="OnTabButtonExit" binds= [ 2 ]]
+[connection signal="pressed" from="TabPanel/Play" to="." method="OnTabButtonPressed" binds= [ 2 ]]
+[connection signal="mouse_entered" from="TabPanel/Multiplayer" to="." method="OnTabButtonHover" binds= [ 3 ]]
+[connection signal="mouse_exited" from="TabPanel/Multiplayer" to="." method="OnTabButtonExit" binds= [ 3 ]]
+[connection signal="pressed" from="TabPanel/Multiplayer" to="." method="OnTabButtonPressed" binds= [ 3 ]]
 [connection signal="pressed" from="MainPanels/PlayPanel/Play" to="." method="OnStartPressed"]
 [connection signal="pressed" from="MainPanels/MultiplayerPanel/Multiplayer/Button" to="." method="OnMultiplayerButtonPressed"]
 [connection signal="pressed" from="MainPanels/OtherPanel/Multiplayer/Button" to="." method="OnDemoButtonPressed"]

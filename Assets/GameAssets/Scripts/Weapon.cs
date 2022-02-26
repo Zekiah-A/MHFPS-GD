@@ -24,7 +24,7 @@ public class Weapon : Spatial
 	AnimationPlayer animPlayer;
 
 	private float mouseRelativeMovement = 0;
-	private bool CanFire = true;
+	private bool canFire = true;
 
 	public override void _Ready() //better idea, extend for melee
 	{
@@ -72,7 +72,7 @@ public class Weapon : Spatial
 
 		RayCast weaponRay = GetNode<RayCast>("WeaponCast");
 
-		if (!animPlayer.IsPlaying() && CanFire == true) //this kinda limits it to spamming at anim length (0.2 seconds, i could make this the timer length too thru script :thinking:)
+		if (!animPlayer.IsPlaying() && canFire == true) //this kinda limits it to spamming at anim length (0.2 seconds, i could make this the timer length too thru script :thinking:)
 		{
 			CurrentAmmo--;
 			if (CurrentAmmo != 0)
@@ -133,7 +133,7 @@ public class Weapon : Spatial
 			CurrentAmmo = TotalAmmo;
 			TotalAmmo = 0;
 			if (CurrentAmmo == 0)
-				CanFire = false;
+				canFire = false;
 		}
 		ammoHud.Text = $"{CurrentAmmo}/{MagazineSize} | {TotalAmmo}";
 	}
