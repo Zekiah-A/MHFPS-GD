@@ -1734,7 +1734,7 @@ material/0 = ExtResource( 13 )
 transform = Transform( 1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -7.99446, 0.181829, 4.60736 )
 
 [node name="IsoPeriskeri" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0902783, -0.446107, 6.54789 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0902781, -0.446107, 7.04789 )
 
 [node name="IsoPeriskeri" parent="IsoPeriskeri" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.114951, 1, 0.223938 )

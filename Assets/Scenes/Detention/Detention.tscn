@@ -1125,8 +1125,8 @@ material/0 = ExtResource( 42 )
 [connection signal="input_event" from="Clock/Area" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area" to="." method="OnObjectMouseExit"]
 [connection signal="mouse_entered" from="Doors/Vent/Area" to="." method="OnVentMouseEntered"]
-[connection signal="mouse_exited" from="Doors/Vent/Area" to="." method="OnVentMouseExit"]
 [connection signal="mouse_exited" from="Doors/Vent/Area" to="." method="OnObjectMouseExit"]
+[connection signal="mouse_exited" from="Doors/Vent/Area" to="." method="OnVentMouseExit"]
 [connection signal="timeout" from="Doors/BatteryTimer" to="Doors" method="OnBatteryTimerTimeout"]
 
 [editable path="DetentionUI"]

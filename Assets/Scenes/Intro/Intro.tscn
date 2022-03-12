@@ -368,7 +368,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="IntroUI/CinematicBars"]
 
 [node name="CreditsBackground" type="ColorRect" parent="IntroUI"]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -445,7 +444,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -16.0
 margin_top = -400.0
-margin_right = 667.0
+margin_right = 2715.0
+margin_bottom = 1200.0
 texture = ExtResource( 19 )
 expand = true
 __meta__ = {
@@ -457,8 +457,8 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -944.0
-margin_right = -74.0
-margin_bottom = 504.0
+margin_right = 1974.0
+margin_bottom = 1704.0
 texture = ExtResource( 20 )
 expand = true
 __meta__ = {

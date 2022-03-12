@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/GameAssets/Textures/School/map.png" type="Texture" id=1]
+[ext_resource path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Scenes/Player/Player.tscn" type="PackedScene" id=3]
 
 [sub_resource type="PlaneMesh" id=1]
-size = Vector2( 550, 550 )
+size = Vector2( 225, 225 )
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 1 )
@@ -21,3 +23,15 @@ material/0 = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Map/StaticBody"]
 shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 87.0368, 0, 10.612 )
+width = 4.0
+height = 8.0
+depth = 3.18786
+
+[node name="bike_shed" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -15.115, 0, 28.1692 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.8, 0 )
