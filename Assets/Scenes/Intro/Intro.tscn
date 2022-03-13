@@ -413,9 +413,9 @@ anchor_top = 0.373
 anchor_right = 0.531
 anchor_bottom = 0.373
 margin_left = -95.744
-margin_top = 32.2
+margin_top = 96.2
 margin_right = 96.256
-margin_bottom = 112.2
+margin_bottom = 176.2
 texture = ExtResource( 16 )
 expand = true
 __meta__ = {
@@ -423,14 +423,16 @@ __meta__ = {
 }
 
 [node name="Icon" type="TextureRect" parent="IntroUI/CreditsPanel"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.531
 anchor_top = 0.373
 anchor_right = 0.531
 anchor_bottom = 0.373
-margin_left = -647.744
-margin_top = 424.2
-margin_right = -455.747
-margin_bottom = 616.197
+margin_left = -95.745
+margin_top = -95.8
+margin_right = 96.252
+margin_bottom = 96.197
+rect_rotation = 359.999
 rect_pivot_offset = Vector2( 96, 96 )
 texture = ExtResource( 9 )
 expand = true
@@ -439,13 +441,13 @@ __meta__ = {
 }
 
 [node name="BloodEffect" type="TextureRect" parent="IntroUI/CreditsPanel"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.588235 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -16.0
 margin_top = -400.0
-margin_right = 2715.0
-margin_bottom = 1200.0
+margin_right = 837.0
+margin_bottom = 100.0
 texture = ExtResource( 19 )
 expand = true
 __meta__ = {
@@ -453,12 +455,13 @@ __meta__ = {
 }
 
 [node name="HandLogo" type="TextureRect" parent="IntroUI/CreditsPanel"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0475817 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -944.0
-margin_right = 1974.0
-margin_bottom = 1704.0
+margin_right = -489.75
+margin_bottom = 264.0
+rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 20 )
 expand = true
 __meta__ = {
@@ -466,7 +469,6 @@ __meta__ = {
 }
 
 [node name="GameTitle" type="Label" parent="IntroUI/CreditsPanel"]
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -487,6 +489,8 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="IntroUI/CreditsPanel"]
 anims/RESET = SubResource( 14 )
 anims/intro_credits = ExtResource( 17 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="IntroUI/CreditsPanel"]
 
 [node name="CutsceneTimer" type="Timer" parent="."]
 wait_time = 1.5
