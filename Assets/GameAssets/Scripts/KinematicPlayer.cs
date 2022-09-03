@@ -49,7 +49,7 @@ public class KinematicPlayer : KinematicBody
 	public override void _Ready()
 	{
 		//Find node exists as well.
-		Input.SetMouseMode(Input.MouseMode.Captured);
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 		armY = GetNode<Position3D>("SpringArmY");
 		springArm = armY.GetNode<SpringArm>("SpringArm");
 		pivot = GetNode<Position3D>("Pivot");
@@ -75,13 +75,13 @@ public class KinematicPlayer : KinematicBody
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event.IsActionPressed("click"))
-			Input.SetMouseMode(Input.MouseMode.Captured);
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		else if (@event.IsActionPressed("toggle_capture"))
 		{
-			if (Input.GetMouseMode() == Input.MouseMode.Captured)
-				Input.SetMouseMode(Input.MouseMode.Visible);
+			if (Input.MouseMode == Input.MouseModeEnum.Captured)
+				Input.MouseMode = (Input.MouseModeEnum.Visible);
 			else
-				Input.SetMouseMode(Input.MouseMode.Captured);
+				Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 		else if (@event.IsActionPressed("game_zoomin"))
 		{
@@ -117,7 +117,7 @@ public class KinematicPlayer : KinematicBody
 			UpdateInventoryPanel();
 		}
 
-		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
+		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseModeEnum.Captured)
 		{
 			armY.RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * MouseSensitivity));
 			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * MouseSensitivity));
@@ -372,14 +372,14 @@ public class KinematicPlayer : KinematicBody
 			//inventoryPanel.Visible = true;
 			//hologramRect.Visible = false;
 			//inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
-			Input.SetMouseMode(Input.MouseMode.Visible);
+			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 		else
 		{
 			//inventoryPanel.Visible = false;
 			//hologramRect.Visible = true;
 			//inventoryRect.Texture = null;
-			Input.SetMouseMode(Input.MouseMode.Captured);
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}	
 	}
 

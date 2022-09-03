@@ -57,7 +57,7 @@ public class Weapon : Spatial
 			Fire();
 		if (@event.IsActionPressed("game_reload") && GetParent<InventoryItem>().Enabled)
 			Reload();
-		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
+		if (@event is InputEventMouseMotion eventMouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured)
 			mouseRelativeMovement = -eventMouseMotion.Relative.x;
 	}
 

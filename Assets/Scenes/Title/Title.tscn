@@ -1601,7 +1601,6 @@ fov = 50.0
 script = ExtResource( 9 )
 Random = true
 Damping = 5.0
-LerpStrength = 0.1
 
 [node name="Timer" type="Timer" parent="Camera"]
 wait_time = 0.1

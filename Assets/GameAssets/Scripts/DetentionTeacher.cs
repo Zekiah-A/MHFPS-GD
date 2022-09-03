@@ -23,7 +23,6 @@ public class DetentionTeacher : Spatial
         };
 
         deathColourRect = GetTree().CurrentScene.GetNode("DetentionUI").GetNode("DeathScreen").GetNode<ColorRect>("DeathColour");
-        
         deathScreenTween = GetTree().CurrentScene.GetNode("DetentionUI").GetNode("DeathScreen").GetNode<Tween>("DeathScreenTween");
     }
 

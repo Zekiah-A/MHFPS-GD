@@ -42,19 +42,23 @@ public class Player : RigidBody
 			if (Input.IsActionPressed("game_forward"))
 			{
 				//move the player forward with LinearVelocity(0, 0, MovementSpeed), in the direction of the _cameraPivot's forward vector
-				LinearVelocity -= cameraPivot.GlobalTransform.basis.z * MovementSpeed * delta;			}
+				LinearVelocity -= cameraPivot.GlobalTransform.basis.z * MovementSpeed * delta;
+			}
 			if (Input.IsActionPressed("game_backward"))
 			{
 				//move the player backward with LinearVelocity(0, 0, -MovementSpeed), in the direction of the _cameraPivot's forward vector
-				LinearVelocity += cameraPivot.GlobalTransform.basis.z * MovementSpeed * delta;			}
+				LinearVelocity += cameraPivot.GlobalTransform.basis.z * MovementSpeed * delta;
+			}
 			if (Input.IsActionPressed("game_left"))
 			{
 				//move the player left with LinearVelocity(0, MovementSpeed, 0), in the direction of the _cameraPivot's right vector
-				LinearVelocity -= cameraPivot.GlobalTransform.basis.x * MovementSpeed * delta;			}
+				LinearVelocity -= cameraPivot.GlobalTransform.basis.x * MovementSpeed * delta;
+			}
 			if (Input.IsActionPressed("game_right"))
 			{
 				//move the player right with LinearVelocity(0, -MovementSpeed, 0), in the direction of the _cameraPivot's right vector
-				LinearVelocity += cameraPivot.GlobalTransform.basis.x * MovementSpeed * delta;			}
+				LinearVelocity += cameraPivot.GlobalTransform.basis.x * MovementSpeed * delta;
+			}
 			
 			//make the player jump if they are on the ground and the jump key is pressed
 			if (Input.IsActionJustPressed("game_jump") && groundSensor.IsColliding())

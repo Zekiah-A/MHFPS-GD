@@ -1,10 +1,9 @@
-using System;
 using Godot;
 
 //TODO: Namespace MHFPS.Detention
 public class DetentionManager : Node
 {
-	public bool BunsenBurnerOn = false;
+	public bool BunsenBurnerOn ;
 	public bool PhoneActivated = false;
 
 	private Texture dotCursor;
@@ -84,10 +83,8 @@ public class DetentionManager : Node
 		}
 		
 		//If is hovering, change cursor
-		if (@event is InputEventMouse mouse)
-		{
+		if (@event is InputEventMouse)
 			Input.SetCustomMouseCursor(hoverCursor);
-		}
 	}
 
 	private void OnBunsenBurnerClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
@@ -111,10 +108,8 @@ public class DetentionManager : Node
 		}
 		
 		//If is hovering, change cursor
-		if (@event is InputEventMouse mouse)
-		{
+		if (@event is InputEventMouse)
 			Input.SetCustomMouseCursor(hoverCursor);
-		}
 	}
 	
 	private void OnClockClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
@@ -129,10 +124,8 @@ public class DetentionManager : Node
 		}
 		
 		//If is hovering, change cursor
-		if (@event is InputEventMouse mouse)
-		{
+		if (@event is InputEventMouse)
 			Input.SetCustomMouseCursor(hoverCursor);
-		}
 	}
 	
 	//TODO: Casette should be spelled "cassette", this needs to be fixed everywhere, including in the editor.
@@ -150,10 +143,8 @@ public class DetentionManager : Node
 		}
 		
 		//If is hovering, change cursor
-		if (@event is InputEventMouse mouse)
-		{
+		if (@event is InputEventMouse)
 			Input.SetCustomMouseCursor(hoverCursor);
-		}
 	}
 	
 	//TODO: Implement signals
