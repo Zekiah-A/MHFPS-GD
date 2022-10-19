@@ -1,28 +1,28 @@
 using Godot;
 
 //TODO: Namespace MHFPS.Detention
-public class DetentionManager : Node
+public partial class DetentionManager : Node
 {
 	public bool BunsenBurnerOn ;
 	public bool PhoneActivated = false;
 
-	private Texture dotCursor;
-	private Texture hoverCursor;
+	private Texture2D dotCursor;
+	private Texture2D hoverCursor;
 	private AudioStreamMP3 ambientStream;
 	private AudioStreamMP3[] casetteStreams;
 	private AudioStreamPlayer ambientPlayer;
 	private AudioStreamPlayer3D casettePlayer;
 	
 	private Control detentionUiCanvas;
-	private Spatial bunsenBurner;
-	private Spatial clock;
-	private Spatial phone;
-	private Spatial doors;
+	private Node3D bunsenBurner;
+	private Node3D clock;
+	private Node3D phone;
+	private Node3D doors;
 
 	public override void _Ready()
 	{
-		dotCursor = ResourceLoader.Load<Texture>("res://Assets/GameAssets/Textures/aim_reticle.png");
-		hoverCursor = ResourceLoader.Load<Texture>("res://Assets/GameAssets/Textures/aim_hover.png");
+		dotCursor = ResourceLoader.Load<Texture2D>("res://Assets/GameAssets/Textures/aim_reticle.png");
+		hoverCursor = ResourceLoader.Load<Texture2D>("res://Assets/GameAssets/Textures/aim_hover.png");
 		ambientStream = ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/ambient.mp3");
 		casetteStreams = new []
 		{
@@ -33,10 +33,10 @@ public class DetentionManager : Node
 		detentionUiCanvas = GetNode<Control>("DetentionUI"); //TODO: Mouse down loading-like animation for the player crumpling up paper
 		ambientPlayer = GetNode<AudioStreamPlayer>("AmbientPlayer");
 		casettePlayer = GetNode("CasetteRecorder").GetNode<AudioStreamPlayer3D>("CasettePlayer");
-		bunsenBurner = GetNode<Spatial>("BunsenBurner");
-		clock = GetNode<Spatial>("Clock");
-		phone = GetNode<Spatial>("Phone");
-		doors = GetTree().CurrentScene.GetNode<Spatial>("Doors");
+		bunsenBurner = GetNode<Node3D>("BunsenBurner");
+		clock = GetNode<Node3D>("Clock");
+		phone = GetNode<Node3D>("Phone");
+		doors = GetTree().CurrentScene.GetNode<Node3D>("Doors");
 
 		BeginGame();
 	}
@@ -73,12 +73,18 @@ public class DetentionManager : Node
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
 				if (!PhoneActivated)
+				{
 					(phone as Phone)?.Activate();
+					//DetentionCamera.BindRotate(phone);
+				}
 				else
+				{
 					(phone as Phone)?.Deactivate();
+					//DetentionCamera.UnbindRotate(phone);
+				}
 			}
 		}
 		
@@ -91,7 +97,7 @@ public class DetentionManager : Node
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
 				BunsenBurnerOn = !BunsenBurnerOn;
 				GD.Print($"Bunsen Burner on: {BunsenBurnerOn}");
@@ -117,7 +123,7 @@ public class DetentionManager : Node
 		//Unwind clock sequence.
 		if (@event is InputEventMouseButton mouseButton)
 		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
 				(clock as Clock)?.Unwind();
 			}
@@ -133,7 +139,7 @@ public class DetentionManager : Node
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
 				//Stop the casette recorder from playing. Play click sound to notify that it has been shut off.
 				casettePlayer.Stream = casetteStreams[2];

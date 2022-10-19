@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class GunWeapon : Weapon
+public partial class GunWeapon : Weapon
 {
 
 }

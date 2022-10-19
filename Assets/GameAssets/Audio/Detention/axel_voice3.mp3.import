@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/axel_voice3.mp3-9b83f3f97c0c62e65f8bba1a0385a1a1.mp3str"
+uid="uid://dwlyi47k4pvsa"
+path="res://.godot/imported/axel_voice3.mp3-9b83f3f97c0c62e65f8bba1a0385a1a1.mp3str"
 
 [deps]
 
 source_file="res://Assets/GameAssets/Audio/Detention/axel_voice3.mp3"
-dest_files=[ "res://.import/axel_voice3.mp3-9b83f3f97c0c62e65f8bba1a0385a1a1.mp3str" ]
+dest_files=["res://.godot/imported/axel_voice3.mp3-9b83f3f97c0c62e65f8bba1a0385a1a1.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

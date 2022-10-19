@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class Doors : Spatial
+public partial class Doors : Node3D
 {
 	public bool LeftOpened = true;
 	public bool RightOpened = true;
@@ -20,15 +20,15 @@ public class Doors : Spatial
 	}
 	private uint doorsClosed = 0;
 
-	public Spatial leftDoor;
-	public Spatial rightDoor;
+	public Node3D leftDoor;
+	public Node3D rightDoor;
 	public Timer batteryTimer;
 	public Label batteryLabel;
 
 	public override void _Ready()
 	{
-		leftDoor = GetNode<Spatial>("LeftDoor");
-		rightDoor = GetNode<Spatial>("RightDoor");
+		leftDoor = GetNode<Node3D>("LeftDoor");
+		rightDoor = GetNode<Node3D>("RightDoor");
 		batteryTimer = GetNode<Timer>("BatteryTimer");
 		batteryLabel = GetTree().CurrentScene.GetNode("DetentionUI").GetNode("BatteryPanel").GetNode<Label>("Battery");
 

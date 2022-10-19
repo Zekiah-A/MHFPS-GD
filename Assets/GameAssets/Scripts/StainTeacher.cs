@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class StainTeacher : DetentionTeacher
+public partial class StainTeacher : DetentionTeacher
 {
 
     public override void _Ready()

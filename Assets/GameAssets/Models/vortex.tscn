@@ -4,13 +4,13 @@
 
 [sub_resource type="Shader" id=1]
 code = "shader_type spatial;
-render_mode depth_draw_alpha_prepass, cull_front, specular_schlick_ggx, depth_test_disable, ensure_correct_normals, shadows_disabled, ambient_light_disabled;
+render_mode depth_draw_opaque, cull_front, specular_schlick_ggx, depth_test_disable, ensure_correct_normals, shadows_disabled, ambient_light_disabled;
 
 uniform sampler2D tex_frg_32;
 uniform sampler2D tex_frg_3;
-uniform vec4 MainColor : hint_color;
-uniform vec4 BackColor1 : hint_color;
-uniform vec4 BackColor2 : hint_color;
+uniform vec4 MainColor : source_color;
+uniform vec4 BackColor1 : source_color;
+uniform vec4 BackColor2 : source_color;
 uniform float Brightness;
 
 
@@ -105,7 +105,7 @@ void fragment() {
 	vec3 n_in53p1 = vec3(1.00000, 4.00000, 1.00000);
 	vec3 n_out53p0 = n_out38p0 * n_in53p1;
 
-// Texture:32
+// Texture2D:32
 	vec4 tex_frg_32_read = texture(tex_frg_32, n_out53p0.xy);
 	vec3 n_out32p0 = tex_frg_32_read.rgb;
 	float n_out32p1 = tex_frg_32_read.a;
@@ -142,7 +142,7 @@ void fragment() {
 // VectorOp:4
 	vec3 n_out4p0 = n_out5p0 + n_out2p0;
 
-// Texture:3
+// Texture2D:3
 	vec4 tex_frg_3_read = texture(tex_frg_3, n_out4p0.xy);
 	vec3 n_out3p0 = tex_frg_3_read.rgb;
 	float n_out3p1 = tex_frg_3_read.a;
@@ -173,7 +173,7 @@ void fragment() {
 
 // Input:58
 
-// Texture:59
+// Texture2D:59
 	vec3 n_out59p0;
 	float n_out59p1;
 	{

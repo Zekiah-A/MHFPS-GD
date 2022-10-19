@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class MeleeWeapon : Spatial
+public partial class MeleeWeapon : Node3D
 {
 	private float swayThreshold = 4; //How much a mouse must be pushed to trigger.
 	private readonly float swayLeft = 0.2f;
@@ -24,18 +24,18 @@ public class MeleeWeapon : Spatial
 			mouseRelativeMovement = -eventMouseMotion.Relative.x;
 	}
 
-	public override void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		SwayWeapon(delta);
 	}
-	
-	public virtual void SwayWeapon(float delta)
+
+	protected virtual void SwayWeapon(double delta)
 	{
 		if (mouseRelativeMovement > swayThreshold)
-			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, swayLeft, swayStrength * delta));
+			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, swayLeft, (float) (swayStrength * delta)));
 		else if (mouseRelativeMovement < -swayThreshold)
-			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, swayRight, swayStrength * delta));
+			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, swayRight, (float) (swayStrength * delta)));
 		else
-			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, 0, swayStrength * delta));
+			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, 0, (float) (swayStrength * delta)));
 	}
 }

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/jumpscare1.mp3-b1a21a8fca60206e943124b154f55922.mp3str"
+uid="uid://8yte2dt6fi72"
+path="res://.godot/imported/jumpscare1.mp3-b1a21a8fca60206e943124b154f55922.mp3str"
 
 [deps]
 
 source_file="res://Assets/GameAssets/Audio/Detention/jumpscare1.mp3"
-dest_files=[ "res://.import/jumpscare1.mp3-b1a21a8fca60206e943124b154f55922.mp3str" ]
+dest_files=["res://.godot/imported/jumpscare1.mp3-b1a21a8fca60206e943124b154f55922.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

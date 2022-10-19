@@ -4,8 +4,8 @@
 
 [node name="zek" instance=ExtResource( 1 )]
 
-[node name="zekiah-base" parent="zekiah/Skeleton" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00112057, -0.000724793, -0.0193012 )
+[node name="zekiah-base" parent="zekiah/Skeleton3D" index="1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00112057, -0.000724793, -0.0193012 )
 
-[node name="zekiah-tongue01" parent="zekiah/Skeleton" index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0110781, -0.00165463, -0.0665474 )
+[node name="zekiah-tongue01" parent="zekiah/Skeleton3D" index="6"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0110781, -0.00165463, -0.0665474 )

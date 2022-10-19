@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh"
+uid="uid://de3r6wqjwu50c"
+path="res://.godot/imported/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh"
 
 [deps]
 
-files=[ "res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh" ]
+files=["res://.godot/imported/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh"]
 
 source_file="res://Assets/GameAssets/Models/impact_particle.obj"
-dest_files=[ "res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh", "res://.import/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh" ]
+dest_files=["res://.godot/imported/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh", "res://.godot/imported/impact_particle.obj-897085a6a3091f6f098bdf60869a8ec9.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

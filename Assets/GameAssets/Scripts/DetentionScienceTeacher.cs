@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using Color = Godot.Color;
 
-public class DetentionScienceTeacher : Node //: DetentionManager
+public partial class DetentionScienceTeacher : Node //: DetentionManager
 {
 	private float minWhiteValue = 0.05f;
 	
@@ -23,12 +23,12 @@ public class DetentionScienceTeacher : Node //: DetentionManager
 
 	public async void OnSubmitAnswerClicked()
 	{
-		for (int n = 0; n < numbers.Length; n++)
+		/*for (int n = 0; n < numbers.Length; n++)
 		{
 			for (int i = 0; i < 4; i++) //Wait 4 frames for screen to load
 				await ToSignal(GetTree(), "idle_frame");
 
-			var uImg = GetViewport().GetTexture().GetData();
+			var uImg = GetViewport().GetTexture().;
 			uImg.FlipY();
 			var img = uImg.GetRect(new Rect2(GetNode<Control>("AnswerDrawArea").RectGlobalPosition, GetNode<Control>("AnswerDrawArea").RectSize));
 			
@@ -51,6 +51,6 @@ public class DetentionScienceTeacher : Node //: DetentionManager
 				}
 			}
 			GD.Print($"ascii: {n} match:{match} total: {total} percent: {(float)match/total*100}");
-		}
+		}*/
 	}
 }

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/mhfps_from_start_to_lose.mp3-e2770b9ec4e3de45f9aece4de8f8c158.mp3str"
+uid="uid://uprhjbyciepk"
+path="res://.godot/imported/mhfps_from_start_to_lose.mp3-e2770b9ec4e3de45f9aece4de8f8c158.mp3str"
 
 [deps]
 
 source_file="res://Assets/GameAssets/Audio/Music/mhfps_from_start_to_lose.mp3"
-dest_files=[ "res://.import/mhfps_from_start_to_lose.mp3-e2770b9ec4e3de45f9aece4de8f8c158.mp3str" ]
+dest_files=["res://.godot/imported/mhfps_from_start_to_lose.mp3-e2770b9ec4e3de45f9aece4de8f8c158.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

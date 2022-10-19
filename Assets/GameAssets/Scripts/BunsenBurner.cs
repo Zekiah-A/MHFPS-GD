@@ -1,19 +1,19 @@
 using Godot;
 using System;
 
-public class BunsenBurner : Spatial
+public partial class BunsenBurner : Node3D
 {
 	public int BurnTime = 0;
-	private Light flameLight;
-	private Particles flameParticles;
+	private Light3D flameLight;
+	private GPUParticles3D flameParticles;
 	private Timer burnerTimer;
 	private Timer overuseTimer;
 	private Label workLeftLabel;
 
 	public override void _Ready()
 	{
-		flameLight = GetNode("Flame").GetNode<Light>("FlameLight");
-		flameParticles = GetNode("Flame").GetNode<Particles>("FlameParticles");
+		flameLight = GetNode("Flame").GetNode<Light3D>("FlameLight");
+		flameParticles = GetNode("Flame").GetNode<GPUParticles3D>("FlameParticles");
 		burnerTimer = GetNode<Timer>("BurnerTimer");
 		overuseTimer = GetNode<Timer>("OveruseTimer");
 		workLeftLabel = GetTree().CurrentScene.GetNode("DetentionUI").GetNode("WorkPanel").GetNode<Label>("WorkLeft");

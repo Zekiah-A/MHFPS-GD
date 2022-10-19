@@ -1,20 +1,21 @@
 [remap]
 
 importer="wavefront_obj"
+importer_version=1
 type="Mesh"
-path="res://.import/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh"
+uid="uid://lv3quocqmqpo"
+path="res://.godot/imported/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh"
 
 [deps]
 
-files=[ "res://.import/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh" ]
+files=["res://.godot/imported/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh"]
 
 source_file="res://Assets/GameAssets/Models/Makehuman/Watcher/Watcher.obj"
-dest_files=[ "res://.import/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh", "res://.import/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh" ]
+dest_files=["res://.godot/imported/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh", "res://.godot/imported/Watcher.obj-5b928e2d9e3a9db26bdff0d38740fc17.mesh"]
 
 [params]
 
 generate_tangents=true
-scale_mesh=Vector3( 1, 1, 1 )
-offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
-optimize_mesh_flags=4286
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

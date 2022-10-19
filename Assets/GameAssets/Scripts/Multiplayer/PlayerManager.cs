@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Godot;
 //using TMPro;
 
-public class PlayerManager : Node
+public partial class PlayerManager : Node
 {
     public int id;
     public string username;

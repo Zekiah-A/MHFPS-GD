@@ -7,7 +7,7 @@ using System.Collections.Generic;
 // ^ A) Does it face input anyways? What about move in dir of rotation.
 // Acceleration tilting (looks liek surfing), rotate around centre of mass
 
-public class KinematicPlayer : KinematicBody
+public partial class KinematicPlayer : CharacterBody3D
 {
 	public bool FirstPerson;
 
@@ -32,37 +32,37 @@ public class KinematicPlayer : KinematicBody
 	private Vector3 lastvelocity;
 	private Vector3 snapVector = Vector3.Zero;
 
-	private SpringArm springArm;
-	private Position3D armY;
-	private Position3D pivot;
-	private Spatial inventoryNode;
+	private SpringArm3D springArm;
+	private Marker3D armY;
+	private Marker3D pivot;
+	private Node3D inventoryNode;
 	private TextureRect hologramRect;
-	private Viewport hologramViewport; 
-	private Camera hologramCamera;
-	private Position3D hologramCameraPos;
+	private SubViewport hologramViewport; 
+	private Camera3D hologramCamera;
+	private Marker3D hologramCameraPos;
 	private Panel inventoryPanel;
 	private TextureRect inventoryRect;
-	private Viewport inventoryViewport;
-	private Camera inventoryCamera;
-	private Position3D inventoryCameraPos;
+	private SubViewport inventoryViewport;
+	private Camera3D inventoryCamera;
+	private Marker3D inventoryCameraPos;
 	private Panel phoneScreen;
 	public override void _Ready()
 	{
 		//Find node exists as well.
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		armY = GetNode<Position3D>("SpringArmY");
-		springArm = armY.GetNode<SpringArm>("SpringArm");
-		pivot = GetNode<Position3D>("Pivot");
-		inventoryNode = pivot.GetNode<Spatial>("Inventory");
+		armY = GetNode<Marker3D>("SpringArmY");
+		springArm = armY.GetNode<SpringArm3D>("SpringArm3D");
+		pivot = GetNode<Marker3D>("Pivot");
+		inventoryNode = pivot.GetNode<Node3D>("Inventory");
 		hologramRect = GetNode("PlayerHUD").GetNode<TextureRect>("TextureRect");
-		hologramViewport = pivot.GetNode<Viewport>("HoloViewport");
-		hologramCamera = hologramViewport.GetNode<Camera>("HoloCamera");
-		hologramCameraPos = pivot.GetNode<Position3D>("HoloCamPosition");
+		hologramViewport = pivot.GetNode<SubViewport>("HoloViewport");
+		hologramCamera = hologramViewport.GetNode<Camera3D>("HoloCamera");
+		hologramCameraPos = pivot.GetNode<Marker3D>("HoloCamPosition");
 		inventoryPanel = GetNode("PlayerHUD").GetNode<Panel>("InvPanel");
 		inventoryRect = inventoryPanel.GetNode<TextureRect>("TextureRect");
-		inventoryViewport = pivot.GetNode<Viewport>("InvViewport");
-		inventoryCamera = inventoryViewport.GetNode<Camera>("InvCamera");
-		inventoryCameraPos = pivot.GetNode<Position3D>("InvCamPosition");
+		inventoryViewport = pivot.GetNode<SubViewport>("InvViewport");
+		inventoryCamera = inventoryViewport.GetNode<Camera3D>("InvCamera");
+		inventoryCameraPos = pivot.GetNode<Marker3D>("InvCamPosition");
 		phoneScreen = GetNode("PlayerHUD").GetNode<Panel>("PhoneScreen");
 		
 		inventoryPanel.Visible = false;
@@ -119,25 +119,25 @@ public class KinematicPlayer : KinematicBody
 
 		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseModeEnum.Captured)
 		{
-			armY.RotateY(Mathf.Deg2Rad(-eventMouseMotion.Relative.x * MouseSensitivity));
-			springArm.RotateX(Mathf.Deg2Rad(-eventMouseMotion.Relative.y * MouseSensitivity));
-			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.Deg2Rad(-75), Mathf.Deg2Rad(75)),
+			armY.RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.x * MouseSensitivity));
+			springArm.RotateX(Mathf.DegToRad(-eventMouseMotion.Relative.y * MouseSensitivity));
+			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.DegToRad(-75), Mathf.DegToRad(75)),
 				springArm.Rotation.y, springArm.Rotation.z);
 			//smooth this out somehow - move to process
 		}
 		else if (@event is InputEventKey eventKey && eventKey.Pressed)
 		{	//eventKey.Pressed && eventKey.Scancode == (int)KeyList.Escape
 			///<summary>checking for number keys.</summary>
-			if (eventKey.Scancode >= 49 && eventKey.Scancode <= 53)
+			/*if (eventKey.Keycode >= 49 && eventKey.Scancode <= 53)
 			{
 				InventoryCurrent = (int) eventKey.Scancode - 49;
 				UpdateInventory();
 				UpdateInventoryPanel();
-			}
+			}*/
 		}
 	}
 
-	public override void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 inputVector = GetInputVector();
 		Vector3 direction = GetDirection(inputVector);
@@ -151,7 +151,7 @@ public class KinematicPlayer : KinematicBody
 		AccelerationTilt(delta);
 
 		//TODO: Make camera controllable with right stick & arrow keys
-		velocity = MoveAndSlideWithSnap(velocity, snapVector, Vector3.Up, true);
+		//velocity = MoveAndSlide(velocity, snapVector, Vector3.Up, true);
 	
 		//TODO: Constantly rotate camera to face back of player / pivot back
 		//camera rotation = lerp player pivot rotation,
@@ -159,7 +159,7 @@ public class KinematicPlayer : KinematicBody
 	}
 
 	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
-	public override void _Process(float delta)
+	public override void _Process(double delta)
 	{
 		Vector3 inputVector = GetInputVector();
 		Vector3 direction = GetDirection(inputVector); //TODO: THESE SHOULD BE GLObAL - used in bothj process & physprocess!
@@ -219,19 +219,19 @@ public class KinematicPlayer : KinematicBody
 		return direction;
 	}
 
-	private void ApplyMovement(Vector3 inputVector, Vector3 direction, float delta)
+	private void ApplyMovement(Vector3 inputVector, Vector3 direction, double delta)
 	{
 		lastvelocity.x = velocity.x;
 		lastvelocity.z = velocity.z;
 		
 		if (direction != Vector3.Zero)
 		{
-			velocity.x = Mathf.MoveToward(velocity.x, direction.x * MaxSpeed, Acceleration * delta);
-			velocity.z = Mathf.MoveToward(velocity.z, direction.z * MaxSpeed, Acceleration * delta);
+			velocity.x = Mathf.MoveToward(velocity.x, direction.x * MaxSpeed, (float) (Acceleration * delta));
+			velocity.z = Mathf.MoveToward(velocity.z, direction.z * MaxSpeed, (float) (Acceleration * delta));
 		}
 	}
 	
-	private void ApplyRotation(float delta, Vector3 direction)
+	private void ApplyRotation(double delta, Vector3 direction)
 	{
 		if (FirstPerson)
 		{
@@ -247,35 +247,35 @@ public class KinematicPlayer : KinematicBody
 			{
 				pivot.Rotation = new Vector3(
 					pivot.Rotation.x,
-					Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), RotSpeed * delta),
+					Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), (float) (RotSpeed * delta)),
 					pivot.Rotation.z
 				);
 			}
 		}
 	}
 
-	private void ApplyFriction(Vector3 direction, float delta)
+	private void ApplyFriction(Vector3 direction, double delta)
 	{
 		if (direction == Vector3.Zero)
 		{
 			if (IsOnFloor())
 			{
-				velocity.x = Mathf.MoveToward(velocity.x, 0, Friction * delta);
-				velocity.y = Mathf.MoveToward(velocity.y, 0, Friction * delta);
-				velocity.z = Mathf.MoveToward(velocity.z, 0, Friction * delta);
+				velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (Friction * delta));
+				velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (Friction * delta));
+				velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (Friction * delta));
 			}
 			else
 			{
-				velocity.x = Mathf.MoveToward(velocity.x, 0, AirFriction * delta);
-				velocity.y = Mathf.MoveToward(velocity.y, 0, AirFriction * delta);
-				velocity.z = Mathf.MoveToward(velocity.z, 0, AirFriction * delta);
+				velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (AirFriction * delta));
+				velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (AirFriction * delta));
+				velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (AirFriction * delta));
 			}
 		}
 	}
 
-	private void ApplyGravity(float delta)
+	private void ApplyGravity(double delta)
 	{
-		velocity.y += Gravity * delta;
+		velocity.y += (float) (Gravity * delta);
 		velocity.y = Mathf.Clamp(velocity.y, Gravity, JumpImpulse);
 	}
 
@@ -308,7 +308,7 @@ public class KinematicPlayer : KinematicBody
 		if (springArm.SpringLength == 0)
 		{
 			FirstPerson = true;
-			springArm.Translation = new Vector3(0, 1.5f, -0.4f);
+			springArm.Position = new Vector3(0, 1.5f, -0.4f);
 		} else
 		{
 			FirstPerson = false;
@@ -317,23 +317,23 @@ public class KinematicPlayer : KinematicBody
 				switch (Inventory[InventoryCurrent].ItemType)
 				{
 					case (int) ItemTypes.Weapon:
-						springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 0, 0.1f), Mathf.Lerp(springArm.Translation.y, 2, 0.1f), 0);
+						springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f), Mathf.Lerp(springArm.Position.y, 2, 0.1f), 0);
 						break;
 					case (int) ItemTypes.MeleeWeapon:
-						springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 1, 0.1f), Mathf.Lerp(springArm.Translation.y, 1.5f, 0.1f), 0);
+						springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 1, 0.1f), Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0);
 						break;
 					default:
-						springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 0, 0.1f), Mathf.Lerp(springArm.Translation.y, 1.5f, 0.1f), 0);
+						springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f), Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0);
 						break;
 				}
 			}
 			else
-				springArm.Translation = new Vector3(Mathf.Lerp(springArm.Translation.x, 0, 0.1f), Mathf.Lerp(springArm.Translation.y, 1.5f, 0.1f), 0);
+				springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f), Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0);
 		}
 	}
 
 	private void DrawHologramViewport() =>
-		hologramRect.Texture = (Texture) hologramViewport.GetTexture();
+		hologramRect.Texture = hologramViewport.GetTexture();
 
 
 	
@@ -348,14 +348,14 @@ public class KinematicPlayer : KinematicBody
 				inventoryPanelButtons.Add(button);
 			
 				if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
-					button.AddColorOverride("font_color", new Color(0, 0, 1, 1));
+					button.AddThemeColorOverride("font_color", new Color(0, 0, 1, 1));
 				else
-					button.AddColorOverride("font_color", new Color(1, 1, 1, 0.5f));
+					button.AddThemeColorOverride("font_color", new Color(1, 1, 1, 0.5f));
 				
 				try
 				{
 					button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] {Inventory[inventoryPanelButtons.IndexOf(button)].Name}";
-					button.Icon = ResourceLoader.Load(Inventory[inventoryPanelButtons.IndexOf(button)].InventoryTexture) as Texture;
+					button.Icon = ResourceLoader.Load(Inventory[inventoryPanelButtons.IndexOf(button)].InventoryTexture) as Texture2D;
 				}
 				catch
 				{
@@ -371,14 +371,14 @@ public class KinematicPlayer : KinematicBody
 		{
 			//inventoryPanel.Visible = true;
 			//hologramRect.Visible = false;
-			//inventoryRect.Texture = (Texture) inventoryViewport.GetTexture();
+			//inventoryRect.Texture2D = (Texture2D) inventoryViewport.GetTexture();
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 		else
 		{
 			//inventoryPanel.Visible = false;
 			//hologramRect.Visible = true;
-			//inventoryRect.Texture = null;
+			//inventoryRect.Texture2D = null;
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}	
 	}
@@ -388,13 +388,13 @@ public class KinematicPlayer : KinematicBody
 		Tween phoneTween = GetNode("PlayerHUD").GetNode<Tween>("PhoneTween");
 		
 		//If already tweening, abort (in order to prevent spam).
-		if (!phoneTween.IsActive())
+		//if (!phoneTween.IsActive())
 		{
 			//If phone screen is open:
 			if (phoneScreen.Visible)
 			{
 				GetNode("PlayerHUD").GetNode("PhoneScreen").GetNode("Cursor").Set("FollowMouse", true);
-				phoneTween.InterpolateProperty(
+				/*phoneTween.InterpolateProperty(
 					phoneScreen,
 					"rect_position",
 					GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition")
@@ -404,16 +404,16 @@ public class KinematicPlayer : KinematicBody
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.In
 				);
-				phoneTween.Start();
+				phoneTween.Start();*/
 				await ToSignal(phoneTween, "tween_completed");
 				phoneScreen.Visible = false;
 			}
 			else
 			{
 				GetNode("PlayerHUD").GetNode("PhoneScreen").GetNode("Cursor").Set("FollowMouse", true); //TODO: Make vars for some of these.
-				Input.WarpMousePosition(GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition").RectPosition + (GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition").RectSize / 2));
+				//Input.WarpMouse(GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition").RectPosition + (GetNode("PlayerHUD").GetNode<Panel>("OpenedPosition").RectSize / 2));
 				phoneScreen.Visible = true;
-				phoneTween.InterpolateProperty(
+				/*phoneTween.InterpolateProperty(
 					phoneScreen,
 					"rect_position",
 					GetNode("PlayerHUD").GetNode<Panel>("ClosedPosition").RectPosition,
@@ -422,7 +422,7 @@ public class KinematicPlayer : KinematicBody
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				phoneTween.Start();
+				phoneTween.Start();*/
 			}
 		}
 	}
@@ -434,7 +434,7 @@ public class KinematicPlayer : KinematicBody
 		OpenInventoryPanel();
 	}
 
-	private void AccelerationTilt(float delta)
+	private void AccelerationTilt(double delta)
 	{
 		//i need directional velocity, not general, could be in applymovement?
 		/*

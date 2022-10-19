@@ -9,8 +9,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 1056, -0.25, 0, 0.25, 0, 872, -0.25, 0, 0.25, 0, 832, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
+"points": PackedFloat32Array( 1056, -0.25, 0, 0.25, 0, 872, -0.25, 0, 0.25, 0, 832, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.6, 1 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("PhoneScreen:rect_position:y")
@@ -19,8 +19,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 248, -0.25, 0, 0.25, 0, 232, -0.25, 0, 0.25, 0, 264, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6, 1 )
+"points": PackedFloat32Array( 248, -0.25, 0, 0.25, 0, 232, -0.25, 0, 0.25, 0, 264, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.6, 1 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("PhoneScreen:rect_rotation")
@@ -29,6 +29,6 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 5, -0.25, 0, 0.251854, 5.31006, 0, -0.369497, -0.833175, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PackedFloat32Array( 5, -0.25, 0, 0.251854, 5.31006, 0, -0.369497, -0.833175, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 1 )
 }

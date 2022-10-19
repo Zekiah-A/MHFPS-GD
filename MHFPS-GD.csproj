@@ -1,6 +1,6 @@
-<Project Sdk="Godot.NET.Sdk/3.3.0">
+<Project Sdk="Godot.NET.Sdk/4.0.0-beta1">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
     <RootNamespace>MHFPS-GD</RootNamespace>
   </PropertyGroup>
   <ItemGroup>

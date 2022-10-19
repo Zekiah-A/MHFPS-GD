@@ -2,30 +2,29 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class Actor : Spatial //Player should be actor as well
+public partial class Actor : Node3D //Player should be actor as well
 {
-	[Export]
-	public List<int> State = new List<int> {0};
-	public List<Node> BodiesInSight = new List<Node>();
+	public List<int> State = new();
+	public List<Node> BodiesInSight = new();
 	
 	private AnimationPlayer animationPlayer;
-	private Area actorSight;
+	private Area3D actorSight;
 	private Label thoughtLabel;
 
 	public override void _Ready()
 	{
 		animationPlayer = GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer");
-		actorSight = GetNode<Area>("ActorSight");
+		actorSight = GetNode<Area3D>("ActorSight");
 		
 		//TESTING: Show actor thoughts for debugging.
-		thoughtLabel = GetNode("Viewport").GetNode("Control").GetNode<Label>("ThoughtLabel");
+		thoughtLabel = GetNode("SubViewport").GetNode("Control").GetNode<Label>("ThoughtLabel");
 
-		actorSight.Connect("body_entered", this, nameof(OnBodyEnteredSight));
-		actorSight.Connect("body_exited", this, nameof(OnBodyExitedSight));
+		actorSight.Connect("body_entered",new Callable(this,nameof(OnBodyEnteredSight)));
+		actorSight.Connect("body_exited",new Callable(this,nameof(OnBodyExitedSight)));
 	}
 	
 	//TODO: Could also run on ActorTick timer?
-	public override void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (BodiesInSight.Count != 0)
 			State[0] = (int) States.Patrol;

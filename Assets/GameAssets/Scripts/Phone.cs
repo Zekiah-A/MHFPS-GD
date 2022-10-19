@@ -1,35 +1,35 @@
 using Godot;
 
-public class Phone : Spatial
+public partial class Phone : Node3D
 {
-	private Transform defaultTransform;
+	private Transform3D defaultTransform;
 	
-	private Spatial doors;
-	private Spatial cameraBody;
+	private Node3D doors;
+	private Node3D cameraBody;
 	private Tween phoneTween;
-	private Area[] doorButtons;
-	private Texture hoverCursor;
+	private Area3D[] doorButtons;
+	private Texture2D hoverCursor;
 	private Environment worldEnvironment;
 	private Button[] doorUiButtons;
 
 	public override void _Ready()
 	{
-		hoverCursor = ResourceLoader.Load<Texture>("res://Assets/GameAssets/Textures/aim_hover.png");
-		doors = GetTree().CurrentScene.GetNode<Spatial>("Doors");
-		cameraBody = GetTree().CurrentScene.GetNode<Spatial>("CameraBody");
+		hoverCursor = ResourceLoader.Load<Texture2D>("res://Assets/GameAssets/Textures/aim_hover.png");
+		doors = GetTree().CurrentScene.GetNode<Node3D>("Doors");
+		cameraBody = GetTree().CurrentScene.GetNode<Node3D>("CameraBody");
 		phoneTween = GetNode<Tween>("Tween");
 		worldEnvironment = GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment;
 		doorButtons = new []
 		{
-			GetNode<Area>("LeftDoorButton"),
-			GetNode<Area>("RightDoorButton"),
-			GetNode<Area>("OpenButton"),
+			GetNode<Area3D>("LeftDoorButton"),
+			GetNode<Area3D>("RightDoorButton"),
+			GetNode<Area3D>("OpenButton"),
 		};
 
 		doorUiButtons = new[]
 		{
-			GetNode("Viewport").GetNode("PhoneUI").GetNode("ContentPanel").GetNode<Button>("LeftButton"),
-			GetNode("Viewport").GetNode("PhoneUI").GetNode("ContentPanel").GetNode<Button>("RightButton"),
+			GetNode("SubViewport").GetNode("PhoneUI").GetNode("ContentPanel").GetNode<Button>("LeftButton"),
+			GetNode("SubViewport").GetNode("PhoneUI").GetNode("ContentPanel").GetNode<Button>("RightButton"),
 		};
 		
 		doorButtons[0].InputRayPickable = false;
@@ -42,8 +42,8 @@ public class Phone : Spatial
 	public void Activate()
 	{
 		//TODO: Tween, bring phone to face.
-		RotationDegrees = new Vector3(0, 90, 90);
-		Translation = new Vector3(cameraBody.Translation.x, cameraBody.Translation.y, cameraBody.Translation.z - 0.8f);
+		//RotationDegrees = new Vector3(0, 90, 90);
+		Position = new Vector3(cameraBody.Position.x, cameraBody.Position.y, cameraBody.Position.z - 0.8f);
 		doorButtons[0].InputRayPickable = true;
 		doorButtons[1].InputRayPickable = true;
 		doorButtons[2].InputRayPickable = false;
@@ -75,12 +75,12 @@ public class Phone : Spatial
 	//TODO: GUI colours for opened/closed, fake button "press" effect when clicked, etc (use "IsPressed" on the button, and make a style for pressed / unpressed.)
 	//TODO: Vent should not be here, and should only be affected by hovering the mouse over it in doors, as it is light based.
 	
-	//TODO: Mouse state nees to reset once mouse is off of these.
+	//TODO: Mouse state needs to reset once mouse is off of these.
 	private void OnLeftDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
 				if (((Doors) doors).LeftOpened)
 				{
@@ -106,7 +106,7 @@ public class Phone : Spatial
 	{
 		if (@event is InputEventMouseButton mouseButton)
 		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
+			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
 				if (((Doors) doors).RightOpened)
 				{
@@ -130,12 +130,10 @@ public class Phone : Spatial
 
 	private void OnBackgroundClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx) //TODO: Only enable this area when the phone is opened.
 	{
-		if (@event is InputEventMouseButton mouseButton)
+		if (@event is not InputEventMouseButton mouseButton) return;
+		if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 		{
-			if (mouseButton.ButtonIndex == (int) ButtonList.Left && mouseButton.Pressed)
-			{
-				Deactivate();
-			}
+			Deactivate();
 		}
 	}
 	

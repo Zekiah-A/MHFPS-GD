@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/watcher0.mp3-a0808fbda4a21d3c1657b918f0cbe733.mp3str"
+uid="uid://scpkwq6s776g"
+path="res://.godot/imported/watcher0.mp3-a0808fbda4a21d3c1657b918f0cbe733.mp3str"
 
 [deps]
 
 source_file="res://Assets/GameAssets/Audio/Detention/watcher0.mp3"
-dest_files=[ "res://.import/watcher0.mp3-a0808fbda4a21d3c1657b918f0cbe733.mp3str" ]
+dest_files=["res://.godot/imported/watcher0.mp3-a0808fbda4a21d3c1657b918f0cbe733.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

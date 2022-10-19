@@ -1,187 +1,163 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://357lkp8ituva"]
 
-[ext_resource path="res://Assets/Fonts/Custom/title_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/GameAssets/Textures/battery.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Fonts/LiberationSans/liberation_sans_regular.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_1.png" type="Texture" id=4]
-[ext_resource path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_2.png" type="Texture" id=5]
-[ext_resource path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_3.png" type="Texture" id=6]
-[ext_resource path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_4.png" type="Texture" id=7]
-[ext_resource path="res://Assets/GameAssets/Shaders/opacity.shader" type="Shader" id=8]
+[ext_resource type="Texture2D" uid="uid://dsdiep4u4hvx8" path="res://Assets/GameAssets/Textures/battery.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://0y32p8ihfqj6" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://f4dmtbsck1h2" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_2.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cuox8fs7pa7n7" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_3.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cycdqcwy0xy7o" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_4.png" id="7"]
+[ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/opacity.gdshader" id="8"]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="ShaderMaterial" id="3"]
+shader = ExtResource("8")
+shader_parameter/Opacity = 0.0
 
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 8 )
-shader_param/Opacity = 0.0
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 8 )
-shader_param/Opacity = 0.0
+[sub_resource type="ShaderMaterial" id="4"]
+shader = ExtResource("8")
+shader_parameter/Opacity = 0.0
 
 [node name="DetentionUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BatteryPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -176.0
-margin_top = -48.0
+offset_left = -176.0
+offset_top = -48.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Battery" type="Label" parent="BatteryPanel"]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.409
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 0.0159988
-custom_fonts/font = ExtResource( 1 )
+offset_left = 0.0159988
 text = "100%"
-align = 2
-valign = 1
+vertical_alignment = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Colon" type="Label" parent="BatteryPanel"]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.273
 anchor_right = 0.409
 anchor_bottom = 1.0
-margin_left = -0.0480003
-margin_right = 0.0159988
-custom_fonts/font = ExtResource( 1 )
+offset_left = -0.0480003
+offset_right = 0.0159988
 text = ":"
-align = 1
-valign = 1
+vertical_alignment = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BatteryIcon" type="TextureRect" parent="BatteryPanel"]
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 0.273
 anchor_bottom = 1.0
-margin_right = -0.0480003
+offset_right = -0.0480003
 mouse_filter = 2
-texture = ExtResource( 2 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("2")
+ignore_texture_size = true
 
 [node name="WorkPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -48.0
-margin_right = 128.0
+offset_top = -48.0
+offset_right = 128.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Details" type="Label" parent="WorkPanel"]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.0625
 anchor_right = 0.6625
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 3 )
-text = "Work Left:"
-valign = 1
+offset_left = -8.0
+offset_right = 0.199997
+text = "Work left:"
+vertical_alignment = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="WorkLeft" type="Label" parent="WorkPanel"]
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.664062
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 3 )
 text = "300"
-valign = 1
+vertical_alignment = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="DeathScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DeathColour" type="ColorRect" parent="DeathScreen"]
 visible = false
-material = SubResource( 3 )
+material = SubResource("3")
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0.745098, 0.0196078, 0.0196078, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color(0.745098, 0.0196078, 0.0196078, 1)
 
 [node name="DeathRect1" type="TextureRect" parent="DeathScreen"]
 visible = false
-material = SubResource( 4 )
+material = SubResource("4")
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = ExtResource( 4 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("4")
 
 [node name="DeathRect2" type="TextureRect" parent="DeathScreen"]
 visible = false
-material = SubResource( 4 )
+material = SubResource("4")
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = ExtResource( 5 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("5")
 
 [node name="DeathRect3" type="TextureRect" parent="DeathScreen"]
 visible = false
-material = SubResource( 4 )
+material = SubResource("4")
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = ExtResource( 6 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("6")
 
 [node name="DeathRect4" type="TextureRect" parent="DeathScreen"]
 visible = false
-material = SubResource( 4 )
+material = SubResource("4")
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = ExtResource( 7 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource("7")
 
 [node name="DeathScreenTween" type="Tween" parent="DeathScreen"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+editor_description = ""
+script = null

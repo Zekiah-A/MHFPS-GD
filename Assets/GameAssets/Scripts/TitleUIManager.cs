@@ -2,7 +2,7 @@ using Godot;
 using System;
 using DiscordRPC;
 
-public class TitleUIManager : Control
+public partial class TitleUIManager : Control
 {	
 	private Panel tabPanel;
 	private Godot.Button tabOther;
@@ -32,7 +32,7 @@ public class TitleUIManager : Control
 		mainPanels = GetNode<Panel>("MainPanels");
 		panelTween = GetNode<Tween>("PanelTween");
 
-		Connect("resized", this, nameof(OnUIResized));
+		Connect("resized",new Callable(this,nameof(OnUIResized)));
 		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.x, 0);
 		mainPanels2 = new Vector2(0, 0);
 		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.x, 0);
@@ -74,7 +74,7 @@ public class TitleUIManager : Control
 			SwitchPanel(3, true);
 	}
 
-	public void OnStartPressed() => GetTree().ChangeScene("res://Assets/Scenes/Intro/Intro.tscn");
+	public void OnStartPressed() => GetTree().ChangeSceneToFile("res://Assets/Scenes/Intro/Intro.tscn");
 
 	//Index 1: Other panel, Index 2: Play Panel, Index 3: Multiplayer Panel
 	private void OnTabButtonPressed(int index) => SwitchPanel(index);
@@ -84,7 +84,7 @@ public class TitleUIManager : Control
 		switch (index)
 		{
 			case 1:
-				tabPanelTween.InterpolateProperty (
+				/*tabPanelTween.InterpolateProperty (
 					tabOther.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
@@ -93,11 +93,10 @@ public class TitleUIManager : Control
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				tabPanelTween.Start();
-				GD.Print("TabOther hovered.");
+				tabPanelTween.Start();*/
 				break;
 			case 2:
-				tabPanelTween.InterpolateProperty (
+				/*tabPanelTween.InterpolateProperty (
 					tabPlay.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
@@ -106,11 +105,10 @@ public class TitleUIManager : Control
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				tabPanelTween.Start();
-				GD.Print("TabPlay hovered");
+				tabPanelTween.Start();*/
 				break;
 			case 3:
-				tabPanelTween.InterpolateProperty (
+				/*tabPanelTween.InterpolateProperty (
 					tabMultiplayer.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(1, 1), //from
@@ -119,8 +117,7 @@ public class TitleUIManager : Control
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				tabPanelTween.Start();
-				GD.Print("TabMultiplayer hovered");
+				tabPanelTween.Start();*/
 				break;
 		}
 	}
@@ -130,7 +127,7 @@ public class TitleUIManager : Control
 		switch (index)
 		{
 			case 1:
-				tabPanelTween.InterpolateProperty (
+				/*tabPanelTween.InterpolateProperty (
 					tabOther.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(UnderlineMax, 1), //from
@@ -139,11 +136,10 @@ public class TitleUIManager : Control
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				tabPanelTween.Start();
-				GD.Print("TabOther exited.");
+				tabPanelTween.Start();*/
 				break;
 			case 2:
-				tabPanelTween.InterpolateProperty (
+				/*tabPanelTween.InterpolateProperty (
 					tabPlay.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(UnderlineMax, 1), //from
@@ -152,11 +148,10 @@ public class TitleUIManager : Control
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				tabPanelTween.Start();
-				GD.Print("TabPlay exited");
+				tabPanelTween.Start();*/
 				break;
 			case 3:
-				tabPanelTween.InterpolateProperty (
+				/*tabPanelTween.InterpolateProperty (
 					tabMultiplayer.GetNode("Underline"), //Object
 					"rect_scale", //Property being tweened
 					new Vector2(UnderlineMax, 1), //from
@@ -165,19 +160,18 @@ public class TitleUIManager : Control
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
 				);
-				tabPanelTween.Start();
-				GD.Print("TabMultiplayer exited");
+				tabPanelTween.Start();*/
 				break;
 		}
 	}
 
 	private void OnUIResized()
 	{
-		if (mainPanels.RectPosition == mainPanels1)
+		if (mainPanels.Position == mainPanels1)
 			SwitchPanel(1);
-		else if (mainPanels.RectPosition == mainPanels2)
+		else if (mainPanels.Position == mainPanels2)
 			SwitchPanel(2);
-		else if (mainPanels.RectPosition == mainPanels3)
+		else if (mainPanels.Position == mainPanels3)
 			SwitchPanel(3);
 	}
 	
@@ -190,14 +184,14 @@ public class TitleUIManager : Control
 		if (controller)
 		{
 			//1 = left, 3 = right
-			if (mainPanels.RectPosition == mainPanels1 && selected == 3)
+			if (mainPanels.Position == mainPanels1 && selected == 3)
 				selected = 2;
-			else if (mainPanels.RectPosition == mainPanels2 && selected == 3)
+			else if (mainPanels.Position == mainPanels2 && selected == 3)
 				selected = 3;
 			
-			else if (mainPanels.RectPosition == mainPanels3 && selected == 1)
+			else if (mainPanels.Position == mainPanels3 && selected == 1)
 				selected = 2;
-			else if (mainPanels.RectPosition == mainPanels2 && selected == 1)
+			else if (mainPanels.Position == mainPanels2 && selected == 1)
 				selected = 1;
 		}
 
@@ -205,7 +199,7 @@ public class TitleUIManager : Control
 		{
 			case 1:
 				//Focus "Other" panel to the centre by moving all
-				panelTween.InterpolateProperty (
+				/*panelTween.InterpolateProperty (
 					mainPanels,
 					"rect_position", //Property being tweened
 					mainPanels.RectPosition, //from
@@ -213,12 +207,12 @@ public class TitleUIManager : Control
 					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
-				);
+				);*/
 				break;
 
 			case 2:
 				//Focus "Player" panel to the centre by moving all
-				panelTween.InterpolateProperty (
+				/*panelTween.InterpolateProperty (
 					mainPanels,
 					"rect_position", //Property being tweened
 					mainPanels.RectPosition, //from
@@ -226,12 +220,12 @@ public class TitleUIManager : Control
 					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
-				);
+				);*/
 				break;
 
 			case 3:
 				//Focus "Multiplayer" panel to the centre by moving all
-				panelTween.InterpolateProperty (
+				/*panelTween.InterpolateProperty (
 					mainPanels,
 					"rect_position", //Property being tweened
 					mainPanels.RectPosition, //from
@@ -239,13 +233,13 @@ public class TitleUIManager : Control
 					TweenSpeed, //speed
 					Tween.TransitionType.Cubic,
 					Tween.EaseType.Out
-				);
+				);*/
 				break;
 		}
-		panelTween.Start();
+		/*panelTween.Start();*/
 	}
 	
-	private void OnDemoButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Other/Demo.tscn");
-	private void OnMultiplayerButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Multiplayer/Lobby.tscn");
-	private void OnDetentionButtonPressed() => GetTree().ChangeScene("res://Assets/Scenes/Detention/Detention.tscn");
+	private void OnDemoButtonPressed() => GetTree().ChangeSceneToFile("res://Assets/Scenes/Other/Demo.tscn");
+	private void OnMultiplayerButtonPressed() => GetTree().ChangeSceneToFile("res://Assets/Scenes/Multiplayer/Lobby.tscn");
+	private void OnDetentionButtonPressed() => GetTree().ChangeSceneToFile("res://Assets/Scenes/Detention/Detention.tscn");
 }

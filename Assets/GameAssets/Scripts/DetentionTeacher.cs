@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class DetentionTeacher : Spatial
+public partial class DetentionTeacher : Node3D
 {
     protected AudioStreamMP3 jumpscareStream;
     protected AudioStreamPlayer jumpscarePlayer;
@@ -13,7 +13,7 @@ public class DetentionTeacher : Spatial
     {
         jumpscareStream = ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/jumpscare1.mp3");
         jumpscarePlayer = GetTree().CurrentScene.GetNode<AudioStreamPlayer>("JumpscarePlayer");
-        jumpscarePlayer.Connect("finished", this, nameof(JumpscarePlayerFinished));
+        jumpscarePlayer.Connect("finished",new Callable(this,nameof(JumpscarePlayerFinished)));
         deathScreenRects = new[]
         {
             GetTree().CurrentScene.GetNode("DetentionUI").GetNode("DeathScreen").GetNode<TextureRect>("DeathRect1"),

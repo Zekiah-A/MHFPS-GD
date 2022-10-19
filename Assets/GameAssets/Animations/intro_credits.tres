@@ -10,8 +10,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -104, -0.25, 0, 0.25, 0, 296, -0.0112854, -34.2917, 0, 34.3624, 369.766, -0.03, -27.35, 0.02, 29.5826, 440, -0.00313497, -6.94522, 0.00686508, 4.03464, 448, -0.0931349, -0.594788, 0.266865, 0.392334, 447.999, -0.073135, 0.165955, 0.236865, -0.0698853 ),
-"times": PoolRealArray( 0, 0.3, 0.36, 0.5, 0.6, 0.91 )
+"points": PackedFloat32Array( -104, -0.25, 0, 0.25, 0, 296, -0.0112854, -34.2917, 0, 34.3624, 369.766, -0.03, -27.35, 0.02, 29.5826, 440, -0.00313497, -6.94522, 0.00686508, 4.03464, 448, -0.0931349, -0.594788, 0.266865, 0.392334, 447.999, -0.073135, 0.165955, 0.236865, -0.0698853 ),
+"times": PackedFloat32Array( 0, 0.3, 0.36, 0.5, 0.6, 0.91 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("Icon:rect_position:y")
@@ -20,8 +20,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 648, -0.25, 0, 0.25, 0, 120, -0.04, 87.2943, 0.02, -10.2237, 85.6061, -0.07, 10.9082, 0.09, 4.07632, 122.636, -0.00999999, -4.19553, 0.00407517, 10.9541, 152, -0.0959249, -0.0501862, 0.124075, -2.2036, 128, -0.105925, 10.6256, 0.254075, 0.127731 ),
-"times": PoolRealArray( 0, 0.3, 0.39, 0.5, 0.6, 0.7 )
+"points": PackedFloat32Array( 648, -0.25, 0, 0.25, 0, 120, -0.04, 87.2943, 0.02, -10.2237, 85.6061, -0.07, 10.9082, 0.09, 4.07632, 122.636, -0.00999999, -4.19553, 0.00407517, 10.9541, 152, -0.0959249, -0.0501862, 0.124075, -2.2036, 128, -0.105925, 10.6256, 0.254075, 0.127731 ),
+"times": PackedFloat32Array( 0, 0.3, 0.39, 0.5, 0.6, 0.7 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("Icon:rect_rotation")
@@ -30,8 +30,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 56.6161, -0.03, -25, 0.07, 70, 180, -0.0355487, -22.5098, 0.0444512, 22.3665, 255, -0.00332302, -14.1939, 0.016677, 11.5124, 359.999, -0.0828849, -21.8875, 0.097115, 12.256, 361.26, -0.0628849, -2.31482, 0.0571151, -0.578674, 359.999, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.24, 0.4, 0.5, 0.6, 0.78, 0.91 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, 56.6161, -0.03, -25, 0.07, 70, 180, -0.0355487, -22.5098, 0.0444512, 22.3665, 255, -0.00332302, -14.1939, 0.016677, 11.5124, 359.999, -0.0828849, -21.8875, 0.097115, 12.256, 361.26, -0.0628849, -2.31482, 0.0571151, -0.578674, 359.999, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0, 0.24, 0.4, 0.5, 0.6, 0.78, 0.91 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("Text:rect_position:y")
@@ -40,8 +40,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 256, -0.25, 0, 0, 46.7628, 320, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 1, 1.5 )
+"points": PackedFloat32Array( 256, -0.25, 0, 0, 46.7628, 320, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 1, 1.5 )
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Text:modulate")
@@ -50,8 +50,8 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1, 1.5, 2, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 1, 1.5, 2, 2.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -62,8 +62,8 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 2, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 2, 2.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -74,8 +74,8 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 2, 2.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 2, 2.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -86,8 +86,8 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 3, 3.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 3, 3.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
@@ -98,8 +98,8 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 3, 12 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 3, 12 )
 }
 tracks/9/type = "bezier"
 tracks/9/path = NodePath("GameTitle:rect_scale:y")
@@ -108,8 +108,8 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 3, 12 )
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 3, 12 )
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("BloodEffect:modulate")
@@ -118,8 +118,8 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 6, 6.9, 9.5, 10.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 6, 6.9, 9.5, 10.5 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ), Color( 1, 1, 1, 0.588235 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -130,8 +130,8 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 0, 4.1, 6.4, 8.5, 10 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 4.1, 6.4, 8.5, 10 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.0509804 ), Color( 1, 1, 1, 0.0509804 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -142,8 +142,8 @@ tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"points": PoolRealArray( -48, -0.25, 0, 0.25, 0, -16, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 6, 10.5 )
+"points": PackedFloat32Array( -48, -0.25, 0, 0.25, 0, -16, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 6, 10.5 )
 }
 tracks/13/type = "bezier"
 tracks/13/path = NodePath("BloodEffect:rect_position:y")
@@ -152,8 +152,8 @@ tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"points": PoolRealArray( -376, -0.25, 0, 0.25, 0, -400, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 6, 10.5 )
+"points": PackedFloat32Array( -376, -0.25, 0, 0.25, 0, -400, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 6, 10.5 )
 }
 tracks/14/type = "bezier"
 tracks/14/path = NodePath("HandLogo:rect_position:x")
@@ -162,8 +162,8 @@ tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"points": PoolRealArray( -944, -0.25, 0, 0.25, 0, -976, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 4.1, 10 )
+"points": PackedFloat32Array( -944, -0.25, 0, 0.25, 0, -976, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 4.1, 10 )
 }
 tracks/15/type = "bezier"
 tracks/15/path = NodePath("HandLogo:rect_position:y")
@@ -172,8 +172,8 @@ tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 4.1, 10 )
+"points": PackedFloat32Array( 0, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 4.1, 10 )
 }
 tracks/16/type = "value"
 tracks/16/path = NodePath(".:modulate")
@@ -182,8 +182,8 @@ tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"times": PoolRealArray( 0, 14, 15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 14, 15 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -194,8 +194,8 @@ tracks/17/loop_wrap = true
 tracks/17/imported = false
 tracks/17/enabled = true
 tracks/17/keys = {
-"times": PoolRealArray( 0.1, 15, 16 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0.1, 15, 16 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }

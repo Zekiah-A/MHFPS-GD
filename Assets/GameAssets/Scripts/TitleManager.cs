@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class TitleManager : Spatial
+public partial class TitleManager : Node3D
 {
 	[Export] public float TweenSpeed = 2.5f;
 	[Export] public Vector3 InitialCameraPosition = new Vector3(0, 2, 7.5f);
@@ -9,7 +9,7 @@ public class TitleManager : Spatial
 	[Export] public Vector3 InitialCameraRotation = new Vector3(0, 0, 50);
 	[Export] public Vector3 EndCameraRotation = Vector3.Zero;
 	
-	private Camera camera;
+	private Camera3D camera;
 	private Tween introTween;
 	private AnimationPlayer fadeAnimation;
 	private AnimationPlayer cameraAnimationPlayer;
@@ -17,17 +17,17 @@ public class TitleManager : Spatial
 	
 	public override void _Ready()
 	{
-		camera =  GetNode<Camera>("Camera");
+		camera =  GetNode<Camera3D>("Camera3D");
 		introTween = GetNode<Tween>("IntroTween");
 		fadeAnimation = GetNode("IntroFade").GetNode<AnimationPlayer>("AnimationPlayer");
-		cameraAnimationPlayer = GetNode("Camera").GetNode<AnimationPlayer>("CameraAnimationPlayer");
+		cameraAnimationPlayer = GetNode("Camera3D").GetNode<AnimationPlayer>("CameraAnimationPlayer");
 		
 		PlayIntroAnimation();
 	}
 	
 	private async void PlayIntroAnimation()
 	{
-		introTween.InterpolateProperty (
+		/*introTween.InterpolateProperty (
 			camera,
 			"translation", //property
 			InitialCameraPosition, //from
@@ -48,7 +48,7 @@ public class TitleManager : Spatial
 		);
 
 		fadeAnimation.Play("FadeAnimation");
-		introTween.Start();
+		introTween.Start();*/
 		
 		//Block camera animation from occuring during the intro.
 		await ToSignal(introTween, "tween_all_completed");

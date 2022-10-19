@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Utils.Colour;
 using Godot;
 
-public class ClientSend
+public partial class ClientSend
 {
 
     private static void SendTCPData(Packet _packet)
@@ -55,7 +55,7 @@ public class ClientSend
         }
     }
 
-    public static void UpdateRotationReceived(Quat _newRot)
+    public static void UpdateRotationReceived(Quaternion _newRot)
     {
         using (Packet _packet = new Packet((int)ClientPackets.updateRotationReceived))
         {

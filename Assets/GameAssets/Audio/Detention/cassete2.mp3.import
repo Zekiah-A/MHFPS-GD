@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/cassete2.mp3-e92207c6715718dd61341787a56e76cc.mp3str"
+uid="uid://bncgchdpyi2hw"
+path="res://.godot/imported/cassete2.mp3-e92207c6715718dd61341787a56e76cc.mp3str"
 
 [deps]
 
 source_file="res://Assets/GameAssets/Audio/Detention/cassete2.mp3"
-dest_files=[ "res://.import/cassete2.mp3-e92207c6715718dd61341787a56e76cc.mp3str" ]
+dest_files=["res://.godot/imported/cassete2.mp3-e92207c6715718dd61341787a56e76cc.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

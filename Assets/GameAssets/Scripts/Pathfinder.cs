@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Pathfinder : KinematicBody
+public partial class Pathfinder : CharacterBody3D
 {
 	public float JumpImpulse = 30f;
 
@@ -15,19 +15,19 @@ public class Pathfinder : KinematicBody
 	private Vector3[] path = null;
 	private int pathNode = 0;
 	
-	private Navigation navigation;
-	private Spatial player; //for testing
-	private RayCast groundCast;
+	private Node3D navigation;
+	private Node3D player; //for testing
+	private RayCast3D groundCast;
 	
 	public override void _Ready()
 	{
-		navigation = GetParent<Navigation>();
-		player = GetParent().GetParent().GetNode<Spatial>("Player"); //for testing
-		groundCast = GetNode<RayCast>("GroundCast");
+		navigation = GetParent<Node3D>();
+		player = GetParent().GetParent().GetNode<Node3D>("Player"); //for testing
+		groundCast = GetNode<RayCast3D>("GroundCast");
 	}
 
-	public override void _PhysicsProcess(float delta)
-	{
+	public override void _PhysicsProcess(double delta)
+	{/*
 		if (path != null && pathNode < path.Length)
 		{
 			direction = path[pathNode] - GlobalTransform.origin;
@@ -40,17 +40,17 @@ public class Pathfinder : KinematicBody
 				Rotation.x,
 				Mathf.LerpAngle(Rotation.y, Mathf.Atan2(-direction.x, -direction.z), RotationSpeed * delta),
 				Rotation.z
-		);
+		);*/
 		
 		//MoveAndSlide(-GlobalTransform.basis.z * speed, Vector3.Up); //still testing
 		
-		if (groundCast.IsColliding())
+		/*if (groundCast.IsColliding())
 			direction = MoveAndSlide(direction.Normalized() * Speed, Vector3.Up);
 		else
 		{
 			//Vector3 directionWithGravity = new Vector3(direction.x, 0, direction.z); //TODO: currently must be 0, no y velocity calculated yet until jumping is implemented
 			//direction = MoveAndSlide(directionWithGravity.Normalized() * speed, Vector3.Up); //HACK: Don't normalise here			
-		}
+		}*/
 
 	}
 
@@ -61,7 +61,7 @@ public class Pathfinder : KinematicBody
 
 	public void MoveTo(Vector3 targetPosition)
 	{
-		path = navigation.GetSimplePath(GlobalTransform.origin, targetPosition); //TODO: should not calculate if it generated path is longer than current distance (e.g on wall)?
+		//path = navigation.GetSimplePath(GlobalTransform.origin, targetPosition); //TODO: should not calculate if it generated path is longer than current distance (e.g on wall)?
 		pathNode = 0;
 	}
 	

@@ -5,7 +5,7 @@ using System.Net;
 using Utils.Colour;
 using Godot;
 
-public class ClientHandle
+public partial class ClientHandle
 {
 /*
     public delegate void PlayerDamageHandler(object sender, PlayerDamageArgs e);
@@ -38,7 +38,7 @@ public class ClientHandle
         int _id = _packet.ReadInt();
         string _username = _packet.ReadString();
         Vector3 _position = _packet.ReadVector3();
-        Quat _rotation = _packet.ReadQuaternion();
+        Quaternion _rotation = _packet.ReadQuaternion();
 
         GameManager.instance.SpawnPlayer(_id, _username, _position, _rotation);
     }
@@ -72,7 +72,7 @@ public class ClientHandle
     public static void PlayerRotation(Packet _packet)
     {
         int _toPlayer = _packet.ReadInt();
-        Quat _newRot = _packet.ReadQuaternion();
+        Quaternion _newRot = _packet.ReadQuaternion();
 /*
         foreach (PlayerManager _player in GameManager.players.Values)
         {

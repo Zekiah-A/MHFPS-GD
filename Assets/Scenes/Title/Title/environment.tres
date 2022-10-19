@@ -1,37 +1,32 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://cnxok64dr3pi7"]
 
-[sub_resource type="ProceduralSky" id=1]
-sun_color = Color( 1, 0.988235, 0.823529, 1 )
-sun_curve = 0.282843
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5ieob"]
+sky_curve = 0.160766
+sky_energy_multiplier = 5.07
+ground_curve = 0.0857423
+sun_curve = 0.0630673
+
+[sub_resource type="Sky" id="Sky_is50v"]
+sky_material = SubResource("ProceduralSkyMaterial_5ieob")
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 1 )
-background_color = Color( 0.0784314, 0.054902, 0.247059, 1 )
-background_energy = 0.25
-ambient_light_color = Color( 0.960784, 0.960784, 0.960784, 1 )
+background_color = Color(0.0784314, 0.054902, 0.247059, 1)
+sky = SubResource("Sky_is50v")
+ambient_light_color = Color(0.960784, 0.960784, 0.960784, 1)
 ambient_light_energy = 0.0
-fog_enabled = true
-fog_color = Color( 0.698039, 0.733333, 0.764706, 1 )
-fog_depth_end = 168.0
-fog_depth_curve = 1.23114
-fog_transmit_enabled = true
-fog_transmit_curve = 0.965936
-fog_height_min = 0.0
 tonemap_mode = 3
 tonemap_exposure = 1.1
 tonemap_white = 2.89
-auto_exposure_max_luma = 9.31
-auto_exposure_speed = 0.01
-ss_reflections_enabled = true
-ss_reflections_max_steps = 128
+ssr_enabled = true
 ssao_enabled = true
 ssao_radius = 0.1
-dof_blur_far_enabled = true
-dof_blur_far_distance = 16.26
-dof_blur_near_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
 glow_enabled = true
 glow_intensity = 1.38
 glow_bloom = 1.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0373
 adjustment_enabled = true
 adjustment_saturation = 0.01

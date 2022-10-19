@@ -3,4 +3,4 @@
 [ext_resource path="res://Assets/GameAssets/Models/Makehuman/Generic/Export/GenericModel.glb" type="PackedScene" id=1]
 
 [node name="GenericModel" instance=ExtResource( 1 )]
-transform = Transform( 2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0 )
+transform = Transform3D( 2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0 )

@@ -6,7 +6,7 @@ using System.Net.Sockets;
 
 namespace Utils.Colour //TODO: Use a record!
 {
-    public class Colour
+    public partial class Colour
     {
         ///<summary>Red colour value.</summary>
         public byte R;

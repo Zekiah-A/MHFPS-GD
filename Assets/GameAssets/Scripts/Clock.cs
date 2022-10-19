@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Clock : Spatial
+public partial class Clock : Node3D
 {
 	public int ClockTime = 0;
 	
@@ -13,9 +13,9 @@ public class Clock : Spatial
 	
 	private DetentionTeacher stainTeacher;
 	private Timer clockTimer;
-	private Spatial minuteHand;
+	private Node3D minuteHand;
 	
-	private const int MaximumTime = 30;
+	private const int MaximumTime = 60;
 	private const int WarnTime = 5;
 
 	public override void _Ready()
@@ -24,13 +24,13 @@ public class Clock : Spatial
 		clockUnwindStream = ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/clock_unwind.mp3");
 		clockPlayer = GetNode<AudioStreamPlayer3D>("ClockPlayer");
 		clockTimer = GetNode<Timer>("ClockTimer");
-		minuteHand = GetNode<Spatial>("minutes"); //TODO: Make a convention in the dev guide for name casing and fix this.
+		minuteHand = GetNode<Node3D>("minutes"); //TODO: Make a convention in the dev guide for name casing and fix this.
 
 		actionPlayer = GetTree().CurrentScene.GetNode("CameraBody").GetNode<AudioStreamPlayer>("PlayerActionPlayer");
 		actionAnimationPlayer = GetTree().CurrentScene.GetNode("CameraBody").GetNode<AnimationPlayer>("ActionAnimationPlayer");
 		stainTeacher = GetTree().CurrentScene.GetNode<DetentionTeacher>("StainTeacher");
 
-		minuteHand.RotationDegrees = new Vector3(minuteHand.RotationDegrees.x, minuteHand.RotationDegrees.y, 0);
+		minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, 0);
 	}
 	
 	public void Unwind()
@@ -42,7 +42,7 @@ public class Clock : Spatial
 			actionAnimationPlayer.Play("unwind_animation");
 			ClockTime = 0; //TODO: Make the clock animate too, override tweens in order to make it wind back realistically with the player's hand.
 			
-			minuteHand.RotationDegrees = new Vector3(minuteHand.RotationDegrees.x, minuteHand.RotationDegrees.y, 0);
+			minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, 0);
 		}
 	}
 
@@ -71,6 +71,6 @@ public class Clock : Spatial
 			stainTeacher.Jumpscare();
 		}
 		// Minute hand needs to travel 360 degrees to get to 6:00 in 30 seconds, so 12 degrees per second. Minus twelve because this model is stupid and the co-ords are wrong. 🤓🔫 
-		minuteHand.RotationDegrees = new Vector3(minuteHand.RotationDegrees.x, minuteHand.RotationDegrees.y, minuteHand.RotationDegrees.z - 12); //TODO: Make fancy tweens to make it look good. 
+		minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, (float) (minuteHand.Rotation.z - 2 * Math.PI / MaximumTime)); //TODO: Make fancy tweens to make it look good. 
 	}
 }

@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using Godot;
 
-public class Client : Node
+public partial class Client : Node
 {
 	public static Client instance = new Client();
 	public static int dataBufferSize = 4096;
@@ -58,7 +58,7 @@ public class Client : Node
 					ip = i.ToString();
 					//InitializeClientData();
 					//tcp.Connect(); //TODO: fix this double connect bug - not to do with udp, i removed
-					//break; //HACK: Remove this since bit would happen anyway at the end!
+					//break; //HACK: RemoveAt this since bit would happen anyway at the end!
 				}
 				else
 				{
@@ -71,7 +71,7 @@ public class Client : Node
 		tcp.Connect();
 	}
 
-	public class TCP
+	public partial class TCP
 	{
 		public TcpClient socket;
 
@@ -88,7 +88,7 @@ public class Client : Node
 			};
 
 			receiveBuffer = new byte[dataBufferSize];
-			socket.BeginConnect(instance.ip, instance.port, ConnectCallback, socket);
+			//socket.BeginConnect(instance.ip,new Callable(new Callable(instance.port,ConnectCallback),socket));
 		}
 
 		public  void SendData(Packet _packet)
@@ -194,7 +194,7 @@ public class Client : Node
 		}
 	}
 
-	public class UDP
+	public partial class UDP
 	{
 		public UdpClient socket;
 		public IPEndPoint endPoint;

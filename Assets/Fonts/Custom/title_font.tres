@@ -1,8 +1,6 @@
-[gd_resource type="DynamicFont" load_steps=2 format=2]
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b3tm4k33tphmh"]
 
-[ext_resource path="res://Assets/Fonts/Typefaces/liberation-sans/LiberationSans-Regular.ttf" type="DynamicFontData" id=1]
+[sub_resource type="SystemFont" id="SystemFont_bsrmc"]
 
 [resource]
-size = 42
-use_filter = true
-font_data = ExtResource( 1 )
+base_font = SubResource("SystemFont_bsrmc")

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using DiscordRPC;
 
-public class LobbyUIManager : Control
+public partial class LobbyUIManager : Control
 {
 	private string ipEntry;
 	public static string usernameEntry;

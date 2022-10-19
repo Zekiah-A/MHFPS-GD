@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Godot;
 
-public class GameManager : Node
+public partial class GameManager : Node
 {
     public static GameManager instance;
 
@@ -10,8 +10,8 @@ public class GameManager : Node
 /*
     public static Dictionary<int, Netrigid> rigidbodies = new Dictionary<int, Netrigid>();
 */
-    public Spatial localPlayerPrefab;
-    public Spatial playerPrefab;
+    public Node3D localPlayerPrefab;
+    public Node3D playerPrefab;
 
     private void Awake()
     {
@@ -28,9 +28,9 @@ public class GameManager : Node
         }
     }
 
-    public void SpawnPlayer(int _id, string _username, Vector3 _position, Quat _rotation)
+    public void SpawnPlayer(int _id, string _username, Vector3 _position, Quaternion _rotation)
     {
-        Spatial _player;
+        Node3D _player;
 
         if (_id == Client.instance.myId)
         {

@@ -29,7 +29,7 @@ public enum ClientPackets
     playerDamageReceived
 }
 
-public class Packet : IDisposable
+public partial class Packet : IDisposable
 {
     private List<byte> buffer;
     private byte[] readableBuffer;
@@ -178,7 +178,7 @@ public class Packet : IDisposable
     }
     ///<summary>Adds a quaternion to the packet</summary>
     ///<param name="_value">The quaternion to add</param>
-    public void Write(Quat _value)
+    public void Write(Quaternion _value)
     {
         Write(_value.x); //Add x value of quaternion
         Write(_value.y); //Add y value of quaternion
@@ -379,9 +379,9 @@ public class Packet : IDisposable
 
     /// <summary>Reads a Quaternion from the packet.</summary>
     /// <param name="_moveReadPos">Whether or not to move the buffer's read position.</param>
-    public Quat ReadQuaternion(bool _moveReadPos = true)
+    public Quaternion ReadQuaternion(bool _moveReadPos = true)
     {
-        return new Quat(
+        return new Quaternion(
             ReadFloat(_moveReadPos),
             ReadFloat(_moveReadPos),
             ReadFloat(_moveReadPos),

@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public class CameraEffects : Camera
+public partial class CameraEffects : Camera3D
 {
-	//private Camera camera;
+	//private Camera3D camera;
 	[Export] public bool Random = false;
 	[Export] public bool Inverse = false;
 	[Export] public float Damping = 10f;
@@ -14,7 +14,7 @@ public class CameraEffects : Camera
 
 	private Random random;
 	private Timer cameraTimer;
-	OpenSimplexNoise noise = new OpenSimplexNoise();
+	//OpenSimplexNoise noise = new OpenSimplexNoise();
 
 
 	public override void _Ready()
@@ -25,7 +25,7 @@ public class CameraEffects : Camera
 			try
 			{
 				cameraTimer = GetNode<Timer>("Timer");
-				cameraTimer.Connect("timeout", this, nameof(OnTimerComplete));
+				cameraTimer.Connect("timeout",new Callable(this,nameof(OnTimerComplete)));
 				cameraTimer.Start();
 			}
 			catch (Exception e)
@@ -35,7 +35,7 @@ public class CameraEffects : Camera
 		}
 	}
 
-	public override void _Process(float delta) //input tween
+	public override void _Process(double delta) //input tween
 	{
 		if (!Random)
 		{
@@ -55,7 +55,7 @@ public class CameraEffects : Camera
 	{
 		///<note> Value must be between -0.5 and 0.5 </note>
 		incrementx++; incrementy++;
-		posx = noise.GetNoise1d(incrementx) / 2;
-		posy = noise.GetNoise1d(-incrementx) / 2;
+		//posx = noise.GetNoise1d(incrementx) / 2;
+		//posy = noise.GetNoise1d(-incrementx) / 2;
 	}
 }

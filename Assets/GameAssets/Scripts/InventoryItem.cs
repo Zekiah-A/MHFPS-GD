@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 ///<summary> All items that can be stored within the inventory (Weapon, Object, EffectObject), will inherit from this?</summary>
-public class InventoryItem : Spatial 
+public partial class InventoryItem : Node3D 
 {
 	[Export] public string InventoryTexture;
 	[Export] public int ItemType;
@@ -16,9 +16,9 @@ public class InventoryItem : Spatial
 		}
 	}
 
-	private Area pickupCollider;
+	private Area3D pickupCollider;
 	private bool enabled;
-	private Texture inventorytexture;
+	private Texture2D inventorytexture;
 
 	private void OnPickupCollide()
 	{
