@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkif64gks1gev"]
+[gd_scene load_steps=26 format=3 uid="uid://dkif64gks1gev"]
 
 [ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/blur.gdshader" id="1"]
+[ext_resource type="Theme" uid="uid://l3f22njtxuo8" path="res://Assets/Themes/main_theme.tres" id="3_3ad5m"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/TitleUIManager.cs" id="4"]
 
 [sub_resource type="CanvasItemMaterial" id="20"]
@@ -17,33 +18,72 @@ shader_parameter/blur_amount = 2.0
 shader_parameter/lightness = 1.0
 shader_parameter/translucency = 1.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_txkyn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xppve"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fuxop"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2shnd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgy40"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1fqax"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gmsrc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kehrx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6xh10"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oh750"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xhk1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_77bw6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_84c1o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0rq5e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fb1w6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nyjtn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tstl2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaolu"]
+
 [node name="TitleUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("4")
 
 [node name="GrainRect" type="TextureRect" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.231373)
 material = SubResource("20")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("22")
 stretch_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("1")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TabPanel" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -51,19 +91,23 @@ offset_left = -160.0
 offset_right = 160.0
 offset_bottom = 64.0
 grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_txkyn")
 
 [node name="Other" type="Button" parent="TabPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.162
 anchor_right = 0.162
 offset_left = -51.84
 offset_right = 52.16
 offset_bottom = 64.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xppve")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fuxop")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2shnd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pgy40")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1fqax")
 text = "Other"
 
 [node name="Underline" type="ColorRect" parent="TabPanel/Other"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -71,7 +115,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -44.0
 offset_top = 12.0
-offset_right = 36.0
+offset_right = 44.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -80,7 +124,6 @@ mouse_filter = 2
 color = Color(1, 0.713726, 0, 0.588235)
 
 [node name="Play" type="Button" parent="TabPanel"]
-layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -88,10 +131,14 @@ offset_left = -56.0
 offset_right = 56.0
 offset_bottom = 64.0
 grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gmsrc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kehrx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6xh10")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oh750")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xhk1k")
 text = "Play"
 
 [node name="Underline" type="ColorRect" parent="TabPanel/Play"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -108,24 +155,27 @@ mouse_filter = 2
 color = Color(1, 0.713726, 0, 0.588235)
 
 [node name="Multiplayer" type="Button" parent="TabPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.842
 anchor_right = 0.842
 offset_left = -53.44
 offset_right = 50.56
 offset_bottom = 64.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_77bw6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_84c1o")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0rq5e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_fb1w6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nyjtn")
 text = "Multiplayer"
 clip_text = true
 
 [node name="Underline" type="ColorRect" parent="TabPanel/Multiplayer"]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -36.0
+offset_left = -44.0
 offset_top = 12.0
 offset_right = 44.0
 offset_bottom = 16.0
@@ -144,55 +194,65 @@ editor_description = ""
 script = null
 
 [node name="MainPanels" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tstl2")
+metadata/_edit_lock_ = true
 
 [node name="PlayPanel" type="Panel" parent="MainPanels"]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_aaolu")
+metadata/_edit_lock_ = true
 
 [node name="Title" type="Label" parent="MainPanels/PlayPanel"]
-layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -192.0
 offset_top = 64.0
 offset_right = 192.0
-offset_bottom = 128.0
+offset_bottom = 136.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
 text = " MHFPS indev "
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Play" type="Button" parent="MainPanels/PlayPanel"]
-layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0625
-anchor_top = 0.813333
-anchor_right = 0.229492
-anchor_bottom = 0.893333
+anchor_left = 0.056
+anchor_top = 0.815
+anchor_right = 0.222
+anchor_bottom = 0.889
+offset_left = -0.512001
+offset_top = -0.120056
+offset_right = 0.255981
+offset_bottom = -0.0720215
 text = "Play"
 
 [node name="WarningLabel" type="Label" parent="MainPanels/PlayPanel"]
-layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
+offset_left = 8.0
 offset_top = -13.0
-offset_right = 384.0
+offset_right = 248.0
 offset_bottom = 13.0
 grow_vertical = 2
+theme_override_font_sizes/font_size = 10
 text = "Currently Playing: The Real Thing - BIM & ELEVNS"
 vertical_alignment = 1
 
 [node name="MultiplayerPanel" type="Panel" parent="MainPanels"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 2.0
@@ -204,9 +264,9 @@ offset_bottom = -40.0001
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(0, 236)
+theme = ExtResource("3_3ad5m")
 
 [node name="Multiplayer" type="Panel" parent="MainPanels/MultiplayerPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0833333
 anchor_top = 0.167373
@@ -214,7 +274,6 @@ anchor_right = 0.416667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/MultiplayerPanel/Multiplayer"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03125
 anchor_top = 0.790476
@@ -223,7 +282,6 @@ anchor_bottom = 0.971429
 text = "Online multiplayer"
 
 [node name="Panel" type="Panel" parent="MainPanels/MultiplayerPanel/Multiplayer"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.104762
@@ -231,7 +289,6 @@ anchor_right = 0.875
 anchor_bottom = 0.663492
 
 [node name="LocalGame" type="Panel" parent="MainPanels/MultiplayerPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.583333
 anchor_top = 0.167373
@@ -239,7 +296,6 @@ anchor_right = 0.916667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/MultiplayerPanel/LocalGame"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03125
 anchor_top = 0.790476
@@ -249,7 +305,6 @@ disabled = true
 text = "Local game"
 
 [node name="Panel" type="Panel" parent="MainPanels/MultiplayerPanel/LocalGame"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.104762
@@ -265,7 +320,6 @@ editor_description = ""
 script = null
 
 [node name="OtherPanel" type="Panel" parent="MainPanels"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.0
 anchor_bottom = 0.96
@@ -274,9 +328,9 @@ offset_top = 64.0002
 offset_right = -109.0
 offset_bottom = -40.0002
 pivot_offset = Vector2(806, 236)
+theme = ExtResource("3_3ad5m")
 
 [node name="Multiplayer" type="Panel" parent="MainPanels/OtherPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0833333
 anchor_top = 0.167373
@@ -284,7 +338,6 @@ anchor_right = 0.416667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/OtherPanel/Multiplayer"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03125
 anchor_top = 0.790476
@@ -293,7 +346,6 @@ anchor_bottom = 0.971429
 text = "Demo Level"
 
 [node name="Panel" type="Panel" parent="MainPanels/OtherPanel/Multiplayer"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.104762
@@ -301,7 +353,6 @@ anchor_right = 0.875
 anchor_bottom = 0.663492
 
 [node name="LocalGame" type="Panel" parent="MainPanels/OtherPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.583333
 anchor_top = 0.167373
@@ -309,7 +360,6 @@ anchor_right = 0.916667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/OtherPanel/LocalGame"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03125
 anchor_top = 0.790476
@@ -319,7 +369,6 @@ offset_left = -1.23978e-05
 text = "Detention"
 
 [node name="Panel" type="Panel" parent="MainPanels/OtherPanel/LocalGame"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
 anchor_top = 0.104762

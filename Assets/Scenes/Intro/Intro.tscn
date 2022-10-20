@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://br4lk402gim4u"]
+[gd_scene load_steps=31 format=3 uid="uid://br4lk402gim4u"]
 
 [ext_resource type="PackedScene" uid="uid://dpki68wvhnkt0" path="res://Assets/GameAssets/Models/hedge.glb" id="3"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/ModelScenes/House.tscn" id="4"]
@@ -15,7 +15,7 @@
 [ext_resource type="Animation" uid="uid://hhnd1ql67cfd" path="res://Assets/GameAssets/Animations/intro_credits.tres" id="17"]
 [ext_resource type="Texture2D" uid="uid://f4dmtbsck1h2" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_2.png" id="19"]
 [ext_resource type="Texture2D" uid="uid://ubkecb8x7b25" path="res://Assets/GameAssets/Textures/HandLogo/hand-logo.png" id="20"]
-[ext_resource type="Animation" path="res://Assets/GameAssets/Animations/intro_camera.tres" id="21"]
+[ext_resource type="Animation" uid="uid://umn6ewt5ydbm" path="res://Assets/GameAssets/Animations/intro_camera.tres" id="21"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ywytw"]
 sky_top_color = Color(0.4, 0.541176, 0.572549, 1)
@@ -34,6 +34,13 @@ ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fp01u"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 0.35
+dof_blur_far_transition = 0.1
+dof_blur_near_distance = 0.9
+dof_blur_amount = 0.2
 
 [sub_resource type="Animation" id="13"]
 length = 0.001
@@ -70,38 +77,17 @@ tracks/2/keys = {
 "points": PackedFloat32Array(),
 "times": PackedFloat32Array()
 }
-tracks/3/type = "bezier"
+tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:rotation_degrees:x")
+tracks/3/path = NodePath(".:attributes:dof_blur_amount")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(),
-"points": PackedFloat32Array(),
-"times": PackedFloat32Array()
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:rotation_degrees:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(),
-"points": PackedFloat32Array(),
-"times": PackedFloat32Array()
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".:rotation_degrees:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(),
-"points": PackedFloat32Array(),
-"times": PackedFloat32Array()
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kl0ju"]
@@ -126,12 +112,34 @@ heightmap_texture = ExtResource("7_gq461")
 heightmap_flip_texture = true
 uv1_scale = Vector3(0.715, 0.715, 0.14)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8luh"]
+albedo_texture = ExtResource("5_npom5")
+roughness_texture = ExtResource("9_uqicg")
+normal_enabled = true
+normal_texture = ExtResource("8_vm3vy")
+ao_enabled = true
+ao_texture = ExtResource("6_uloww")
+heightmap_enabled = true
+heightmap_scale = -0.01
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("7_gq461")
+heightmap_flip_texture = true
+uv1_scale = Vector3(32, 4, 1)
+
 [sub_resource type="PlaneMesh" id="1"]
-material = ExtResource("7")
-size = Vector2(7, 4)
+material = SubResource("StandardMaterial3D_e8luh")
+size = Vector2(40, 4)
 
 [sub_resource type="PlaneMesh" id="2"]
-size = Vector2(40, 4)
+size = Vector2(40, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ynisk"]
+size = Vector3(40, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uolbh"]
+albedo_color = Color(0.113725, 0.411765, 0.0588235, 1)
 
 [sub_resource type="Animation" id="14"]
 length = 0.001
@@ -248,13 +256,13 @@ tracks/9/keys = {
 tracks/10/type = "bezier"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Icon:position:x")
+tracks/10/path = NodePath("HandLogo:position:y")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(6.10352e-05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/11/type = "value"
 tracks/11/imported = false
@@ -298,7 +306,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0.1)
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.984399, 0, -0.175951, 0, 1, 0, 0.175951, 0, 0.984399, -2.13467, 1.2, 1.44938)
+transform = Transform3D(0.984399, 0, -0.175951, 0, 1, 0, 0.175951, 0, 0.984399, -2.13112, 1.2, 1.43704)
+attributes = SubResource("CameraAttributesPractical_fp01u")
 current = true
 fov = 50.0
 
@@ -325,6 +334,36 @@ surface_material_override/0 = SubResource("StandardMaterial3D_heqik")
 [node name="House2" parent="." instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -5)
 
+[node name="House9" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1, 0, -5)
+
+[node name="House10" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5, 0, -5)
+
+[node name="House11" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, -5)
+
+[node name="House12" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 0, -5)
+
+[node name="House3" parent="." instance=ExtResource("4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 23)
+
+[node name="House4" parent="." instance=ExtResource("4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.1, 0, 23)
+
+[node name="House5" parent="." instance=ExtResource("4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 14.1, 0, 23)
+
+[node name="House6" parent="." instance=ExtResource("4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 22.7, 0, 23)
+
+[node name="House7" parent="." instance=ExtResource("4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.1, 0, 23)
+
+[node name="House8" parent="." instance=ExtResource("4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -16.5, 0, 23)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 mesh = SubResource("1")
@@ -333,21 +372,28 @@ mesh = SubResource("1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
 mesh = SubResource("1")
 
+[node name="MeshInstance6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+mesh = SubResource("1")
+
 [node name="MeshInstance2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 9)
 mesh = SubResource("2")
 
-[node name="Hedge" parent="." instance=ExtResource("3")]
-transform = Transform3D(-4.37114e-08, 0, 0.6, 0, 0.6, 0, -1, 0, -2.62268e-08, 3.7, -0.2, 2)
+[node name="MeshInstance4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 5)
+mesh = SubResource("BoxMesh_ynisk")
 
-[node name="Hedge" parent="Hedge" index="0"]
-transform = Transform3D(2, 0, 0, 0, 0.5, 0, 1.42109e-14, 0, 0.5, 0, 0.666667, 0)
+[node name="MeshInstance5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 13)
+mesh = SubResource("BoxMesh_ynisk")
 
 [node name="Hedge2" parent="." instance=ExtResource("3")]
 transform = Transform3D(-4.37114e-08, 0, 0.6, 0, 0.6, 0, -1, 0, -2.62268e-08, 3.7, -0.2, 5.5)
 
 [node name="Hedge" parent="Hedge2" index="0"]
 transform = Transform3D(2, 0, -5.32907e-15, 0, 0.5, 0, 1.42109e-14, 0, 0.5, 3.5, 0.833333, 2.38419e-06)
+surface_material_override/0 = SubResource("StandardMaterial3D_uolbh")
 
 [node name="IntroUI" type="Control" parent="."]
 layout_mode = 3
@@ -359,7 +405,6 @@ grow_vertical = 2
 
 [node name="CinematicBars" type="Panel" parent="IntroUI"]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -371,7 +416,6 @@ scale = Vector2(1, 1.275)
 pivot_offset = Vector2(512, 300)
 
 [node name="Top" type="ColorRect" parent="IntroUI/CinematicBars"]
-layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 64.0
@@ -379,7 +423,6 @@ grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Bottom" type="ColorRect" parent="IntroUI/CinematicBars"]
-layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -398,7 +441,7 @@ editor_description = ""
 script = null
 
 [node name="CreditsBackground" type="ColorRect" parent="IntroUI"]
-layout_mode = 1
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -408,7 +451,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="CreditsPanel" type="Panel" parent="IntroUI"]
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -423,7 +465,6 @@ grow_vertical = 2
 
 [node name="MadeWith" type="Label" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.355
 anchor_top = 0.38
@@ -438,7 +479,6 @@ vertical_alignment = 1
 
 [node name="Text" type="TextureRect" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.531
 anchor_top = 0.373
@@ -453,52 +493,52 @@ ignore_texture_size = true
 
 [node name="Icon" type="TextureRect" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.531
 anchor_top = 0.373
 anchor_right = 0.531
 anchor_bottom = 0.373
-offset_left = -543.744
-offset_top = 448.2
-offset_right = -351.747
-offset_bottom = 640.197
+offset_left = -24.0
+offset_top = 672.0
+offset_right = 167.997
+offset_bottom = 863.997
 pivot_offset = Vector2(96, 96)
 texture = ExtResource("9")
 ignore_texture_size = true
 
 [node name="BloodEffect" type="TextureRect" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -16.0
-offset_top = -400.0
-offset_right = 837.0
-offset_bottom = 100.0
+offset_left = 30.162
+offset_top = -456.0
+offset_right = 883.162
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19")
 ignore_texture_size = true
+metadata/_edit_lock_ = true
 
 [node name="HandLogo" type="TextureRect" parent="IntroUI/CreditsPanel"]
-modulate = Color(1, 1, 1, 0.0265985)
-layout_mode = 1
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -944.0
-offset_right = -489.75
-offset_bottom = 264.0
+offset_left = -984.0
+offset_top = 32.0
+offset_right = -529.75
+offset_bottom = 296.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("20")
 ignore_texture_size = true
+metadata/_edit_lock_ = true
 
 [node name="GameTitle" type="Label" parent="IntroUI/CreditsPanel"]
-layout_mode = 1
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -510,7 +550,7 @@ offset_right = 192.0
 offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.3, 1.3)
+scale = Vector2(3, 3)
 pivot_offset = Vector2(192, 44)
 text = "MHFPS"
 horizontal_alignment = 1
@@ -531,5 +571,34 @@ one_shot = true
 [editable path="House2"]
 [editable path="House2/House"]
 [editable path="House2/Doorbell"]
-[editable path="Hedge"]
+[editable path="House9"]
+[editable path="House9/House"]
+[editable path="House9/Doorbell"]
+[editable path="House10"]
+[editable path="House10/House"]
+[editable path="House10/Doorbell"]
+[editable path="House11"]
+[editable path="House11/House"]
+[editable path="House11/Doorbell"]
+[editable path="House12"]
+[editable path="House12/House"]
+[editable path="House12/Doorbell"]
+[editable path="House3"]
+[editable path="House3/House"]
+[editable path="House3/Doorbell"]
+[editable path="House4"]
+[editable path="House4/House"]
+[editable path="House4/Doorbell"]
+[editable path="House5"]
+[editable path="House5/House"]
+[editable path="House5/Doorbell"]
+[editable path="House6"]
+[editable path="House6/House"]
+[editable path="House6/Doorbell"]
+[editable path="House7"]
+[editable path="House7/House"]
+[editable path="House7/Doorbell"]
+[editable path="House8"]
+[editable path="House8/House"]
+[editable path="House8/Doorbell"]
 [editable path="Hedge2"]
