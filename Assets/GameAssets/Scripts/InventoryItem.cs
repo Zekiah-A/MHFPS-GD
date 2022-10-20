@@ -8,7 +8,7 @@ public partial class InventoryItem : Node3D
 	[Export] public int ItemType;
 	public bool Enabled
 	{
-		get { return enabled; }
+		get => enabled;
 		set
 		{
 			enabled=value;
@@ -31,10 +31,7 @@ public partial class InventoryItem : Node3D
 		GD.Print($"Enabled set to {enabled}");
 		
 		//HACK: BODGE: Quick bodge job :)
-		if (!enabled)
-			this.Visible = false;
-		else
-			this.Visible = true;
+		Visible = enabled;
 	}
 
 	//Collide signal

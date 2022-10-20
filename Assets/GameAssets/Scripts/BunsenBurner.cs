@@ -3,7 +3,7 @@ using System;
 
 public partial class BunsenBurner : Node3D
 {
-	public int BurnTime = 0;
+	public int BurnTime;
 	private Light3D flameLight;
 	private GPUParticles3D flameParticles;
 	private Timer burnerTimer;
@@ -54,7 +54,7 @@ public partial class BunsenBurner : Node3D
 	//If bunsen burner is left on for more than 20 seconds straight (the wait time of the overuse timer), game over!
 	public void OnOveruseTimerFinished()
 	{
-		GD.Print("Game over: Time us overused.");
+		GD.Print("Game over: Bunsen burner overuse.");
 		//TODO: Use the correct Jumpscare.
 		GetTree().CurrentScene.GetNode<DetentionTeacher>("StainTeacher").Jumpscare();
 	}

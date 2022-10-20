@@ -109,7 +109,7 @@ public partial class Weapon : Node3D
 		//TODO: Call a "shake" animation in the camera.
 	}
 
-	protected virtual void OnFireEnd()
+	protected void OnFireEnd()
 	{
 		muzzleFlash.Visible = false;
 	}
@@ -135,7 +135,7 @@ public partial class Weapon : Node3D
 		ammoHud.Text = $"{CurrentAmmo}/{MagazineSize} | {TotalAmmo}";
 	}
 
-	protected virtual void RotateWeapon() //THIS doesn't matter anyway, because the ray should come from player HEAD and the bullet should hit where player is looking!
+	protected void RotateWeapon() //THIS doesn't matter anyway, because the ray should come from player HEAD and the bullet should hit where player is looking!
 	{
 		/*RotationDegrees = new Vector3(Mathf.Lerp(RotationDegrees.x, springArm.RotationDegrees.x, 0.2f), RotationDegrees.y, RotationDegrees.z);*/
 	}

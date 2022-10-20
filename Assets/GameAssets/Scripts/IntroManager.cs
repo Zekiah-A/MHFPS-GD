@@ -8,7 +8,7 @@ public partial class IntroManager : Node3D
 	private AnimationPlayer cameraAnimationPlayer;
 	private uint defaultCullMask;
 	
-	public override async void _Ready()
+	public override void _Ready()
 	{
 		creditsTimer = GetNode<Timer>("CutsceneTimer");
 		cameraAnimationPlayer = GetNode<AnimationPlayer>("Camera3D/CameraAnimationPlayer");

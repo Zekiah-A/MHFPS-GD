@@ -3,7 +3,7 @@ using System;
 
 public partial class DetentionCamera : Node3D
 {
-	public float MouseSensitivity = 0.04f; //TODO: Make values like this customisable.
+	const float MouseSensitivity = 0.04f; //TODO: Make values like this customisable.
 	private Camera3D camera;
 	private SpotLight3D torch;
 	

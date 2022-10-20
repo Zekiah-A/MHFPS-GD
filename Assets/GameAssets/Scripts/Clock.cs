@@ -3,7 +3,7 @@ using System;
 
 public partial class Clock : Node3D
 {
-	public int ClockTime = 0;
+	private int clockTime;
 	
 	private AudioStreamMP3 clockStream;
 	private AudioStreamMP3 clockUnwindStream;
@@ -35,15 +35,14 @@ public partial class Clock : Node3D
 	
 	public void Unwind()
 	{
-		if (!actionPlayer.Playing)
-		{
-			actionPlayer.Stream = clockUnwindStream;
-			actionPlayer.Play();
-			actionAnimationPlayer.Play("unwind_animation");
-			ClockTime = 0; //TODO: Make the clock animate too, override tweens in order to make it wind back realistically with the player's hand.
+		if (actionPlayer.Playing) return;
+		
+		actionPlayer.Stream = clockUnwindStream;
+		actionPlayer.Play();
+		actionAnimationPlayer.Play("unwind_animation");
+		clockTime = 0; //TODO: Make the clock animate too, override tweens in order to make it wind back realistically with the player's hand.
 			
-			minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, 0);
-		}
+		minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, 0);
 	}
 
 	// Clock does not seem to automatically tick after the radio announcement, as the audio sequence overruns by about 10 seconds.
@@ -54,16 +53,16 @@ public partial class Clock : Node3D
 	
 	private void OnClockTimerTimeout()
 	{	// Clock will need rewinding every 30 seconds
-		ClockTime += 1;
+		clockTime += 1;
 
 		// Auditory warning to player that time is running out. 
-		if (ClockTime >= MaximumTime - WarnTime && ClockTime < MaximumTime) 
+		if (clockTime >= MaximumTime - WarnTime && clockTime < MaximumTime) 
 		{
 			clockPlayer.Stream = clockStream;
 			clockPlayer.Play();
 		}
 		// If gone for more than 30 seconds without rewind, then player will be jumpscared. 
-		else if (ClockTime >= MaximumTime) 
+		else if (clockTime >= MaximumTime) 
 		{
 			//Jumpscare player, time is out.
 			clockPlayer.Stop();

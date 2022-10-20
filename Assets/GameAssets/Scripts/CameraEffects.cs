@@ -19,19 +19,18 @@ public partial class CameraEffects : Camera3D
 
 	public override void _Ready()
 	{
-		if (Random)
+		if (!Random) return;
+		
+		random = new Random();
+		try
 		{
-			random = new Random();
-			try
-			{
-				cameraTimer = GetNode<Timer>("Timer");
-				cameraTimer.Connect("timeout",new Callable(this,nameof(OnTimerComplete)));
-				cameraTimer.Start();
-			}
-			catch (Exception e)
-			{
-				GD.Print($"Random camera movement requires a timer with autostart enabled as a child.\n{e}");
-			}
+			cameraTimer = GetNode<Timer>("Timer");
+			cameraTimer.Connect("timeout",new Callable(this,nameof(OnTimerComplete)));
+			cameraTimer.Start();
+		}
+		catch (Exception e)
+		{
+			GD.Print($"Random camera movement requires a timer with autostart enabled as a child.\n{e}");
 		}
 	}
 
@@ -39,9 +38,9 @@ public partial class CameraEffects : Camera3D
 	{
 		if (!Random)
 		{
-			Vector2 mousePosition = GetViewport().GetMousePosition();
-			posx = (mousePosition.x  - GetViewport().GetVisibleRect().Size.x / 2) / GetViewport().GetVisibleRect().Size.x;
-			posy = (mousePosition.y  - GetViewport().GetVisibleRect().Size.y / 2) / GetViewport().GetVisibleRect().Size.y;
+			var (x, y) = GetViewport().GetMousePosition();
+			posx = (x  - GetViewport().GetVisibleRect().Size.x / 2) / GetViewport().GetVisibleRect().Size.x;
+			posy = (y  - GetViewport().GetVisibleRect().Size.y / 2) / GetViewport().GetVisibleRect().Size.y;
 		}
 
 		Rotation = new Vector3 (

@@ -20,13 +20,12 @@ public partial class KinematicPlayer : CharacterBody3D
 	public const int RotSpeed = 15;
 	public const int MaxSpringLength = 4;
 	public const float MouseSensitivity = 0.2f;
-	public const bool MouseSmoothing = true; //TODO:
 
 	//get "Weapon class from the spatial" - all weapon logic will go into it's own class
 	//[Export] public int currentSelected;
 	public static int InventoryCurrent = 0;
-	public static List<InventoryItem> Inventory = new List<InventoryItem>();
-	List<Button> inventoryPanelButtons = new List<Button>();
+	public static List<InventoryItem> Inventory = new();
+	List<Button> inventoryPanelButtons = new();
 
 	private Vector3 velocity = Vector3.Zero;
 	private Vector3 lastvelocity;
@@ -46,6 +45,7 @@ public partial class KinematicPlayer : CharacterBody3D
 	private Camera3D inventoryCamera;
 	private Marker3D inventoryCameraPos;
 	private Panel phoneScreen;
+	
 	public override void _Ready()
 	{
 		//Find node exists as well.
@@ -78,10 +78,7 @@ public partial class KinematicPlayer : CharacterBody3D
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		else if (@event.IsActionPressed("toggle_capture"))
 		{
-			if (Input.MouseMode == Input.MouseModeEnum.Captured)
-				Input.MouseMode = (Input.MouseModeEnum.Visible);
-			else
-				Input.MouseMode = Input.MouseModeEnum.Captured;
+			Input.MouseMode = Input.MouseMode == Input.MouseModeEnum.Captured ? Input.MouseModeEnum.Visible : Input.MouseModeEnum.Captured;
 		}
 		else if (@event.IsActionPressed("game_zoomin"))
 		{
@@ -161,8 +158,8 @@ public partial class KinematicPlayer : CharacterBody3D
 	///<summary>Per-frame operations. Not to be used for movement or other related things.</summary>
 	public override void _Process(double delta)
 	{
-		Vector3 inputVector = GetInputVector();
-		Vector3 direction = GetDirection(inputVector); //TODO: THESE SHOULD BE GLObAL - used in bothj process & physprocess!
+		var inputVector = GetInputVector();
+		var direction = GetDirection(inputVector); //TODO: THESE SHOULD BE GLObAL - used in bothj process & physprocess!
 		
 		hologramCamera.GlobalTransform = hologramCameraPos.GlobalTransform;
 		inventoryCamera.GlobalTransform = inventoryCameraPos.GlobalTransform;
@@ -172,28 +169,26 @@ public partial class KinematicPlayer : CharacterBody3D
 	//<summary> foreach object under the  "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
 	public void UpdateInventory()
 	{
-		foreach (Node node in inventoryNode.GetChildren())
+		foreach (var node in inventoryNode.GetChildren())
 		{
-			if (node is InventoryItem nodeItem)
-			{
-				if (!Inventory.Contains(nodeItem))
-				{
-					Inventory.Add(nodeItem);
-					GD.Print($"Added item '{node.Name}' to Inventory.");
-				}
+			if (node is not InventoryItem nodeItem) continue;
 			
-				if (Inventory.IndexOf(nodeItem) == InventoryCurrent)
-				{
-					//enable this, it is the primary, maybe enable "isEnabled" bool in inventoryite.cs?
-					GD.Print($"Enabled - {nodeItem.Name}");
-					nodeItem.Enabled = true;
-				}
-				else
-				{
-					GD.Print($"Disabled - {nodeItem.Name}");
-					nodeItem.Enabled = false;
-				}
-				
+			if (!Inventory.Contains(nodeItem))
+			{
+				Inventory.Add(nodeItem);
+				GD.Print($"Added item '{node.Name}' to Inventory.");
+			}
+			
+			if (Inventory.IndexOf(nodeItem) == InventoryCurrent)
+			{
+				//enable this, it is the primary, maybe enable "isEnabled" bool in inventoryite.cs?
+				GD.Print($"Enabled - {nodeItem.Name}");
+				nodeItem.Enabled = true;
+			}
+			else
+			{
+				GD.Print($"Disabled - {nodeItem.Name}");
+				nodeItem.Enabled = false;
 			}
 		}
 		
@@ -223,12 +218,11 @@ public partial class KinematicPlayer : CharacterBody3D
 	{
 		lastvelocity.x = velocity.x;
 		lastvelocity.z = velocity.z;
+
+		if (direction == Vector3.Zero) return;
 		
-		if (direction != Vector3.Zero)
-		{
-			velocity.x = Mathf.MoveToward(velocity.x, direction.x * MaxSpeed, (float) (Acceleration * delta));
-			velocity.z = Mathf.MoveToward(velocity.z, direction.z * MaxSpeed, (float) (Acceleration * delta));
-		}
+		velocity.x = Mathf.MoveToward(velocity.x, direction.x * MaxSpeed, (float) (Acceleration * delta));
+		velocity.z = Mathf.MoveToward(velocity.z, direction.z * MaxSpeed, (float) (Acceleration * delta));
 	}
 	
 	private void ApplyRotation(double delta, Vector3 direction)
@@ -343,24 +337,22 @@ public partial class KinematicPlayer : CharacterBody3D
 
 		foreach (Node node in inventoryPanel.GetChildren())
 		{
-			if (node is Button button)
+			if (node is not Button button) continue;
+			inventoryPanelButtons.Add(button);
+
+			button.AddThemeColorOverride("font_color",
+				inventoryPanelButtons.IndexOf(button) == InventoryCurrent
+					? new Color(0, 0, 1, 1)
+					: new Color(1, 1, 1, 0.5f));
+
+			try
 			{
-				inventoryPanelButtons.Add(button);
-			
-				if (inventoryPanelButtons.IndexOf(button) == InventoryCurrent)
-					button.AddThemeColorOverride("font_color", new Color(0, 0, 1, 1));
-				else
-					button.AddThemeColorOverride("font_color", new Color(1, 1, 1, 0.5f));
-				
-				try
-				{
-					button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] {Inventory[inventoryPanelButtons.IndexOf(button)].Name}";
-					button.Icon = ResourceLoader.Load(Inventory[inventoryPanelButtons.IndexOf(button)].InventoryTexture) as Texture2D;
-				}
-				catch
-				{
-					button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] ____________";
-				}
+				button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] {Inventory[inventoryPanelButtons.IndexOf(button)].Name}";
+				button.Icon = ResourceLoader.Load(Inventory[inventoryPanelButtons.IndexOf(button)].InventoryTexture) as Texture2D;
+			}
+			catch
+			{
+				button.Text = $"[{inventoryPanelButtons.IndexOf(button) + 1}] ____________";
 			}
 		}
 	}

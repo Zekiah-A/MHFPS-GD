@@ -6,10 +6,11 @@ public partial class Doors : Node3D
 {
 	public bool LeftOpened = true;
 	public bool RightOpened = true;
-	public bool VentLit = false;
-	public int BatteryPercentage;
+	private bool VentLit;
+
+	private int BatteryPercentage;
 	//If this value ever goes negative, then something has gone seriously wrong.
-	public uint DoorsClosed
+	private uint DoorsClosed
 	{
 		get => doorsClosed;
 		set
@@ -18,12 +19,12 @@ public partial class Doors : Node3D
 			OnDoorsStateChanged();
 		}
 	}
-	private uint doorsClosed = 0;
+	private uint doorsClosed;
 
-	public Node3D leftDoor;
-	public Node3D rightDoor;
-	public Timer batteryTimer;
-	public Label batteryLabel;
+	private Node3D leftDoor;
+	private Node3D rightDoor;
+	private Timer batteryTimer;
+	private Label batteryLabel;
 
 	public override void _Ready()
 	{
@@ -89,13 +90,12 @@ public partial class Doors : Node3D
 		batteryLabel.Text = $"{BatteryPercentage}%";
 
 		//If player has run out of battery, leave them completely vunerable, possible also disable their torch.
-		if (BatteryPercentage == 0)
-		{
-			batteryTimer.Stop();
-			(GetTree().CurrentScene.GetNode("Phone") as Phone)?.Disable();
-			OpenLeft();
-			OpenRight();
-		}
+		if (BatteryPercentage != 0) return;
+		
+		batteryTimer.Stop();
+		(GetTree().CurrentScene.GetNode("Phone") as Phone)?.Disable();
+		OpenLeft();
+		OpenRight();
 	}
 
 	/// <summary>
@@ -103,18 +103,14 @@ public partial class Doors : Node3D
 	/// </summary>
 	private void OnDoorsStateChanged()
 	{
-		switch (DoorsClosed)
+		batteryTimer.WaitTime = DoorsClosed switch
 		{
-			case 0:
-				batteryTimer.WaitTime = 4;
-				break;
-			case 1:
-				batteryTimer.WaitTime = 2;
-				break;
-			case 2:
-				batteryTimer.WaitTime = 1.5f;
-				break;
-		}
+			0 => 4,
+			1 => 2,
+			2 => 1.5f,
+			_ => batteryTimer.WaitTime
+		};
+		
 		GD.Print($"Doors state changed [{DoorsClosed}], battery wait time set to {batteryTimer.WaitTime}.");
 	}
 }
