@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cc8307h2ekp4p"]
+[gd_scene load_steps=62 format=3 uid="uid://cc8307h2ekp4p"]
 
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" id="1"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/DetentionManager.cs" id="2"]
@@ -24,14 +24,18 @@
 [ext_resource type="PackedScene" uid="uid://d11yt1xeqpgea" path="res://Assets/GameAssets/Models/DisplayBoard/display_board.glb" id="25"]
 [ext_resource type="PackedScene" uid="uid://1xvrlpr5020" path="res://Assets/GameAssets/Models/Paper/paper_stack.glb" id="27"]
 [ext_resource type="PackedScene" uid="uid://j453mnsqikfd" path="res://Assets/GameAssets/Models/Knife/knife.glb" id="28"]
+[ext_resource type="Texture2D" uid="uid://4eobq1qrw20k" path="res://Assets/GameAssets/Textures/Posters/you_failed.png" id="28_vswhj"]
 [ext_resource type="PackedScene" uid="uid://656wpmdjn3s6" path="res://Assets/GameAssets/Models/Watcher/watcher.glb" id="29"]
+[ext_resource type="Texture2D" uid="uid://cruedttn6no5o" path="res://Assets/GameAssets/Textures/Posters/third_eye.png" id="29_pw0o6"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/Clock.cs" id="30"]
+[ext_resource type="Texture2D" uid="uid://4ky2urf50ssy" path="res://Assets/GameAssets/Textures/Posters/uusikaupunki.png" id="30_x0y5w"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/ModelScenes/DecorativeBorder.tscn" id="31"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/decorative_border_horizontal.tres" id="32"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/decorative_border_vertical.tres" id="33"]
 [ext_resource type="AudioStream" uid="uid://bncgchdpyi2hw" path="res://Assets/GameAssets/Audio/Detention/cassete2.mp3" id="34"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/Doors.cs" id="35"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/Phone.cs" id="37"]
+[ext_resource type="Texture2D" uid="uid://dp65lu55vm8ib" path="res://Assets/GameAssets/Textures/WallGraffiti/wall_graffiti0.png" id="37_utqwf"]
 [ext_resource type="Theme" uid="uid://b1um6tmgnouur" path="res://Assets/Themes/detention_phoneui.tres" id="38"]
 [ext_resource type="PackedScene" uid="uid://v73v32llb3l8" path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting1.glb" id="39"]
 [ext_resource type="PackedScene" uid="uid://1x8my7cpuomn" path="res://Assets/GameAssets/Models/DetentionWalls/detention_walls.glb" id="40"]
@@ -41,6 +45,10 @@
 [sub_resource type="Environment" id="Environment_2wvfl"]
 background_mode = 1
 background_energy_multiplier = 0.0
+sdfgi_enabled = true
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+volumetric_fog_density = 0.1095
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23iwc"]
 _data = {
@@ -93,10 +101,24 @@ size = Vector3(2.4, 0.02, 3.6)
 [sub_resource type="BoxShape3D" id="10"]
 size = Vector3(1, 1, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhckw"]
+albedo_texture = ExtResource("28_vswhj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tew8"]
+albedo_texture = ExtResource("29_pw0o6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctpvq"]
+albedo_texture = ExtResource("30_x0y5w")
+
 [sub_resource type="BoxShape3D" id="46"]
 size = Vector3(2, 0.2, 1.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3f62v"]
+transparency = 1
+albedo_texture = ExtResource("37_utqwf")
+
 [sub_resource type="PlaneMesh" id="44"]
+material = SubResource("StandardMaterial3D_3f62v")
 
 [node name="Detention" type="Node3D"]
 script = ExtResource("2")
@@ -105,39 +127,6 @@ script = ExtResource("2")
 environment = SubResource("Environment_2wvfl")
 
 [node name="DetentionUI" parent="." instance=ExtResource("5")]
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BatteryPanel" parent="DetentionUI" index="0"]
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="WorkPanel" parent="DetentionUI" index="1"]
-grow_vertical = 0
-
-[node name="DeathScreen" parent="DetentionUI" index="2"]
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeathColour" parent="DetentionUI/DeathScreen" index="0"]
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeathRect1" parent="DetentionUI/DeathScreen" index="1"]
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeathRect2" parent="DetentionUI/DeathScreen" index="2"]
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeathRect3" parent="DetentionUI/DeathScreen" index="3"]
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DeathRect4" parent="DetentionUI/DeathScreen" index="4"]
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="CameraBody" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 1)
@@ -267,13 +256,11 @@ offset_right = 243.75
 offset_bottom = 133.333
 
 [node name="TopPanel" type="Panel" parent="Phone/SubViewport/PhoneUI"]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.00039
 anchor_bottom = 0.24
 
 [node name="Title" type="Label" parent="Phone/SubViewport/PhoneUI/TopPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.695652
 anchor_bottom = 1.0
@@ -281,7 +268,6 @@ text = "Mobile Door Control"
 clip_text = true
 
 [node name="Upgrades" type="Label" parent="Phone/SubViewport/PhoneUI/TopPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.695652
 anchor_right = 1.0
@@ -289,7 +275,6 @@ anchor_bottom = 1.0
 text = "Upgrades"
 
 [node name="ContentPanel" type="Panel" parent="Phone/SubViewport/PhoneUI"]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -297,7 +282,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LeftButton" type="Button" parent="Phone/SubViewport/PhoneUI/ContentPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0108738
 anchor_top = 0.261
@@ -308,7 +292,6 @@ toggle_mode = true
 text = "Left Door"
 
 [node name="RightButton" type="Button" parent="Phone/SubViewport/PhoneUI/ContentPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.509515
 anchor_top = 0.261
@@ -491,11 +474,23 @@ transform = Transform3D(-1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0
 [node name="YouFailedPoster" parent="Posters" instance=ExtResource("21")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.47897, 2.74133, -13.1395)
 
+[node name="poster_mesh2" parent="Posters/YouFailedPoster" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.70204, 0.145403)
+material_override = SubResource("StandardMaterial3D_mhckw")
+
 [node name="ThirdEyePoster" parent="Posters" instance=ExtResource("21")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.47671, 2.76133, -2.48918)
 
+[node name="poster_mesh2" parent="Posters/ThirdEyePoster" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.440864, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_4tew8")
+
 [node name="UusikaupunkiPoster" parent="Posters" instance=ExtResource("21")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.02013, 2.56563, 1.92862)
+
+[node name="poster_mesh2" parent="Posters/UusikaupunkiPoster" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.344529, 0)
+material_override = SubResource("StandardMaterial3D_ctpvq")
 
 [node name="DisplayBoards" type="Node3D" parent="."]
 
@@ -644,7 +639,7 @@ mesh = SubResource("44")
 skeleton = NodePath("../..")
 
 [node name="WallGraffiti2" type="MeshInstance3D" parent="WallDecorations"]
-transform = Transform3D(0.5, 8.74228e-08, -3.82137e-15, 0, -2.18557e-08, -0.5, -1.74846e-07, 1, -4.37114e-08, 0.4, 0.8, -12.9)
+transform = Transform3D(0.5, 8.74228e-08, -3.82137e-15, 0, -2.18557e-08, -0.5, -1.74846e-07, 1, -4.37114e-08, 0.4, 0.8, -12.9912)
 mesh = SubResource("44")
 skeleton = NodePath("../..")
 
@@ -673,6 +668,14 @@ size = Vector3(0.002, 4, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 1.8, -12)
 size = Vector3(0.002, 4, 10)
 
+[node name="EditorLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
+visible = false
+light_energy = 6.371
+light_size = 0.108
+editor_only = true
+omni_range = 11.103
+
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
 [connection signal="input_event" from="CasetteRecorder/Area3D" to="." method="OnCasetteRecorderClicked"]
 [connection signal="mouse_exited" from="CasetteRecorder/Area3D" to="." method="OnObjectMouseExit"]
@@ -689,8 +692,8 @@ size = Vector3(0.002, 4, 10)
 [connection signal="input_event" from="Clock/Area3D" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="mouse_entered" from="Doors/Vent/Area3D" to="." method="OnVentMouseEntered"]
-[connection signal="mouse_exited" from="Doors/Vent/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="mouse_exited" from="Doors/Vent/Area3D" to="." method="OnVentMouseExit"]
+[connection signal="mouse_exited" from="Doors/Vent/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="Doors/BatteryTimer" to="Doors" method="OnBatteryTimerTimeout"]
 
 [editable path="DetentionUI"]

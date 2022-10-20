@@ -20,8 +20,8 @@ public partial class IntroManager : Node3D
 		creditsAnimationPlayer.Play("intro_credits");
 		
 		//Wait for the intro GUI cutscene to start, before playing intro.
-		await ToSignal(creditsAnimationPlayer, "animation_finished");
-		PlayIntro();
+		//await ToSignal(creditsAnimationPlayer, "animation_finished");
+		//PlayIntro();
 	}
 
 	private void PlayIntro()

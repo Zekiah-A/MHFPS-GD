@@ -145,9 +145,6 @@ spot_attenuation = 0.637281
 spot_angle = 24.449
 spot_angle_attenuation = 0.901252
 
-[node name="CSGBox2" type="CSGBox3D" parent="."]
-transform = Transform3D(2.09, 0, 0, 0, 2, 0, 0, 0, 1, -7.35339, 18.6924, -30.4538)
-
 [node name="BikeShed" parent="." instance=ExtResource("10")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, -7.99446, 0.181829, 4.60736)
 

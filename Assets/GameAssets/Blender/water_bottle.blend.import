@@ -3,11 +3,14 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dl1tqjiixq132"
+uid="uid://cmyvs75jwuuen"
+path="res://.godot/imported/water_bottle.blend-b2e3c28f7c5813c9d2d9bb8397432e8f.scn"
 
 [deps]
 
 source_file="res://Assets/GameAssets/Blender/water_bottle.blend"
+dest_files=["res://.godot/imported/water_bottle.blend-b2e3c28f7c5813c9d2d9bb8397432e8f.scn"]
+
 [params]
 
 nodes/root_type="Node3D"

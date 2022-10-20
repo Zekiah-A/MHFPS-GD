@@ -1,15 +1,14 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://c2175wqyoqwft"]
 
-[ext_resource path="res://Assets/Scenes/Other/Demo/sky.tres" type="Sky" id=1]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bo7nc"]
+
+[sub_resource type="Sky" id="Sky_8ci1b"]
+sky_material = SubResource("ProceduralSkyMaterial_bo7nc")
 
 [resource]
 background_mode = 2
-background_sky = ExtResource( 1 )
-background_energy = 0.21
-ss_reflections_enabled = true
-ss_reflections_fade_in = 0.0776449
+sky = SubResource("Sky_8ci1b")
 ssao_enabled = true
-dof_blur_near_enabled = true
 glow_enabled = true
 adjustment_enabled = true
 adjustment_saturation = 1.25

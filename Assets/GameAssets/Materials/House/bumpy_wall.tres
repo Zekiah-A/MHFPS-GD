@@ -1,14 +1,12 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=2]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bonljjrbiy5b"]
 
-[ext_resource path="res://Assets/GameAssets/Textures/BumpyWall/bumpy_wall_albedo.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://y6vwxphs351f" path="res://Assets/GameAssets/Textures/BumpyWall/bumpy_wall_albedo.png" id="1"]
 
 [resource]
-albedo_texture = ExtResource( 1 )
+albedo_texture = ExtResource("1")
 roughness = 0.8
-depth_enabled = true
-depth_scale = 0.05
-depth_deep_parallax = false
-depth_flip_tangent = false
-depth_flip_binormal = false
-depth_texture = ExtResource( 1 )
-uv1_scale = Vector3( 5, 5.781, 0 )
+heightmap_enabled = true
+heightmap_scale = 0.05
+heightmap_texture = ExtResource("1")
+heightmap_flip_texture = true
+uv1_scale = Vector3(12.156, 14.029, 0)

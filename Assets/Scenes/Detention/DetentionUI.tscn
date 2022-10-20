@@ -20,10 +20,11 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="BatteryPanel" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -31,10 +32,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -176.0
 offset_top = -48.0
+grow_horizontal = 0
+grow_vertical = 0
 mouse_filter = 2
 
-[node name="Battery" type="Label" parent="BatteryPanel"]
-layout_mode = 1
+[node name="UIBatteryLeft" type="Label" parent="BatteryPanel"]
+unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.409
 anchor_right = 1.0
@@ -45,7 +48,6 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="Colon" type="Label" parent="BatteryPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.273
 anchor_right = 0.409
@@ -57,7 +59,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="BatteryIcon" type="TextureRect" parent="BatteryPanel"]
-layout_mode = 1
+self_modulate = Color(1, 1, 1, 0.282353)
 anchors_preset = -1
 anchor_right = 0.273
 anchor_bottom = 1.0
@@ -67,16 +69,15 @@ texture = ExtResource("2")
 ignore_texture_size = true
 
 [node name="WorkPanel" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -48.0
 offset_right = 128.0
+grow_vertical = 0
 mouse_filter = 2
 
 [node name="Details" type="Label" parent="WorkPanel"]
-layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0625
 anchor_right = 0.6625
@@ -87,8 +88,8 @@ text = "Work left:"
 vertical_alignment = 1
 clip_text = true
 
-[node name="WorkLeft" type="Label" parent="WorkPanel"]
-layout_mode = 1
+[node name="UIWorkLeft" type="Label" parent="WorkPanel"]
+unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.664062
 anchor_right = 1.0
@@ -98,59 +99,67 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="DeathScreen" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="DeathColour" type="ColorRect" parent="DeathScreen"]
 visible = false
 material = SubResource("3")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 color = Color(0.745098, 0.0196078, 0.0196078, 1)
 
 [node name="DeathRect1" type="TextureRect" parent="DeathScreen"]
 visible = false
 material = SubResource("4")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("4")
 
 [node name="DeathRect2" type="TextureRect" parent="DeathScreen"]
 visible = false
 material = SubResource("4")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("5")
 
 [node name="DeathRect3" type="TextureRect" parent="DeathScreen"]
 visible = false
 material = SubResource("4")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6")
 
 [node name="DeathRect4" type="TextureRect" parent="DeathScreen"]
 visible = false
 material = SubResource("4")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("7")
 

@@ -1,7 +1,7 @@
 [gd_resource type="Environment" load_steps=3 format=3 uid="uid://cnxok64dr3pi7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5ieob"]
-sky_curve = 0.160766
+sky_curve = 0.252269
 sky_energy_multiplier = 5.07
 ground_curve = 0.0857423
 sun_curve = 0.0630673
@@ -13,6 +13,7 @@ sky_material = SubResource("ProceduralSkyMaterial_5ieob")
 background_mode = 2
 background_color = Color(0.0784314, 0.054902, 0.247059, 1)
 sky = SubResource("Sky_is50v")
+ambient_light_source = 3
 ambient_light_color = Color(0.960784, 0.960784, 0.960784, 1)
 ambient_light_energy = 0.0
 tonemap_mode = 3

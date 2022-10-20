@@ -1,26 +1,13 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://bm6sy0r2312u6"]
 
-[sub_resource type="Sky" id=1]
-sun_latitude = -0.25
-sun_longitude = 51.5
-sun_energy = 4.0
+[sub_resource type="Sky" id="1"]
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 1 )
-background_energy = 0.4
-ambient_light_color = Color( 0.988235, 0.968627, 0.694118, 1 )
-fog_color = Color( 0.917647, 0.803922, 0.360784, 1 )
-fog_depth_begin = 5.0
-fog_depth_end = 15.0
+sky = SubResource("1")
+ambient_light_color = Color(0.988235, 0.968627, 0.694118, 1)
 tonemap_mode = 4
-ss_reflections_enabled = true
 ssao_enabled = true
-ssao_quality = 2
-dof_blur_far_enabled = true
-dof_blur_far_distance = 0.4
-dof_blur_far_transition = 2.5
-dof_blur_far_quality = 2
 glow_enabled = true
 glow_bloom = 0.4
 adjustment_enabled = true

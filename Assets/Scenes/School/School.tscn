@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://btniha4y37iuq"]
+[gd_scene load_steps=7 format=3 uid="uid://btniha4y37iuq"]
 
+[ext_resource type="Texture2D" uid="uid://btqhwu63kcgdf" path="res://Assets/GameAssets/Textures/School/map.png" id="1_7sgqt"]
 [ext_resource type="PackedScene" uid="uid://cg5jllv23jkeh" path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" id="2"]
-[ext_resource type="PackedScene" path="res://Assets/Scenes/Player/Player.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dxd0rtrs34ywe" path="res://Assets/Scenes/Player/Player.tscn" id="3"]
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(225, 225)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jdq2"]
+albedo_texture = ExtResource("1_7sgqt")
 
 [sub_resource type="BoxShape3D" id="3"]
 size = Vector3(225, 0.2, 225)
@@ -13,6 +17,7 @@ size = Vector3(225, 0.2, 225)
 
 [node name="Map" type="MeshInstance3D" parent="."]
 mesh = SubResource("1")
+surface_material_override/0 = SubResource("StandardMaterial3D_7jdq2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map"]
 
@@ -27,18 +32,3 @@ transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926
 
 [node name="Player" parent="." instance=ExtResource("3")]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.8, 0)
-
-[node name="SixthFormBlock" type="Node3D" parent="."]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 23, 0, 8.5)
-
-[node name="Wall" type="CSGBox3D" parent="SixthFormBlock"]
-transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 2.19067, 0, -0.448288)
-
-[node name="Wall2" type="CSGBox3D" parent="SixthFormBlock"]
-transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, -4.30933, 0, -0.148288)
-
-[node name="Wall3" type="CSGBox3D" parent="SixthFormBlock"]
-transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -0.152073, 0, 3.42743)
-
-[node name="Wall4" type="CSGBox3D" parent="SixthFormBlock"]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -0.317017, 0, -4.22605)
