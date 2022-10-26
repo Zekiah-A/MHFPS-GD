@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/Models/Makehuman/Placeholder/Export/zek.tscn" id="3"]
 [ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/blur.gdshader" id="6"]
 [ext_resource type="Texture2D" uid="uid://bc37nqo1ac57j" path="res://icon.png" id="8"]
-[ext_resource type="PackedScene" path="res://Assets/Scenes/Weapons/WeaponMelee.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dnhpmwrrntobk" path="res://Assets/Scenes/Weapons/WeaponMelee.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://dj7x2d8lgkb0k" path="res://Assets/GameAssets/Textures/Phone/phone_background.png" id="10"]
 [ext_resource type="Theme" uid="uid://bhypfgi3wabsn" path="res://Assets/Themes/app_icon_theme.tres" id="11"]
 [ext_resource type="Texture2D" uid="uid://bbp2f4lt5hex1" path="res://Assets/GameAssets/Textures/Phone/phone_cursor.png" id="12"]
@@ -176,10 +176,13 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHUD"]
 visible = false
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -187,11 +190,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -192.0
 offset_bottom = 280.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(1, -1)
 
 [node name="InvPanel" type="Panel" parent="PlayerHUD"]
 visible = false
 material = SubResource("7")
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1875
 anchor_top = 0.186667
@@ -200,6 +206,7 @@ anchor_bottom = 0.813333
 mouse_filter = 1
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHUD/InvPanel"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.373832
 anchor_top = 0.106383
@@ -208,6 +215,7 @@ anchor_bottom = 0.893618
 offset_right = -3.05176e-05
 
 [node name="Button" type="Button" parent="PlayerHUD/InvPanel"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.673676
 anchor_top = 0.0638298
@@ -218,6 +226,7 @@ icon = ExtResource("8")
 expand_icon = true
 
 [node name="Button2" type="Button" parent="PlayerHUD/InvPanel"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.672897
 anchor_top = 0.234043
@@ -228,6 +237,7 @@ icon = ExtResource("8")
 expand_icon = true
 
 [node name="Button3" type="Button" parent="PlayerHUD/InvPanel"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.672897
 anchor_top = 0.404255
@@ -238,6 +248,7 @@ icon = ExtResource("8")
 expand_icon = true
 
 [node name="Button4" type="Button" parent="PlayerHUD/InvPanel"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.672897
 anchor_top = 0.574468
@@ -248,6 +259,7 @@ icon = ExtResource("8")
 expand_icon = true
 
 [node name="Button5" type="Button" parent="PlayerHUD/InvPanel"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.672897
 anchor_top = 0.744681
@@ -260,6 +272,7 @@ expand_icon = true
 [node name="PhoneScreen" type="Panel" parent="PlayerHUD"]
 visible = false
 clip_contents = true
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -272,6 +285,7 @@ grow_vertical = 0
 pivot_offset = Vector2(90, 160)
 
 [node name="Background" type="TextureRect" parent="PlayerHUD/PhoneScreen"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -282,6 +296,7 @@ texture = ExtResource("10")
 ignore_texture_size = true
 
 [node name="Header" type="Panel" parent="PlayerHUD/PhoneScreen"]
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.05
@@ -289,6 +304,7 @@ offset_bottom = 15.2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ux0fw")
 
 [node name="Label" type="Label" parent="PlayerHUD/PhoneScreen/Header"]
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.333333
 anchor_bottom = 0.952381
@@ -298,6 +314,7 @@ text = "4G"
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="PlayerHUD/PhoneScreen/Header"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.333333
 anchor_right = 0.666667
@@ -309,6 +326,7 @@ text = "00:00AM"
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="PlayerHUD/PhoneScreen/Header"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.666667
 anchor_right = 1.0
@@ -320,6 +338,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Tray" type="Panel" parent="PlayerHUD/PhoneScreen"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0555531
 anchor_top = 0.875
@@ -329,6 +348,7 @@ offset_left = -10.6662
 offset_right = 10.6662
 
 [node name="AppGrid" type="Panel" parent="PlayerHUD/PhoneScreen"]
+layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.0505952
 anchor_right = 1.0
@@ -336,6 +356,7 @@ anchor_bottom = 0.875
 theme_override_styles/panel = SubResource("StyleBoxEmpty_2d2vc")
 
 [node name="Button2" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0416667
 anchor_top = 0.0288809
@@ -344,6 +365,7 @@ anchor_bottom = 0.202166
 theme = ExtResource("11")
 
 [node name="Button3" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.375
 anchor_top = 0.0296029
@@ -352,6 +374,7 @@ anchor_bottom = 0.202888
 theme = ExtResource("11")
 
 [node name="Button4" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.708333
 anchor_top = 0.0296029
@@ -360,6 +383,7 @@ anchor_bottom = 0.202888
 theme = ExtResource("11")
 
 [node name="Button5" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0416667
 anchor_top = 0.227437
@@ -368,6 +392,7 @@ anchor_bottom = 0.400722
 theme = ExtResource("11")
 
 [node name="Button6" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.375
 anchor_top = 0.227437
@@ -376,6 +401,7 @@ anchor_bottom = 0.400722
 theme = ExtResource("11")
 
 [node name="Button7" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.708333
 anchor_top = 0.227437
@@ -384,6 +410,7 @@ anchor_bottom = 0.400722
 theme = ExtResource("11")
 
 [node name="Button8" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0416667
 anchor_top = 0.429603
@@ -392,6 +419,7 @@ anchor_bottom = 0.602888
 theme = ExtResource("11")
 
 [node name="Button9" type="Button" parent="PlayerHUD/PhoneScreen/AppGrid"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.375
 anchor_top = 0.429603
@@ -408,6 +436,7 @@ editor_description = ""
 script = null
 
 [node name="Cursor" type="TextureRect" parent="PlayerHUD/PhoneScreen"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -417,6 +446,8 @@ offset_left = -24.0
 offset_top = -24.0
 offset_right = 24.0
 offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(24, 24)
 mouse_filter = 2
 texture = ExtResource("12")
@@ -433,6 +464,7 @@ script = null
 
 [node name="OpenedPosition" type="Panel" parent="PlayerHUD"]
 visible = false
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -446,6 +478,7 @@ mouse_filter = 2
 
 [node name="ClosedPosition" type="Panel" parent="PlayerHUD"]
 visible = false
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -453,6 +486,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -336.0
 offset_right = 192.0
+grow_horizontal = 0
+grow_vertical = 0
 mouse_filter = 2
 
 [node name="Player" type="Node3D" parent="."]

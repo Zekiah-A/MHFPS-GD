@@ -3,7 +3,7 @@ using System;
 
 public partial class BunsenBurner : Node3D
 {
-	public int BurnTime;
+	private int burnTime;
 	private Light3D flameLight;
 	private GPUParticles3D flameParticles;
 	private Timer burnerTimer;
@@ -41,13 +41,13 @@ public partial class BunsenBurner : Node3D
 	//Called each second, adds to burn time. Once burn time reaches 300, as work is done when the burner is on, the player will win. Enough work has been done.
 	private void OnBurnerTimerFinished()
 	{
-		BurnTime++;
-		workLeftLabel.Text = (300 - BurnTime).ToString();
+		burnTime++;
+		workLeftLabel.Text = (300 - burnTime).ToString();
 		
 		//Total mach length
-		if (BurnTime >= 300)
+		if (burnTime >= 300)
 		{
-			GD.Print("Game won: You sucessfully survived the night.");
+			GD.Print("Game won: You successfully survived the night.");
 		}
 	}
 	

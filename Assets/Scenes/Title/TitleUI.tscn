@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dkif64gks1gev"]
+[gd_scene load_steps=28 format=3 uid="uid://dkif64gks1gev"]
 
 [ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/blur.gdshader" id="1"]
 [ext_resource type="Theme" uid="uid://l3f22njtxuo8" path="res://Assets/Themes/main_theme.tres" id="3_3ad5m"]
@@ -53,6 +53,18 @@ shader_parameter/translucency = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tstl2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaolu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xd4n"]
+shader = ExtResource("1")
+shader_parameter/blur_amount = 2.0
+shader_parameter/lightness = 0.8
+shader_parameter/translucency = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nf80b"]
+shader = ExtResource("1")
+shader_parameter/blur_amount = 2.0
+shader_parameter/lightness = 0.8
+shader_parameter/translucency = 1.0
 
 [node name="TitleUI" type="Control"]
 layout_mode = 3
@@ -253,6 +265,7 @@ text = "Currently Playing: The Real Thing - BIM & ELEVNS"
 vertical_alignment = 1
 
 [node name="MultiplayerPanel" type="Panel" parent="MainPanels"]
+material = SubResource("ShaderMaterial_6xd4n")
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 2.0
@@ -320,6 +333,7 @@ editor_description = ""
 script = null
 
 [node name="OtherPanel" type="Panel" parent="MainPanels"]
+material = SubResource("ShaderMaterial_nf80b")
 anchors_preset = -1
 anchor_left = -1.0
 anchor_bottom = 0.96

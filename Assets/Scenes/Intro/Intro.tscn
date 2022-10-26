@@ -19,10 +19,11 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ywytw"]
 sky_top_color = Color(0.4, 0.541176, 0.572549, 1)
-sky_horizon_color = Color(0.670588, 0.643137, 0.415686, 1)
-sky_curve = 0.197926
-ground_bottom_color = Color(0.2, 0.168627, 0.133333, 1)
-ground_horizon_color = Color(0.662745, 0.635294, 0.431373, 1)
+sky_horizon_color = Color(1, 0.960784, 0.619608, 1)
+sky_curve = 0.142631
+ground_horizon_color = Color(1, 0.956863, 0.65098, 1)
+ground_curve = 0.12996
+sun_angle_max = 90.0
 
 [sub_resource type="Sky" id="Sky_ntuqn"]
 sky_material = SubResource("ProceduralSkyMaterial_ywytw")
@@ -301,10 +302,6 @@ script = ExtResource("6")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oxxua")
 
-[node name="DoorLight" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0.1)
-shadow_enabled = true
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.984399, 0, -0.175951, 0, 1, 0, 0.175951, 0, 0.984399, -2.13112, 1.2, 1.43704)
 attributes = SubResource("CameraAttributesPractical_fp01u")
@@ -366,10 +363,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -16.5,
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-mesh = SubResource("1")
-
-[node name="MeshInstance3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
 mesh = SubResource("1")
 
 [node name="MeshInstance6" type="MeshInstance3D" parent="."]
@@ -564,6 +557,11 @@ libraries = {
 [node name="CutsceneTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 10, 10)
+light_color = Color(0.976471, 1, 0.752941, 1)
+shadow_enabled = true
 
 [editable path="House"]
 [editable path="House/House"]

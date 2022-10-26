@@ -29,17 +29,18 @@ public partial class IntroManager : Node3D
 		GetNode<Camera3D>("Camera3D").CullMask = defaultCullMask;
 		GetNode<Panel>("IntroUI/CreditsPanel").Visible = false;
 		GetNode<ColorRect>("IntroUI/CreditsBackground").Visible = false;
-
-		/*GetNode<Tween>("IntroUI/CinematicBars/Tween").InterpolateProperty(
+		
+		var tween = CreateTween();
+		tween.TweenProperty
+		(
 			GetNode<Panel>("IntroUI/CinematicBars"),
-			"rect_scale",
-			new Vector2(1f, 1.275f),
+			"scale",
 			new Vector2(1f, 1f),
-			1f,
-			Tween.TransitionType.Cubic,
-			Tween.EaseType.Out
-		);
-		GetNode<Tween>("IntroUI/CinematicBars/Tween").Start();*/
+			1f
+		)
+		.SetTrans(Tween.TransitionType.Cubic)
+		.SetEase(Tween.EaseType.Out);
+		tween.Play();
 		
 		cameraAnimationPlayer.Play("intro_camera");
 	}

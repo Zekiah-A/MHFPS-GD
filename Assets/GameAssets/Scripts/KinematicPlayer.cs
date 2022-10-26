@@ -28,7 +28,7 @@ public partial class KinematicPlayer : CharacterBody3D
 	List<Button> inventoryPanelButtons = new();
 
 	private Vector3 velocity = Vector3.Zero;
-	private Vector3 lastvelocity;
+	private Vector3 lastVelocity;
 	private Vector3 snapVector = Vector3.Zero;
 
 	private SpringArm3D springArm;
@@ -136,8 +136,8 @@ public partial class KinematicPlayer : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector3 inputVector = GetInputVector();
-		Vector3 direction = GetDirection(inputVector);
+		var inputVector = GetInputVector();
+		var direction = GetDirection(inputVector);
 		ApplyMovement(inputVector, direction, delta);
 		ApplyFriction(direction, delta);
 		ApplyGravity(delta);
@@ -145,11 +145,12 @@ public partial class KinematicPlayer : CharacterBody3D
 		Jump();
 		//RotateInventory();
 		MoveSpringArm();
-		AccelerationTilt(delta);
 
 		//TODO: Make camera controllable with right stick & arrow keys
-		//velocity = MoveAndSlide(velocity, snapVector, Vector3.Up, true);
-	
+		Velocity = velocity;
+		MoveAndSlide(); //velocity, snapVector, Vector3.Up, true
+		velocity = Velocity;
+		
 		//TODO: Constantly rotate camera to face back of player / pivot back
 		//camera rotation = lerp player pivot rotation,
 		//blocked by mouse movement somehow? would still need to get mouse motion in process
@@ -167,7 +168,7 @@ public partial class KinematicPlayer : CharacterBody3D
 	}
 
 	//<summary> foreach object under the  "inventory" Empty, add it to the list with all of the parameters found. -- get these "objects", by their "InventoryItem" attached! </summary>
-	public void UpdateInventory()
+	private void UpdateInventory()
 	{
 		foreach (var node in inventoryNode.GetChildren())
 		{
@@ -198,26 +199,23 @@ public partial class KinematicPlayer : CharacterBody3D
 
 	private Vector3 GetInputVector()
 	{
-		Vector3 inputVector = Vector3.Zero;
+		var inputVector = Vector3.Zero;
 		inputVector.x = Input.GetActionStrength("game_right") - Input.GetActionStrength("game_left");
 		inputVector.z = Input.GetActionStrength("game_backward") - Input.GetActionStrength("game_forward");
 		
-		if (inputVector.Length() > 1)
-			return inputVector.Normalized();
-		else
-			return inputVector;
+		return inputVector.Length() > 1 ? inputVector.Normalized() : inputVector;
 	}
 
 	private Vector3 GetDirection(Vector3 inputVector)
 	{
-		Vector3 direction = (inputVector.x * armY.Transform.basis.x) + (inputVector.z * armY.Transform.basis.z); 
+		var direction = (inputVector.x * armY.Transform.basis.x) + (inputVector.z * armY.Transform.basis.z); 
 		return direction;
 	}
 
 	private void ApplyMovement(Vector3 inputVector, Vector3 direction, double delta)
 	{
-		lastvelocity.x = velocity.x;
-		lastvelocity.z = velocity.z;
+		lastVelocity.x = velocity.x;
+		lastVelocity.z = velocity.z;
 
 		if (direction == Vector3.Zero) return;
 		
@@ -250,20 +248,19 @@ public partial class KinematicPlayer : CharacterBody3D
 
 	private void ApplyFriction(Vector3 direction, double delta)
 	{
-		if (direction == Vector3.Zero)
+		if (direction != Vector3.Zero) return;
+		
+		if (IsOnFloor())
 		{
-			if (IsOnFloor())
-			{
-				velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (Friction * delta));
-				velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (Friction * delta));
-				velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (Friction * delta));
-			}
-			else
-			{
-				velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (AirFriction * delta));
-				velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (AirFriction * delta));
-				velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (AirFriction * delta));
-			}
+			velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (Friction * delta));
+			velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (Friction * delta));
+			velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (Friction * delta));
+		}
+		else
+		{
+			velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (AirFriction * delta));
+			velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (AirFriction * delta));
+			velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (AirFriction * delta));
 		}
 	}
 
@@ -308,18 +305,15 @@ public partial class KinematicPlayer : CharacterBody3D
 			FirstPerson = false;
 			if (InventoryCurrent < Inventory.Count - 1)
 			{
-				switch (Inventory[InventoryCurrent].ItemType)
+				springArm.Position = Inventory[InventoryCurrent].ItemType switch
 				{
-					case (int) ItemTypes.Weapon:
-						springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f), Mathf.Lerp(springArm.Position.y, 2, 0.1f), 0);
-						break;
-					case (int) ItemTypes.MeleeWeapon:
-						springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 1, 0.1f), Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0);
-						break;
-					default:
-						springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f), Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0);
-						break;
-				}
+					(int) ItemTypes.Weapon => new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f),
+						Mathf.Lerp(springArm.Position.y, 2, 0.1f), 0),
+					(int) ItemTypes.MeleeWeapon => new Vector3(Mathf.Lerp(springArm.Position.x, 1, 0.1f),
+						Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0),
+					_ => new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f),
+						Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0)
+				};
 			}
 			else
 				springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f), Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0);
@@ -335,7 +329,7 @@ public partial class KinematicPlayer : CharacterBody3D
 	{
 		UpdateInventory();
 
-		foreach (Node node in inventoryPanel.GetChildren())
+		foreach (var node in inventoryPanel.GetChildren())
 		{
 			if (node is not Button button) continue;
 			inventoryPanelButtons.Add(button);
@@ -424,19 +418,5 @@ public partial class KinematicPlayer : CharacterBody3D
 		InventoryCurrent = index;
 		UpdateInventory();
 		OpenInventoryPanel();
-	}
-
-	private void AccelerationTilt(double delta)
-	{
-		//i need directional velocity, not general, could be in applymovement?
-		/*
-		Vector3 Acceleration = new Vector3(
-			(velocity.x - lastvelocity.x),
-			0,
-			(velocity.z - lastvelocity.z)
-		) / delta;
-
-		Vector3 directionalAcceleration = Acceleration + Rotation;*/
-		
 	}
 }

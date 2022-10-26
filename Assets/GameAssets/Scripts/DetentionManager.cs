@@ -163,3 +163,4 @@ public partial class DetentionManager : Node
 	public void OnObjectMouseExit() =>
 		Input.SetCustomMouseCursor(dotCursor);
 }
+

@@ -50,7 +50,7 @@ public partial class Actor : Node3D //Player should be actor as well
 
 	public void ApplyState()
 	{
-		foreach (int current in State)
+		foreach (var current in State)
 		{
 			switch (current)
 			{

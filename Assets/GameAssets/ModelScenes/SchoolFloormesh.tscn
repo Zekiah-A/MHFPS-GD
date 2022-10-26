@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://be6hm8fwswxu0"]
+
+[ext_resource type="PackedScene" uid="uid://h8omgo4hcqt1" path="res://Assets/GameAssets/Blender/school_floormesh.blend" id="1_hogsc"]
+
+[node name="SchoolFloormesh" instance=ExtResource("1_hogsc")]
+transform = Transform3D(48.7, 0, 0, 0, 48.7, 0, 0, 0, 48.7, 0, 0, 0)

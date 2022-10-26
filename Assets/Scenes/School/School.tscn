@@ -1,13 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://btniha4y37iuq"]
+[gd_scene load_steps=17 format=3 uid="uid://btniha4y37iuq"]
 
 [ext_resource type="Texture2D" uid="uid://btqhwu63kcgdf" path="res://Assets/GameAssets/Textures/School/map.png" id="1_7sgqt"]
 [ext_resource type="PackedScene" uid="uid://cg5jllv23jkeh" path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" id="2"]
+[ext_resource type="PackedScene" uid="uid://b0011ppwin30p" path="res://Assets/GameAssets/ModelScenes/ComputerScience.tscn" id="2_ymhbg"]
 [ext_resource type="PackedScene" uid="uid://dxd0rtrs34ywe" path="res://Assets/Scenes/Player/Player.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bvtrd76uby7q3" path="res://Assets/GameAssets/ModelScenes/SixthForm.tscn" id="4_us0ws"]
+[ext_resource type="PackedScene" uid="uid://bmhxvdk4yvhgn" path="res://Assets/GameAssets/ModelScenes/TableTennis.tscn" id="6_1x7a0"]
+[ext_resource type="PackedScene" uid="uid://t2q6odqs7s3q" path="res://Assets/GameAssets/ModelScenes/OutsideCanteen.tscn" id="7_tseu4"]
+[ext_resource type="PackedScene" uid="uid://dg45q14ehxnh8" path="res://Assets/GameAssets/ModelScenes/SecurityHut.tscn" id="8_7rp1v"]
+[ext_resource type="PackedScene" uid="uid://bhop3vo6h1ap3" path="res://Assets/GameAssets/ModelScenes/MediaStudies.tscn" id="9_2xod6"]
+[ext_resource type="PackedScene" uid="uid://be6hm8fwswxu0" path="res://Assets/GameAssets/ModelScenes/SchoolFloormesh.tscn" id="10_5xewc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vded6"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_6gy6k"]
+sky_material = SubResource("ProceduralSkyMaterial_vded6")
+
+[sub_resource type="Environment" id="Environment_5ioxq"]
+background_mode = 2
+sky = SubResource("Sky_6gy6k")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(225, 225)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jdq2"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.215686)
 albedo_texture = ExtResource("1_7sgqt")
 
 [sub_resource type="BoxShape3D" id="3"]
@@ -15,9 +37,14 @@ size = Vector3(225, 0.2, 225)
 
 [node name="Node3D" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5ioxq")
+
 [node name="Map" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 mesh = SubResource("1")
 surface_material_override/0 = SubResource("StandardMaterial3D_7jdq2")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map"]
 
@@ -28,7 +55,38 @@ shape = SubResource("3")
 transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 87.0368, 0, 10.612)
 
 [node name="BikeShed" parent="." instance=ExtResource("2")]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -15, 0, 28)
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, -20, -14, 40)
 
 [node name="Player" parent="." instance=ExtResource("3")]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0.8, 0)
+
+[node name="ComputerScience" parent="." instance=ExtResource("2_ymhbg")]
+transform = Transform3D(1.3523, 0, 0.362347, 0, 1.4, 0, -0.362347, 0, 1.3523, 50, -9, 37)
+
+[node name="SixthForm" parent="." instance=ExtResource("4_us0ws")]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 31, -9, 13)
+
+[node name="TableTennis" parent="." instance=ExtResource("6_1x7a0")]
+transform = Transform3D(-0.116469, 0, 0.434667, 0, 0.397, 0, -0.434667, 0, -0.116469, -26, -14, 41)
+
+[node name="OutsideCanteen" parent="." instance=ExtResource("7_tseu4")]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 29, -10.1, 30)
+
+[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 9, 0)
+light_energy = 0.229
+shadow_enabled = true
+
+[node name="SecurityHut" parent="." instance=ExtResource("8_7rp1v")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 122, -2, 15)
+
+[node name="MediaStudies" parent="." instance=ExtResource("9_2xod6")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 111, -2, -7)
+
+[node name="SchoolFloormesh" parent="." instance=ExtResource("10_5xewc")]
+transform = Transform3D(-2.12874e-06, 0, -48.7, 0, 48.7, 0, 48.7, 0, -2.12874e-06, 91, -32.2, 83.2)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 70.3, -5, 7.5)
+polygon = PackedVector2Array(-3.4, -0.1, 12.6, 1.2, 24.7, 2.9, 24.7, -1.3, -3.4, -0.6)
+depth = 0.64

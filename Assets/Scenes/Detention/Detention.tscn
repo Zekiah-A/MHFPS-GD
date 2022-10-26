@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cc8307h2ekp4p"]
+[gd_scene load_steps=65 format=3 uid="uid://cc8307h2ekp4p"]
 
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/DetentionCamera.cs" id="1"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/DetentionManager.cs" id="2"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://da4lrob2vqf1m" path="res://Assets/GameAssets/Models/Gluestick/gluestick.glb" id="19"]
 [ext_resource type="PackedScene" uid="uid://cj07b64ke6fpl" path="res://Assets/GameAssets/Models/Rubber/rubber.glb" id="20"]
 [ext_resource type="PackedScene" uid="uid://bs6h6r2rmlp27" path="res://Assets/GameAssets/Models/PosterMesh/poster_mesh.glb" id="21"]
+[ext_resource type="PackedScene" uid="uid://bfwjs0hvu50sy" path="res://Assets/GameAssets/ModelScenes/WaterBottle.tscn" id="23_qa368"]
 [ext_resource type="PackedScene" uid="uid://d11yt1xeqpgea" path="res://Assets/GameAssets/Models/DisplayBoard/display_board.glb" id="25"]
 [ext_resource type="PackedScene" uid="uid://1xvrlpr5020" path="res://Assets/GameAssets/Models/Paper/paper_stack.glb" id="27"]
 [ext_resource type="PackedScene" uid="uid://j453mnsqikfd" path="res://Assets/GameAssets/Models/Knife/knife.glb" id="28"]
@@ -39,8 +40,10 @@
 [ext_resource type="Theme" uid="uid://b1um6tmgnouur" path="res://Assets/Themes/detention_phoneui.tres" id="38"]
 [ext_resource type="PackedScene" uid="uid://v73v32llb3l8" path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting1.glb" id="39"]
 [ext_resource type="PackedScene" uid="uid://1x8my7cpuomn" path="res://Assets/GameAssets/Models/DetentionWalls/detention_walls.glb" id="40"]
+[ext_resource type="Material" path="res://Assets/GameAssets/Materials/interior_wall0.tres" id="42_p6yr2"]
 [ext_resource type="PackedScene" uid="uid://d2dnpwhwtaaqx" path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting_corner1.glb" id="43"]
-[ext_resource type="PackedScene" uid="uid://cs7vgevy68uly" path="res://Assets/GameAssets/Models/WaterBottle/water_bottle.glb" id="45"]
+[ext_resource type="Material" path="res://Assets/GameAssets/Materials/Detention/detention_floor.tres" id="43_s64uc"]
+[ext_resource type="Material" path="res://Assets/GameAssets/Materials/interior_ceiling0.tres" id="44_5uci3"]
 
 [sub_resource type="Environment" id="Environment_2wvfl"]
 background_mode = 1
@@ -128,11 +131,51 @@ environment = SubResource("Environment_2wvfl")
 
 [node name="DetentionUI" parent="." instance=ExtResource("5")]
 
+[node name="BatteryPanel" parent="DetentionUI" index="0"]
+layout_mode = 3
+
+[node name="UIBatteryLeft" parent="DetentionUI/BatteryPanel" index="0"]
+layout_mode = 3
+
+[node name="Colon" parent="DetentionUI/BatteryPanel" index="1"]
+layout_mode = 3
+
+[node name="BatteryIcon" parent="DetentionUI/BatteryPanel" index="2"]
+layout_mode = 3
+
+[node name="WorkPanel" parent="DetentionUI" index="1"]
+layout_mode = 3
+
+[node name="Details" parent="DetentionUI/WorkPanel" index="0"]
+layout_mode = 3
+
+[node name="UIWorkLeft" parent="DetentionUI/WorkPanel" index="1"]
+layout_mode = 3
+
+[node name="DeathScreen" parent="DetentionUI" index="2"]
+layout_mode = 3
+
+[node name="DeathColour" parent="DetentionUI/DeathScreen" index="0"]
+layout_mode = 3
+
+[node name="DeathRect1" parent="DetentionUI/DeathScreen" index="1"]
+layout_mode = 3
+
+[node name="DeathRect2" parent="DetentionUI/DeathScreen" index="2"]
+layout_mode = 3
+
+[node name="DeathRect3" parent="DetentionUI/DeathScreen" index="3"]
+layout_mode = 3
+
+[node name="DeathRect4" parent="DetentionUI/DeathScreen" index="4"]
+layout_mode = 3
+
 [node name="CameraBody" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 1)
 script = ExtResource("1")
 
 [node name="Camera3D" type="Camera3D" parent="CameraBody"]
+current = true
 fov = 40.0
 
 [node name="Torch" type="SpotLight3D" parent="CameraBody"]
@@ -161,7 +204,6 @@ transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 
 
 [node name="CasettePlayer" type="AudioStreamPlayer3D" parent="CasetteRecorder"]
 stream = ExtResource("34")
-unit_db = 5.0
 max_db = 5.0
 
 [node name="Area3D" type="Area3D" parent="CasetteRecorder"]
@@ -322,7 +364,6 @@ transform = Transform3D(-2.41136, 0.419888, 0, -0.579449, -1.74735, 0, 0, 0, 0.9
 [node name="ClockPlayer" type="AudioStreamPlayer3D" parent="Clock"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 stream = ExtResource("9")
-unit_db = 20.0
 
 [node name="ClockTimer" type="Timer" parent="Clock"]
 
@@ -349,9 +390,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -17)
 script = ExtResource("10")
 
 [node name="RightDoorLight" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.5, -14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 2.2, -14)
 light_color = Color(0.737255, 0.878431, 1, 1)
-light_energy = 0.779
+light_energy = 1.639
+shadow_enabled = true
+omni_range = 3.427
+
+[node name="RightDoorLight2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, -14)
+light_color = Color(1, 0.117647, 0, 1)
+light_energy = 0.1
 shadow_enabled = true
 omni_range = 4.52425
 
@@ -378,8 +426,8 @@ transform = Transform3D(-0.28505, 0, -0.0194777, 0, 0.285714, 0, 0.0194777, 0, -
 [node name="Knife" parent="TeacherDesk" instance=ExtResource("28")]
 transform = Transform3D(-0.801337, -0.236678, -0.549402, 6.91762e-08, 0.918405, -0.395642, 0.598213, -0.317042, -0.735952, -1.75709, 2.23114, -1.23519)
 
-[node name="WaterBottle" parent="TeacherDesk" instance=ExtResource("45")]
-transform = Transform3D(-1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0, -1.85714, -0.857144, 2.30832, -0.999999)
+[node name="WaterBottle" parent="TeacherDesk" instance=ExtResource("23_qa368")]
+transform = Transform3D(1.902, 0, 0, 0, 1.902, 0, 0, 0, 1.902, -0.861556, 2.32915, -1.01571)
 
 [node name="SetDesks" type="Node3D" parent="."]
 
@@ -463,11 +511,11 @@ transform = Transform3D(0.171828, 0, 0.102349, 0, 0.2, 0, -0.102349, 0, 0.171828
 [node name="PaperStack4" parent="TableProps" instance=ExtResource("27")]
 transform = Transform3D(-0.145614, 4.80326e-09, 0.1371, -1.50217e-08, -0.2, -8.9476e-09, 0.1371, -1.68119e-08, 0.145614, 6.98272, 1.36158, -3.82803)
 
-[node name="WaterBottle" parent="TableProps" instance=ExtResource("45")]
+[node name="WaterBottle3" parent="TableProps" instance=ExtResource("23_qa368")]
 transform = Transform3D(-1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0, -1.85714, 3.94286, 1.60832, -3.9)
 
-[node name="WaterBottle2" parent="TableProps" instance=ExtResource("45")]
-transform = Transform3D(-1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0, -1.85714, -4.85714, 1.60832, -6.6)
+[node name="WaterBottle4" parent="TableProps" instance=ExtResource("23_qa368")]
+transform = Transform3D(-1.85714, 0, 1.62356e-07, 0, 1.85714, 0, -1.62356e-07, 0, -1.85714, -3.85714, 1.60832, -6.4)
 
 [node name="Posters" type="Node3D" parent="."]
 
@@ -660,6 +708,15 @@ skeleton = NodePath("../..")
 
 [node name="DetentionWalls" parent="." instance=ExtResource("40")]
 
+[node name="DetentionWalls" parent="DetentionWalls" index="0"]
+surface_material_override/0 = ExtResource("42_p6yr2")
+
+[node name="Floor" parent="DetentionWalls" index="1"]
+surface_material_override/0 = ExtResource("43_s64uc")
+
+[node name="Ceiling" parent="DetentionWalls" index="2"]
+surface_material_override/0 = ExtResource("44_5uci3")
+
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8, 1.8, -11)
 size = Vector3(0.002, 4, 10)
@@ -668,11 +725,15 @@ size = Vector3(0.002, 4, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 1.8, -12)
 size = Vector3(0.002, 4, 10)
 
+[node name="CSGBox3" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.8, 1.8, -15)
+size = Vector3(0.002, 4, 6)
+
 [node name="EditorLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
-visible = false
 light_energy = 6.371
 light_size = 0.108
+shadow_enabled = true
 editor_only = true
 omni_range = 11.103
 

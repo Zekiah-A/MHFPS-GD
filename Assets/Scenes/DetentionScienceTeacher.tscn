@@ -1,0 +1,168 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckk0qt2f48x8p"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_jvegp"]
+script/source = "using Godot;
+using System;
+using System.Drawing;
+using System.Linq;
+using Color = Godot.Color;
+
+public partial class DetentionScienceTeacher : Node //: DetentionManager
+{
+	private float minWhiteValue = 0.05f;
+	
+	private readonly string[] numbers =
+	{
+		\"##########\\n###****###\\n##*####*##\\n#*######*#\\n#*######*#\\n#*######*#\\n#*######*#\\n##*####*##\\n###****###\\n##########\", //O as ascii `*` & `#`
+		\"##########\\n####*#####\\n###**#####\\n##*#*#####\\n####*#####\\n####*#####\\n####*#####\\n####*#####\\n##*****###\\n##########\", //1
+		\"##########\\n###****###\\n##*####*##\\n##*####*##\\n######*###\\n#####*####\\n####*#####\\n###*######\\n##******##\\n##########\", //2
+		\"##########\\n##*****###\\n#######*##\\n#######*##\\n######**##\\n##*****###\\n#######*##\\n#######*##\\n##*****###\\n##########\"  //3
+	};
+	
+	public override void _Ready()
+	{
+		OnSubmitAnswerClicked();
+	}
+
+	public async void OnSubmitAnswerClicked()
+	{
+		/*for (int n = 0; n < numbers.Length; n++)
+		{
+			for (int i = 0; i < 4; i++) //Wait 4 frames for screen to load
+				await ToSignal(GetTree(), \"idle_frame\");
+
+			var uImg = GetViewport().GetTexture().;
+			uImg.FlipY();
+			var img = uImg.GetRect(new Rect2(GetNode<Control>(\"AnswerDrawArea\").RectGlobalPosition, GetNode<Control>(\"AnswerDrawArea\").RectSize));
+			
+			for (int i = 0; i < 4; i++) //160 -> 80 //80 -> 40 // 40 -> 20 // 20 -> 10
+				img.ShrinkX2();
+			img.Lock();
+
+			var match = 0;
+			var total = 0;
+			
+			for (int h = 0; h < img.GetHeight(); h++)
+			{
+				for (int w = 0; w < img.GetWidth(); w++)
+				{
+					var asciiColour = numbers[n].Split(\"\\n\")[h][w] == '#' ? Colors.Black : Colors.White;
+					if (asciiColour == Colors.White)
+						total++;
+					if (img.GetPixel(w, h).r > minWhiteValue && img.GetPixel(w, h).g > minWhiteValue && img.GetPixel(w, h).b > minWhiteValue && asciiColour == Colors.White)
+						match++;
+				}
+			}
+			GD.Print($\"ascii: {n} match:{match} total: {total} percent: {(float)match/total*100}\");
+		}*/
+	}
+}
+"
+
+[node name="DetentionScienceTeacher" type="Node3D"]
+script = SubResource("CSharpScript_jvegp")
+
+[node name="AnswerDrawArea" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.773
+anchor_right = 0.5
+anchor_bottom = 0.773
+offset_left = -80.0
+offset_top = -79.8
+offset_right = 80.0
+offset_bottom = 80.2
+
+[node name="ColorRect4" type="ColorRect" parent="AnswerDrawArea"]
+offset_right = 160.0
+offset_bottom = 160.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="AnswerDrawArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -68.0
+offset_right = 48.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="AnswerDrawArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="AnswerDrawArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 56.0
+offset_right = 48.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect5" type="ColorRect" parent="AnswerDrawArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -8.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect7" type="ColorRect" parent="AnswerDrawArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_right = 40.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect8" type="ColorRect" parent="AnswerDrawArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -16.0
+offset_right = 40.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect6" type="ColorRect" parent="AnswerDrawArea"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -68.0
+offset_right = 32.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
