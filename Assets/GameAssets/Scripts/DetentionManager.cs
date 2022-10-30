@@ -153,7 +153,6 @@ public partial class DetentionManager : Node
 			Input.SetCustomMouseCursor(hoverCursor);
 	}
 	
-	//TODO: Implement signals
 	private void OnVentMouseEntered() =>
 		(doors as Doors)?.TorchOnVent();
 

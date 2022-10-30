@@ -172,7 +172,21 @@ transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4.24966, -0.40294, 0.64
 transform = Transform3D(-1.8, 0, -1.57361e-07, 0, 1.8, 0, 1.57361e-07, 0, -1.8, 4.24966, -0.40294, 7.50611)
 
 [node name="GenericModel3" parent="." instance=ExtResource("12")]
-transform = Transform3D(-7.59995e-08, -0.465874, 1.73867, -2.0364e-08, 1.73867, 0.465874, -1.8, 0, -7.86805e-08, -2.38879, -0.504516, 6.75957)
+transform = Transform3D(-7.59995e-08, -0.465874, 1.73867, -2.0364e-08, 1.73867, 0.465874, -1.8, 0, -7.86805e-08, -2.43538, -0.230649, 6.75957)
+
+[node name="Skeleton3D" parent="GenericModel3/generic_model" index="0"]
+transform = Transform3D(1, 0, 8.88178e-16, 3.55271e-15, 1, 0, 5.76592e-17, -1.12336e-21, 1, 0, 0, 0)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(1.46999, -1.68595, -0.127741)
+bones/7/rotation = Quaternion(-0.109681, -0.518723, -0.0355403, 0.847132)
+bones/7/scale = Vector3(1, 1, 1)
+bones/25/scale = Vector3(1, 1, 1)
+bones/26/position = Vector3(-1.46999, -1.68595, -0.127738)
+bones/26/rotation = Quaternion(-0.202832, 0.592891, 0.0721562, 0.775972)
+bones/26/scale = Vector3(1, 1, 1)
+bones/28/scale = Vector3(1, 0.999999, 1)
+bones/41/scale = Vector3(1, 1, 1)
+bones/42/scale = Vector3(1, 1, 1)
 
 [node name="TableTennisTable" parent="." instance=ExtResource("10_4frxc")]
 transform = Transform3D(-3.49691e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.49691e-08, 4.18957, -0.36, 4.08)

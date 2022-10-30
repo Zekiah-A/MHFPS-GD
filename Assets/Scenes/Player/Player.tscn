@@ -1,24 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://dxd0rtrs34ywe"]
+[gd_scene load_steps=22 format=3 uid="uid://dxd0rtrs34ywe"]
 
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/InventoryItem.cs" id="1"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" id="2"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/Models/Makehuman/Placeholder/Export/zek.tscn" id="3"]
 [ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/blur.gdshader" id="6"]
 [ext_resource type="Texture2D" uid="uid://bc37nqo1ac57j" path="res://icon.png" id="8"]
-[ext_resource type="PackedScene" uid="uid://dnhpmwrrntobk" path="res://Assets/Scenes/Weapons/WeaponMelee.tscn" id="9"]
 [ext_resource type="Texture2D" uid="uid://dj7x2d8lgkb0k" path="res://Assets/GameAssets/Textures/Phone/phone_background.png" id="10"]
 [ext_resource type="Theme" uid="uid://bhypfgi3wabsn" path="res://Assets/Themes/app_icon_theme.tres" id="11"]
 [ext_resource type="Texture2D" uid="uid://bbp2f4lt5hex1" path="res://Assets/GameAssets/Textures/Phone/phone_cursor.png" id="12"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
-height = 1.5
-
-[sub_resource type="Animation" id="6"]
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ysvxn"]
-_data = {
-"test": SubResource("6")
-}
+height = 3.6
 
 [sub_resource type="ShaderMaterial" id="7"]
 shader = ExtResource("6")
@@ -76,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 script = ExtResource("2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 shape = SubResource("1")
 
 [node name="SpringArmY" type="Marker3D" parent="."]
@@ -136,40 +128,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1.968)
 [node name="InvCamPosition" type="Marker3D" parent="Pivot"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, -3.032)
 
-[node name="zek" parent="Pivot" instance=ExtResource("3")]
+[node name="Zek" parent="Pivot" instance=ExtResource("3")]
 transform = Transform3D(-2.35, 0, -2.05444e-07, 0, 2.35, 0, 2.05444e-07, 0, -2.35, 0, 0, 0)
-
-[node name="zek_hologram" parent="Pivot" instance=ExtResource("3")]
-transform = Transform3D(-2.35, 0, -2.05444e-07, 0, 2.35, 0, 2.05444e-07, 0, -2.35, 0, 0, 0)
-
-[node name="zekiah-afro01" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="0"]
-layers = 2
-
-[node name="zekiah-base" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="1"]
-layers = 2
-
-[node name="zekiah-eyebrow001" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="2"]
-layers = 2
-
-[node name="zekiah-low_poly" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="3"]
-layers = 2
-
-[node name="zekiah-male_casualsuit06" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="4"]
-layers = 2
-
-[node name="zekiah-teeth_base" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="5"]
-layers = 2
-
-[node name="zekiah-tongue01" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="6"]
-layers = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/zek_hologram/zekiah/Skeleton3D" index="7"]
-libraries = {
-"": SubResource("AnimationLibrary_ysvxn")
-}
-
-[node name="PivotInventoryMeleeKatana v5" parent="." instance=ExtResource("9")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.96046e-08, 0, 5.96046e-08)
 
 [node name="PlayerHUD" type="Control" parent="."]
 layout_mode = 3
@@ -181,7 +141,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="PlayerHUD"]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -270,7 +229,6 @@ icon = ExtResource("8")
 expand_icon = true
 
 [node name="PhoneScreen" type="Panel" parent="PlayerHUD"]
-visible = false
 clip_contents = true
 layout_mode = 1
 anchors_preset = 3
@@ -308,8 +266,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.333333
 anchor_bottom = 0.952381
+offset_left = 8.0
 offset_right = 6.86646e-05
-offset_bottom = 1.52381
+offset_bottom = -4.47619
 text = "4G"
 vertical_alignment = 1
 
@@ -321,7 +280,7 @@ anchor_right = 0.666667
 anchor_bottom = 0.952381
 offset_left = 6.86646e-05
 offset_right = 2.99994
-offset_bottom = 1.52381
+offset_bottom = -4.47619
 text = "00:00AM"
 vertical_alignment = 1
 
@@ -332,7 +291,8 @@ anchor_left = 0.666667
 anchor_right = 1.0
 anchor_bottom = 0.952381
 offset_left = -6.10352e-05
-offset_bottom = 1.52381
+offset_right = -8.0
+offset_bottom = -4.47619
 text = "100%"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -490,16 +450,12 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="Player" type="Node3D" parent="."]
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("12")
-anim_player = NodePath("../Pivot/zek_hologram/zekiah/Skeleton3D/AnimationPlayer")
-active = true
 parameters/Idle/blend_position = Vector2(-0.394343, 0.147632)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Pivot/zek/zekiah/Skeleton3D")
+root_node = NodePath("../Pivot/Zek/zekiah/Skeleton3D")
 libraries = {
 "": SubResource("AnimationLibrary_oq05t")
 }
@@ -510,5 +466,4 @@ libraries = {
 [connection signal="pressed" from="PlayerHUD/InvPanel/Button4" to="." method="InventoryButtonPressed" binds= [3]]
 [connection signal="pressed" from="PlayerHUD/InvPanel/Button5" to="." method="InventoryButtonPressed" binds= [4]]
 
-[editable path="Pivot/zek"]
-[editable path="Pivot/zek_hologram"]
+[editable path="Pivot/Zek"]

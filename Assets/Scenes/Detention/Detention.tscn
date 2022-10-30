@@ -42,7 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://1x8my7cpuomn" path="res://Assets/GameAssets/Models/DetentionWalls/detention_walls.glb" id="40"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/interior_wall0.tres" id="42_p6yr2"]
 [ext_resource type="PackedScene" uid="uid://d2dnpwhwtaaqx" path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting_corner1.glb" id="43"]
-[ext_resource type="Material" path="res://Assets/GameAssets/Materials/Detention/detention_floor.tres" id="43_s64uc"]
+[ext_resource type="Material" uid="uid://b0mvdigl14a1y" path="res://Assets/GameAssets/Materials/Detention/detention_floor.tres" id="43_s64uc"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/interior_ceiling0.tres" id="44_5uci3"]
 
 [sub_resource type="Environment" id="Environment_2wvfl"]
@@ -52,6 +52,7 @@ sdfgi_enabled = true
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 volumetric_fog_density = 0.1095
+adjustment_saturation = 0.8
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23iwc"]
 _data = {
@@ -236,11 +237,9 @@ process_material = SubResource("4")
 draw_pass_1 = SubResource("5")
 
 [node name="FlameLight" type="OmniLight3D" parent="BunsenBurner/Flame"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-visible = false
 light_color = Color(0.909804, 0.568627, 0.207843, 1)
 shadow_enabled = true
-omni_range = 1.948
+omni_range = 1.5
 
 [node name="BurnerTimer" type="Timer" parent="BunsenBurner"]
 
@@ -733,9 +732,8 @@ size = Vector3(0.002, 4, 6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
 light_energy = 6.371
 light_size = 0.108
-shadow_enabled = true
 editor_only = true
-omni_range = 11.103
+omni_range = 16.9072
 
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
 [connection signal="input_event" from="CasetteRecorder/Area3D" to="." method="OnCasetteRecorderClicked"]
@@ -748,6 +746,7 @@ omni_range = 11.103
 [connection signal="mouse_exited" from="Phone/OpenButton" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="Phone/LeftDoorButton" to="Phone" method="OnLeftDoorClicked"]
 [connection signal="input_event" from="Phone/RightDoorButton" to="Phone" method="OnRightDoorClicked"]
+[connection signal="mouse_exited" from="Phone/RightDoorButton" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="Phone/BackgroundArea" to="Phone" method="OnBackgroundClicked"]
 [connection signal="timeout" from="Clock/ClockTimer" to="Clock" method="OnClockTimerTimeout"]
 [connection signal="input_event" from="Clock/Area3D" to="." method="OnClockClicked"]

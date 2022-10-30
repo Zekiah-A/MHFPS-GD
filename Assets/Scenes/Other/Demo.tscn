@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://50iagylsnvng"]
+[gd_scene load_steps=10 format=3 uid="uid://50iagylsnvng"]
 
 [ext_resource type="Environment" uid="uid://c2175wqyoqwft" path="res://Assets/Scenes/Other/Demo/environment.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://dxd0rtrs34ywe" path="res://Assets/Scenes/Player/Player.tscn" id="2"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Scripts/Actor.cs" id="3"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/ModelScenes/GenericModel.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://bt0fn5vijw8rm" path="res://Assets/GameAssets/Models/Bottle/water_bottle.glb" id="6"]
+[ext_resource type="PackedScene" uid="uid://bfwjs0hvu50sy" path="res://Assets/GameAssets/ModelScenes/WaterBottle.tscn" id="5_pbrdj"]
 
 [sub_resource type="BoxShape3D" id="2"]
 size = Vector3(20, 2, 20)
@@ -16,10 +16,6 @@ points = PackedVector3Array(0, 0, 0, -1, 1, 2, 1, 1, 2, 1, -1, 2, -1, -1, 2)
 
 [sub_resource type="ViewportTexture" id="9"]
 viewport_path = NodePath("Actor/SubViewport")
-
-[sub_resource type="CapsuleShape3D" id="11"]
-radius = 0.1
-height = 0.4
 
 [node name="Node3D" type="Node3D"]
 
@@ -45,18 +41,6 @@ shape = SubResource("2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 size = Vector3(15.4, 1, 16)
 
-[node name="StaticBody12" type="StaticBody3D" parent="Map"]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 55.1647, 0.0166285, -0.0012641)
-
-[node name="StaticBody13" type="StaticBody3D" parent="Map"]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.975037, 27.2605, 0.0166285, -0.0012641)
-
-[node name="StaticBody4" type="StaticBody3D" parent="Map"]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 6.53267e-05, 0.0166285, -47.9767)
-
-[node name="StaticBody2" type="StaticBody3D" parent="Map"]
-transform = Transform3D(1.63308, 0, 0, 0, 0.837538, -0.508421, 0, 0.54638, 0.779352, 6.53267e-05, -0.456825, -15.9212)
-
 [node name="StaticBody3" type="StaticBody3D" parent="Map"]
 transform = Transform3D(3.05166, 0, 0, 0, 3.92039, 0, 0, 0, 2.78686, 6.53267e-05, 1.01198, 14.9841)
 
@@ -64,27 +48,6 @@ transform = Transform3D(3.05166, 0, 0, 0, 3.92039, 0, 0, 0, 2.78686, 6.53267e-05
 shape = SubResource("3")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Map/StaticBody3"]
-
-[node name="StaticBody5" type="StaticBody3D" parent="Map"]
-transform = Transform3D(0.488536, 0, 0, 0, 3.92039, 0, 0, 0, 9.83889, 7.63435, 1.01198, -38.3892)
-
-[node name="StaticBody6" type="StaticBody3D" parent="Map"]
-transform = Transform3D(0.488536, 0, 0, 0, 3.92039, 0, 0, 0, 9.83889, -12.5316, 1.01198, -38.3892)
-
-[node name="StaticBody7" type="StaticBody3D" parent="Map"]
-transform = Transform3D(-2.13546e-08, 0, -9.83889, 0, 3.92039, 0, 0.488536, 0, -4.30071e-07, -2.52638, 1.01198, -47.6675)
-
-[node name="StaticBody8" type="StaticBody3D" parent="Map"]
-transform = Transform3D(-3.67671e-08, 0, -16.94, 0, 3.92039, 0, 0.488536, 0, -4.30071e-07, -15.1593, 0.995126, -28.5875)
-
-[node name="StaticBody9" type="StaticBody3D" parent="Map"]
-transform = Transform3D(-1.47141e-08, 0, -6.77937, 0, 3.92039, 0, 0.488536, 0, -4.30071e-07, 1.08979, 1.00677, -33.9655)
-
-[node name="StaticBody10" type="StaticBody3D" parent="Map"]
-transform = Transform3D(0.488536, 0, -1.33736e-07, 0, 3.92039, 0, -3.89191e-09, 0, 3.97332, -5.07558, 1.00677, -37.6184)
-
-[node name="StaticBody11" type="StaticBody3D" parent="Map"]
-transform = Transform3D(-1.74627e-08, 0, -3.97332, 0, 3.92039, 0, 0.488536, 0, -3.07415e-07, -1.4436, 1.00677, -40.9823)
 
 [node name="Actor" type="Node3D" parent="." groups=["Actor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
@@ -121,17 +84,20 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Hello World3D!"
 
-[node name="WaterBottleRigidBody" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.9)
+[node name="WaterBottle" parent="." instance=ExtResource("5_pbrdj")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.6, 0.3, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterBottleRigidBody"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("11")
+[node name="WaterBottle2" parent="." instance=ExtResource("5_pbrdj")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.9, 0.3, 0)
 
-[node name="WaterBottle" parent="WaterBottleRigidBody" instance=ExtResource("6")]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+[node name="WaterBottle3" parent="." instance=ExtResource("5_pbrdj")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.9, 0.3, 0.3)
+
+[node name="WaterBottle4" parent="." instance=ExtResource("5_pbrdj")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.6, 0.3, 0.3)
 
 [editable path="Actor/GenericModel"]
-[editable path="WaterBottleRigidBody/WaterBottle"]
