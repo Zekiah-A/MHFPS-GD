@@ -14,9 +14,6 @@ noise = SubResource("21")
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("1")
-shader_parameter/blur_amount = 2.0
-shader_parameter/lightness = 1.0
-shader_parameter/translucency = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_txkyn"]
 
@@ -56,15 +53,9 @@ shader_parameter/translucency = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6xd4n"]
 shader = ExtResource("1")
-shader_parameter/blur_amount = 2.0
-shader_parameter/lightness = 0.8
-shader_parameter/translucency = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nf80b"]
 shader = ExtResource("1")
-shader_parameter/blur_amount = 2.0
-shader_parameter/lightness = 0.8
-shader_parameter/translucency = 1.0
 
 [node name="TitleUI" type="Control"]
 layout_mode = 3
@@ -79,7 +70,7 @@ script = ExtResource("4")
 visible = false
 modulate = Color(1, 1, 1, 0.231373)
 material = SubResource("20")
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -88,15 +79,16 @@ texture = SubResource("22")
 stretch_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource("1")
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabPanel" type="Panel" parent="."]
-anchors_preset = 5
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -160.0
@@ -106,7 +98,7 @@ grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_txkyn")
 
 [node name="Other" type="Button" parent="TabPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.162
 anchor_right = 0.162
 offset_left = -51.84
@@ -120,7 +112,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_1fqax")
 text = "Other"
 
 [node name="Underline" type="ColorRect" parent="TabPanel/Other"]
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -136,7 +128,7 @@ mouse_filter = 2
 color = Color(1, 0.713726, 0, 0.588235)
 
 [node name="Play" type="Button" parent="TabPanel"]
-anchors_preset = 5
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -56.0
@@ -151,7 +143,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_xhk1k")
 text = "Play"
 
 [node name="Underline" type="ColorRect" parent="TabPanel/Play"]
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -167,7 +159,7 @@ mouse_filter = 2
 color = Color(1, 0.713726, 0, 0.588235)
 
 [node name="Multiplayer" type="Button" parent="TabPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.842
 anchor_right = 0.842
 offset_left = -53.44
@@ -182,7 +174,7 @@ text = "Multiplayer"
 clip_text = true
 
 [node name="Underline" type="ColorRect" parent="TabPanel/Multiplayer"]
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -206,7 +198,7 @@ editor_description = ""
 script = null
 
 [node name="MainPanels" type="Panel" parent="."]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -216,7 +208,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_tstl2")
 metadata/_edit_lock_ = true
 
 [node name="PlayPanel" type="Panel" parent="MainPanels"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -226,7 +218,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_aaolu")
 metadata/_edit_lock_ = true
 
 [node name="Title" type="Label" parent="MainPanels/PlayPanel"]
-anchors_preset = 5
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -192.0
@@ -240,7 +232,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Play" type="Button" parent="MainPanels/PlayPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.056
 anchor_top = 0.815
 anchor_right = 0.222
@@ -252,7 +244,7 @@ offset_bottom = -0.0720215
 text = "Play"
 
 [node name="WarningLabel" type="Label" parent="MainPanels/PlayPanel"]
-anchors_preset = 4
+layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 8.0
@@ -266,7 +258,7 @@ vertical_alignment = 1
 
 [node name="MultiplayerPanel" type="Panel" parent="MainPanels"]
 material = SubResource("ShaderMaterial_6xd4n")
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 1.0
 anchor_right = 2.0
 anchor_bottom = 0.96
@@ -280,14 +272,14 @@ pivot_offset = Vector2(0, 236)
 theme = ExtResource("3_3ad5m")
 
 [node name="Multiplayer" type="Panel" parent="MainPanels/MultiplayerPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.0833333
 anchor_top = 0.167373
 anchor_right = 0.416667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/MultiplayerPanel/Multiplayer"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
@@ -295,21 +287,21 @@ anchor_bottom = 0.971429
 text = "Online multiplayer"
 
 [node name="Panel" type="Panel" parent="MainPanels/MultiplayerPanel/Multiplayer"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.125
 anchor_top = 0.104762
 anchor_right = 0.875
 anchor_bottom = 0.663492
 
 [node name="LocalGame" type="Panel" parent="MainPanels/MultiplayerPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.583333
 anchor_top = 0.167373
 anchor_right = 0.916667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/MultiplayerPanel/LocalGame"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
@@ -318,7 +310,7 @@ disabled = true
 text = "Local game"
 
 [node name="Panel" type="Panel" parent="MainPanels/MultiplayerPanel/LocalGame"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.125
 anchor_top = 0.104762
 anchor_right = 0.875
@@ -334,7 +326,7 @@ script = null
 
 [node name="OtherPanel" type="Panel" parent="MainPanels"]
 material = SubResource("ShaderMaterial_nf80b")
-anchors_preset = -1
+layout_mode = 0
 anchor_left = -1.0
 anchor_bottom = 0.96
 offset_left = 109.0
@@ -345,14 +337,14 @@ pivot_offset = Vector2(806, 236)
 theme = ExtResource("3_3ad5m")
 
 [node name="Multiplayer" type="Panel" parent="MainPanels/OtherPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.0833333
 anchor_top = 0.167373
 anchor_right = 0.416667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/OtherPanel/Multiplayer"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
@@ -360,21 +352,21 @@ anchor_bottom = 0.971429
 text = "Demo Level"
 
 [node name="Panel" type="Panel" parent="MainPanels/OtherPanel/Multiplayer"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.125
 anchor_top = 0.104762
 anchor_right = 0.875
 anchor_bottom = 0.663492
 
 [node name="LocalGame" type="Panel" parent="MainPanels/OtherPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.583333
 anchor_top = 0.167373
 anchor_right = 0.916667
 anchor_bottom = 0.834746
 
 [node name="Button" type="Button" parent="MainPanels/OtherPanel/LocalGame"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.03125
 anchor_top = 0.790476
 anchor_right = 0.96875
@@ -383,7 +375,7 @@ offset_left = -1.23978e-05
 text = "Detention"
 
 [node name="Panel" type="Panel" parent="MainPanels/OtherPanel/LocalGame"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.125
 anchor_top = 0.104762
 anchor_right = 0.875

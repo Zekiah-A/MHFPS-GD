@@ -25,9 +25,9 @@ public partial class TitleUIManager : Control
 		
 		mainPanels = GetNode<Panel>("MainPanels");
 
-		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.x, 0);
+		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.X, 0);
 		mainPanels2 = new Vector2(0, 0);
-		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.x, 0);
+		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.Y, 0);
 		
 		Resized += () =>
 		{
@@ -105,9 +105,9 @@ public partial class TitleUIManager : Control
 	
 	private void SwitchPanel(int selected, bool controller = false)
 	{
-		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.x, 0);
+		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.X, 0);
 		mainPanels2 = new Vector2(0, 0);
-		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.x, 0);
+		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.Y, 0);
 		
 		if (controller)
 		{

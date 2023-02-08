@@ -17,8 +17,8 @@ public partial class DetentionCamera : Node3D
 	{
 		if (@event is InputEventMouseMotion eventMouseMotion)
 		{
-			camera.RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.x * MouseSensitivity));
-			camera.Rotation = new Vector3(0, Mathf.Clamp(camera.Rotation.y, Mathf.DegToRad(-45), Mathf.DegToRad(45)), 0);
+			camera.RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.	X * MouseSensitivity));
+			camera.Rotation = new Vector3(0, Mathf.Clamp(camera.Rotation.Y, Mathf.DegToRad(-45), Mathf.DegToRad(45)), 0);
 			var rayNormal = camera.ProjectPosition(GetViewport().GetMousePosition(), 1);
 			torch.LookAt(rayNormal, Vector3.Up);
 		}

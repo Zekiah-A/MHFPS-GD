@@ -398,7 +398,7 @@ grow_vertical = 2
 
 [node name="CinematicBars" type="Panel" parent="IntroUI"]
 self_modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -6.0
@@ -409,14 +409,14 @@ scale = Vector2(1, 1.275)
 pivot_offset = Vector2(512, 300)
 
 [node name="Top" type="ColorRect" parent="IntroUI/CinematicBars"]
-anchors_preset = 10
+layout_mode = 0
 anchor_right = 1.0
 offset_bottom = 64.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Bottom" type="ColorRect" parent="IntroUI/CinematicBars"]
-anchors_preset = 12
+layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -435,7 +435,7 @@ script = null
 
 [node name="CreditsBackground" type="ColorRect" parent="IntroUI"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -444,7 +444,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="CreditsPanel" type="Panel" parent="IntroUI"]
 self_modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -458,7 +458,7 @@ grow_vertical = 2
 
 [node name="MadeWith" type="Label" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.355
 anchor_top = 0.38
 anchor_right = 0.355
@@ -472,7 +472,7 @@ vertical_alignment = 1
 
 [node name="Text" type="TextureRect" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.531
 anchor_top = 0.373
 anchor_right = 0.531
@@ -482,11 +482,11 @@ offset_top = 96.2
 offset_right = 96.256
 offset_bottom = 176.2
 texture = ExtResource("16")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="Icon" type="TextureRect" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.531
 anchor_top = 0.373
 anchor_right = 0.531
@@ -497,11 +497,11 @@ offset_right = 167.997
 offset_bottom = 863.997
 pivot_offset = Vector2(96, 96)
 texture = ExtResource("9")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="BloodEffect" type="TextureRect" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 30.162
@@ -511,12 +511,12 @@ offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19")
-ignore_texture_size = true
+expand_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="HandLogo" type="TextureRect" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -984.0
@@ -527,12 +527,12 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("20")
-ignore_texture_size = true
+expand_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="GameTitle" type="Label" parent="IntroUI/CreditsPanel"]
 modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

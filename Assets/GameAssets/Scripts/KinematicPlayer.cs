@@ -114,12 +114,12 @@ public partial class KinematicPlayer : CharacterBody3D
 			UpdateInventoryPanel();
 		}
 
-		if (@event is InputEventMouseMotion eventMouseMotion && Input.GetMouseMode() == Input.MouseModeEnum.Captured)
+		if (@event is InputEventMouseMotion eventMouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
-			armY.RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.x * MouseSensitivity));
-			springArm.RotateX(Mathf.DegToRad(-eventMouseMotion.Relative.y * MouseSensitivity));
-			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.x, Mathf.DegToRad(-75), Mathf.DegToRad(75)),
-				springArm.Rotation.y, springArm.Rotation.z);
+			armY.RotateY(Mathf.DegToRad(-eventMouseMotion.Relative.X * MouseSensitivity));
+			springArm.RotateX(Mathf.DegToRad(-eventMouseMotion.Relative.Y * MouseSensitivity));
+			springArm.Rotation = new Vector3(Mathf.Clamp(springArm.Rotation.X, Mathf.DegToRad(-75), Mathf.DegToRad(75)),
+				springArm.Rotation.Y, springArm.Rotation.Z);
 			//smooth this out somehow - move to process
 		}
 		else if (@event is InputEventKey eventKey && eventKey.Pressed)
@@ -200,27 +200,27 @@ public partial class KinematicPlayer : CharacterBody3D
 	private Vector3 GetInputVector()
 	{
 		var inputVector = Vector3.Zero;
-		inputVector.x = Input.GetActionStrength("game_right") - Input.GetActionStrength("game_left");
-		inputVector.z = Input.GetActionStrength("game_backward") - Input.GetActionStrength("game_forward");
+		inputVector.X = Input.GetActionStrength("game_right") - Input.GetActionStrength("game_left");
+		inputVector.Z = Input.GetActionStrength("game_backward") - Input.GetActionStrength("game_forward");
 		
 		return inputVector.Length() > 1 ? inputVector.Normalized() : inputVector;
 	}
 
 	private Vector3 GetDirection(Vector3 inputVector)
 	{
-		var direction = (inputVector.x * armY.Transform.basis.x) + (inputVector.z * armY.Transform.basis.z); 
+		var direction = (inputVector.X * armY.Transform.Basis.X) + (inputVector.Z * armY.Transform.Basis.Z); 
 		return direction;
 	}
 
 	private void ApplyMovement(Vector3 inputVector, Vector3 direction, double delta)
 	{
-		lastVelocity.x = velocity.x;
-		lastVelocity.z = velocity.z;
+		lastVelocity.X = velocity.X;
+		lastVelocity.Z = velocity.Z;
 
 		if (direction == Vector3.Zero) return;
 		
-		velocity.x = Mathf.MoveToward(velocity.x, direction.x * MaxSpeed, (float) (Acceleration * delta));
-		velocity.z = Mathf.MoveToward(velocity.z, direction.z * MaxSpeed, (float) (Acceleration * delta));
+		velocity.X = Mathf.MoveToward(velocity.X, direction.X * MaxSpeed, (float) (Acceleration * delta));
+		velocity.Z = Mathf.MoveToward(velocity.Z, direction.Z * MaxSpeed, (float) (Acceleration * delta));
 	}
 	
 	private void ApplyRotation(double delta, Vector3 direction)
@@ -228,9 +228,9 @@ public partial class KinematicPlayer : CharacterBody3D
 		if (FirstPerson)
 		{
 			pivot.Rotation = new Vector3(
-				pivot.Rotation.x,
-				armY.Rotation.y,
-				pivot.Rotation.z
+				pivot.Rotation.X,
+				armY.Rotation.Y,
+				pivot.Rotation.Z
 			);
 		}
 		else
@@ -238,9 +238,9 @@ public partial class KinematicPlayer : CharacterBody3D
 			if (direction != Vector3.Zero)
 			{
 				pivot.Rotation = new Vector3(
-					pivot.Rotation.x,
-					Mathf.LerpAngle(pivot.Rotation.y, Mathf.Atan2(-velocity.x, -velocity.z), (float) (RotSpeed * delta)),
-					pivot.Rotation.z
+					pivot.Rotation.X,
+					Mathf.LerpAngle(pivot.Rotation.Y, Mathf.Atan2(-velocity.X, -velocity.Z), (float) (RotSpeed * delta)),
+					pivot.Rotation.Z
 				);
 			}
 		}
@@ -252,22 +252,22 @@ public partial class KinematicPlayer : CharacterBody3D
 		
 		if (IsOnFloor())
 		{
-			velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (Friction * delta));
-			velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (Friction * delta));
-			velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (Friction * delta));
+			velocity.X = Mathf.MoveToward(velocity.X, 0, (float) (Friction * delta));
+			velocity.Y = Mathf.MoveToward(velocity.Y, 0, (float) (Friction * delta));
+			velocity.Z = Mathf.MoveToward(velocity.Z, 0, (float) (Friction * delta));
 		}
 		else
 		{
-			velocity.x = Mathf.MoveToward(velocity.x, 0, (float) (AirFriction * delta));
-			velocity.y = Mathf.MoveToward(velocity.y, 0, (float) (AirFriction * delta));
-			velocity.z = Mathf.MoveToward(velocity.z, 0, (float) (AirFriction * delta));
+			velocity.X = Mathf.MoveToward(velocity.X, 0, (float) (AirFriction * delta));
+			velocity.Y = Mathf.MoveToward(velocity.Y, 0, (float) (AirFriction * delta));
+			velocity.Z = Mathf.MoveToward(velocity.Z, 0, (float) (AirFriction * delta));
 		}
 	}
 
 	private void ApplyGravity(double delta)
 	{
-		velocity.y += (float) (Gravity * delta);
-		velocity.y = Mathf.Clamp(velocity.y, Gravity, JumpImpulse);
+		velocity.Y += (float) (Gravity * delta);
+		velocity.Y = Mathf.Clamp(velocity.Y, Gravity, JumpImpulse);
 	}
 
 	private void UpdateSnapVector() //use fancy terneary thing
@@ -283,15 +283,15 @@ public partial class KinematicPlayer : CharacterBody3D
 		if (Input.IsActionJustPressed("game_jump") && IsOnFloor())
 		{
 			snapVector = Vector3.Zero; //allows plr to jump
-			velocity.y = JumpImpulse;
+			velocity.Y = JumpImpulse;
 		}
-		if (Input.IsActionJustReleased("game_jump") && velocity.y > JumpImpulse / 2)
-			velocity.y = JumpImpulse / 2;
+		if (Input.IsActionJustReleased("game_jump") && velocity.Y > JumpImpulse / 2)
+			velocity.Y = JumpImpulse / 2;
 	}
 /*
 	private void RotateInventory()
 	{
-		inventoryNode.RotationDegrees = new Vector3(Mathf.Lerp(inventoryNode.RotationDegrees.x, springArm.RotationDegrees.x, 0.2f), inventoryNode.RotationDegrees.y, inventoryNode.RotationDegrees.z);
+		inventoryNode.RotationDegrees = new Vector3(Mathf.Lerp(inventoryNode.RotationDegrees.X, springArm.RotationDegrees.X, 0.2f), inventoryNode.RotationDegrees.Y, inventoryNode.RotationDegrees.Z);
 	}
 */
 	private void MoveSpringArm()
@@ -307,16 +307,16 @@ public partial class KinematicPlayer : CharacterBody3D
 			{
 				springArm.Position = Inventory[InventoryCurrent].ItemType switch
 				{
-					(int) ItemTypes.Weapon => new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f),
-						Mathf.Lerp(springArm.Position.y, 2, 0.1f), 0),
-					(int) ItemTypes.MeleeWeapon => new Vector3(Mathf.Lerp(springArm.Position.x, 1, 0.1f),
-						Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0),
-					_ => new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f),
-						Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0)
+					(int) ItemTypes.Weapon => new Vector3(Mathf.Lerp(springArm.Position.X, 0, 0.1f),
+						Mathf.Lerp(springArm.Position.Y, 2, 0.1f), 0),
+					(int) ItemTypes.MeleeWeapon => new Vector3(Mathf.Lerp(springArm.Position.X, 1, 0.1f),
+						Mathf.Lerp(springArm.Position.Y, 1.5f, 0.1f), 0),
+					_ => new Vector3(Mathf.Lerp(springArm.Position.X, 0, 0.1f),
+						Mathf.Lerp(springArm.Position.Y, 1.5f, 0.1f), 0)
 				};
 			}
 			else
-				springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.x, 0, 0.1f), Mathf.Lerp(springArm.Position.y, 1.5f, 0.1f), 0);
+				springArm.Position = new Vector3(Mathf.Lerp(springArm.Position.X, 0, 0.1f), Mathf.Lerp(springArm.Position.Y, 1.5f, 0.1f), 0);
 		}
 	}
 

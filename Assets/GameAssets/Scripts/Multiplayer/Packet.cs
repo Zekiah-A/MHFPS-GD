@@ -172,18 +172,18 @@ public partial class Packet : IDisposable
     }
     public void Write(Vector3 _value)
     {
-        Write(_value.x); //Add x value of Vector3
-        Write(_value.y); //Add y value of Vector3
-        Write(_value.z); //Add z value of vector3
+        Write(_value.X); //Add x value of Vector3
+        Write(_value.Y); //Add y value of Vector3
+        Write(_value.Z); //Add z value of vector3
     }
     ///<summary>Adds a quaternion to the packet</summary>
     ///<param name="_value">The quaternion to add</param>
     public void Write(Quaternion _value)
     {
-        Write(_value.x); //Add x value of quaternion
-        Write(_value.y); //Add y value of quaternion
-        Write(_value.z); //Add z value of quaternion
-        Write(_value.w); //Add w value of quaternion
+        Write(_value.X); //Add x value of quaternion
+        Write(_value.Y); //Add y value of quaternion
+        Write(_value.Z); //Add z value of quaternion
+        Write(_value.W); //Add w value of quaternion
     }
     /// <summary>Adds a rgba colour value to the packet.</summary>
     /// <param name="_value">The colour to add</param>

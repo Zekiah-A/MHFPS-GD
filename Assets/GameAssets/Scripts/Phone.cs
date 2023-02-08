@@ -43,7 +43,7 @@ public partial class Phone : Node3D
 	{
 		//TODO: Tween, bring phone to face.
 		//RotationDegrees = new Vector3(0, 90, 90);
-		Position = new Vector3(cameraBody.Position.x, cameraBody.Position.y, cameraBody.Position.z - 0.8f);
+		Position = new Vector3(cameraBody.Position.X, cameraBody.Position.Y, cameraBody.Position.Z - 0.8f);
 		doorButtons[0].InputRayPickable = true;
 		doorButtons[1].InputRayPickable = true;
 		doorButtons[2].InputRayPickable = false;

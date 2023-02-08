@@ -5,7 +5,7 @@ public partial class BunsenBurner : Node3D
 {
 	private int burnTime;
 	private Light3D flameLight;
-	private GPUParticles3D flameParticles;
+	private GpuParticles3D flameParticles;
 	private Timer burnerTimer;
 	private Timer overuseTimer;
 	private Label workLeftLabel;
@@ -13,7 +13,7 @@ public partial class BunsenBurner : Node3D
 	public override void _Ready()
 	{
 		flameLight = GetNode("Flame").GetNode<Light3D>("FlameLight");
-		flameParticles = GetNode("Flame").GetNode<GPUParticles3D>("FlameParticles");
+		flameParticles = GetNode("Flame").GetNode<GpuParticles3D>("FlameParticles");
 		burnerTimer = GetNode<Timer>("BurnerTimer");
 		overuseTimer = GetNode<Timer>("OveruseTimer");
 		workLeftLabel = GetTree().CurrentScene.GetNode("DetentionUI").GetNode("WorkPanel").GetNode<Label>("WorkLeft");

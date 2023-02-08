@@ -21,7 +21,7 @@ public partial class MeleeWeapon : Node3D
 		//if (@event.IsActionPressed("game_reload") && GetParent<InventoryItem>().Enabled)
 			//Reload();
 		if (@event is InputEventMouseMotion eventMouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured)
-			mouseRelativeMovement = -eventMouseMotion.Relative.x;
+			mouseRelativeMovement = -eventMouseMotion.Relative.X;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -32,10 +32,10 @@ public partial class MeleeWeapon : Node3D
 	protected virtual void SwayWeapon(double delta)
 	{
 		if (mouseRelativeMovement > swayThreshold)
-			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, swayLeft, (float) (swayStrength * delta)));
+			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.Z, swayLeft, (float) (swayStrength * delta)));
 		else if (mouseRelativeMovement < -swayThreshold)
-			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, swayRight, (float) (swayStrength * delta)));
+			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.Z, swayRight, (float) (swayStrength * delta)));
 		else
-			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.z, 0, (float) (swayStrength * delta)));
+			Rotation = new Vector3(0, 0, Mathf.Lerp(Rotation.Z, 0, (float) (swayStrength * delta)));
 	}
 }

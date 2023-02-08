@@ -14,9 +14,6 @@ height = 3.6
 
 [sub_resource type="ShaderMaterial" id="7"]
 shader = ExtResource("6")
-shader_parameter/blur_amount = 5.0
-shader_parameter/lightness = 0.7
-shader_parameter/translucency = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ux0fw"]
 
@@ -251,7 +248,7 @@ offset_top = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("10")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="Header" type="Panel" parent="PlayerHUD/PhoneScreen"]
 layout_mode = 1
@@ -411,7 +408,7 @@ grow_vertical = 2
 pivot_offset = Vector2(24, 24)
 mouse_filter = 2
 texture = ExtResource("12")
-ignore_texture_size = true
+expand_mode = 1
 script = SubResource("20")
 
 [node name="PhoneTween" type="Tween" parent="PlayerHUD"]

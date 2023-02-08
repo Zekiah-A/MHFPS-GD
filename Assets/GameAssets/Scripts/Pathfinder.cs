@@ -56,7 +56,7 @@ public partial class Pathfinder : CharacterBody3D
 
 	public void NavigationTick()
 	{
-		MoveTo(player.GlobalTransform.origin);
+		MoveTo(player.GlobalTransform.Origin);
 	}
 
 	public void MoveTo(Vector3 targetPosition)

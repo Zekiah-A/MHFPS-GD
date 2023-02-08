@@ -30,7 +30,7 @@ public partial class Clock : Node3D
 		actionAnimationPlayer = GetTree().CurrentScene.GetNode("CameraBody").GetNode<AnimationPlayer>("ActionAnimationPlayer");
 		stainTeacher = GetTree().CurrentScene.GetNode<DetentionTeacher>("StainTeacher");
 
-		minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, 0);
+		minuteHand.Rotation = new Vector3(minuteHand.Rotation.X, minuteHand.Rotation.Y, 0);
 	}
 	
 	public void Unwind()
@@ -42,7 +42,7 @@ public partial class Clock : Node3D
 		actionAnimationPlayer.Play("unwind_animation");
 		clockTime = 0; //TODO: Make the clock animate too, override tweens in order to make it wind back realistically with the player's hand.
 			
-		minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, 0);
+		minuteHand.Rotation = new Vector3(minuteHand.Rotation.X, minuteHand.Rotation.Y, 0);
 	}
 
 	// Clock does not seem to automatically tick after the radio announcement, as the audio sequence overruns by about 10 seconds.
@@ -70,6 +70,6 @@ public partial class Clock : Node3D
 			stainTeacher.Jumpscare();
 		}
 		// Minute hand needs to travel 360 degrees to get to 6:00 in 30 seconds, so 12 degrees per second. Minus twelve because this model is stupid and the co-ords are wrong. 🤓🔫 
-		minuteHand.Rotation = new Vector3(minuteHand.Rotation.x, minuteHand.Rotation.y, (float) (minuteHand.Rotation.z - 2 * Math.PI / MaximumTime)); //TODO: Make fancy tweens to make it look good. 
+		minuteHand.Rotation = new Vector3(minuteHand.Rotation.X, minuteHand.Rotation.Y, (float) (minuteHand.Rotation.Z - 2 * Math.PI / MaximumTime)); //TODO: Make fancy tweens to make it look good. 
 	}
 }

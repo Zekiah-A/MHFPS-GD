@@ -58,7 +58,7 @@ public partial class Weapon : Node3D
 		if (@event.IsActionPressed("game_reload") && GetParent<InventoryItem>().Enabled)
 			Reload();
 		if (@event is InputEventMouseMotion eventMouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured)
-			mouseRelativeMovement = -eventMouseMotion.Relative.x;
+			mouseRelativeMovement = -eventMouseMotion.Relative.X;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -92,7 +92,7 @@ public partial class Weapon : Node3D
 		//target.health -= damage
 		//else
 		//{
-		var particles = impactParticles.Instantiate<GPUParticles3D>();
+		var particles = impactParticles.Instantiate<GpuParticles3D>();
 		particles.LookAt(-weaponRay.GetCollisionNormal(), Vector3.Up);
 		particles.Position = hitPosition;
 		GetTree().CurrentScene.AddChild(particles);
@@ -143,10 +143,10 @@ public partial class Weapon : Node3D
 	protected virtual void SwayWeapon(double delta)
 	{
 		if (mouseRelativeMovement > swayThreshold)
-			Rotation = new Vector3(0, Mathf.Lerp(Rotation.y, swayLeft, (float) (swayStrength * delta)), 0);
+			Rotation = new Vector3(0, Mathf.Lerp(Rotation.Y, swayLeft, (float) (swayStrength * delta)), 0);
 		else if (mouseRelativeMovement < -swayThreshold)
-			Rotation = new Vector3(0, Mathf.Lerp(Rotation.y, swayRight, (float) (swayStrength * delta)), 0);
+			Rotation = new Vector3(0, Mathf.Lerp(Rotation.Y, swayRight, (float) (swayStrength * delta)), 0);
 		else
-			Rotation = new Vector3(0, Mathf.Lerp(Rotation.y, 0, (float) (swayStrength * delta)), 0);
+			Rotation = new Vector3(0, Mathf.Lerp(Rotation.Y, 0, (float) (swayStrength * delta)), 0);
 	}
 }

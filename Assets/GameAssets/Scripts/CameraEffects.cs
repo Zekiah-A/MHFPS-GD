@@ -39,14 +39,14 @@ public partial class CameraEffects : Camera3D
 		if (!Random)
 		{
 			var (x, y) = GetViewport().GetMousePosition();
-			posx = (x  - GetViewport().GetVisibleRect().Size.x / 2) / GetViewport().GetVisibleRect().Size.x;
-			posy = (y  - GetViewport().GetVisibleRect().Size.y / 2) / GetViewport().GetVisibleRect().Size.y;
+			posx = (x  - GetViewport().GetVisibleRect().Size.X / 2) / GetViewport().GetVisibleRect().Size.X;
+			posy = (y  - GetViewport().GetVisibleRect().Size.Y / 2) / GetViewport().GetVisibleRect().Size.Y;
 		}
 
 		Rotation = new Vector3 (
-			Mathf.Lerp(Rotation.x, Inverse ? posy / Damping : -posy / Damping, LerpStrength),
-			Mathf.Lerp(Rotation.y, Inverse ? posx / Damping : -posx / Damping, LerpStrength),
-			Rotation.z
+			Mathf.Lerp(Rotation.Y, Inverse ? posy / Damping : -posy / Damping, LerpStrength),
+			Mathf.Lerp(Rotation.Y, Inverse ? posx / Damping : -posx / Damping, LerpStrength),
+			Rotation.Z
 		);
 	}
 	

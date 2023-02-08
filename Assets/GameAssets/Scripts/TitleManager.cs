@@ -13,7 +13,6 @@ public partial class TitleManager : Node3D
 	private AnimationPlayer fadeAnimation;
 	private AnimationPlayer cameraAnimationPlayer;
 	
-	
 	public override void _Ready()
 	{
 		camera =  GetNode<Camera3D>("Camera3D");
@@ -46,10 +45,7 @@ public partial class TitleManager : Node3D
 		.SetEase(Tween.EaseType.Out);
 		
 		tween.Chain()
-		.TweenCallback(new Callable(() =>
-		{
-			cameraAnimationPlayer.Play("title_camera_animation");
-		}));
+		.TweenCallback(new Callable(this, nameof(PlayCameraAnimation)));
 		
 		fadeAnimation.Play("FadeAnimation");
 		tween.Play();
@@ -57,10 +53,10 @@ public partial class TitleManager : Node3D
 
 		var a = GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer");
 		a.Play("Idle");
-		a.PlaybackSpeed = 1.25f;
+		a.SpeedScale = 1.25f;
 		var b = GetNode("GenericModel2").GetNode<AnimationPlayer>("AnimationPlayer");
 		b.Play("Idle");
-		b.PlaybackSpeed = 0.7f;
+		b.SpeedScale = 0.7f;
 		var c = GetNode("GenericModel3").GetNode<AnimationPlayer>("AnimationPlayer");
 		c.Play("Idle");
 
@@ -68,5 +64,10 @@ public partial class TitleManager : Node3D
 		{
 			cameraAnimationPlayer.Play("title_camera_animation");
 		};
+	}
+
+	public void PlayCameraAnimation()
+	{
+		cameraAnimationPlayer.Play("title_camera_animation");
 	}
 }
