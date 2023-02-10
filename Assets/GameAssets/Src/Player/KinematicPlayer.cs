@@ -8,13 +8,13 @@ using Godot;
 
 public partial class KinematicPlayer : CharacterBody3D
 {
-	private const int SpeedMagnitude = 4;
+	private const int MovementSpeed = 4;
 	private const int Acceleration = 30;
 	private const int Friction = 100;
 	private const int AirFriction = 10;
 	private const float Gravity = -9.81f;
 	private const int JumpImpulse = 5;
-	private const int RotationSpeed = 15;
+	private const int RotationSpeed = 4;
 	private const int MaxSpringLength = 4;
 	private const float MouseSensitivity = 0.2f;
 	public const float AirRotationDamping = 5;
@@ -220,33 +220,32 @@ public partial class KinematicPlayer : CharacterBody3D
 			velocity.X = Mathf.MoveToward
 			(
 				velocity.X,
-				direction.X * SpeedMagnitude,
+				direction.X * MovementSpeed,
 				(float) (Acceleration * delta)
 			);
 			
 			velocity.Z = Mathf.MoveToward
 			(
 				velocity.Z,
-				direction.Z * SpeedMagnitude,
+				direction.Z * MovementSpeed,
 				(float) (Acceleration * delta)
 			);
 		}
 		else
 		{
-			var rotationVector = new Vector2(-Mathf.Sin(pivot.Rotation.Y), -Mathf.Cos(pivot.Rotation.Y)).Normalized();
 			// we basically need to make velocity the direction we are facing
 			// SO we just use W, and use forward velocity
 			velocity.X = Mathf.MoveToward
 			(
 				velocity.X,
-				velocity.X + rotationVector.X,
+				-Mathf.Sin(pivot.Rotation.Y) * MovementSpeed,  // velocity.X + ... (for now we ignore the effects of the previous velocity (momentum))
 				(float) (Acceleration * delta)
 			);
 
 			velocity.Z = Mathf.MoveToward
 			(
 				velocity.Z,
-				velocity.Z + rotationVector.Y,
+				-Mathf.Cos(pivot.Rotation.Y) * MovementSpeed, // velocity.Z + ... (for now we ignore the effects of the previous velocity (momentum))
 				(float) (Acceleration * delta)
 			);
 		}
@@ -358,11 +357,11 @@ public partial class KinematicPlayer : CharacterBody3D
 			phoneScreen,
 			"position",
 			GetNode("PlayerHUD").GetNode<Panel>(phoneScreen.Visible ? "ClosedPosition" : "OpenedPosition").Position,
-			1
+			0.2f
 		)
 		.SetTrans(Tween.TransitionType.Cubic)
 		.SetEase(Tween.EaseType.In);
-		tween.Chain().TweenCallback(Callable.From(() =>
+		tween.TweenCallback(Callable.From(() =>
 		{
 			phoneScreen.Visible = !phoneScreen.Visible;
 		}));
