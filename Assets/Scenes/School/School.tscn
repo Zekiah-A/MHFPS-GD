@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://btniha4y37iuq"]
+[gd_scene load_steps=21 format=3 uid="uid://btniha4y37iuq"]
 
 [ext_resource type="Texture2D" uid="uid://btqhwu63kcgdf" path="res://Assets/GameAssets/Textures/School/map.png" id="1_7sgqt"]
 [ext_resource type="PackedScene" uid="uid://cg5jllv23jkeh" path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" id="2"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dg45q14ehxnh8" path="res://Assets/GameAssets/ModelScenes/SecurityHut.tscn" id="8_7rp1v"]
 [ext_resource type="PackedScene" uid="uid://bhop3vo6h1ap3" path="res://Assets/GameAssets/ModelScenes/MediaStudies.tscn" id="9_2xod6"]
 [ext_resource type="PackedScene" uid="uid://be6hm8fwswxu0" path="res://Assets/GameAssets/ModelScenes/SchoolFloormesh.tscn" id="10_5xewc"]
+[ext_resource type="PackedScene" uid="uid://ou5x1ieva5x3" path="res://Assets/GameAssets/Blender/BikeShed/bike_shed_half.blend" id="11_j3klr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vded6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,8 +33,17 @@ transparency = 1
 albedo_color = Color(1, 1, 1, 0.470588)
 albedo_texture = ExtResource("1_7sgqt")
 
-[sub_resource type="BoxShape3D" id="3"]
-size = Vector3(225, 0.2, 225)
+[sub_resource type="BoxShape3D" id="BoxShape3D_bgnja"]
+size = Vector3(5.7, 1, 24.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3nktx"]
+size = Vector3(89.8, 1, 21.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tjs1v"]
+size = Vector3(45.9, 1, 21.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ctm3t"]
+size = Vector3(5.7, 1, 51)
 
 [node name="Node3D" type="Node3D"]
 
@@ -45,11 +55,6 @@ transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 mesh = SubResource("1")
 surface_material_override/0 = SubResource("StandardMaterial3D_7jdq2")
 metadata/_edit_lock_ = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Map"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D"]
-shape = SubResource("3")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 87.0368, 0, 10.612)
@@ -86,7 +91,28 @@ transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 
 [node name="SchoolFloormesh" parent="." instance=ExtResource("10_5xewc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 50, -5, -3)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
-transform = Transform3D(0.996195, 0, -0.0871557, 0, 1, 0, 0.0871557, 0, 0.996195, 70.3, -5, 5.9)
-polygon = PackedVector2Array(-3.4, -0.1, 12.6, 1.2, 24.7, 2.9, 24.7, -1.3, -3.4, -0.6)
-depth = 0.64
+[node name="StaticBody3D" type="StaticBody3D" parent="SchoolFloormesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SchoolFloormesh/StaticBody3D"]
+transform = Transform3D(1, 7.5904e-09, -6.64077e-10, -7.5904e-09, 0.984808, -0.173648, -6.64077e-10, 0.173648, 0.984808, 4, -1.9, 0)
+shape = SubResource("BoxShape3D_bgnja")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="SchoolFloormesh/StaticBody3D"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -2.1, -5.5, 45.2)
+shape = SubResource("BoxShape3D_3nktx")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="SchoolFloormesh/StaticBody3D"]
+transform = Transform3D(0.965926, 3.8097e-09, 0.258819, 0.0225576, 0.996195, -0.084186, -0.257834, 0.0871557, 0.96225, 16.8, -4.4, 20.1)
+shape = SubResource("BoxShape3D_tjs1v")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="SchoolFloormesh/StaticBody3D"]
+transform = Transform3D(0.996195, -0.0151344, -0.0858316, 0.00759612, 0.996137, -0.0874824, 0.0868241, 0.0864975, 0.992462, 6.7, 1.2, -36.4)
+shape = SubResource("BoxShape3D_ctm3t")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="SchoolFloormesh/StaticBody3D"]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, 7.3, -1.3, -6.2)
+depth = 1.036
+polygon = PackedVector2Array(0.0755825, 12.0756, 2.42764, 29.1417, 3.30283, 38.6046, 6.36598, 45.9343, 11.3436, 44.0198, 15.0084, 42.707, 17.9987, 46.4903, 22.0465, 49.0612, 24.7267, 52.2337, 26.9147, 52.1243, 29.759, 48.6236, 34.3538, 42.0597, 35.2289, 39.4888, 46.2396, 27.2162, 59.9144, 4.68016, 75.5181, -1.3461, 70.9781, -13.7081, 54.623, -8.07409, 53.758, -10.843, 53.1016, -14.5626, 52.117, -16.8599, 47.7958, -20.7983, 46.2642, -14.6173, 47.5223, -13.8515, 48.3428, -11.4447, 49.1086, -8.38156, 51.1325, -4.82613, 45.1456, 2.58931, 40.332, 10.5754, 34.698, 20.2571, 37.7612, 23.7032, 34.6433, 27.6415, 31.996, 22.6777, 31.1208, 19.3958, 27.3465, 11.3003, 24.3928, 3.97065, 18.5858, -6.53061, 10.386, -3.26291, 5.95536, -2.88002, -0.265039, 0.497009)
+
+[node name="BikeShedHalf" parent="." instance=ExtResource("11_j3klr")]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 32, -8, -50.6)
