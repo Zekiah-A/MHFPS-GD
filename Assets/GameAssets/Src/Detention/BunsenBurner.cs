@@ -1,14 +1,14 @@
 using Godot;
-using System;
 
 public partial class BunsenBurner : Node3D
 {
+	private Timer burnerTimer;
 	private int burnTime;
 	private Light3D flameLight;
 	private GpuParticles3D flameParticles;
-	private Timer burnerTimer;
 	private Timer overuseTimer;
 	private Label workLeftLabel;
+	private const int CompletionTime = 300;
 
 	public override void _Ready()
 	{
@@ -28,7 +28,7 @@ public partial class BunsenBurner : Node3D
 		burnerTimer.Start();
 		overuseTimer.Start();
 	}
-	
+
 	//Pause burn timer, and reset over use timer.
 	public void StopBurning()
 	{
@@ -37,20 +37,20 @@ public partial class BunsenBurner : Node3D
 		burnerTimer.Paused = true;
 		overuseTimer.Stop();
 	}
-	
+
 	//Called each second, adds to burn time. Once burn time reaches 300, as work is done when the burner is on, the player will win. Enough work has been done.
 	private void OnBurnerTimerFinished()
 	{
 		burnTime++;
-		workLeftLabel.Text = (300 - burnTime).ToString();
-		
+		workLeftLabel.Text = (CompletionTime - burnTime).ToString();
+
 		//Total mach length
-		if (burnTime >= 300)
+		if (burnTime >= CompletionTime)
 		{
-			GD.Print("Game won: You successfully survived the night.");
+			GD.Print("Game won: Successfully survived the night.");
 		}
 	}
-	
+
 	//If bunsen burner is left on for more than 20 seconds straight (the wait time of the overuse timer), game over!
 	public void OnOveruseTimerFinished()
 	{

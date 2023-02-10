@@ -1,28 +1,27 @@
 using Godot;
-using System;
 
 public partial class TitleManager : Node3D
 {
-	[Export] public float TweenSpeed = 2.5f;
-	[Export] public Vector3 InitialCameraPosition = new(0, 2, 7.5f);
-	[Export] public Vector3 EndCameraPosition = new(0, 2, 13);
-	[Export] public Vector3 InitialCameraRotation = new(0, 0, 0.872665f);
-	[Export] public Vector3 EndCameraRotation = Vector3.Zero;
-	
 	private Camera3D camera;
-	private AnimationPlayer fadeAnimation;
 	private AnimationPlayer cameraAnimationPlayer;
-	
+	private AnimationPlayer fadeAnimation;
+	[Export] public Vector3 EndCameraPosition = new(0, 2, 13);
+	[Export] public Vector3 EndCameraRotation = Vector3.Zero;
+	[Export] public Vector3 InitialCameraPosition = new(0, 2, 7.5f);
+	[Export] public Vector3 InitialCameraRotation = new(0, 0, 0.872665f);
+	[Export] public float TweenSpeed = 2.5f;
+
 	public override void _Ready()
 	{
-		camera =  GetNode<Camera3D>("Camera3D");
-		fadeAnimation = GetNode("IntroFade").GetNode<AnimationPlayer>("AnimationPlayer");
-		cameraAnimationPlayer = GetNode("Camera3D").GetNode<AnimationPlayer>("CameraAnimationPlayer");
-		
+		camera = GetNode<Camera3D>("Camera3D");
+		fadeAnimation = GetNode<AnimationPlayer>("IntroFadeAnimationPlayer");
+		cameraAnimationPlayer = GetNode<AnimationPlayer>("Camera3D/CameraAnimationPlayer");
+		cameraAnimationPlayer.AnimationFinished += _ => cameraAnimationPlayer.Play("title_camera_animation");
+
 		camera.Position = InitialCameraPosition;
 		camera.Rotation = InitialCameraRotation;
-		
-		var tween = CreateTween();
+
+		var tween = CreateTween().SetParallel();
 		tween.TweenProperty
 		(
 			camera,
@@ -32,9 +31,7 @@ public partial class TitleManager : Node3D
 		)
 		.SetTrans(Tween.TransitionType.Cubic)
 		.SetEase(Tween.EaseType.Out);
-
-		tween.Chain()
-		.TweenProperty
+		tween.TweenProperty
 		(
 			camera,
 			"rotation",
@@ -43,14 +40,21 @@ public partial class TitleManager : Node3D
 		)
 		.SetTrans(Tween.TransitionType.Cubic)
 		.SetEase(Tween.EaseType.Out);
-		
-		tween.Chain()
-		.TweenCallback(new Callable(this, nameof(PlayCameraAnimation)));
-		
+		tween.TweenProperty
+		(
+			GetNode<ColorRect>("IntroFadeColorRect"),
+			"modulate",
+			Colors.Transparent,
+			TweenSpeed
+		);
+		tween.Chain().TweenCallback
+		(
+			Callable.From(() => cameraAnimationPlayer.Play("title_camera_animation"))
+		);
+
 		fadeAnimation.Play("FadeAnimation");
 		tween.Play();
-
-
+		
 		var a = GetNode("GenericModel").GetNode<AnimationPlayer>("AnimationPlayer");
 		a.Play("Idle");
 		a.SpeedScale = 1.25f;
@@ -59,15 +63,5 @@ public partial class TitleManager : Node3D
 		b.SpeedScale = 0.7f;
 		var c = GetNode("GenericModel3").GetNode<AnimationPlayer>("AnimationPlayer");
 		c.Play("Idle");
-
-		cameraAnimationPlayer.AnimationFinished += _ =>
-		{
-			cameraAnimationPlayer.Play("title_camera_animation");
-		};
-	}
-
-	public void PlayCameraAnimation()
-	{
-		cameraAnimationPlayer.Play("title_camera_animation");
 	}
 }

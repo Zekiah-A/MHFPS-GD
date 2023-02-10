@@ -1,10 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://br4lk402gim4u"]
+[gd_scene load_steps=31 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dpki68wvhnkt0" path="res://Assets/GameAssets/Models/hedge.glb" id="3"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/ModelScenes/House.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://c2goeaddqsvgg" path="res://Assets/GameAssets/Textures/Brick/brick0_albedo.png" id="5_npom5"]
 [ext_resource type="Material" uid="uid://bonljjrbiy5b" path="res://Assets/GameAssets/Materials/House/bumpy_wall.tres" id="5_yi63t"]
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/IntroManager.cs" id="6"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/IntroManager.cs" id="6"]
 [ext_resource type="Texture2D" uid="uid://d20fesfugxo7t" path="res://Assets/GameAssets/Textures/Brick/brick0_ambient.png" id="6_uloww"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/House/brick.tres" id="7"]
 [ext_resource type="Texture2D" uid="uid://bsrum8icf84it" path="res://Assets/GameAssets/Textures/Brick/brick0_displacement.png" id="7_gq461"]

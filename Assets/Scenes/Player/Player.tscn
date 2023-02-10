@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://dxd0rtrs34ywe"]
+[gd_scene load_steps=22 format=3 uid="uid://ddl54xkj5tq2i"]
 
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/InventoryItem.cs" id="1"]
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/KinematicPlayer.cs" id="2"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/Player/KinematicPlayer.cs" id="1_2sque"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/InventoryItem.cs" id="2_vlqgd"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/Models/Makehuman/Placeholder/Export/zek.tscn" id="3"]
 [ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/blur.gdshader" id="6"]
 [ext_resource type="Texture2D" uid="uid://bc37nqo1ac57j" path="res://icon.png" id="8"]
@@ -14,6 +14,9 @@ height = 3.6
 
 [sub_resource type="ShaderMaterial" id="7"]
 shader = ExtResource("6")
+shader_parameter/blur_amount = null
+shader_parameter/translucency = null
+shader_parameter/lightness = null
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ux0fw"]
 
@@ -62,7 +65,7 @@ _data = {
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
-script = ExtResource("2")
+script = ExtResource("1_2sque")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
@@ -87,16 +90,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 
 [node name="Weapon" type="Marker3D" parent="Pivot/Inventory"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.5, -1.1)
-script = ExtResource("1")
+script = ExtResource("2_vlqgd")
 InventoryTexture = "res://Assets/GameAssets/Icons/weapon_icon.png"
 
 [node name="Object" type="Node3D" parent="Pivot/Inventory"]
-script = ExtResource("1")
+script = ExtResource("2_vlqgd")
 InventoryTexture = "res://icon.png"
 ItemType = 2
 
 [node name="EffectObject" type="Node3D" parent="Pivot/Inventory"]
-script = ExtResource("1")
+script = ExtResource("2_vlqgd")
 InventoryTexture = "res://icon.png"
 ItemType = 3
 
@@ -149,6 +152,19 @@ offset_bottom = 280.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(1, -1)
+
+[node name="ViewFadeRect" type="ColorRect" parent="PlayerHUD"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="InvPanel" type="Panel" parent="PlayerHUD"]
 visible = false

@@ -1,8 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://dkif64gks1gev"]
+[gd_scene load_steps=28 format=3 uid="uid://ct1ei47kcvuua"]
 
 [ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/blur.gdshader" id="1"]
 [ext_resource type="Theme" uid="uid://l3f22njtxuo8" path="res://Assets/Themes/main_theme.tres" id="3_3ad5m"]
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/TitleUIManager.cs" id="4"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/TitleUIManager.cs" id="4"]
 
 [sub_resource type="CanvasItemMaterial" id="20"]
 
@@ -14,6 +14,9 @@ noise = SubResource("21")
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("1")
+shader_parameter/blur_amount = null
+shader_parameter/translucency = null
+shader_parameter/lightness = null
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_txkyn"]
 
@@ -52,10 +55,8 @@ shader = ExtResource("1")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaolu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6xd4n"]
-shader = ExtResource("1")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nf80b"]
-shader = ExtResource("1")
 
 [node name="TitleUI" type="Control"]
 layout_mode = 3
@@ -218,7 +219,8 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_aaolu")
 metadata/_edit_lock_ = true
 
 [node name="Title" type="Label" parent="MainPanels/PlayPanel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -192.0
@@ -226,8 +228,9 @@ offset_top = 64.0
 offset_right = 192.0
 offset_bottom = 136.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 48
-text = " MHFPS indev "
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = " MHFPS"
 horizontal_alignment = 1
 vertical_alignment = 1
 

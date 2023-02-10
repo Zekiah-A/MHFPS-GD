@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://iix6nwi0u0on"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/Pathfinder.cs" id="1"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/Pathfinder.cs" id="1"]
 
 [sub_resource type="BoxMesh" id="1"]
 size = Vector3(1, 2.5, 1)

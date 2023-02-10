@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://50iagylsnvng"]
+[gd_scene load_steps=9 format=3 uid="uid://50iagylsnvng"]
 
 [ext_resource type="Environment" uid="uid://c2175wqyoqwft" path="res://Assets/Scenes/Other/Demo/environment.tres" id="1"]
-[ext_resource type="PackedScene" uid="uid://dxd0rtrs34ywe" path="res://Assets/Scenes/Player/Player.tscn" id="2"]
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/Actor.cs" id="3"]
+[ext_resource type="PackedScene" uid="uid://ddl54xkj5tq2i" path="res://Assets/Scenes/Player/Player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/ModelScenes/GenericModel.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://bfwjs0hvu50sy" path="res://Assets/GameAssets/ModelScenes/WaterBottle.tscn" id="5_pbrdj"]
 
@@ -51,7 +50,6 @@ shape = SubResource("3")
 
 [node name="Actor" type="Node3D" parent="." groups=["Actor"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-script = ExtResource("3")
 
 [node name="GenericModel" parent="Actor" instance=ExtResource("4")]
 

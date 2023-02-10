@@ -1,9 +1,7 @@
 using Godot;
-using System;
 
 public partial class StainTeacher : DetentionTeacher
 {
-
     public override void _Ready()
     {
         //Teachers may override ready in order to have their own jumpscare sounds.

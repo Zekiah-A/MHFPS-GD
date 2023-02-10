@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://btqhwu63kcgdf" path="res://Assets/GameAssets/Textures/School/map.png" id="1_7sgqt"]
 [ext_resource type="PackedScene" uid="uid://cg5jllv23jkeh" path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" id="2"]
 [ext_resource type="PackedScene" uid="uid://b0011ppwin30p" path="res://Assets/GameAssets/ModelScenes/ComputerScience.tscn" id="2_ymhbg"]
-[ext_resource type="PackedScene" uid="uid://dxd0rtrs34ywe" path="res://Assets/Scenes/Player/Player.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://ddl54xkj5tq2i" path="res://Assets/Scenes/Player/Player.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bvtrd76uby7q3" path="res://Assets/GameAssets/ModelScenes/SixthForm.tscn" id="4_us0ws"]
 [ext_resource type="PackedScene" uid="uid://bmhxvdk4yvhgn" path="res://Assets/GameAssets/ModelScenes/TableTennis.tscn" id="6_1x7a0"]
 [ext_resource type="PackedScene" uid="uid://t2q6odqs7s3q" path="res://Assets/GameAssets/ModelScenes/OutsideCanteen.tscn" id="7_tseu4"]

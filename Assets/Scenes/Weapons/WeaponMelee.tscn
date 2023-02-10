@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnhpmwrrntobk"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Material" path="res://Assets/GameAssets/Models/Katana/Material_003.material" id="1"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Models/Katana/Material_001.material" id="2"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Models/Katana/Material_004.material" id="3"]
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/MeleeWeapon.cs" id="4"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/Player/Katana.cs" id="4"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Models/Katana/Material_005.material" id="5"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Models/Katana/Material_002.material" id="6"]
 

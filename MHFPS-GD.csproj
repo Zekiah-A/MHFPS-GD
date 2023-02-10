@@ -1,9 +1,9 @@
 <Project Sdk="Godot.NET.Sdk/4.0.0-rc.1">
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>MHFPS-GD</RootNamespace>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RootNamespace>MHFPS-GD</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
+    </ItemGroup>
 </Project>

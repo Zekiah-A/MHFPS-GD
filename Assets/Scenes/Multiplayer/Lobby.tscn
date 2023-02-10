@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvgrletdxnnq8"]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/CameraEffects.cs" id="2"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/CameraEffects.cs" id="2"]
 [ext_resource type="PackedScene" uid="uid://xjnotvifc123" path="res://Assets/Scenes/Multiplayer/LobbyUI.tscn" id="2_ftkd4"]
 
 [sub_resource type="BoxMesh" id="2"]

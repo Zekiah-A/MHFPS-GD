@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource path="res://Assets/GameAssets/Scripts/Weapon.cs" type="Script" id=1]
-[ext_resource path="res://Assets/GameAssets/Textures/weapon_flash.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/GameAssets/Textures/aim_reticle.png" type="Texture2D" id=3]
-[ext_resource path="res://Assets/Fonts/Typefaces/liberation-sans/LiberationSans-Regular.ttf" type="FontFile" id=4]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/Player/Weapon.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://c4qw51q6fp002" path="res://Assets/GameAssets/Textures/weapon_flash.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://uamy0hoxuoqp" path="res://Assets/GameAssets/Textures/aim_reticle.png" id="3"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Typefaces/liberation-sans/LiberationSans-Regular.ttf" id="4"]
 
 [sub_resource type="BoxMesh" id=1]
 size = Vector3( 0.1, 0.1, 0.5 )

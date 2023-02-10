@@ -1,41 +1,20 @@
-[gd_scene load_steps=20 format=3 uid="uid://ceavn8li4ma06"]
+[gd_scene load_steps=18 format=3 uid="uid://cmpdjllguhlgh"]
 
 [ext_resource type="PackedScene" uid="uid://c7yvcg2vs8br5" path="res://Assets/GameAssets/Models/IsoPeriskeri/isoperiskeri.glb" id="2"]
 [ext_resource type="Environment" uid="uid://cnxok64dr3pi7" path="res://Assets/Scenes/Title/Title/environment.tres" id="3"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/iso_periskeri.tres" id="5"]
 [ext_resource type="Animation" path="res://Assets/GameAssets/Animations/title_camera_animation.tres" id="6"]
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/TitleManager.cs" id="7"]
-[ext_resource type="Script" path="res://Assets/GameAssets/Scripts/CameraEffects.cs" id="9"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/TitleManager.cs" id="7"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/CameraEffects.cs" id="9"]
 [ext_resource type="PackedScene" uid="uid://cg5jllv23jkeh" path="res://Assets/GameAssets/Models/BikeShed/bike_shed.glb" id="10"]
 [ext_resource type="PackedScene" uid="uid://cn6dnrdcpun37" path="res://Assets/GameAssets/Models/TableTennis/tabletennis_high.glb" id="10_4frxc"]
-[ext_resource type="PackedScene" uid="uid://dkif64gks1gev" path="res://Assets/Scenes/Title/TitleUI.tscn" id="10_xw8ps"]
+[ext_resource type="PackedScene" uid="uid://ct1ei47kcvuua" path="res://Assets/Scenes/Title/TitleUI.tscn" id="10_xw8ps"]
 [ext_resource type="AudioStream" uid="uid://chgtjrc5wn8qi" path="res://The Real Thing.mp3" id="11"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/ModelScenes/GenericModel.tscn" id="12"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_erc2h"]
 _data = {
 "title_camera_animation": ExtResource("6")
-}
-
-[sub_resource type="Animation" id="1"]
-resource_name = "FadeAnimation"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("IntroFadeColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t5y5u"]
-_data = {
-"FadeAnimation": SubResource("1")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dv8n7"]
@@ -83,8 +62,8 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 13)
 fov = 50.0
 script = ExtResource("9")
-Random = true
 Damping = 5.0
+Random = true
 
 [node name="Timer" type="Timer" parent="Camera3D"]
 wait_time = 0.1
@@ -109,7 +88,6 @@ editor_description = ""
 script = null
 
 [node name="IntroFadeColorRect" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -117,11 +95,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
-[node name="IntroFadeAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_t5y5u")
-}
+metadata/_edit_lock_ = true
 
 [node name="BikeShedTerrain" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7444, -0.416115, 3.02027)
