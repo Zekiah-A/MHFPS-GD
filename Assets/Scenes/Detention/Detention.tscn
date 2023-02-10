@@ -1,9 +1,10 @@
-[gd_scene load_steps=65 format=3]
+[gd_scene load_steps=66 format=3 uid="uid://ccxm5edm38pa3"]
 
 [ext_resource type="Script" path="res://Assets/GameAssets/Src/Detention/DetentionCamera.cs" id="1"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Src/Detention/DetentionManager.cs" id="2"]
 [ext_resource type="PackedScene" uid="uid://bylsnm27wn1eu" path="res://Assets/GameAssets/Models/CasetteRecorder/cassete_recorder.glb" id="3"]
 [ext_resource type="AudioStream" uid="uid://svdjdfpagvfj" path="res://Assets/GameAssets/Audio/Detention/ambient.mp3" id="4"]
+[ext_resource type="Texture2D" uid="uid://jgrhe6ccr2q8" path="res://Assets/GameAssets/Textures/torch_light_mask.png" id="4_1tkir"]
 [ext_resource type="PackedScene" uid="uid://357lkp8ituva" path="res://Assets/Scenes/Detention/DetentionUI.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://ky44w8r8rtk8" path="res://Assets/GameAssets/Models/BunsenBurner/bunsen_burner.glb" id="6"]
 [ext_resource type="PackedScene" uid="uid://dje3evk3o5d7p" path="res://Assets/GameAssets/Models/Phone/phone.glb" id="7"]
@@ -40,7 +41,7 @@
 [ext_resource type="Theme" uid="uid://b1um6tmgnouur" path="res://Assets/Themes/detention_phoneui.tres" id="38"]
 [ext_resource type="PackedScene" uid="uid://v73v32llb3l8" path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting1.glb" id="39"]
 [ext_resource type="PackedScene" uid="uid://1x8my7cpuomn" path="res://Assets/GameAssets/Models/DetentionWalls/detention_walls.glb" id="40"]
-[ext_resource type="Material" path="res://Assets/GameAssets/Materials/interior_wall0.tres" id="42_p6yr2"]
+[ext_resource type="Material" uid="uid://gfgx0gob1mux" path="res://Assets/GameAssets/Materials/interior_wall0.tres" id="42_p6yr2"]
 [ext_resource type="PackedScene" uid="uid://d2dnpwhwtaaqx" path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting_corner1.glb" id="43"]
 [ext_resource type="Material" uid="uid://b0mvdigl14a1y" path="res://Assets/GameAssets/Materials/Detention/detention_floor.tres" id="43_s64uc"]
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/interior_ceiling0.tres" id="44_5uci3"]
@@ -48,6 +49,7 @@
 [sub_resource type="Environment" id="Environment_2wvfl"]
 background_mode = 1
 background_energy_multiplier = 0.0
+ssil_enabled = true
 sdfgi_enabled = true
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
@@ -132,45 +134,6 @@ environment = SubResource("Environment_2wvfl")
 
 [node name="DetentionUI" parent="." instance=ExtResource("5")]
 
-[node name="BatteryPanel" parent="DetentionUI" index="0"]
-layout_mode = 3
-
-[node name="UIBatteryLeft" parent="DetentionUI/BatteryPanel" index="0"]
-layout_mode = 3
-
-[node name="Colon" parent="DetentionUI/BatteryPanel" index="1"]
-layout_mode = 3
-
-[node name="BatteryIcon" parent="DetentionUI/BatteryPanel" index="2"]
-layout_mode = 3
-
-[node name="WorkPanel" parent="DetentionUI" index="1"]
-layout_mode = 3
-
-[node name="Details" parent="DetentionUI/WorkPanel" index="0"]
-layout_mode = 3
-
-[node name="UIWorkLeft" parent="DetentionUI/WorkPanel" index="1"]
-layout_mode = 3
-
-[node name="DeathScreen" parent="DetentionUI" index="2"]
-layout_mode = 3
-
-[node name="DeathColour" parent="DetentionUI/DeathScreen" index="0"]
-layout_mode = 3
-
-[node name="DeathRect1" parent="DetentionUI/DeathScreen" index="1"]
-layout_mode = 3
-
-[node name="DeathRect2" parent="DetentionUI/DeathScreen" index="2"]
-layout_mode = 3
-
-[node name="DeathRect3" parent="DetentionUI/DeathScreen" index="3"]
-layout_mode = 3
-
-[node name="DeathRect4" parent="DetentionUI/DeathScreen" index="4"]
-layout_mode = 3
-
 [node name="CameraBody" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 1)
 script = ExtResource("1")
@@ -181,13 +144,15 @@ fov = 40.0
 
 [node name="Torch" type="SpotLight3D" parent="CameraBody"]
 light_color = Color(0.988235, 0.917647, 0.501961, 1)
-light_energy = 1.25
+light_energy = 0.6
+light_projector = ExtResource("4_1tkir")
+light_size = 0.1
 shadow_enabled = true
+shadow_bias = 0.02
 shadow_reverse_cull_face = true
-spot_range = 20.0
-spot_attenuation = 1.46408
+spot_range = 18.0
 spot_angle = 10.0
-spot_angle_attenuation = 0.732043
+spot_angle_attenuation = 0.353553
 
 [node name="PlayerActionPlayer" type="AudioStreamPlayer" parent="CameraBody"]
 stream = ExtResource("12")
@@ -237,9 +202,13 @@ process_material = SubResource("4")
 draw_pass_1 = SubResource("5")
 
 [node name="FlameLight" type="OmniLight3D" parent="BunsenBurner/Flame"]
+visible = false
 light_color = Color(0.909804, 0.568627, 0.207843, 1)
+light_energy = 0.3
+light_size = 0.02
 shadow_enabled = true
 omni_range = 1.5
+omni_attenuation = 1.93187
 
 [node name="BurnerTimer" type="Timer" parent="BunsenBurner"]
 
@@ -297,33 +266,33 @@ offset_right = 243.75
 offset_bottom = 133.333
 
 [node name="TopPanel" type="Panel" parent="Phone/SubViewport/PhoneUI"]
-anchors_preset = -1
+layout_mode = 0
 anchor_right = 1.00039
 anchor_bottom = 0.24
 
 [node name="Title" type="Label" parent="Phone/SubViewport/PhoneUI/TopPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_right = 0.695652
 anchor_bottom = 1.0
 text = "Mobile Door Control"
 clip_text = true
 
 [node name="Upgrades" type="Label" parent="Phone/SubViewport/PhoneUI/TopPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.695652
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Upgrades"
 
 [node name="ContentPanel" type="Panel" parent="Phone/SubViewport/PhoneUI"]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LeftButton" type="Button" parent="Phone/SubViewport/PhoneUI/ContentPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.0108738
 anchor_top = 0.261
 anchor_right = 0.48466
@@ -333,7 +302,7 @@ toggle_mode = true
 text = "Left Door"
 
 [node name="RightButton" type="Button" parent="Phone/SubViewport/PhoneUI/ContentPanel"]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.509515
 anchor_top = 0.261
 anchor_right = 0.981748
@@ -408,10 +377,6 @@ light_color = Color(0.807843, 0.713726, 0.615686, 1)
 light_energy = 0.4
 shadow_enabled = true
 omni_range = 4.52425
-
-[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0237168, 0.999719, 0, -0.999719, -0.0237168, 0, 9, -8)
-sky_mode = 2
 
 [node name="TeacherDesk" parent="." instance=ExtResource("15")]
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, -5.8, 0, -11)
@@ -544,6 +509,9 @@ material_override = SubResource("StandardMaterial3D_ctpvq")
 [node name="DisplayBoard" parent="DisplayBoards" instance=ExtResource("25")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.99, 2.147, -4.767)
 
+[node name="PaperStack" parent="DisplayBoards/DisplayBoard" instance=ExtResource("27")]
+transform = Transform3D(0.49665, -2.9481e-08, -0.0577936, 0.0722325, -6.00209e-09, 0.397372, -7.53766e-08, -0.2, -3.40625e-09, -0.761026, 0.01458, 0.00728083)
+
 [node name="DecorativeBorderBottom" parent="DisplayBoards/DisplayBoard" instance=ExtResource("31")]
 transform = Transform3D(1.99246, -1.74022e-07, 4.56404e-16, 0, -4.37114e-08, -0.06, -6.96087e-08, 1, -2.62268e-09, 0, -0.940479, 0.0136185)
 material = ExtResource("32")
@@ -562,6 +530,9 @@ material = ExtResource("33")
 
 [node name="DisplayBoard2" parent="DisplayBoards" instance=ExtResource("25")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.49, 2.147, -3.616)
+
+[node name="PaperStack2" parent="DisplayBoards/DisplayBoard2" instance=ExtResource("27")]
+transform = Transform3D(0.0151072, -6.43261e-09, -0.401371, -0.501648, 2.14659e-08, -0.0120874, 5.43277e-08, 0.2, -1.1612e-08, -3.88798, 0.01458, 15.4727)
 
 [node name="DecorativeBorderBottom" parent="DisplayBoards/DisplayBoard2" instance=ExtResource("31")]
 transform = Transform3D(1.99246, -3.48868e-07, 9.14969e-16, 0, -4.37114e-08, -0.06, 2.78764e-07, 1, -2.62268e-09, 0.0063808, -0.940889, 0.0141206)
@@ -632,6 +603,12 @@ transform = Transform3D(-4.37114e-08, 0, -8, 0, 1, 0, 1, 0, -3.49691e-07, 0, 0, 
 [node name="WallSkirting2" parent="WallDecorations" instance=ExtResource("39")]
 transform = Transform3D(-4.37114e-08, 0, -0.5, 0, 1, 0, 1, 0, -2.18557e-08, 1.5, 0, -12.5)
 
+[node name="WallSkirting12" parent="WallDecorations" instance=ExtResource("39")]
+transform = Transform3D(-4.37114e-08, 0, -1.3, 0, 1, 0, 1, 0, -5.68248e-08, -6.3, 0, -12)
+
+[node name="WallSkirting13" parent="WallDecorations" instance=ExtResource("39")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, -5, 0, -12.5)
+
 [node name="WallSkirting3" parent="WallDecorations" instance=ExtResource("39")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.25, 2, 0, -12.75)
 
@@ -664,6 +641,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0, 
 
 [node name="WallSkirtingCorner2" parent="WallDecorations" instance=ExtResource("43")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 2, 0, -12.5)
+
+[node name="WallSkirtingCorner8" parent="WallDecorations" instance=ExtResource("43")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -5, 0, -12)
 
 [node name="WallSkirtingCorner3" parent="WallDecorations" instance=ExtResource("43")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -4, 0, 1)
@@ -730,13 +710,14 @@ size = Vector3(0.002, 4, 6)
 
 [node name="EditorLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
+visible = false
 light_energy = 6.371
 light_size = 0.108
 editor_only = true
 omni_range = 16.9072
 
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
-[connection signal="input_event" from="CasetteRecorder/Area3D" to="." method="OnCasetteRecorderClicked"]
+[connection signal="input_event" from="CasetteRecorder/Area3D" to="." method="OnCassetteRecorderClicked"]
 [connection signal="mouse_exited" from="CasetteRecorder/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="input_event" from="BunsenBurner/Area3D" to="." method="OnBunsenBurnerClicked"]
 [connection signal="mouse_exited" from="BunsenBurner/Area3D" to="." method="OnObjectMouseExit"]
@@ -764,6 +745,8 @@ omni_range = 16.9072
 [editable path="Posters/UusikaupunkiPoster"]
 [editable path="WallDecorations/WallSkirting"]
 [editable path="WallDecorations/WallSkirting2"]
+[editable path="WallDecorations/WallSkirting12"]
+[editable path="WallDecorations/WallSkirting13"]
 [editable path="WallDecorations/WallSkirting3"]
 [editable path="WallDecorations/WallSkirting4"]
 [editable path="WallDecorations/WallSkirting5"]
@@ -775,6 +758,7 @@ omni_range = 16.9072
 [editable path="WallDecorations/WallSkirting11"]
 [editable path="WallDecorations/WallSkirtingCorner"]
 [editable path="WallDecorations/WallSkirtingCorner2"]
+[editable path="WallDecorations/WallSkirtingCorner8"]
 [editable path="WallDecorations/WallSkirtingCorner3"]
 [editable path="WallDecorations/WallSkirtingCorner4"]
 [editable path="WallDecorations/WallSkirtingCorner5"]

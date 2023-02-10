@@ -210,7 +210,7 @@ public partial class KinematicPlayer : CharacterBody3D
 	// Movement is applied in whatever direction player is currently facing, direction is vector magnitude for movement
 	private void ApplyMovement(Vector3 direction, double delta)
 	{
-		if (direction == Vector3.Zero)
+		if (direction == Vector3.Zero || !IsOnFloor())
 		{
 			return;
 		}

@@ -37,8 +37,7 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="UIBatteryLeft" type="Label" parent="BatteryPanel"]
-unique_name_in_owner = true
+[node name="BatteryLeft" type="Label" parent="BatteryPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.409
@@ -70,7 +69,7 @@ anchor_bottom = 1.0
 offset_right = -0.0480003
 mouse_filter = 2
 texture = ExtResource("2")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="WorkPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -94,8 +93,7 @@ text = "Work left:"
 vertical_alignment = 1
 clip_text = true
 
-[node name="UIWorkLeft" type="Label" parent="WorkPanel"]
-unique_name_in_owner = true
+[node name="WorkLeft" type="Label" parent="WorkPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.664062

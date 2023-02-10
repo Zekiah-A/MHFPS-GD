@@ -74,7 +74,6 @@ public partial class Clock : Node3D
 
         // Minute hand needs to travel 360 degrees to get to 6:00 in 30 seconds, so 12 degrees per second. Minus twelve because this model is stupid and the co-ords are wrong. 🤓🔫 
         minuteHand.Rotation = new Vector3(minuteHand.Rotation.X, minuteHand.Rotation.Y,
-            (float) (minuteHand.Rotation.Z -
-                     2 * Math.PI / MaximumTime)); //TODO: Make fancy tweens to make it look good. 
+            (float) (minuteHand.Rotation.Z - 2 * Math.PI / MaximumTime));
     }
 }

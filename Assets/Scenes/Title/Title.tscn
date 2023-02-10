@@ -79,14 +79,6 @@ stream = ExtResource("11")
 volume_db = 0.5
 autoplay = true
 
-[node name="IntroTween" type="Tween" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
-
 [node name="IntroFadeColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,6 +133,14 @@ mesh = SubResource("5")
 
 [node name="GenericModel" parent="." instance=ExtResource("12")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 4.24966, -0.40294, 0.649374)
+
+[node name="Skeleton3D" parent="GenericModel/generic_model" index="0"]
+bones/6/rotation = Quaternion(0.209678, -0.261649, -0.25539, 0.906836)
+bones/7/rotation = Quaternion(-0.195025, -0.432846, 0.000381266, 0.880119)
+bones/25/rotation = Quaternion(0.0889242, -0.0497135, 0.291107, 0.951251)
+bones/26/rotation = Quaternion(-0.0486116, 0.444372, 0.183522, 0.875494)
+bones/43/rotation = Quaternion(0.0132612, 0.00281936, 0.000277771, 0.999908)
+bones/44/rotation = Quaternion(0.0538138, 0.00872351, -0.00225555, 0.99851)
 
 [node name="GenericModel2" parent="." instance=ExtResource("12")]
 transform = Transform3D(-1.8, 0, -1.57361e-07, 0, 1.8, 0, 1.57361e-07, 0, -1.8, 4.24966, -0.40294, 7.50611)

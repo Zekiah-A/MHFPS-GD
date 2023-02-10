@@ -1,20 +1,18 @@
-[gd_resource type="StandardMaterial3D" load_steps=5 format=2]
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://gfgx0gob1mux"]
 
-[ext_resource path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_roughness0.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_ambient0.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_normal0.png" type="Texture2D" id=4]
-[ext_resource path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_diffuse0.png" type="Texture2D" id=5]
+[ext_resource type="Texture2D" uid="uid://ccomfalwd6oi7" path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_roughness0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c1lbcoduml8lg" path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_ambient0.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b048cs2b0a5ul" path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_normal0.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bp5pqhgb61b6i" path="res://Assets/GameAssets/Textures/InteriorWalls/interior_wall_diffuse0.png" id="5"]
 
 [resource]
-albedo_texture = ExtResource( 5 )
-roughness = 0.5
-roughness_texture = ExtResource( 1 )
+albedo_texture = ExtResource("5")
+metallic_specular = 0.53
+roughness = 0.8
+roughness_texture = ExtResource("1")
 normal_enabled = true
 normal_scale = 0.1
-normal_texture = ExtResource( 4 )
+normal_texture = ExtResource("4")
 ao_enabled = true
-ao_light_affect = 0.0
-ao_texture = ExtResource( 2 )
-ao_on_uv2 = false
-ao_texture_channel = 0
-uv1_scale = Vector3( 2, 2, 2 )
+ao_texture = ExtResource("2")
+uv1_scale = Vector3(2, 2, 2)
