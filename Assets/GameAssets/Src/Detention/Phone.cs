@@ -10,15 +10,15 @@ public partial class Phone : Node3D
     private Button[] doorUiButtons;
     private Texture2D hoverCursor;
     private Tween phoneTween;
-    private Environment worldEnvironment;
-
+    private WorldEnvironment worldEnvironment;
+    
     public override void _Ready()
     {
         hoverCursor = ResourceLoader.Load<Texture2D>("res://Assets/GameAssets/Textures/aim_hover.png");
         doors = GetTree().CurrentScene.GetNode<Node3D>("Doors");
         cameraBody = GetTree().CurrentScene.GetNode<Node3D>("CameraBody");
         phoneTween = GetNode<Tween>("Tween");
-        worldEnvironment = GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment").Environment;
+        worldEnvironment = GetTree().CurrentScene.GetNode<WorldEnvironment>("WorldEnvironment");
         doorButtons = new[]
         {
             GetNode<Area3D>("LeftDoorButton"),
@@ -36,18 +36,17 @@ public partial class Phone : Node3D
         doorButtons[1].InputRayPickable = false;
         doorButtons[2].InputRayPickable = true;
         defaultTransform = Transform;
-        worldEnvironment.Set("dof_blur_far_enabled", false);
+        worldEnvironment.CameraAttributes.Set("dof_blur_far_enabled", false);
     }
 
     public void Activate()
     {
-        //TODO: Tween, bring phone to face.
-        //RotationDegrees = new Vector3(0, 90, 90);
+        Rotation = new Vector3(0, Mathf.Pi / 4, Mathf.Pi / 4);
         Position = new Vector3(cameraBody.Position.X, cameraBody.Position.Y, cameraBody.Position.Z - 0.8f);
         doorButtons[0].InputRayPickable = true;
         doorButtons[1].InputRayPickable = true;
         doorButtons[2].InputRayPickable = false;
-        worldEnvironment.Set("dof_blur_far_enabled", true);
+        worldEnvironment.CameraAttributes.Set("dof_blur_far_enabled", false);
     }
 
     public void Deactivate()
@@ -57,7 +56,7 @@ public partial class Phone : Node3D
         doorButtons[1].InputRayPickable = false;
         doorButtons[2].InputRayPickable = true;
         Transform = defaultTransform;
-        worldEnvironment.Set("dof_blur_far_enabled", false);
+        worldEnvironment.CameraAttributes.Set("dof_blur_far_enabled", false);
     }
 
     public void Disable()
@@ -69,14 +68,14 @@ public partial class Phone : Node3D
         doorUiButtons[0].SetPressedNoSignal(false);
         doorUiButtons[1].SetPressedNoSignal(false);
         Transform = defaultTransform;
-        worldEnvironment.Set("dof_blur_far_enabled", false);
+        worldEnvironment.CameraAttributes.Set("dof_blur_far_enabled", false);
     }
 
     //TODO: GUI colours for opened/closed, fake button "press" effect when clicked, etc (use "IsPressed" on the button, and make a style for pressed / unpressed.)
     //TODO: Vent should not be here, and should only be affected by hovering the mouse over it in doors, as it is light based.
 
     //TODO: Mouse state needs to reset once mouse is off of these.
-    private void OnLeftDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
+    private void OnLeftDoorClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, int shapeIdx)
     {
         if (@event is InputEventMouseButton mouseButton)
             if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
@@ -94,10 +93,13 @@ public partial class Phone : Node3D
             }
 
         //If is hovering, change cursor
-        if (@event is InputEventMouse mouse) Input.SetCustomMouseCursor(hoverCursor);
+        if (@event is InputEventMouse mouse)
+        {
+            Input.SetCustomMouseCursor(hoverCursor);
+        }
     }
 
-    private void OnRightDoorClicked(object camera, object @event, Vector3 position, Vector3 normal, int shapeIdx)
+    private void OnRightDoorClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, int shapeIdx)
     {
         if (@event is InputEventMouseButton mouseButton)
             if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
@@ -115,15 +117,24 @@ public partial class Phone : Node3D
             }
 
         //If is hovering, change cursor
-        if (@event is InputEventMouse mouse) Input.SetCustomMouseCursor(hoverCursor);
+        if (@event is InputEventMouse mouse)
+        {
+            Input.SetCustomMouseCursor(hoverCursor);
+        }
     }
 
-    private void
-        OnBackgroundClicked(object camera, object @event, Vector3 position, Vector3 normal,
-            int shapeIdx) //TODO: Only enable this area when the phone is opened.
+    //TODO: Only enable this area when the phone is opened.
+    private void OnBackgroundClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, long shapeIndex)
     {
-        if (@event is not InputEventMouseButton mouseButton) return;
-        if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed) Deactivate();
+        if (@event is not InputEventMouseButton mouseButton)
+        {
+            return;
+        }
+
+        if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
+        {
+            Deactivate();
+        }
     }
 
     //NOTE: Make sure to enable Resource > Local to scene under the viewport material for the phone screen, or else it will not work.

@@ -31,7 +31,7 @@ public partial class Doors : Node3D
 		leftDoor = GetNode<Node3D>("LeftDoor");
 		rightDoor = GetNode<Node3D>("RightDoor");
 		batteryTimer = GetNode<Timer>("BatteryTimer");
-		batteryLabel = GetNode<Label>("/root/DetentionUI/BatteryPanel/BatteryLeft");
+		batteryLabel = GetTree().CurrentScene.GetNode<Label>("DetentionUI/BatteryPanel/BatteryLeft");
 
 		BatteryPercentage = 100;
 		batteryTimer.Start();

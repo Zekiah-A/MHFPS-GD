@@ -57,19 +57,20 @@ public partial class Clock : Node3D
         // Clock will need rewinding every 30 seconds
         clockTime += 1;
 
-        // Auditory warning to player that time is running out. 
-        if (clockTime >= MaximumTime - WarnTime && clockTime < MaximumTime)
+        switch (clockTime)
         {
-            clockPlayer.Stream = clockStream;
-            clockPlayer.Play();
-        }
-        // If gone for more than 30 seconds without rewind, then player will be jumpscared. 
-        else if (clockTime >= MaximumTime)
-        {
-            //Jumpscare player, time is out.
-            clockPlayer.Stop();
-            clockTimer.Stop();
-            stainTeacher.Jumpscare();
+            // Auditory warning to player that time is running out. 
+            case >= MaximumTime - WarnTime and < MaximumTime:
+                clockPlayer.Stream = clockStream;
+                clockPlayer.Play();
+                break;
+            // If gone for more than 30 seconds without rewind, then player will be jumpscared. 
+            case >= MaximumTime:
+                //Jumpscare player, time is out.
+                clockPlayer.Stop();
+                clockTimer.Stop();
+                stainTeacher.Jumpscare();
+                break;
         }
 
         // Minute hand needs to travel 360 degrees to get to 6:00 in 30 seconds, so 12 degrees per second. Minus twelve because this model is stupid and the co-ords are wrong. 🤓🔫 
