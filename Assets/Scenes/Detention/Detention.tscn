@@ -97,14 +97,17 @@ color_ramp = SubResource("9")
 material = ExtResource("11")
 size = Vector2(0.05, 0.05)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_hj646"]
+viewport_path = NodePath("Phone/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grwfh"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_hj646")
+point_size = 128.0
+
 [sub_resource type="BoxShape3D" id="37"]
 size = Vector3(0.4, 0.1, 0.8)
-
-[sub_resource type="BoxShape3D" id="40"]
-size = Vector3(0.4, 0.1, 0.4)
-
-[sub_resource type="BoxShape3D" id="42"]
-size = Vector3(2.4, 0.02, 3.6)
 
 [sub_resource type="BoxShape3D" id="10"]
 size = Vector3(1, 1, 0.2)
@@ -130,6 +133,7 @@ material = SubResource("StandardMaterial3D_3f62v")
 
 [node name="Detention" type="Node3D"]
 script = ExtResource("2")
+metadata/_edit_vertical_guides_ = []
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2wvfl")
@@ -222,43 +226,16 @@ wait_time = 20.0
 transform = Transform3D(0.129409, 0, 0.482963, 0, 0.5, 0, -0.482963, 0, 0.129409, -0.0500001, 1.38, -2.25)
 script = ExtResource("14_c0gt8")
 
-[node name="OpenButton" type="Area3D" parent="Phone"]
+[node name="Cube" parent="Phone" index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_grwfh")
+
+[node name="Area3D" type="Area3D" parent="Phone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0178251, -0.00984001, 0.01832)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Phone/OpenButton"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Phone/Area3D"]
 shape = SubResource("37")
 
-[node name="LeftDoorButton" type="Area3D" parent="Phone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Phone/LeftDoorButton"]
-shape = SubResource("40")
-
-[node name="RightDoorButton" type="Area3D" parent="Phone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-07, 0, 0.2)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Phone/RightDoorButton"]
-shape = SubResource("40")
-
-[node name="BackgroundArea" type="Area3D" parent="Phone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999999, 0)
-
-[node name="Background" type="CollisionShape3D" parent="Phone/BackgroundArea"]
-visible = false
-shape = SubResource("42")
-
-[node name="Left" type="CollisionShape3D" parent="Phone/BackgroundArea"]
-transform = Transform3D(1, 0, -8.88178e-16, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.33786e-06, 1.8, -1.8)
-visible = false
-shape = SubResource("42")
-
-[node name="Right" type="CollisionShape3D" parent="Phone/BackgroundArea"]
-transform = Transform3D(1, 0, 8.88178e-16, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.8, 1.8)
-visible = false
-shape = SubResource("42")
-
 [node name="SubViewport" type="SubViewport" parent="Phone"]
-handle_input_locally = false
 size = Vector2i(400, 200)
 
 [node name="PhoneUI" type="Control" parent="Phone/SubViewport"]
@@ -313,14 +290,6 @@ anchor_bottom = 0.981
 theme = ExtResource("38")
 toggle_mode = true
 text = "Right Door"
-
-[node name="Tween" type="Tween" parent="Phone"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
 
 [node name="Clock" parent="." instance=ExtResource("14")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.25, -13)
@@ -713,7 +682,6 @@ size = Vector3(0.002, 4, 6)
 
 [node name="EditorLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
-visible = false
 light_energy = 6.371
 light_size = 0.108
 editor_only = true
@@ -726,12 +694,10 @@ omni_range = 16.9072
 [connection signal="mouse_exited" from="BunsenBurner/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="BunsenBurner/BurnerTimer" to="BunsenBurner" method="OnBurnerTimerFinished"]
 [connection signal="timeout" from="BunsenBurner/OveruseTimer" to="BunsenBurner" method="OnOveruseTimerFinished"]
-[connection signal="input_event" from="Phone/OpenButton" to="." method="OnPhoneClicked"]
-[connection signal="mouse_exited" from="Phone/OpenButton" to="." method="OnObjectMouseExit"]
-[connection signal="input_event" from="Phone/LeftDoorButton" to="Phone" method="OnLeftDoorClicked"]
-[connection signal="input_event" from="Phone/RightDoorButton" to="Phone" method="OnRightDoorClicked"]
-[connection signal="mouse_exited" from="Phone/RightDoorButton" to="." method="OnObjectMouseExit"]
-[connection signal="input_event" from="Phone/BackgroundArea" to="Phone" method="OnBackgroundClicked"]
+[connection signal="input_event" from="Phone/Area3D" to="." method="OnPhoneClicked"]
+[connection signal="mouse_exited" from="Phone/Area3D" to="." method="OnObjectMouseExit"]
+[connection signal="pressed" from="Phone/SubViewport/PhoneUI/ContentPanel/LeftButton" to="Phone" method="OnDoorLeftButtonPressed"]
+[connection signal="pressed" from="Phone/SubViewport/PhoneUI/ContentPanel/RightButton" to="Phone" method="OnDoorRightButtonPressed"]
 [connection signal="timeout" from="Clock/ClockTimer" to="Clock" method="OnClockTimerTimeout"]
 [connection signal="input_event" from="Clock/Area3D" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area3D" to="." method="OnObjectMouseExit"]

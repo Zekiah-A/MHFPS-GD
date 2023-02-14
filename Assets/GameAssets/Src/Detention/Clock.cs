@@ -16,6 +16,8 @@ public partial class Clock : Node3D
     private Node3D minuteHand;
 
     private DetentionTeacher stainTeacher;
+    
+    public bool Started;
 
     public override void _Ready()
     {
@@ -36,7 +38,10 @@ public partial class Clock : Node3D
 
     public void Unwind()
     {
-        if (actionPlayer.Playing) return;
+        if (actionPlayer.Playing)
+        {
+            return;
+        }
 
         actionPlayer.Stream = clockUnwindStream;
         actionPlayer.Play();
@@ -49,6 +54,7 @@ public partial class Clock : Node3D
     // Clock does not seem to automatically tick after the radio announcement, as the audio sequence overruns by about 10 seconds.
     public void StartClockTimer()
     {
+        Started = true;
         clockTimer.Start();
     }
 

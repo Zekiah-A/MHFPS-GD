@@ -70,44 +70,69 @@ public partial class DetentionManager : Node
 		}
 	}
 
-	//Node camera, InputEvent @event, Vector3 position, Vector3 normal, long shape_idx
+	// Based off https://www.reddit.com/r/godot/comments/l6bqlw/what_is_an_efficient_calculation_for_the_aabb_of/
 	public void OnPhoneClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, long shapeIndex)
 	{
-		if (@event is InputEventMouseButton mouseButton)
-			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
-			{
-				if (!phoneActivated)
-					(phone as Phone)?.Activate();
-				//DetentionCamera.BindRotate(phone);
-				else
-					(phone as Phone)?.Deactivate();
-				//DetentionCamera.UnbindRotate(phone);
-			}
-
-		//If is hovering, change cursor
-		if (@event is InputEventMouse)
+		if (camera is not Camera3D camera3D)
 		{
+			return;
+		}
+		
+		if ((phone as Phone)?.Active == false)
+		{
+			if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
+			{
+				(phone as Phone)?.Activate();
+			}
+			
 			Input.SetCustomMouseCursor(hoverCursor);
+			return;
+		}
+		
+		Input.SetCustomMouseCursor(dotCursor);
+
+		var mesh = phone.GetNode<MeshInstance3D>("Cube");
+		var viewportStartX = camera3D.UnprojectPosition(mesh.ToGlobal(mesh.GetAabb().Position));
+		var viewportStartY = camera3D.UnprojectPosition(mesh.ToGlobal(mesh.GetAabb().End));
+
+		var viewportMousePosition = camera3D.UnprojectPosition(position);
+		
+		var viewportRetargetPosition = new Vector2(Mathf.Abs(viewportMousePosition.X - viewportStartX.X),
+			Mathf.Abs(viewportMousePosition.Y - viewportStartY.Y));
+		
+		// ViewportStartY = viewport end x, and vice versa, idk why viewportAabbsize X and Y are inverted
+		GD.Print("VPRTPS:", viewportRetargetPosition);
+
+		if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
+		{
+			var retargetedInput = new InputEventMouseButton
+			{
+				Position = viewportRetargetPosition,
+				ButtonIndex = MouseButton.Left,
+				Pressed = true,
+			};
+			
+			(phone as Phone)?.SubViewport.PushInput(retargetedInput, true);
+			GD.Print((phone as Phone)?.SubViewport.IsInputHandled());
 		}
 	}
 
 	public void OnBunsenBurnerClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, long shapeIndex)
 	{
-		if (@event is InputEventMouseButton mouseButton)
-			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
-			{
-				bunsenBurnerOn = !bunsenBurnerOn;
-				GD.Print($"Bunsen Burner on: {bunsenBurnerOn}");
+		if (@event is InputEventMouseButton {ButtonIndex: MouseButton.Left, Pressed: true})
+		{
+			bunsenBurnerOn = !bunsenBurnerOn;
+			GD.Print($"Bunsen Burner on: {bunsenBurnerOn}");
 
-				if (bunsenBurnerOn)
-				{
-					(bunsenBurner as BunsenBurner)?.Burn();
-				}
-				else
-				{
-					(bunsenBurner as BunsenBurner)?.StopBurning();
-				}
+			if (bunsenBurnerOn)
+			{
+				(bunsenBurner as BunsenBurner)?.Burn();
 			}
+			else
+			{
+				(bunsenBurner as BunsenBurner)?.StopBurning();
+			}
+		}
 
 		//If is hovering, change cursor
 		if (@event is InputEventMouse)
@@ -119,9 +144,10 @@ public partial class DetentionManager : Node
 	public void OnClockClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, long shapeIndex)
 	{
 		//Unwind clock sequence.
-		if (@event is InputEventMouseButton mouseButton)
-			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
-				(clock as Clock)?.Unwind();
+		if (@event is InputEventMouseButton {ButtonIndex: MouseButton.Left, Pressed: true})
+		{
+			(clock as Clock)?.Unwind();
+		}
 
 		//If is hovering, change cursor
 		if (@event is InputEventMouse)
@@ -133,14 +159,18 @@ public partial class DetentionManager : Node
 	//TODO: Casette should be spelled "cassette", this needs to be fixed everywhere, including in the editor.
 	public void OnCassetteRecorderClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, long shapeIndex)
 	{
-		if (@event is InputEventMouseButton mouseButton)
-			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
+		if (@event is InputEventMouseButton {ButtonIndex: MouseButton.Left, Pressed: true})
+		{
+			//Stop the casette recorder from playing. Play click sound to notify that it has been shut off.
+			cassettePlayer.Stream = caseCassetteStreams[2];
+			cassettePlayer.Play();
+			
+			// Only start clock if not yet started
+			if ((clock as Clock)?.Started == false)
 			{
-				//Stop the casette recorder from playing. Play click sound to notify that it has been shut off.
-				cassettePlayer.Stream = caseCassetteStreams[2];
-				cassettePlayer.Play();
 				(clock as Clock)?.StartClockTimer();
 			}
+		}
 
 		//If is hovering, change cursor
 		if (@event is InputEventMouse)

@@ -16,7 +16,7 @@ public partial class BunsenBurner : Node3D
 		flameParticles = GetNode("Flame").GetNode<GpuParticles3D>("FlameParticles");
 		burnerTimer = GetNode<Timer>("BurnerTimer");
 		overuseTimer = GetNode<Timer>("OveruseTimer");
-		workLeftLabel = GetTree().CurrentScene.GetNode<Label>("DetentionUI/WorkPanel/UIWorkLeft");
+		workLeftLabel = GetTree().CurrentScene.GetNode<Label>("DetentionUI/WorkPanel/WorkLeft");
 	}
 
 	//Start burn timer, and start overuse timer.

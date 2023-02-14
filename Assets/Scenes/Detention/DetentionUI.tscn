@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://357lkp8ituva"]
+[gd_scene load_steps=11 format=3 uid="uid://357lkp8ituva"]
 
 [ext_resource type="Texture2D" uid="uid://dsdiep4u4hvx8" path="res://Assets/GameAssets/Textures/battery.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://0y32p8ihfqj6" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_1.png" id="4"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cuox8fs7pa7n7" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_3.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://cycdqcwy0xy7o" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_4.png" id="7"]
 [ext_resource type="Shader" path="res://Assets/GameAssets/Shaders/opacity.gdshader" id="8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_omnys"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7rabk"]
 
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("8")
@@ -31,45 +35,46 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -176.0
+offset_left = -128.0
 offset_top = -48.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_omnys")
 
 [node name="BatteryLeft" type="Label" parent="BatteryPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.409
+anchor_left = 0.625
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0159988
 text = "100%"
 vertical_alignment = 1
 clip_text = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Colon" type="Label" parent="BatteryPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.273
-anchor_right = 0.409
+anchor_left = 0.375
+anchor_right = 0.625
 anchor_bottom = 1.0
-offset_left = -0.0480003
-offset_right = 0.0159988
 text = ":"
+horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+metadata/_edit_use_anchors_ = true
 
 [node name="BatteryIcon" type="TextureRect" parent="BatteryPanel"]
 self_modulate = Color(1, 1, 1, 0.282353)
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.273
+anchor_right = 0.375
 anchor_bottom = 1.0
-offset_right = -0.0480003
 mouse_filter = 2
 texture = ExtResource("2")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="WorkPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -80,14 +85,13 @@ offset_top = -48.0
 offset_right = 128.0
 grow_vertical = 0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7rabk")
 
 [node name="Details" type="Label" parent="WorkPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0625
 anchor_right = 0.6625
 anchor_bottom = 1.0
-offset_left = -8.0
 offset_right = 0.199997
 text = "Work left:"
 vertical_alignment = 1
