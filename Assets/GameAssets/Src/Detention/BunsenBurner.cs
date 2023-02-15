@@ -47,15 +47,14 @@ public partial class BunsenBurner : Node3D
 		//Total mach length
 		if (burnTime >= CompletionTime)
 		{
-			GD.Print("Game won: Successfully survived the night.");
+			GD.Print("[Detention] Won: Successfully survived.");
 		}
 	}
 
 	//If bunsen burner is left on for more than 20 seconds straight (the wait time of the overuse timer), game over!
 	public void OnOveruseTimerFinished()
 	{
-		GD.Print("Game over: Bunsen burner overuse.");
-		//TODO: Use the correct Jumpscare.
-		GetTree().CurrentScene.GetNode<DetentionTeacher>("StainTeacher").Jumpscare();
+		GD.Print("[Detention] Killed: Bunsen burner overuse.");
+		//TODO: Use Jumpscare.
 	}
 }

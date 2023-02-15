@@ -176,11 +176,3 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("7")
-
-[node name="DeathScreenTween" type="Tween" parent="DeathScreen"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null

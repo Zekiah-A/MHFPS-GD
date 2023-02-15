@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://bljrq176iwnw0"]
+[gd_scene load_steps=75 format=3 uid="uid://bljrq176iwnw0"]
 
 [ext_resource type="Script" path="res://Assets/GameAssets/Src/Detention/DetentionCamera.cs" id="1"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Src/Detention/DetentionManager.cs" id="2"]
@@ -37,8 +37,10 @@
 [ext_resource type="Material" path="res://Assets/GameAssets/Materials/decorative_border_vertical.tres" id="33"]
 [ext_resource type="AudioStream" uid="uid://bncgchdpyi2hw" path="res://Assets/GameAssets/Audio/Detention/cassete2.mp3" id="34"]
 [ext_resource type="Script" path="res://Assets/GameAssets/Src/Detention/Doors.cs" id="35"]
+[ext_resource type="Script" path="res://Assets/GameAssets/Src/Detention/Watcher.cs" id="37_2bsfm"]
 [ext_resource type="Texture2D" uid="uid://dp65lu55vm8ib" path="res://Assets/GameAssets/Textures/WallGraffiti/wall_graffiti0.png" id="37_utqwf"]
 [ext_resource type="Theme" uid="uid://b1um6tmgnouur" path="res://Assets/Themes/detention_phoneui.tres" id="38"]
+[ext_resource type="AudioStream" uid="uid://scpkwq6s776g" path="res://Assets/GameAssets/Audio/Detention/watcher0.mp3" id="38_xot4k"]
 [ext_resource type="PackedScene" uid="uid://v73v32llb3l8" path="res://Assets/GameAssets/Models/WallSkirtings/wall_skirting1.glb" id="39"]
 [ext_resource type="PackedScene" uid="uid://1x8my7cpuomn" path="res://Assets/GameAssets/Models/DetentionWalls/detention_walls.glb" id="40"]
 [ext_resource type="Material" uid="uid://gfgx0gob1mux" path="res://Assets/GameAssets/Materials/interior_wall0.tres" id="42_p6yr2"]
@@ -120,6 +122,86 @@ albedo_texture = ExtResource("29_pw0o6")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctpvq"]
 albedo_texture = ExtResource("30_x0y5w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nw6r1"]
+shading_mode = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ptii0"]
+size = Vector3(0.6, 0.5, 0.2)
+
+[sub_resource type="Animation" id="Animation_mykc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 6.30062, 1, -13.6827)
+
+[sub_resource type="Animation" id="Animation_ecch3"]
+resource_name = "watcher_appear"
+length = 7.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 7.62044, 1.24527, -13.6827, 1.3, 1, 5.92526, 1.09398, -13.6827, 1.5, 1, 5.63833, 1.17078, -13.6827, 1.7, 1, 5.26129, 0.97447, -13.6827, 2, 1, 5.01247, 1.01252, -13.6827, 2.2, 1, 4.70864, 0.989659, -13.6827, 2.5, 1, 4.44442, 0.61094, -13.6827, 2.8, 1, 3.97585, 0.750211, -13.6827, 3.1, 1, 3.73471, 0.227736, -13.6827, 3.6, 1, 3.89477, 0.23, -13.6827, 5.7, 1, 3.89477, 0.23, -13.6827, 6.6, 1, 3.93635, 1.01061, -13.6827, 7, 1, 3.89477, 1, -13.6827)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 2.2, 3.7, 5.6, 5.9, 6.3, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.977524, 0), Vector3(0, -1.12357, 0), Vector3(0, 0.00523599, 0), Vector3(0, 0.00523599, 0), Vector3(0.010062, 0.167132, 0.0738846), Vector3(-0.0279056, -0.205074, -0.24183), Vector3(0, -0.261555, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vsom0"]
+length = 4.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 3.89477, 1, -13.6827, 0.7, 1, 3.87995, 0.94015, -13.7237, 1.7, 1, 3.98587, 1.10421, -13.7237, 2.1, 1, 4.37767, 0.981413, -13.7448, 2.9, 1, 5.18269, 1.18761, -13.7946, 3.4, 1, 5.45321, 1.11829, -13.8037, 4, 1, 6.10682, 1.15998, -13.8447)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 1, 1.5, 2.7, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.261555, 0), Vector3(0.203882, -0.486783, -0.055374), Vector3(0.203882, -0.267221, -0.055374), Vector3(0.130689, 0.457535, -0.0921941), Vector3(-0.206136, 1.40687, -0.0570931), Vector3(-0.0301299, 1.49089, 0.0735983)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kuka6"]
+_data = {
+"RESET": SubResource("Animation_mykc8"),
+"watcher_appear": SubResource("Animation_ecch3"),
+"watcher_disappear": SubResource("Animation_vsom0")
+}
 
 [sub_resource type="BoxShape3D" id="46"]
 size = Vector3(2, 0.2, 1.2)
@@ -542,8 +624,33 @@ transform = Transform3D(-3.46631e-07, 4.61853e-14, -0.06, -0.976306, 1.06689e-07
 material = ExtResource("33")
 
 [node name="Watcher" parent="." instance=ExtResource("29")]
-transform = Transform3D(2.2331, 0, -0.275258, 0, 2.25, 0, 0.275258, 0, 2.2331, 3.99477, 1, -13.6827)
-visible = false
+transform = Transform3D(2.25, 0, 0, 0, 2.25, 0, 0, 0, 2.25, 6.30062, 1, -13.6827)
+script = ExtResource("37_2bsfm")
+
+[node name="watcher_eyes" parent="Watcher" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_nw6r1")
+
+[node name="KillTimer" type="Timer" parent="Watcher"]
+
+[node name="AppearTimer" type="Timer" parent="Watcher"]
+one_shot = true
+
+[node name="Area3D" type="Area3D" parent="Watcher"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Watcher/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.222222, 0.0444446)
+shape = SubResource("BoxShape3D_ptii0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Watcher"]
+libraries = {
+"": SubResource("AnimationLibrary_kuka6")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Watcher"]
+stream = ExtResource("38_xot4k")
+volume_db = 6.0
+max_db = 6.0
+max_distance = 30.0
 
 [node name="Doors" type="Node3D" parent="."]
 script = ExtResource("35")
@@ -687,6 +794,8 @@ light_size = 0.108
 editor_only = true
 omni_range = 16.9072
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="finished" from="CasetteRecorder/CasettePlayer" to="." method="OnStreamFinish"]
 [connection signal="input_event" from="CasetteRecorder/Area3D" to="." method="OnCassetteRecorderClicked"]
 [connection signal="mouse_exited" from="CasetteRecorder/Area3D" to="." method="OnObjectMouseExit"]
@@ -712,6 +821,7 @@ omni_range = 16.9072
 [editable path="Posters/YouFailedPoster"]
 [editable path="Posters/ThirdEyePoster"]
 [editable path="Posters/UusikaupunkiPoster"]
+[editable path="Watcher"]
 [editable path="WallDecorations/WallSkirting"]
 [editable path="WallDecorations/WallSkirting2"]
 [editable path="WallDecorations/WallSkirting12"]

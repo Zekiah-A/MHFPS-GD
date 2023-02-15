@@ -32,7 +32,7 @@ public partial class CameraEffects : Camera3D
 		}
 		catch (Exception e)
 		{
-			GD.Print($"Random camera movement requires a timer with autostart enabled as a child.\n{e}");
+			GD.PrintErr($"Random camera movement requires a timer with autostart enabled as a child.\n{e}");
 		}
 	}
 

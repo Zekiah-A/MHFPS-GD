@@ -14,8 +14,6 @@ public partial class Clock : Node3D
     private Timer clockTimer;
     private AudioStreamMP3 clockUnwindStream;
     private Node3D minuteHand;
-
-    private DetentionTeacher stainTeacher;
     
     public bool Started;
 
@@ -31,7 +29,6 @@ public partial class Clock : Node3D
         actionAnimationPlayer = GetTree().CurrentScene
             .GetNode("CameraBody")
             .GetNode<AnimationPlayer>("ActionAnimationPlayer");
-        stainTeacher = GetTree().CurrentScene.GetNode<DetentionTeacher>("StainTeacher");
 
         minuteHand.Rotation = new Vector3(minuteHand.Rotation.X, minuteHand.Rotation.Y, 0);
     }
@@ -75,7 +72,7 @@ public partial class Clock : Node3D
                 //Jumpscare player, time is out.
                 clockPlayer.Stop();
                 clockTimer.Stop();
-                stainTeacher.Jumpscare();
+                //TODO: Jumpscare
                 break;
         }
 

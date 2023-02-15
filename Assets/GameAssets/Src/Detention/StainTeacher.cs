@@ -1,17 +1,15 @@
 using Godot;
+using System;
 
-public partial class StainTeacher : DetentionTeacher
+public partial class StainTeacher : Node
 {
-    public override void _Ready()
-    {
-        //Teachers may override ready in order to have their own jumpscare sounds.
-        jumpscareStream = ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/jumpscare1.mp3");
-        base._Ready();
-    }
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
 
-    public override void Jumpscare()
-    {
-        GD.Print("Game Over: Jumpscared by Stain teacher.");
-        base.Jumpscare();
-    }
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
 }

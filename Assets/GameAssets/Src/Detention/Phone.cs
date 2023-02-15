@@ -14,9 +14,6 @@ public partial class Phone : Node3D
 
 	private WorldEnvironment worldEnvironment;
 	
-	public bool Active;
-	public bool MouseIsOver;
-	
 	public override void _Ready()
 	{
 		SubViewport = GetNode<SubViewport>("SubViewport");
@@ -32,18 +29,15 @@ public partial class Phone : Node3D
 	
 	private void OnDoorLeftButtonPressed()
 	{
-		GD.Print("I like");
 	}
 
 
 	private void OnDoorRightButtonPressed()
 	{
-		GD.Print("I sike");
 	}
 
 	public void Activate()
 	{
-		Active = true;
 		Rotation = new Vector3(0, Mathf.Pi / 2, Mathf.Pi / 2);
 		Position = new Vector3(cameraBody.Position.X, cameraBody.Position.Y, cameraBody.Position.Z - 0.8f);
 		worldEnvironment.CameraAttributes.Set("dof_blur_far_enabled", false);
@@ -51,7 +45,6 @@ public partial class Phone : Node3D
 
 	public void Deactivate()
 	{
-		Active = false;
 		Transform = defaultTransform;
 		worldEnvironment.CameraAttributes.Set("dof_blur_far_enabled", false);
 	}

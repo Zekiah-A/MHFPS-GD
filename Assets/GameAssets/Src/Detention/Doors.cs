@@ -12,9 +12,7 @@ public partial class Doors : Node3D
 	private Node3D rightDoor;
 	public bool LeftOpened = true;
 	public bool RightOpened = true;
-
-	private bool VentLit;
-
+	
 	//If this value ever goes negative, then something has gone seriously wrong.
 	private uint DoorsClosed
 	{
@@ -67,14 +65,10 @@ public partial class Doors : Node3D
 
 	public void TorchOnVent()
 	{
-		GD.Print("Vent Hovered (Lit)");
-		VentLit = true;
 	}
 
 	public void TorchOffVent()
 	{
-		GD.Print("Vent Exited (Unlit)");
-		VentLit = false;
 	}
 
 	/// <summary>
@@ -89,7 +83,10 @@ public partial class Doors : Node3D
 		batteryLabel.Text = $"{BatteryPercentage}%";
 
 		//If player has run out of battery, leave them completely vunerable, possible also disable their torch.
-		if (BatteryPercentage != 0) return;
+		if (BatteryPercentage != 0)
+		{
+			return;
+		}
 
 		batteryTimer.Stop();
 		(GetTree().CurrentScene.GetNode("Phone") as Phone)?.Disable();
@@ -109,7 +106,5 @@ public partial class Doors : Node3D
 			2 => 1.5f,
 			_ => batteryTimer.WaitTime
 		};
-
-		GD.Print($"Doors state changed [{DoorsClosed}], battery wait time set to {batteryTimer.WaitTime}.");
 	}
 }

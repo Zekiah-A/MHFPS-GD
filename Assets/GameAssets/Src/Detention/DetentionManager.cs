@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 //TODO: Namespace MHFPS.Detention
@@ -11,15 +12,16 @@ public partial class DetentionManager : Node
 	private AudioStreamPlayer3D cassettePlayer;
 	private Node3D clock;
 
-	private Control detentionUiCanvas;
-	private Node3D doors;
-
+	private Timer watcherTimer;
+	
 	private Texture2D dotCursor;
 	private Texture2D hoverCursor;
 	private Node3D phone;
 	private bool phoneActivated;
 
-	//TODO: Mouse down loading-like animation for the player crumpling up paper
+	private Node3D watcher;
+	private readonly Random random = new();
+
 	public override void _Ready()
 	{
 		dotCursor = ResourceLoader.Load<Texture2D>("res://Assets/GameAssets/Textures/aim_reticle.png");
@@ -31,13 +33,12 @@ public partial class DetentionManager : Node
 			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete1.mp3"),
 			ResourceLoader.Load<AudioStreamMP3>("res://Assets/GameAssets/Audio/Detention/cassete2.mp3")
 		};
-		detentionUiCanvas = GetNode<Control>("DetentionUI");
 		ambientPlayer = GetNode<AudioStreamPlayer>("AmbientPlayer");
 		cassettePlayer = GetNode<AudioStreamPlayer3D>("CasetteRecorder/CasettePlayer");
 		bunsenBurner = GetNode<Node3D>("BunsenBurner");
 		clock = GetNode<Node3D>("Clock");
 		phone = GetNode<Node3D>("Phone");
-		doors = GetTree().CurrentScene.GetNode<Node3D>("Doors");
+		watcher = GetNode<Node3D>("Watcher");
 
 		BeginGame();
 	}
@@ -51,8 +52,9 @@ public partial class DetentionManager : Node
 
 		cassettePlayer.Stream = caseCassetteStreams[0];
 		cassettePlayer.Play();
-	}
 
+	}
+	
 	private void OnStreamFinish()
 	{
 		// Begin the second half of the casette announcement, after the "audio interruption".
@@ -77,11 +79,12 @@ public partial class DetentionManager : Node
 		{
 			return;
 		}
-		
-		if ((phone as Phone)?.Active == false)
+
+		if (phoneActivated == false)
 		{
 			if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
 			{
+				phoneActivated = true;
 				(phone as Phone)?.Activate();
 			}
 			
@@ -101,7 +104,6 @@ public partial class DetentionManager : Node
 			Mathf.Abs(viewportMousePosition.Y - viewportStartY.Y));
 		
 		// ViewportStartY = viewport end x, and vice versa, idk why viewportAabbsize X and Y are inverted
-		GD.Print("VPRTPS:", viewportRetargetPosition);
 
 		if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
 		{
@@ -113,7 +115,6 @@ public partial class DetentionManager : Node
 			};
 			
 			(phone as Phone)?.SubViewport.PushInput(retargetedInput, true);
-			GD.Print((phone as Phone)?.SubViewport.IsInputHandled());
 		}
 	}
 
@@ -122,8 +123,7 @@ public partial class DetentionManager : Node
 		if (@event is InputEventMouseButton {ButtonIndex: MouseButton.Left, Pressed: true})
 		{
 			bunsenBurnerOn = !bunsenBurnerOn;
-			GD.Print($"Bunsen Burner on: {bunsenBurnerOn}");
-
+			
 			if (bunsenBurnerOn)
 			{
 				(bunsenBurner as BunsenBurner)?.Burn();
@@ -156,7 +156,6 @@ public partial class DetentionManager : Node
 		}
 	}
 
-	//TODO: Casette should be spelled "cassette", this needs to be fixed everywhere, including in the editor.
 	public void OnCassetteRecorderClicked(Node camera, InputEvent @event, Vector3 position, Vector3 normal, long shapeIndex)
 	{
 		if (@event is InputEventMouseButton {ButtonIndex: MouseButton.Left, Pressed: true})
@@ -181,12 +180,10 @@ public partial class DetentionManager : Node
 
 	public void OnVentMouseEntered()
 	{
-		(doors as Doors)?.TorchOnVent();
 	}
 
 	public void OnVentMouseExit()
 	{
-		(doors as Doors)?.TorchOffVent();
 	}
 
 	public void OnObjectMouseExit()
