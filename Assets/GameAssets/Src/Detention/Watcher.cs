@@ -3,7 +3,7 @@ using System;
 
 public partial class Watcher : Node3D
 {
-	private const int AppearCooldown = 4;//60;
+	private const int AppearCooldown = 60;
 	private const int MinKillTime = 16;
 	private const int MaxKillTIme = 32;
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=35 format=3 uid="uid://bt58wdxprxcps"]
 
 [ext_resource type="PackedScene" uid="uid://dpki68wvhnkt0" path="res://Assets/GameAssets/Models/hedge.glb" id="3"]
 [ext_resource type="PackedScene" path="res://Assets/GameAssets/ModelScenes/House.tscn" id="4"]
@@ -13,8 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://b53p2w32n6558" path="res://Assets/GameAssets/Textures/Brick/brick0_roughness.png" id="9_uqicg"]
 [ext_resource type="Texture2D" uid="uid://0e73t2ykqown" path="res://Assets/GameAssets/Textures/Godot/godot_text.png" id="16"]
 [ext_resource type="Animation" uid="uid://hhnd1ql67cfd" path="res://Assets/GameAssets/Animations/intro_credits.tres" id="17"]
+[ext_resource type="PackedScene" uid="uid://cb41lw8lph34e" path="res://Assets/GameAssets/Blender/bedside_drawer.blend" id="17_6v7ah"]
+[ext_resource type="PackedScene" uid="uid://cmyvs75jwuuen" path="res://Assets/GameAssets/Blender/water_bottle.blend" id="18_52hj2"]
 [ext_resource type="Texture2D" uid="uid://f4dmtbsck1h2" path="res://Assets/GameAssets/Textures/Blood/Death/death_splatters_2.png" id="19"]
+[ext_resource type="PackedScene" uid="uid://ewxju62d5fth" path="res://Assets/GameAssets/Blender/pencil.blend" id="19_yss3s"]
 [ext_resource type="Texture2D" uid="uid://ubkecb8x7b25" path="res://Assets/GameAssets/Textures/HandLogo/hand-logo.png" id="20"]
+[ext_resource type="PackedScene" uid="uid://c8jhupb8cfmxn" path="res://Assets/GameAssets/Blender/paper_stack.blend" id="20_n6k6h"]
 [ext_resource type="Animation" uid="uid://umn6ewt5ydbm" path="res://Assets/GameAssets/Animations/intro_camera.tres" id="21"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ywytw"]
@@ -31,10 +35,10 @@ sky_material = SubResource("ProceduralSkyMaterial_ywytw")
 [sub_resource type="Environment" id="Environment_oxxua"]
 background_mode = 2
 sky = SubResource("Sky_ntuqn")
-ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fp01u"]
 dof_blur_far_enabled = true
@@ -303,12 +307,12 @@ script = ExtResource("6")
 environment = SubResource("Environment_oxxua")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.984399, 0, -0.175951, 0, 1, 0, 0.175951, 0, 0.984399, -2.13112, 1.2, 1.43704)
+transform = Transform3D(-0.429576, -0.160783, 0.888602, 0.417899, 0.836917, 0.353456, -0.800516, 0.523182, -0.292328, 1.4775, 4.1364, -0.709336)
 attributes = SubResource("CameraAttributesPractical_fp01u")
 current = true
 fov = 50.0
 
-[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
 libraries = {
 "": SubResource("AnimationLibrary_kl0ju")
 }
@@ -563,6 +567,46 @@ transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 
 light_color = Color(0.976471, 1, 0.752941, 1)
 shadow_enabled = true
 
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 1.5, -0.2)
+size = Vector3(2.6, 3.2, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.5, 0, 4.47035e-08, 0, 0.5, 0, -4.47035e-08, 0, -0.5, 1.32471, 4, -3.94941)
+flip_faces = true
+size = Vector3(8.6, 4, 15)
+
+[node name="BedsideDrawer" parent="." instance=ExtResource("17_6v7ah")]
+transform = Transform3D(-0.5, 0, 4.47035e-08, 0, 0.5, 0, -4.47035e-08, 0, -0.5, 0.224712, 3, -0.549408)
+
+[node name="Slide" parent="BedsideDrawer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.895208, 0.875284)
+
+[node name="WaterBottle" parent="." instance=ExtResource("18_52hj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3.71756, -0.6)
+
+[node name="Pencil2" parent="." instance=ExtResource("19_yss3s")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.433757, 3.60417, -0.7)
+
+[node name="Pencil" parent="." instance=ExtResource("19_yss3s")]
+transform = Transform3D(0.0413619, -0.339758, 0.939603, 0.992671, 0.120847, 4.09782e-08, -0.113548, 0.932717, 0.342266, 0.437774, 3.61393, -0.711028)
+
+[node name="PaperStack" parent="." instance=ExtResource("20_n6k6h")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.0666232, 3.39859, -0.906573)
+
+[node name="PaperStack2" parent="." instance=ExtResource("20_n6k6h")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.439158, 3.57538, -0.727664)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 3.3, -1.5)
+size = Vector3(1.2, 0.4, 2.2)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 4.2, -0.3)
+light_color = Color(1, 0.952941, 0.564706, 1)
+light_energy = 0.093
+shadow_enabled = true
+
 [editable path="House"]
 [editable path="House/House"]
 [editable path="House/Doorbell"]
@@ -600,3 +644,4 @@ shadow_enabled = true
 [editable path="House8/House"]
 [editable path="House8/Doorbell"]
 [editable path="Hedge2"]
+[editable path="BedsideDrawer"]

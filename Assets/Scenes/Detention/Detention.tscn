@@ -92,12 +92,14 @@ emission_sphere_radius = 0.01
 direction = Vector3(0, 1, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
+initial_velocity_max = 0.8
 scale_curve = SubResource("7")
 color_ramp = SubResource("9")
 
 [sub_resource type="PlaneMesh" id="5"]
 material = ExtResource("11")
 size = Vector2(0.05, 0.05)
+orientation = 2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hj646"]
 viewport_path = NodePath("Phone/SubViewport")
@@ -286,6 +288,7 @@ emitting = false
 amount = 200
 lifetime = 0.15
 randomness = 1.0
+visibility_aabb = AABB(-0.1, -0.2, -0.1, 0.2, 0.4, 0.2)
 draw_order = 2
 process_material = SubResource("4")
 draw_pass_1 = SubResource("5")
@@ -789,6 +792,7 @@ size = Vector3(0.002, 4, 6)
 
 [node name="EditorLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
+visible = false
 light_energy = 6.371
 light_size = 0.108
 editor_only = true
@@ -811,8 +815,8 @@ omni_range = 16.9072
 [connection signal="input_event" from="Clock/Area3D" to="." method="OnClockClicked"]
 [connection signal="mouse_exited" from="Clock/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="mouse_entered" from="Doors/Vent/Area3D" to="." method="OnVentMouseEntered"]
-[connection signal="mouse_exited" from="Doors/Vent/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="mouse_exited" from="Doors/Vent/Area3D" to="." method="OnVentMouseExit"]
+[connection signal="mouse_exited" from="Doors/Vent/Area3D" to="." method="OnObjectMouseExit"]
 [connection signal="timeout" from="Doors/BatteryTimer" to="Doors" method="OnBatteryTimerTimeout"]
 
 [editable path="DetentionUI"]

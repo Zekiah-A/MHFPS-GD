@@ -18,10 +18,7 @@ public partial class DetentionManager : Node
 	private Texture2D hoverCursor;
 	private Node3D phone;
 	private bool phoneActivated;
-
-	private Node3D watcher;
-	private readonly Random random = new();
-
+	
 	public override void _Ready()
 	{
 		dotCursor = ResourceLoader.Load<Texture2D>("res://Assets/GameAssets/Textures/aim_reticle.png");
@@ -38,7 +35,6 @@ public partial class DetentionManager : Node
 		bunsenBurner = GetNode<Node3D>("BunsenBurner");
 		clock = GetNode<Node3D>("Clock");
 		phone = GetNode<Node3D>("Phone");
-		watcher = GetNode<Node3D>("Watcher");
 
 		BeginGame();
 	}

@@ -3,20 +3,21 @@
 [resource]
 resource_name = "intro_camera"
 length = 10.0
+step = 0.0166667
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -2.13467, 1.2, 1.44938, 1, 1, -2.11694, 1.2, 1.38766, 1.01667, 1, -1.72649, 1.2, 0.221453)
+tracks/0/keys = PackedFloat32Array(0, 1, -2.13467, 1.2, 1.44938, 1, 1, -2.11694, 1.2, 1.38766, 1.01667, 1, -1.72649, 1.2, 0.221453, 2.5, 1, -1.72649, 1.2, 0.221453, 2.51667, 1, 1.4775, 4.1364, -0.709336)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.0883206, 0, 0.996092, 1, 1, 0, -0.0883206, 0, 0.996092, 1.01667, 1, 0, -0.5, 0, 0.866025)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, -0.0883206, 0, 0.996092, 1, 1, 0, -0.0883206, 0, 0.996092, 1.01667, 1, 0, -0.5, 0, 0.866025, 2.5, 1, 0, -0.5, 0, 0.866025, 2.51667, 1, -0.00839582, 0.720739, 0.693098, 0.00895853, 3.43333, 1, -0.00839582, 0.720739, 0.693098, 0.00895853, 3.63333, 1, 0.0803672, 0.799816, 0.274012, 0.527971, 5.93333, 1, 0.0803672, 0.799816, 0.274012, 0.527971)
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
@@ -24,8 +25,8 @@ tracks/2/path = NodePath(".:attributes:dof_blur_amount")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1, 1.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(1, 1.01, 3.43333, 3.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.02, 0.2]
+"values": [0.02, 0.2, 0.2, 0.06]
 }
