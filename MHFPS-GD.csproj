@@ -1,15 +1,15 @@
-<Project Sdk="Godot.NET.Sdk/4.0.0-rc.1">
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <RootNamespace>MHFPS-GD</RootNamespace>
-    </PropertyGroup>
-    <ItemGroup>
-        <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
-    </ItemGroup>
-    <ItemGroup>
-      <Compile Remove="Assets\GameAssets\Models\**" />
-    </ItemGroup>
-    <ItemGroup>
-      <EmbeddedResource Remove="Assets\GameAssets\Models\**" />
-    </ItemGroup>
+<Project Sdk="Godot.NET.Sdk/4.2.1">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>MHFPS-GD</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Assets\GameAssets\Models\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Assets\GameAssets\Models\**" />
+  </ItemGroup>
 </Project>

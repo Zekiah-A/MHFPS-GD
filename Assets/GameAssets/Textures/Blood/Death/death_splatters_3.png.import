@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/death_splatters_3.png-6fe80453223d5b38e5d5494
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

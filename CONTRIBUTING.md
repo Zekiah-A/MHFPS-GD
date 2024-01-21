@@ -1,8 +1,11 @@
 Contributing
 =======
 
-## Guidelines
+## Dependecies:
+ - Latest version of godot (4.2.1 as of 20/01/2024)
+ - Latest version of blender installed, blender 3 path in editor set to blender installation path
 
+## Guidelines
 To keep the game consistent, and easy to maintain, a few guidelines and conventions have been made in order to make the game easily acessable.
   
 ### Code Guidelines:
@@ -15,9 +18,7 @@ To keep the game consistent, and easy to maintain, a few guidelines and conventi
 - All assets, such as images, models, audio files, or blender files should be using snake_case.
 - Objects, be them inside of blender, or godot, should be in pascal case, so that everything loaded into the scene is using the same casing. (This may also include audacity track names, inkscape layer names, and krita layer names, yet this isn't a big deal, as it is likely that these names won't be used inside of a scene.) 
 
-
 ## Software Guidelines:
-
 This project aims to use as much Free and Open Source (FOSS) software as possible, in order to allow anyone to contribute, regardless of their device, and also to prevent license issues from arising. To do this, there are specific recommended softwares that should be used.
 
 - Vector Images (.svg) [textures and assets] -> Inkscape
@@ -43,7 +44,6 @@ TODO:
 ```
 
 ## Model and Texture Guidelines:
-
 Models and textures have no strict regulations, but it should just be noted that you should attempt to make it fit in with the general aesthetic of the game. Performance is also quite important, so it is prefered that most textures, if possible, be exported at resolutions of 1024x1024, or lower (such as 512*512, or any other number to the power of 2). However, it's fine for things like HDRIs or high fidelity textures to use higher resolutions. When you are creating a model, also make sure to consider poly count, by thinking things such as "How can I make this model as low poly as possible, while also looking good.", and also considering "If the player will never see this, then it's fine to not put any geometry here."
 
 ## Footnotes:

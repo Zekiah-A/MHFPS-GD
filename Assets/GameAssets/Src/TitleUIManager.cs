@@ -6,6 +6,7 @@ public partial class TitleUIManager : Control
 	private const float UnderlineMax = 1.2f;
 	private const float TweenSpeed = 0.5f;
 	private Panel mainPanels;
+	private int currentPanel;
 
 	private Vector2 mainPanels1;
 	private Vector2 mainPanels2;
@@ -21,21 +22,11 @@ public partial class TitleUIManager : Control
 		tabOther = tabPanel.GetNode<Button>("Other");
 		tabPlay = tabPanel.GetNode<Button>("Play");
 		tabMultiplayer = tabPanel.GetNode<Button>("Multiplayer");
-
 		mainPanels = GetNode<Panel>("MainPanels");
-
-		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.X, 0);
-		mainPanels2 = new Vector2(0, 0);
-		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.Y, 0);
 
 		Resized += () =>
 		{
-			if (mainPanels.Position == mainPanels1)
-				SwitchPanel(1);
-			else if (mainPanels.Position == mainPanels2)
-				SwitchPanel(2);
-			else if (mainPanels.Position == mainPanels3)
-				SwitchPanel(3);
+			SwitchPanel(currentPanel);
 		};
 	}
 
@@ -106,9 +97,9 @@ public partial class TitleUIManager : Control
 	
 	private void SwitchPanel(int selected, bool controller = false)
 	{
-		mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.X, 0);
-		mainPanels2 = new Vector2(0, 0);
-		mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.Y, 0);
+		var mainPanels1 = new Vector2(GetViewport().GetVisibleRect().Size.X, 0);
+		var mainPanels2 = new Vector2(0, 0);
+		var mainPanels3 = new Vector2(-GetViewport().GetVisibleRect().Size.X, 0);
 
 		if (controller)
 		{
@@ -130,7 +121,8 @@ public partial class TitleUIManager : Control
 				selected = 1;
 			}
 		}
-
+		
+		currentPanel = selected;
 		var target = selected switch
 		{
 			1 => mainPanels1,

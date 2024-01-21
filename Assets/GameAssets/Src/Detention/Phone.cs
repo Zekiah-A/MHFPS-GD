@@ -26,7 +26,15 @@ public partial class Phone : Node3D
 		defaultTransform = Transform;
 		worldEnvironment.CameraAttributes.Set("dof_blur_far_enabled", false);
 	}
-	
+
+	public override void _Input(InputEvent @event)
+	{
+		if (Input.IsActionPressed("game_cancel"))
+		{
+			Deactivate();
+		}
+	}
+
 	private void OnDoorLeftButtonPressed()
 	{
 	}

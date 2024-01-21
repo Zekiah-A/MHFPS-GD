@@ -7,8 +7,13 @@
 [sub_resource type="CanvasItemMaterial" id="20"]
 
 [sub_resource type="FastNoiseLite" id="21"]
+noise_type = 0
+fractal_type = 2
+fractal_gain = 3.0
 
 [sub_resource type="NoiseTexture2D" id="22"]
+width = 128
+height = 128
 seamless = true
 noise = SubResource("21")
 
@@ -55,8 +60,16 @@ shader_parameter/lightness = null
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aaolu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6xd4n"]
+shader = ExtResource("1")
+shader_parameter/blur_amount = 5.0
+shader_parameter/translucency = 1.5
+shader_parameter/lightness = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nf80b"]
+shader = ExtResource("1")
+shader_parameter/blur_amount = 5.0
+shader_parameter/translucency = 1.5
+shader_parameter/lightness = 1.0
 
 [node name="TitleUI" type="Control"]
 layout_mode = 3
@@ -68,8 +81,7 @@ grow_vertical = 2
 script = ExtResource("4")
 
 [node name="GrainRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.231373)
+modulate = Color(1, 1, 1, 0.117647)
 material = SubResource("20")
 layout_mode = 0
 anchor_right = 1.0
@@ -77,7 +89,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("22")
-stretch_mode = 2
+stretch_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -189,14 +201,6 @@ grow_vertical = 2
 pivot_offset = Vector2(36, 2)
 mouse_filter = 2
 color = Color(1, 0.713726, 0, 0.588235)
-
-[node name="TabPanelTween" type="Tween" parent="TabPanel"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
 
 [node name="MainPanels" type="Panel" parent="."]
 layout_mode = 0
@@ -318,14 +322,6 @@ anchor_top = 0.104762
 anchor_right = 0.875
 anchor_bottom = 0.663492
 
-[node name="MultiplayerTween" type="Tween" parent="MainPanels/MultiplayerPanel"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
-
 [node name="OtherPanel" type="Panel" parent="MainPanels"]
 material = SubResource("ShaderMaterial_nf80b")
 layout_mode = 0
@@ -382,22 +378,6 @@ anchor_left = 0.125
 anchor_top = 0.104762
 anchor_right = 0.875
 anchor_bottom = 0.663492
-
-[node name="MultiplayerTween" type="Tween" parent="MainPanels/OtherPanel"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
-
-[node name="PanelTween" type="Tween" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
 
 [connection signal="mouse_entered" from="TabPanel/Other" to="." method="OnTabButtonHover" binds= [1]]
 [connection signal="mouse_exited" from="TabPanel/Other" to="." method="OnTabButtonExit" binds= [1]]

@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/door_grating_albedo.png-78eaee2f4bcd9198d464b
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false

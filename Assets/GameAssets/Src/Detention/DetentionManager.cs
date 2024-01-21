@@ -98,7 +98,7 @@ public partial class DetentionManager : Node
 		
 		var viewportRetargetPosition = new Vector2(Mathf.Abs(viewportMousePosition.X - viewportStartX.X),
 			Mathf.Abs(viewportMousePosition.Y - viewportStartY.Y));
-		
+
 		// ViewportStartY = viewport end x, and vice versa, idk why viewportAabbsize X and Y are inverted
 
 		if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Left })
@@ -159,7 +159,7 @@ public partial class DetentionManager : Node
 			//Stop the casette recorder from playing. Play click sound to notify that it has been shut off.
 			cassettePlayer.Stream = caseCassetteStreams[2];
 			cassettePlayer.Play();
-			
+
 			// Only start clock if not yet started
 			if ((clock as Clock)?.Started == false)
 			{
