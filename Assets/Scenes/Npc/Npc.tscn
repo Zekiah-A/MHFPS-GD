@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://bk812ky8e7svh"]
 
 [ext_resource type="Script" path="res://Assets/GameAssets/Src/Pathfinder.cs" id="1"]
 

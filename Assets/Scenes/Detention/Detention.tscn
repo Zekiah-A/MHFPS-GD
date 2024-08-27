@@ -485,7 +485,7 @@ transform = Transform3D(0.696133, 0, -0.42952, 0, 0.18, 0, 0.450155, 0, 0.664224
 transform = Transform3D(-0.721178, -0.0345134, 0.30621, 0.13506, -0.0660776, 0.310642, 0.325644, 1.10621, 0.0937229, 7.28069, 1.37208, -6.69146)
 
 [node name="Gluestick" parent="TableProps" instance=ExtResource("19")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 2.88973, 1.50039, -4.28047)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 2.88973, 1.47272, -4.28047)
 
 [node name="Gluestick2" parent="TableProps" instance=ExtResource("19")]
 transform = Transform3D(-2.83914e-08, -0.649519, -0.375, 0.75, -3.27835e-08, 0, -1.63918e-08, -0.375, 0.649519, 2.26186, 1.4059, -6.32048)
